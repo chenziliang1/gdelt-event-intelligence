@@ -58,15 +58,19 @@ def user_message(data_text, sents):
 
 
 async def judge(out_path, model):
+    from dotenv import load_dotenv
     from langchain_core.messages import HumanMessage, SystemMessage
     from backend.agents.planner import _extract_json, build_llm
+    load_dotenv(HERE.parent / ".env")
     llm = build_llm({"provider": "claude", "model": model})
     results = {}
     for rid, data_text, sents in report_inputs():
         resp = await llm.ainvoke([SystemMessage(content=JUDGE_PROMPT), HumanMessage(content=user_message(data_text, sents))])
         raw = _extract_json(resp.content) or {}
-        results[rid] = {str(i): (raw.get("labels") or {}).get(str(i), "") for i in range(1, len(sents) + 1)}
-        print(rid, sum(v == "U" for v in results[rid].values()), "U")
+        got = raw.get("labels") or {}
+        results[rid] = {str(i): got.get(str(i), "") for i in range(1, len(sents) + 1)}
+        missing = len(sents) - sum(str(i) in got for i in range(1, len(sents) + 1))
+        print(rid, sum(v == "U" for v in results[rid].values()), "U", f"MISSING {missing}" if missing else "")
     Path(out_path).write_text(json.dumps({"model": model, "prompt": JUDGE_PROMPT, "labels": results}, indent=1))
 
 

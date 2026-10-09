@@ -2,7 +2,24 @@
 
 30 reports from `../2026-10-09_answer_quality/` (seed 2026, `tests/make_causal_labeling.py`), 447 sentences. These
 labels are the reference for the causal rule (`tests/answer_quality.causal_candidates`) and the Claude judge
-(`tests/causal_judge.py`). Labels were made before the judge was run on these reports.
+(`tests/causal_judge.py`). Round 1 of the review was done before the judge was run; round 2 after (see below).
+
+## How the reference labels were made
+
+Pre-labelled, then reviewed by a person (`tests/make_causal_review.py`):
+
+1. An independent Claude agent (Opus) labelled all 447 sentences, reading only this README and `reports.md`; it did
+   not see the rule or the judge prompt (`prelabels.json`: 64 U, 8 H, 375 empty).
+2. A person reviewed `review.csv`: every U and H pre-label (72) plus 40 randomly sampled empty ones, correcting the
+   `final` column.
+3. After the judge had run, the person reviewed `review2.csv` blind (no pre-filled answer, no judge label): the 23
+   sentences the judge called U that had been pre-labelled empty and not sampled. 12 were U.
+4. `labels.csv` = the pre-labels with the reviewed rows of both rounds replaced (75 U, 6 H).
+
+Limits: the 312 empty pre-labels that neither the sample nor round 2 covered were not seen by the reviewer, so a
+missed U there stays missed; round 2 checked only the judge's disagreements, which favours the judge; and in round
+1 a pre-label can anchor the reviewer. Results: `summary.md`. The judge (Sonnet) is a different model from the pre-labeller (Opus), but
+both are Claude.
 
 ## How to label
 

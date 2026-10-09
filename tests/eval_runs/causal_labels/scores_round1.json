@@ -1,0 +1,59 @@
+{
+ "rule": {
+  "sentences": {
+   "tp": 37,
+   "fp": 50,
+   "fn": 26,
+   "precision": 0.425,
+   "recall": 0.587
+  },
+  "reports": {
+   "reports_with_U": 24,
+   "agree": 25,
+   "of": 30,
+   "tp": 24,
+   "fp": 5,
+   "fn": 0,
+   "precision": 0.828,
+   "recall": 1.0
+  }
+ },
+ "judge": {
+  "sentences": {
+   "tp": 56,
+   "fp": 25,
+   "fn": 7,
+   "precision": 0.691,
+   "recall": 0.889
+  },
+  "reports": {
+   "reports_with_U": 24,
+   "agree": 26,
+   "of": 30,
+   "tp": 24,
+   "fp": 4,
+   "fn": 0,
+   "precision": 0.857,
+   "recall": 1.0
+  }
+ },
+ "rule_and_judge": {
+  "sentences": {
+   "tp": 32,
+   "fp": 13,
+   "fn": 31,
+   "precision": 0.711,
+   "recall": 0.508
+  },
+  "reports": {
+   "reports_with_U": 24,
+   "agree": 23,
+   "of": 30,
+   "tp": 20,
+   "fp": 3,
+   "fn": 4,
+   "precision": 0.87,
+   "recall": 0.833
+  }
+ }
+}

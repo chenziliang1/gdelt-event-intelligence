@@ -1,14 +1,14 @@
 report_id,sentence_no,sentence,label,note
 brief-01,1,The data for 2024-12-31 is sparse.,,
-brief-01,2,"The daily brief gives only aggregate figures, with no individual events, actors, locations, or article counts, so there are no specific developments to build a story around.",,
+brief-01,2,"The daily brief gives only aggregate figures, with no individual events, actors, locations, or article counts, so there are no specific developments to build a story around.",,已核对：输入仅有总事件数、冲突数和平均语调；本句说明信息局限。
 brief-01,3,"GDELT recorded 38,539 events for the day, 12,595 of them classified as conflict events.",,
 brief-01,4,"The average tone was -2.01467, which is mildly negative.",,
 brief-01,5,"That suggests coverage leaned toward negative framing, but with no event detail I can't say which stories or regions drove it.",,
-brief-01,6,"There is also no earlier period to compare against, so I can't say whether this volume, conflict level, or tone is high, low, or typical.",,
+brief-01,6,"There is also no earlier period to compare against, so I can't say whether this volume, conflict level, or tone is high, low, or typical.",,已核对：没有前期对照数据；未推断趋势或原因。
 brief-01,7,"For an actual narrative of New Year's Eve, I would need the top events by article count, with their actors, locations, and dates.",,
-confidence-probe-02,1,January 2024 protest coverage in Texas centered on immigration and the border.,,
+confidence-probe-02,1,January 2024 protest coverage in Texas centered on immigration and the border.,U,保留U：仅ABBOT–IMMIGRANT和ARMY–MIGRANT两条涉及移民，输入未提边境，不能概括为全月中心议题。
 confidence-probe-02,2,"The most-covered events are a sample of the month's 50 top stories, so they show what drew attention, not how much happened overall.",,
-confidence-probe-02,3,The clearest thread is the standoff between state authorities and migrants.,,
+confidence-probe-02,3,The clearest thread is the standoff between state authorities and migrants.,U,保留U：把不同日期的角色配对组织成同一场州当局与移民的对峙，数据未建立该联系。
 confidence-probe-02,4,"On January 23, an event pairing Governor Abbott with immigrants drew 20 articles.",,
 confidence-probe-02,5,"On January 29, an event pitting the Army against migrants in Texas drew 16.",,
 confidence-probe-02,6,"Both carry a Goldstein score of -6.5, which marks them as conflictual.",,
@@ -20,9 +20,9 @@ confidence-probe-02,11,"Earlier, on January 9, a protest involving a company in 
 confidence-probe-02,12,Other protests were recorded in Dallas on January 30 (10 articles) and involving an airway entity on January 25 (10 articles).,,
 confidence-probe-02,13,"The airway event carried the month's harshest tone among these ten, at -7.5.",,
 confidence-probe-02,14,Some entries are harder to interpret.,,
-confidence-probe-02,15,"Hamas versus ""Marche"" appears on both January 29 and January 30, with 10 articles each, which suggests Middle East-related demonstrations in Texas, though the actor coding is ambiguous.",,
-confidence-probe-02,16,"One 20-article event, on January 19, was located in San Diego, California, not Texas, so it likely reflects a geographic tagging quirk in the data.",,
-confidence-probe-02,17,"Taken together, the sample suggests the month's protest coverage was driven mainly by border and migration politics, with local and international issues also present.",,
+confidence-probe-02,15,"Hamas versus ""Marche"" appears on both January 29 and January 30, with 10 articles each, which suggests Middle East-related demonstrations in Texas, though the actor coding is ambiguous.",U,保留U：HAMAS–MARCHE不直接说明示威主题。承认角色编码含混，仍未明确撤回中东主题的判断；按边界规则取U。
+confidence-probe-02,16,"One 20-article event, on January 19, was located in San Diego, California, not Texas, so it likely reflects a geographic tagging quirk in the data.",U,San Diego位于California、20篇和日期均有据，但输入没有解释它为何出现在Texas检索结果中。把这种不匹配归因于geographic tagging quirk是新增原因；likely不是数据未证实的明确限定。
+confidence-probe-02,17,"Taken together, the sample suggests the month's protest coverage was driven mainly by border and migration politics, with local and international issues also present.",U,保留U：边境及移民政治驱动报道是新增主题和归因，suggests本身不足以成为H。
 confidence-probe-02,18,The sparse and loosely coded actor fields mean specific causes and participants can't be confirmed from this data alone.,,
 confidence-probe-03,1,California's 2024 conflict coverage in this sample is dominated by violence in its big urban centers.,,
 confidence-probe-03,2,"The single most-covered event was on 2024-11-01 in Los Angeles, coded as mass violence (Goldstein -10.0) with 250 articles.",,
@@ -36,36 +36,36 @@ confidence-probe-03,9,"On 2024-07-29, an event coded as Canada vs.",,
 confidence-probe-03,10,"United States, located only as ""California,"" drew 96 articles.",,
 confidence-probe-03,11,"The coding of that event is ambiguous, and the data does not say what it concerned.",,
 confidence-probe-03,12,"The one distinctly non-violent cluster is a pair of protest events in Hollywood on 2024-09-09 and 2024-09-10, involving actors and television (100 and 110 articles, Goldstein -6.5).",,
-confidence-probe-03,13,"That is milder than the -10.0 fighting events, and it points to labor or industry-related tension rather than physical confrontation, though the data does not specify the cause.",,
+confidence-probe-03,13,"That is milder than the -10.0 fighting events, and it points to labor or industry-related tension rather than physical confrontation, though the data does not specify the cause.",H,保留H：从ACTOR–TELEVISION猜测劳资或行业矛盾，同句明确说明数据未给出原因，限定直接针对这项猜测。
 confidence-probe-03,14,"This is only a sample of the most-covered events, so it cannot show how much conflict occurred overall or how it changed during the year.",,
 confidence-probe-03,15,"It does show that Los Angeles, San Francisco, San Diego and Hollywood drew the heaviest coverage.",,
 confidence-probe-03,16,"Many of the actor labels are generic or machine-coded (e.g., ""LOS ANGELES vs ?""), so the underlying incidents should be confirmed against the source articles.",,
 detail-01,1,**Primary event 1150442224** is thinly documented.,,
 detail-01,2,"It is dated 2024-01-09 in Fort Worth, Texas, and pairs ""AUTHORITIES"" with an unidentified counterpart.",,
 detail-01,3,It was covered in 120 articles and has a neutral tone score of 3.0.,,
-detail-01,4,"There is no event type, summary text or named second actor, so the record shows that authorities were prominent in coverage that day but not what they did.",,
+detail-01,4,"There is no event type, summary text or named second actor, so the record shows that authorities were prominent in coverage that day but not what they did.",,保持空白：120篇及缺少事件类型、对方角色支持信息局限判断。严格说Summary存在，但只重复地点，并无事件描述。
 detail-01,5,The related events fill in some of the surrounding picture.,,
-detail-01,6,"The most prominent cluster is at Perry High School, Iowa, on 2024-01-05, where four records, each with 70 articles, involve AUTHORITIES and POLICE.",,
+detail-01,6,"The most prominent cluster is at Perry High School, Iowa, on 2024-01-05, where four records, each with 70 articles, involve AUTHORITIES and POLICE.",,保持空白；另有计数错误：Perry High School在1月5日仅3条记录，每条70篇，并非4条。这不是原因、性质或关联推测。
 detail-01,7,"They include consultations (Goldstein 2.8 and 1.9) and a ""fighting"" record (Goldstein -10.0).",,
 detail-01,8,"A separate Iowa record dated 2024-01-06 has AUTHORITIES fighting PUPIL, with 100 articles and the same -10.0 score.",,
 detail-01,9,"In Texas, a 2024-01-18 record places AUTHORITIES in a consultation at Robb Elementary School, with 80 articles and a Goldstein score of 1.0.",,
-detail-01,10,The school-based locations are the visible link between these events and the Texas primary event.,,
-detail-01,11,"The data does not say what happened at any of them, and nothing in it establishes a causal connection to Fort Worth.",,
+detail-01,10,The school-based locations are the visible link between these events and the Texas primary event.,U,保留U：Fort Worth主事件没有学校字段，学校地点无法建立它与其他记录的联系。
+detail-01,11,"The data does not say what happened at any of them, and nothing in it establishes a causal connection to Fort Worth.",,保持空白：本句否认已证实的因果联系，属于局限说明；其他记录虽有类型，仍缺具体事由。
 detail-01,12,The remaining related events are scattered across the United States and do not share a clear theme:,,
 detail-01,13,"**Maine (2024-01-05):** AUTHORITIES threatening RESIDENTS, 60 articles, Goldstein -4.4.",,
 detail-01,14,"**Michigan (2024-01-02):** AUTHORITIES criticizing an unnamed party, 60 articles, Goldstein -2.0.",,
 detail-01,15,"**New Hampshire (2024-01-31):** AUTHORITIES making a public statement about MANCHESTER, 60 articles, Goldstein 0.0.",,
-detail-01,16,"These share the generic ""AUTHORITIES"" actor label and heavy coverage, but nothing more is established.",,
+detail-01,16,"These share the generic ""AUTHORITIES"" actor label and heavy coverage, but nothing more is established.",,已核对：所指其他记录确实共用AUTHORITIES标签，本句没有据此认定同一事件。
 detail-01,17,"The data header lists 50 related events and only eight are shown here, so this is a partial sample.",,
-detail-01,18,"Because the Fort Worth record lacks a type, a second actor and a summary, any firmer reading of it would need the underlying articles.",,
+detail-01,18,"Because the Fort Worth record lacks a type, a second actor and a summary, any firmer reading of it would need the underlying articles.",,保持空白：建议查原文以确认事件。Summary仅为地点，缺少实质摘要。
 h-brief-02,1,The data for 2024-07-04 is a high-level snapshot only.,,
 h-brief-02,2,"It has no individual events, actors, locations, or article counts, so I can't name specific storylines for the day.",,
 h-brief-02,3,"GDELT recorded 41,167 events on 2024-07-04, 12,344 of them classified as conflict events.",,
-h-brief-02,4,"The average tone across the day was -1.68459, which is mildly negative.",,
-h-brief-02,5,"That fits a news environment where conflict coverage makes up a substantial part of the record, but the brief doesn't say which conflicts or regions drove it.",,
+h-brief-02,4,"The average tone across the day was -1.68459, which is mildly negative.",,已核对：平均语调-1.68459直接来自输入，属数值描述。
+h-brief-02,5,"That fits a news environment where conflict coverage makes up a substantial part of the record, but the brief doesn't say which conflicts or regions drove it.",,冲突记录12344/41167约占30%，平均语调为-1.68459。本句把两项汇总并列解释为相容，并未说某场冲突造成负语调；后半句说明缺乏具体冲突和地区信息。
 h-brief-02,6,"With no PERIOD COMPARISON section, I can't say whether the day was busier, calmer, more negative, or more positive than usual.",,
 h-brief-02,7,"Identifying the key events would need the top events by article count, with their actors, locations, and dates.",,
-h-detail-01,1,"The primary event (1150622757) is dated 2024-01-09 and centers on the White House in Washington, D.C.",,
+h-detail-01,1,"The primary event (1150622757) is dated 2024-01-09 and centers on the White House in Washington, D.C.",,"已核对：主记录日期2024-01-09，地点White House, District of Columbia。"
 h-detail-01,2,"It pairs the actors AUSTIN and DEPUTY, which GDELT records only by role or name fragment.",,
 h-detail-01,3,"With 150 articles and a neutral tone score of 5.0, it is the most heavily covered item in this set.",,
 h-detail-01,4,"The record has no summary beyond its location, so the data doesn't say what happened or why it drew coverage.",,
@@ -76,7 +76,7 @@ h-detail-01,8,"The same day, AUSTIN expressed intent to cooperate with DEPUTY (1
 h-detail-01,9,"On 2024-01-11, another AUSTIN-DEPUTY consultation was recorded at the White House (10 articles, tone 2.8).",,
 h-detail-01,10,"That day also had DEPUTY public statements about AUSTIN, with 10 articles at the White House and 20 in Washington more broadly.",,
 h-detail-01,11,Further public statements by DEPUTY about AUSTIN appear on 2024-01-12 in Washington (10 articles) and on 2024-01-16 at the White House (12 articles).,,
-h-detail-01,12,"Together these show a connected exchange: consultation, cooperative signals, and repeated public statements from DEPUTY's side.",,
+h-detail-01,12,"Together these show a connected exchange: consultation, cooperative signals, and repeated public statements from DEPUTY's side.",U,保留U：RELATED EVENTS检索列表和相同角色不能证明咨询、合作与声明组成一次连贯交流。
 h-detail-01,13,"The two-way events have mildly positive Goldstein scores, while the public statements score 0.0.",,
 h-detail-01,14,"The header says 50 related events, but only eight are included here, so this picture is partial.",,
 h-detail-01,15,"The data also doesn't identify who AUSTIN and DEPUTY are, what the statements said, or what prompted the coverage.",,
@@ -89,7 +89,7 @@ h-detail-02,5,"The event's content therefore can't be established from this data
 h-detail-02,6,**The related events** that appear in the data cluster around schools and local authorities in early January 2024.,,
 h-detail-02,7,"The largest is a Fighting event (Goldstein -10.0) involving AUTHORITIES and a PUPIL in Iowa on 2024-01-06, with 100 articles.",,
 h-detail-02,8,"Perry High School, Iowa, appears in three records dated 2024-01-05, each with 70 articles: AUTHORITIES consulting with POLICE (2.8), POLICE fighting AUTHORITIES (-10.0), and POLICE consulting with AUTHORITIES (1.9).",,
-h-detail-02,9,The mix of cooperative and conflict codes for the same location and date is typical of how GDELT codes a single incident from many angles.,,
+h-detail-02,9,The mix of cooperative and conflict codes for the same location and date is typical of how GDELT codes a single incident from many angles.,U,保留U：同日同地3条编码未被确认为同一事件，单一事件多角度编码的解释也不在输入中。
 h-detail-02,10,"Separately, a Consultation event (Goldstein 1.0) took place at Robb Elementary School, Texas, on 2024-01-18, with 80 articles.",,
 h-detail-02,11,"That puts school-related activity in Texas as well, though the data doesn't explain it.",,
 h-detail-02,12,**Other AUTHORITIES events** in the set are less obviously connected.,,
@@ -102,126 +102,126 @@ h-detail-02,18,"The Fort Worth appeal's 120 articles make it the most heavily co
 h-hot-02,1,"On 2024-03-15, the most-covered events in the data were set almost entirely within the United States, and they split between political cooperation in Washington and a scattering of conflict and cooperation events in individual states.",,
 h-hot-02,2,"The heaviest coverage was a consultation event in Illinois involving a scientist (150 articles, Goldstein 2.8).",,
 h-hot-02,3,"Just behind it were two mirrored events at the White House in Washington, D.C., in which the Speaker of the House expresses intent to cooperate and an unidentified actor does the same toward the Speaker (120 articles each, Goldstein 4.0).",,
-h-hot-02,4,"Together they suggest a notable moment of political engagement around the Speaker, though the data doesn't say what the cooperation concerned.",,
+h-hot-02,4,"Together they suggest a notable moment of political engagement around the Speaker, though the data doesn't say what the cooperation concerned.",,输入标题明确包含对白宫SPEAKER OF THE HOUSE的合作意向，以及Speaker表达合作意向，各120篇。political engagement是对已给出政治角色及合作行为的宽泛概括，没有新增合作议题、动机或认定同一事件。
 h-hot-02,5,Conflict appears in several places.,,
 h-hot-02,6,"Fighting involving ""ADEN"" was recorded in the United States (80 articles, Goldstein -10.0).",,
 h-hot-02,7,"Pennsylvania reduced relations (60 articles, Goldstein -7.0).",,
 h-hot-02,8,"A prosecutor was recorded fighting New York (40 articles, Goldstein -10.0), and Maine was recorded fighting police (40 articles, Goldstein -10.0).",,
 h-hot-02,9,The data gives no detail on what these confrontations involved.,,
-h-hot-02,10,Cooperative events balance this out.,,
+h-hot-02,10,Cooperative events balance this out.,,结合后句，指列表同时含Aid及Yield等合作记录，与前述冲突类记录形成对照；未主张现实中的合作抵消冲突、建立因果关系或给出净影响。
 h-hot-02,11,"The Associated Press provided aid to Boston (60 articles, Goldstein 7.0), Tennessee yielded (58 articles, Goldstein 7.0), and an unidentified actor yielded to Phoenix, Arizona (42 articles, Goldstein 10.0).",,
 h-hot-02,12,"These event labels are coded automatically and are only a sample of the most-covered items, so they show what drew attention on the day but not the full context behind each one.",,
 h-invalid-02,1,"Texas protest coverage in 2024, as captured by the most-covered events in this sample, centers on a cluster of demonstrations in Austin on April 24.",,
 h-invalid-02,2,"Four of the ten events share that date: AUSTIN vs TROOPER (40 articles), PALESTINE vs AUSTIN (40 articles), PALESTINE vs POLICE (30 articles), and AUSTIN vs TEXAS (30 articles).",,
-h-invalid-02,3,"The actor pairings suggest pro-Palestinian demonstrators confronting law enforcement, including state troopers.",,
+h-invalid-02,3,"The actor pairings suggest pro-Palestinian demonstrators confronting law enforcement, including state troopers.",U,保留U：PALESTINE、AUSTIN、TROOPER、POLICE标签没有明确支持亲巴示威者及州警身份和同一场对抗。
 h-invalid-02,4,Each event carries a conflict tone of -6.5 on the Goldstein scale.,,
-h-invalid-02,5,"A related event on April 30, DEMONSTRATOR vs POLICE (30 articles), points to continued friction with police later that month.",,
-h-invalid-02,6,Other episodes show that the year's unrest was not confined to a single issue.,,
-h-invalid-02,7,"On February 2, a protest involving TEXAS drew 30 articles in Eagle Pass, a border community.",,
-h-invalid-02,8,"The data does not specify the cause, but the location is notable.",,
-h-invalid-02,9,"On February 26, a WASHINGTON vs ISRAELI protest registered 30 articles and the sharpest tone in the sample (Goldstein -7.5), which ties Texas coverage to the Israel-Gaza issue.",,
-h-invalid-02,10,"An April 6 protest listed under UNITED STATES drew 36 articles, though the actors are not specified.",,
-h-invalid-02,11,"Later in the year, the sample includes a May 30 event pitting STUDENT against TEXAS (40 articles), which fits with campus-related activism.",,
+h-invalid-02,5,"A related event on April 30, DEMONSTRATOR vs POLICE (30 articles), points to continued friction with police later that month.",U,保留U：related及continued把4月30日与24日关联为持续摩擦，输入只列独立记录。
+h-invalid-02,6,Other episodes show that the year's unrest was not confined to a single issue.,U,保留U：不同角色不等于不同抗议议题，输入未提供任何明确事由。
+h-invalid-02,7,"On February 2, a protest involving TEXAS drew 30 articles in Eagle Pass, a border community.",U,保留U：输入只给Eagle Pass地点，新增border community在上下文中暗示抗议与边境有关，本句未限定该推断。
+h-invalid-02,8,"The data does not specify the cause, but the location is notable.",,H改为空白：本句只说原因未提供、地点值得注意，没有提出具体原因或事件性质。前句的边境暗示已单独标U，不把局限句重复标H。
+h-invalid-02,9,"On February 26, a WASHINGTON vs ISRAELI protest registered 30 articles and the sharpest tone in the sample (Goldstein -7.5), which ties Texas coverage to the Israel-Gaza issue.",U,保留U：WASHINGTON–ISRAELI抗议不能直接推出Israel-Gaza议题，输入没有Gaza或抗议诉求。
+h-invalid-02,10,"An April 6 protest listed under UNITED STATES drew 36 articles, though the actors are not specified.",,保持空白：4月6日36篇与记录相符。角色确有UNITED STATES，但不是可辨认的具体参与者，措辞不精确不属于本项推测。
+h-invalid-02,11,"Later in the year, the sample includes a May 30 event pitting STUDENT against TEXAS (40 articles), which fits with campus-related activism.",U,保留U：STUDENT标签不证明事件发生在校园或属于校园运动。
 h-invalid-02,12,"On July 25, an INDUSTRY protest drew 30 articles, with no further detail on its subject.",,
-h-invalid-02,13,"Taken together, these records suggest that Gaza-related activism, campus and student mobilization, and clashes with police were prominent threads in Texas protest coverage, with Austin as a focal point.",,
+h-invalid-02,13,"Taken together, these records suggest that Gaza-related activism, campus and student mobilization, and clashes with police were prominent threads in Texas protest coverage, with Austin as a focal point.",U,保留U：Gaza、校园动员及警民冲突的整体叙事超出角色和Protest编码；后句总免责声明不改变本句标签。
 h-invalid-02,14,"The data is only a sample of the most-covered events and gives limited detail on causes, participants, or outcomes, so these links are inferences from actor labels and dates rather than confirmed findings.",,
-h-march-01,1,"The most-covered protest events in the data that are actually located in Washington, DC, center largely on the Gaza war and its political fallout.",,
+h-march-01,1,"The most-covered protest events in the data that are actually located in Washington, DC, center largely on the Gaza war and its political fallout.",U,保留U：角色涉及GAZA、ISRAEL、HAMAS，仍未说明抗议是针对加沙战争及其政治影响。
 h-march-01,2,"The top DC-tagged event is dated 2024-05-01 and was coded as ""California protests against Hamas."" It drew 70 articles, the most of any event listed.",,
-h-march-01,3,"Other DC events point the same way: a 2024-01-13 event coded ""Washington vs Gaza"" (40 articles) and a 2024-08-23 event coded ""Intelligence vs Israel"" (48 articles).",,
+h-march-01,3,"Other DC events point the same way: a 2024-01-13 event coded ""Washington vs Gaza"" (40 articles) and a 2024-08-23 event coded ""Intelligence vs Israel"" (48 articles).",U,保留U：point the same way承接第1句加沙战争主题，将两条角色记录当成该主题的证据。
 h-march-01,4,"The actor labels are automated GDELT codings, so they show the themes of coverage but not who was actually protesting.",,
-h-march-01,5,Several events cluster around domestic politics and policing.,,
+h-march-01,5,Several events cluster around domestic politics and policing.,,标题直接给出针对LAWMAKER和LAW ENFORCEMENT AGENCIES的Protest行为。这里是对政治及执法对象的宽泛归组，未指定共同诉求、具体政策或同一场运动；不把cluster本身当作事件关联证据。
 h-march-01,6,"On 2024-07-15, an event coded ""Washington vs Lawmaker"" drew 32 articles.",,
-h-march-01,7,"On 2024-07-26, two separate DC events each drew 50 articles: one coded ""Protester vs Law Enforcement Agencies"" and one coded ""Unidentified actor vs Male."" The shared date and location suggest they may describe the same episode, but the data doesn't confirm that.",,
-h-march-01,8,"A 2024-05-23 event coded only as ""Hunter"" (30 articles) is too thin to interpret.",,
+h-march-01,7,"On 2024-07-26, two separate DC events each drew 50 articles: one coded ""Protester vs Law Enforcement Agencies"" and one coded ""Unidentified actor vs Male."" The shared date and location suggest they may describe the same episode, but the data doesn't confirm that.",H,保留H：猜测两条同日同地记录是同一事件，并明确说数据不能确认。
+h-march-01,8,"A 2024-05-23 event coded only as ""Hunter"" (30 articles) is too thin to interpret.",,已核对：HUNTER记录为5月23日、30篇；too thin to interpret是局限说明。
 h-march-01,9,"Some of the top ""Washington"" events are not in DC at all.",,
 h-march-01,10,"The 2024-04-23 event (Palestine vs Jewish, 50 articles) is placed in Morningside, Washington State.",,
 h-march-01,11,"Three others come from Washington State: Seattle on 2024-09-13 (Aerospace vs Boeing, 50 articles), a 2024-10-24 Boeing protest (50 articles), and Morningside.",,
-h-march-01,12,These appear to reflect labor and corporate disputes and shouldn't be counted as DC activity.,,
+h-march-01,12,These appear to reflect labor and corporate disputes and shouldn't be counted as DC activity.,U,保留U：华盛顿州地点有据，但劳资及企业纠纷性质未给出，尤其Morningside记录为PALESTINE–JEWISH。
 h-march-01,13,"The DC picture is a sample of high-coverage events, not a full record of the year.",,
-h-march-01,14,"It shows that Gaza-related demonstrations and confrontations with authorities drew the most media attention in the capital, and it doesn't say how often protests occurred or whether they grew or declined.",,
+h-march-01,14,"It shows that Gaza-related demonstrations and confrontations with authorities drew the most media attention in the capital, and it doesn't say how often protests occurred or whether they grew or declined.",U,保留U：仍断言加沙主题。关于频率和趋势的限制不限定这一主题判断。
 h-overview-02,1,"Ontario's November 2024 record contains 35,248 events.",,
 h-overview-02,2,"The summary shows 3,167 coded as conflict and 4,792 as cooperation, with an average Goldstein score of about +0.68 and an average tone of about -1.72.",,
 h-overview-02,3,"Cooperative events outnumber conflictual ones, but the overall tone is mildly negative.",,
-h-overview-02,4,"Only five high-coverage events are available here, so this is a partial picture of the month.",,
+h-overview-02,4,"Only five high-coverage events are available here, so this is a partial picture of the month.",,已核对：Hot events仅5条，本句说明样本不完整。
 h-overview-02,5,"The most heavily covered event was on 14 November in Etobicoke, where an actor labelled ""HUNTER"" appeared against an unidentified counterpart across 109 articles.",,
 h-overview-02,6,Its tone of -10.0 is the most negative in the sample.,,
 h-overview-02,7,"The data doesn't say what happened, and the actor label alone doesn't establish the nature of the incident.",,
 h-overview-02,8,"The other four events are all in Ottawa and involve labour, migration and government.",,
 h-overview-02,9,"On 15 November, a ""WORKER"" event drew 90 articles at a neutral tone of 3.0.",,
-h-overview-02,10,"On 26 November, ""MIGRANT WORKER vs MINIST"" drew 70 articles (tone 0.4), and a ""CANADA"" event the same day drew 60 articles (tone 4.0).",,
+h-overview-02,10,"On 26 November, ""MIGRANT WORKER vs MINIST"" drew 70 articles (tone 0.4), and a ""CANADA"" event the same day drew 60 articles (tone 4.0).",,已核对：11月26日两条分别70篇/0.4和60篇/4.0，直接复述。
 h-overview-02,11,"On 8 November, an event pairing an unidentified actor with a ministry drew 50 articles at a tone of -5.0.",,
-h-overview-02,12,"Taken together, the sample suggests national-level coverage centred on Ottawa, with worker and migrant-worker issues and government ministries prominent, set against a single sharply negative incident in Etobicoke.",,
+h-overview-02,12,"Taken together, the sample suggests national-level coverage centred on Ottawa, with worker and migrant-worker issues and government ministries prominent, set against a single sharply negative incident in Etobicoke.",U,Ottawa地点和WORKER/MIGRANT WORKER角色有据，但national-level报道、工人议题及government ministries的实质身份均未确立。MINIST只是截短标签，地点与角色不能确认这些报道主题。后句局限不替代本句限定。
 h-overview-02,13,"The records lack detail on the actors and the nature of the events, so the underlying causes and any links between these events can't be determined from this data.",,
 h-overview-03,1,"Arizona's coverage for April 1 to June 30, 2024 is dominated by a handful of loosely defined events rather than one clear storyline.",,
 h-overview-03,2,The regional summary shows a mildly negative overall tone (about -2.7) and an average Goldstein score near zero (0.07).,,
 h-overview-03,3,That points to a mix of conflict and cooperation with no decisive lean either way.,,
 h-overview-03,4,"The most heavily covered event was on June 2 in Phoenix, listed as ""PHOENIX vs MINIST OF DEFENCE"" with 150 articles and a neutral tone (-2.0).",,
-h-overview-03,5,The actor pairing is odd for a city-level event and may reflect how the source articles were coded rather than a literal confrontation.,,
+h-overview-03,5,The actor pairing is odd for a city-level event and may reflect how the source articles were coded rather than a literal confrontation.,U,PHOENIX–MINIST OF DEFENCE只有角色配对和分数，未给编码过程或原文。本句猜测异常源于文章编码而非真实对抗，属于对记录实质及形成原因的解释；may未明确指出这一解释未经数据证实。
 h-overview-03,6,"On April 30, a statewide event tagged ""THE US vs Unknown"" drew 140 articles with a slightly positive tone (1.9).",,
 h-overview-03,7,Its actors are too vague to say what it concerned.,,
 h-overview-03,8,The sharpest negative signal came on June 11 in Maricopa County.,,
 h-overview-03,9,"An ""ARIZONA vs ACTOR"" event drew 126 articles at a strongly conflictual tone of -9.5, the most negative reading among the top events.",,
 h-overview-03,10,"On June 22, a ""HOUSE SPEAKER vs ADMINISTRATION"" event drew 120 articles at a neutral -2.0.",,
-h-overview-03,11,"It points to a political dispute playing out in Arizona coverage, though the data doesn't identify the issue.",,
+h-overview-03,11,"It points to a political dispute playing out in Arizona coverage, though the data doesn't identify the issue.",U,保留U：HOUSE SPEAKER–ADMINISTRATION及-2.0不能确认政治争端；issue不明只限定具体议题。
 h-overview-03,12,"An ""ARIZONA vs STUDENT"" event on May 16 drew 110 articles, with no tone value recorded.",,
-h-overview-03,13,"Together these top events suggest a period shaped by political and institutional friction, with the Maricopa County event standing out for its tone.",,
+h-overview-03,13,"Together these top events suggest a period shaped by political and institutional friction, with the Maricopa County event standing out for its tone.",U,保留U：无事件类型或摘要的角色配对不能证明季度由政治和制度摩擦塑造。
 h-overview-03,14,"The actor labels are generic and the event list is only a sample, so the data can't confirm specific causes or show how the situation changed over the quarter.",,
-h-reldate-01,1,"Protest coverage in Illinois between December 18 and December 31, 2024 centered on labor disputes and institutional targets, with Chicago featuring prominently.",,
+h-reldate-01,1,"Protest coverage in Illinois between December 18 and December 31, 2024 centered on labor disputes and institutional targets, with Chicago featuring prominently.",,本报告不只有孤立WORKER标签：明确含STRIKING WORKER protests、两条EMPLOYEE protests against COMPANY，以及针对PRISON和SUPREME COURT的抗议。劳资行动和机构目标有标题依据，Chicago也出现5次；未新增具体劳资诉求或共同事件。
 h-reldate-01,2,"The data is generic: the events carry actor labels rather than named organizations, so the specific causes behind them cannot be identified from this sample.",,
 h-reldate-01,3,The most visible thread is labor.,,
-h-reldate-01,4,"On December 19, events show an EMPLOYEE vs COMPANY protest, logged both statewide in Illinois and in Chicago, along with a WORKER protest in Illinois.",,
+h-reldate-01,4,"On December 19, events show an EMPLOYEE vs COMPANY protest, logged both statewide in Illinois and in Chicago, along with a WORKER protest in Illinois.",,保持空白：12月19日EMPLOYEE–COMPANY有Illinois和Chicago两条，另有WORKER记录。statewide宜理解为州级地点标签，不代表遍及全州。
 h-reldate-01,5,"On December 20, a STRIKING WORKER protest was recorded in Illinois, along with another WORKER protest in Chicago.",,
 h-reldate-01,6,"The striking-worker event carried the sharpest conflict tone in the set (Goldstein -7.5), while the others sat at -6.5.",,
 h-reldate-01,7,Each of these events drew 10 articles.,,
 h-reldate-01,8,A separate INDUSTRY protest was logged in Chicago on December 18.,,
-h-reldate-01,9,A second thread involves institutions and detention.,,
+h-reldate-01,9,A second thread involves institutions and detention.,,上下文随后列出两条protests against PRISON及一条protests against SUPREME COURT。institutions and detention在此宽泛概括抗议涉及的机构类别，没有声称具体拘押事件、拘押原因或共同诉求。
 h-reldate-01,10,"On both December 18 and December 19, Chicago events show an unidentified actor protesting against a PRISON, each with 10 articles.",,
 h-reldate-01,11,"Also on December 18, an event pitted ILLINOIS against COMMUNITY.",,
 h-reldate-01,12,"The period closed on December 31 with a PROTESTER vs SUPREME COURT event in Illinois, also at 10 articles and a -6.5 tone.",,
 h-reldate-01,13,The data does not say which court or what issue was involved.,,
-h-reldate-01,14,"Taken together, the sample suggests that labor actions and protests aimed at prisons and the courts drew the most coverage in Illinois during this window, with Chicago as the main location.",,
+h-reldate-01,14,"Taken together, the sample suggests that labor actions and protests aimed at prisons and the courts drew the most coverage in Illinois during this window, with Chicago as the main location.",,劳工行动有STRIKING WORKER及EMPLOYEE–COMPANY抗议标题支持，prisons/courts是原文明确抗议对象；Chicago为5条具体地点。10条都是高覆盖样本且均10篇，宜理解为样本构成，不能外推总体排名，但未新增事件动因或联系。
 h-reldate-01,15,"Because the records are broad actor-type labels and the list is only a sample of the most-covered events, they do not show the size of the protests, the specific grievances, or how the disputes were resolved.",,
-h-reldate-04,1,"Coverage of Mexico on December 30-31, 2024 is dominated by violence tied to organized crime, with one political protest standing out as the single most-covered event.",,
+h-reldate-04,1,"Coverage of Mexico on December 30-31, 2024 is dominated by violence tied to organized crime, with one political protest standing out as the single most-covered event.",U,保留U：10条仅2条CARTEL、1条CRIMINAL，不能把其他Fighting记录归入有组织犯罪。
 h-reldate-04,2,"The most-reported item in the sample was a protest involving ""PRESIDENT"" actors in Tlaxcala, Tlaxcala on December 30 (30 articles, Goldstein -6.5).",,
-h-reldate-04,3,It was milder in tone than the fighting events that make up the rest of the list.,,
-h-reldate-04,4,The armed violence centers on cartel activity.,,
+h-reldate-04,3,It was milder in tone than the fighting events that make up the rest of the list.,,保持空白：-6.5较其余-10.0温和。另有类型概括错误：其余9条中1条是Assault，不全是Fighting。
+h-reldate-04,4,The armed violence centers on cartel activity.,U,保留U：把所有武装暴力概括为卡特尔活动，超出仅2条CARTEL角色记录。
 h-reldate-04,5,"On December 30, fighting between CARTEL and ARMY actors was recorded in Coalcoman, Michoacán de Ocampo (20 articles, Goldstein -10.0).",,
 h-reldate-04,6,"Michoacán-labeled fighting involving ""MEXICO"" actors drew the same 20 articles that day.",,
-h-reldate-04,7,"Fighting attributed to CRIMINAL actors in Sinaloa (20 articles) was logged on December 30, and a CARTEL-labeled fighting event in Sinaloa followed on December 31 (20 articles).",,
-h-reldate-04,8,"The geocoding is imprecise: these records pair Sinaloa and Michoacán with ""Tabasco,"" which suggests location-matching errors in the source data rather than a real geographic link.",,
+h-reldate-04,7,"Fighting attributed to CRIMINAL actors in Sinaloa (20 articles) was logged on December 30, and a CARTEL-labeled fighting event in Sinaloa followed on December 31 (20 articles).",,已核对：12月30日CRIMINAL和31日CARTEL各20篇；followed在这里仅表示日期先后，未说同一事件或因果。
+h-reldate-04,8,"The geocoding is imprecise: these records pair Sinaloa and Michoacán with ""Tabasco,"" which suggests location-matching errors in the source data rather than a real geographic link.",U,Sinaloa/Tabasco和Michoacan/Tabasco的字段组合确实存在，但输入没有权威地点核验或匹配日志。断言地理编码不准，并用匹配错误排除真实地理联系，超出单纯指出字段可疑。suggests不满足H。
 h-reldate-04,9,Other events in the sample are smaller and harder to interpret.,,
 h-reldate-04,10,"These include fighting between ""WORKER"" and ""UNITED STATES"" actors across Mexico on December 31 (12 articles), and fighting involving ""MEXICO"" and ""PRIEST"" actors on December 30 (10 articles).",,
 h-reldate-04,11,"Also logged on December 30 were an assault event pairing ""SOLICITOR GENERAL"" and ""MONK"" in Juarez (10 articles), a generic CIVILIAN fighting event (10 articles), and a ""HOSPITAL"" fighting event in Puebla (10 articles).",,
 h-reldate-04,12,"Several of these actor labels look like coding artifacts, so they should be read cautiously.",,
 h-reldate-04,13,"Taken together, the sample suggests that cartel-army clashes in Michoacán and criminal violence in Sinaloa were the main conflict stories of these two days.",,
 h-reldate-04,14,"This is only a sample of the most-covered events, so it cannot show the overall scale of violence or any trend over time.",,
-h-reldate-05,1,"December 2024 protest coverage in Ohio centered on labor disputes and tensions with law enforcement, based on a sample of the ten most-covered events.",,
+h-reldate-05,1,"December 2024 protest coverage in Ohio centered on labor disputes and tensions with law enforcement, based on a sample of the ten most-covered events.",U,Ohio输入只有WORKER等角色和Protest记录，没有STRIKING WORKER、雇员对雇主的明确配对或抗议诉求。将工人参与直接解释成labor disputes是未支持的性质判断；警方角色也不能自动证明多条事件构成持续紧张。
 h-reldate-05,2,"Every event in the sample drew 10 articles and carried a conflict tone, with Goldstein scores of -6.5 or -7.5.",,
 h-reldate-05,3,"The data is thin on detail: most events are statewide (""Ohio, United States"") with generic actor labels, so the specifics behind each protest are not clear from the records.",,
-h-reldate-05,4,Worker-related actions were the most visible thread.,,
+h-reldate-05,4,Worker-related actions were the most visible thread.,,保持空白：3条记录直接含WORKER，可概括为worker-related；未推断诉求或同一运动。10条均10篇，most visible并非独占领先。
 h-reldate-05,5,"On December 22, a WORKER vs UNITED STATES protest was logged in Ohio.",,
-h-reldate-05,6,"On December 30, workers were recorded protesting against PITTSBURGH in Lordstown, a location tied to Ohio's manufacturing sector.",,
+h-reldate-05,6,"On December 30, workers were recorded protesting against PITTSBURGH in Lordstown, a location tied to Ohio's manufacturing sector.",U,保留U：Lordstown与制造业的联系不在输入中，上下文借此解释工人抗议的性质。
 h-reldate-05,7,"On December 20, a TOLEDO vs WORKER event appeared.",,
 h-reldate-05,8,"The actor labels alone don't reveal the employers or issues involved, so any link between these events is only suggested by the shared actor category.",,
-h-reldate-05,9,Policing drew the sharpest tone.,,
+h-reldate-05,9,Policing drew the sharpest tone.,,保持空白：唯一两条-7.5记录均直接含POLICE，本句为角色类别与分数的概括，没有新增抗议原因。
 h-reldate-05,10,"Two events scored -7.5, the most negative in the sample: OHIO vs POLICE on December 5, and a POLICE-related protest in Dayton on December 14.",,
 h-reldate-05,11,A DEPUTIES protest was also logged on December 5.,,
 h-reldate-05,12,"The remaining events involved community and institutional voices: MEDIA protests on December 2 and 6, a COMMUNITY protest on December 3, and a YWCA protest on December 17.",,
-h-reldate-05,13,The records do not say what prompted them.,,
-h-reldate-05,14,"Taken together, the sample shows a month of protest activity in Ohio spanning labor, public safety and civic organizations, though the sparse event descriptions limit firmer conclusions.",,
+h-reldate-05,13,The records do not say what prompted them.,,已核对：输入未列动因，本句仅说明局限。
+h-reldate-05,14,"Taken together, the sample shows a month of protest activity in Ohio spanning labor, public safety and civic organizations, though the sparse event descriptions limit firmer conclusions.",U,POLICE/DEPUTIES参与抗议不证明主题是public safety，WORKER也未说明劳资诉求。句末只说信息稀疏、限制更强结论，仍把这些主题作为现有结论，没有明确说主题本身无法确认。
 h-top-01,1,"California's most-covered events in June 2024 were spread across the state, and the data gives only actor labels and locations, with no detail on what actually happened.",,
 h-top-01,2,"The biggest clusters, at 120 articles each, came from San Francisco on June 22 and from a statewide event on June 26.",,
-h-top-01,3,"The San Francisco events pair the city with an unnamed counterpart and with a ""JUDGE,"" which suggests a court or legal matter, and a separate ""WEBSITE"" event the same day drew 114 articles.",,
+h-top-01,3,"The San Francisco events pair the city with an unnamed counterpart and with a ""JUDGE,"" which suggests a court or legal matter, and a separate ""WEBSITE"" event the same day drew 114 articles.",U,保留U：JUDGE配对无事件类型或摘要，不能确认该事件的主题就是法院或法律事务。
 h-top-01,4,"The June 26 event involves a ""FARMER"" and carries a cooperative tone (7.4).",,
-h-top-01,5,Mid-month coverage centered on Hollywood and on politics.,,
+h-top-01,5,Mid-month coverage centered on Hollywood and on politics.,U,Hollywood地点及6月18日记录有据；BARACK OBAMA和PRESIDENT等角色并未提供活动类型或内容，不能确定报道主题就是政治。角色身份不等于事件性质。
 h-top-01,6,"On June 18, four events in Hollywood each drew 100 articles.",,
 h-top-01,7,"Three pair Los Angeles with Barack Obama, and the fourth pairs ""POLICE"" with ""COMMUNITY."" One of the Obama–Los Angeles records has a cooperative tone (7.4), and the others are neutral.",,
 h-top-01,8,"Earlier, on June 11, a statewide ""PRESIDENT vs PROSECUTOR"" event drew 102 articles with a neutral tone (-5.0).",,
 h-top-01,9,"On June 7, an event in Sacramento involving Idaho drew 110 articles.",,
-h-top-01,10,"These are coded actor pairings, so the underlying stories are not named.",,
-h-top-01,11,"The repeated San Francisco and Hollywood entries probably reflect a few major news items, each recorded as several related events.",,
+h-top-01,10,"These are coded actor pairings, so the underlying stories are not named.",,已核对：输入只有角色、地点、日期及指标，未命名具体新闻事件。
+h-top-01,11,"The repeated San Francisco and Hollywood entries probably reflect a few major news items, each recorded as several related events.",U,保留U：同日同地和重复角色不证明多条记录源于少数相同新闻事件。
 h-top-01,12,"The tone scores are mostly neutral, with occasional cooperative readings.",,
-h-top-01,13,"The records point to a month of legal, political, and local-community coverage, but the specifics would need the source articles.",,
+h-top-01,13,"The records point to a month of legal, political, and local-community coverage, but the specifics would need the source articles.",U,此输入只有角色、地点、日期和分数，没有标题中的行为或事件摘要。把JUDGE、PRESIDENT、POLICE–COMMUNITY扩展为法律、政治和社区新闻主题仍是推断；specifics需原文只限定细节。
 hot-01,1,"New Year's Eve 2024 was dominated by U.S.-centered events, and the most heavily covered item was a diplomatic-style exchange rather than a conflict.",,
 hot-01,2,"The top event by article count was ""SAINT consults with LOS ANGELES,"" with 240 articles and a mildly positive Goldstein score of 1.9.",,
 hot-01,3,"The data gives only actor labels and no further detail, so what lies behind it can't be determined.",,
@@ -230,97 +230,97 @@ hot-01,5,"Together they made up the cooperative, consultative side of the day's 
 hot-01,6,Most of the remaining events were coercion or fighting.,,
 hot-01,7,"The largest of these was ""AUTHORITIES coerces WISCONSIN"" in Milwaukee County, Wisconsin, at 70 articles (Goldstein -5.0).",,
 hot-01,8,"In Washington, D.C., ""PRISON assaults WASHINGTON"" drew 60 articles (Goldstein -9.0).",,
-hot-01,9,"California was a cluster: coercion events involving the United States or authorities were recorded in Palo Alto (56 articles, -9.2), Santa Clara County (42 articles, -9.2), and California more broadly (36 articles, -9.2).",,
-hot-01,10,"The near-identical scores and the shared geography suggest these may be related coverage of one situation, but the data doesn't confirm a link.",,
+hot-01,9,"California was a cluster: coercion events involving the United States or authorities were recorded in Palo Alto (56 articles, -9.2), Santa Clara County (42 articles, -9.2), and California more broadly (36 articles, -9.2).",,已核对：3条加州Coercion分别56、42、36篇，Goldstein均-9.2；只是地理归组。
+hot-01,10,"The near-identical scores and the shared geography suggest these may be related coverage of one situation, but the data doesn't confirm a link.",H,保留H：推测3条Coercion属于同一情境，同句明确数据未证实联系。
 hot-01,11,The rest were conflict-coded events with smaller article counts.,,
-hot-01,12,"""PICKPOCKET fights"" in Times Square, New York, drew 40 articles (Goldstein -9.5), which fits New Year's Eve crowds there.",,
+hot-01,12,"""PICKPOCKET fights"" in Times Square, New York, drew 40 articles (Goldstein -9.5), which fits New Year's Eve crowds there.",U,保留U：输入没有跨年人群，将PICKPOCKET事件与人群相联系属于外部背景解释。
 hot-01,13,"""VANCOUVER fights"" in Metchosin, British Columbia, and ""UNITED STATES fights NEIGHBORHOOD"" across the U.S.",,
 hot-01,14,each had 30 articles and the most negative score on the list (-10.0).,,
 hot-01,15,Canada's single entry stands out in a list otherwise located in the United States.,,
 hot-01,16,"The event labels are automated GDELT codings, so they point to topics in the news without establishing what actually happened.",,
 hot-02,1,"On 2024-01-09, the most-covered event in the data was at the White House in Washington, D.C., where ""AUSTIN yields to DEPUTY"" drew 150 articles, more than double any other item on the list.",,
 hot-02,2,It carries a neutral tone (Goldstein 5.0).,,
-hot-02,3,"The coding suggests a handoff of responsibility between Defense Secretary Lloyd Austin and his deputy, but the data gives no further detail on what was yielded or why.",,
+hot-02,3,"The coding suggests a handoff of responsibility between Defense Secretary Lloyd Austin and his deputy, but the data gives no further detail on what was yielded or why.",U,保留U：输入只有AUSTIN yields to DEPUTY，未确认Lloyd Austin身份或职责交接。缺少更多细节不等于承认身份推断未证实。
 hot-02,4,"Conflict-coded events made up much of the rest of the top 10, mostly in the United States.",,
 hot-02,5,"""GOVERNOR fights"" in Iowa had 72 articles (Goldstein -10.0).",,
 hot-02,6,"""INDONESIA fights ADDIS ABABA"" in California had 70 articles (-10.0).",,
 hot-02,7,"An unidentified actor fighting a GOVERNOR in Charleston, South Carolina, had 56 articles (-10.0), and ""ONTARIO fights MIAMI"" in Miami, Florida, had 42 articles (-10.0).",,
-hot-02,8,"In Ottawa, ""EDMONTON coerces"" had 60 articles (-9.2).",,
+hot-02,8,"In Ottawa, ""EDMONTON coerces"" had 60 articles (-9.2).",,已核对：Ottawa、EDMONTON coerces、60篇、-9.2均直接来自输入。
 hot-02,9,"The actor labels here are odd, such as Indonesia and Addis Ababa in California and Ontario against Miami, which looks like the automated coding of place names as actors.",,
 hot-02,10,"These entries should be read cautiously as signals of conflict-related coverage, not literal confrontations between those parties.",,
 hot-02,11,Cooperative events were also on the list.,,
 hot-02,12,"""MISSISSIPPI yields"" had 60 articles (Goldstein 10.0).",,
 hot-02,13,"""IOWA yields to CRIMINAL"" in Kansas had 63 articles (7.0).",,
 hot-02,14,"""EMPLOYEE consults with BOEING"" in Alaska had 60 articles (7.0), and ""SEATTLE provides aid"" in Florida had 60 articles (7.0).",,
-hot-02,15,"The Boeing and Alaska pairing likely connects to the aviation story of that day, but the data doesn't confirm it.",,
+hot-02,15,"The Boeing and Alaska pairing likely connects to the aviation story of that day, but the data doesn't confirm it.",H,保留H：把BOEING与Alaska联系到当天航空新闻，同时明确说数据不能确认。
 hot-02,16,"Taken together, the list is dominated by U.S.",,
-hot-02,17,"locations, and its generic actor labels make the specific storylines hard to pin down beyond the Pentagon item.",,
+hot-02,17,"locations, and its generic actor labels make the specific storylines hard to pin down beyond the Pentagon item.",U,保留U：结合第16句读取分句；Pentagon item把AUSTIN–DEPUTY认定为五角大楼事件，输入未给这一身份。
 invalid-date-01,1,"Texas in 2024 shows up in the data mostly through a handful of heavily covered events, though GDELT's actor coding is generic enough that many details stay vague.",,
 invalid-date-01,2,"The ten events listed are a sample of the most-covered items, not a full account of the year.",,
-invalid-date-01,3,The strongest coverage clusters around two dates.,,
+invalid-date-01,3,The strongest coverage clusters around two dates.,,已核对：5月17日和11月11日各有两条200篇记录，为最高覆盖日期组。
 invalid-date-01,4,"On 2024-05-17, a pair of consultation events between Texas and an unspecified actor each drew 200 articles, with mildly cooperative Goldstein scores of 1.9 and 2.8.",,
 invalid-date-01,5,"On 2024-11-11, three events coded in Texas involving the United States and ""population"" also hit 200 articles each: a public statement (Goldstein 0.0) and a yield (Goldstein 5.0).",,
 invalid-date-01,6,"The data does not say what prompted either set, so those readings are limited to the event types.",,
-invalid-date-01,7,"Between them, on 2024-06-27, the most conflictual of the top events appeared: a ""High Court coerces Texas"" event (Goldstein -5.0) with 180 articles, suggesting a court-imposed constraint on the state.",,
-invalid-date-01,8,Other prominent items were more local or thematic.,,
+invalid-date-01,7,"Between them, on 2024-06-27, the most conflictual of the top events appeared: a ""High Court coerces Texas"" event (Goldstein -5.0) with 180 articles, suggesting a court-imposed constraint on the state.",,此报告输入明确给出HIGH COURT coerces TEXAS及Type: Coercion，180篇、-5.0均相符。court-imposed constraint是该标题的近义概括，没有补充具体案件、裁决或动机，不能与仅有HIGH COURT–TEXAS角色的其他报告混用。
+invalid-date-01,8,Other prominent items were more local or thematic.,,保持空白：只是引出其他条目的概括，没有指认原因、具体性质或跨事件关联。
 invalid-date-01,9,"On 2024-10-11 in Dallas, a rejection involving a website (Goldstein -4.0) drew 150 articles.",,
 invalid-date-01,10,"On 2024-02-26 in Houston, a consultation involving ""pole"" and Houston (Goldstein 2.8) drew 140.",,
 invalid-date-01,11,"On 2024-08-30, a governor expressed intent to cooperate (Goldstein 5.2, 130 articles).",,
-invalid-date-01,12,"In late April, two events appeared: on 2024-04-25, an unidentified actor expressed intent to cooperate with ""the beloved country"" (Goldstein 4.0, 120 articles), and on 2024-04-27, Israel investigating a protester (Goldstein -2.0, 128 articles), the latter hinting at an international or protest-related thread in Texas coverage.",,
+invalid-date-01,12,"In late April, two events appeared: on 2024-04-25, an unidentified actor expressed intent to cooperate with ""the beloved country"" (Goldstein 4.0, 120 articles), and on 2024-04-27, Israel investigating a protester (Goldstein -2.0, 128 articles), the latter hinting at an international or protest-related thread in Texas coverage.",U,保留U：调查PROTESTER有据，但international thread把ISRAEL角色提升为国际新闻线索；该性质判断未获确认。
 invalid-date-01,13,"Taken together, the sample mixes cooperative signals (consultations, yielding, intent to cooperate) with a few confrontational ones (the High Court coercion, the Dallas rejection, the protester investigation).",,
 invalid-date-01,14,"Because the actor labels are often generic and no period comparison is provided, these events show what drew the most attention, but not how the year developed or what drove each story.",,
-keyword-fts-01,1,"The most heavily covered events of 2024 in this sample all center on wildfire and its fallout in the United States, with a geographic focus on Texas, Hawaii, and the West Coast.",,
-keyword-fts-01,2,"The actor labels (FIREFIGHTER, TANKER, RESIDENTS, XCEL ENERGY) point to emergency response, utilities, and affected communities.",,
-keyword-fts-01,3,"GDELT codes these as ""fighting"" and ""appeal"" events, so the ""fighting"" entries are probably firefighting reports rather than armed conflict.",,
+keyword-fts-01,1,"The most heavily covered events of 2024 in this sample all center on wildfire and its fallout in the United States, with a geographic focus on Texas, Hawaii, and the West Coast.",U,保留U：检索问题中的wildfire不是事件证据；所给标题和摘要均未出现火灾，不能确认所有记录都是野火及后果。
+keyword-fts-01,2,"The actor labels (FIREFIGHTER, TANKER, RESIDENTS, XCEL ENERGY) point to emergency response, utilities, and affected communities.",U,保留U：角色可提示职业类别，但emergency response及affected communities给这些事件新增了应急和受灾背景。
+keyword-fts-01,3,"GDELT codes these as ""fighting"" and ""appeal"" events, so the ""fighting"" entries are probably firefighting reports rather than armed conflict.",U,保留U：FIREFIGHTER角色不证明Fighting编码实指灭火，属于对事件性质的重新解释。
 keyword-fts-01,4,"In Texas, the biggest cluster falls in late winter.",,
 keyword-fts-01,5,"On February 29, an unidentified actor made a public statement about COMMUNITY (102 articles).",,
 keyword-fts-01,6,"On March 3, two mirrored ""fighting"" events pairing FIREFIGHTER and TEXAS each drew 64 articles at the maximum conflict score of -10.0.",,
-keyword-fts-01,7,"On March 7, a public statement about XCEL ENERGY drew 70 articles, which suggests the utility was drawn into the story.",,
+keyword-fts-01,7,"On March 7, a public statement about XCEL ENERGY drew 70 articles, which suggests the utility was drawn into the story.",U,保留U：输入仅说对XCEL ENERGY作公开声明，未说明它被卷入前文所说的野火事件。
 keyword-fts-01,8,The data does not say what the statement concerned.,,
-keyword-fts-01,9,"In the summer, attention moved west.",,
+keyword-fts-01,9,"In the summer, attention moved west.",,按本次原因、性质和事件关联口径留空：本句只是时间与地域概括，未给原因或声称同一事件延续。另记趋势问题：早期样本在Texas、夏季在Oregon/California/Hawaii，但高覆盖样本不是时间序列，不能据此证明整体媒体注意力向西转移。
 keyword-fts-01,10,"On July 27, OREGON made a public statement about TANKER (60 articles).",,
 keyword-fts-01,11,"On July 29, an unidentified actor criticized CALIFORNIA in Butte County (60 articles, Goldstein -2.0).",,
 keyword-fts-01,12,"On August 4 in Hawaii, RESIDENTS were tied to a fighting event (60 articles, -9.5), and a SCHOOL expressed intent to cooperate (60 articles, +4.0).",,
 keyword-fts-01,13,"Hawaii returned on September 13 with the two most heavily covered events in the sample: TANKER appealing to FIREFIGHTER (105 articles) and RESIDENTS in a fighting event (100 articles, -10.0).",,
-keyword-fts-01,14,"Taken together, the sample shows a year in which fire emergencies in several states generated sustained coverage.",,
-keyword-fts-01,15,"Conflict-coded firefighting and resident events sit alongside appeals, public statements, and offers of cooperation.",,
+keyword-fts-01,14,"Taken together, the sample shows a year in which fire emergencies in several states generated sustained coverage.",U,保留U：火灾造成持续报道的主题及归因均未提供；离散高覆盖样本也不支持sustained。
+keyword-fts-01,15,"Conflict-coded firefighting and resident events sit alongside appeals, public statements, and offers of cooperation.",U,保留U：把Fighting直接称为firefighting，输入没有这一事件性质。
 keyword-fts-01,16,"This is only a top-10 sample, so it shows which events drew the most coverage, not how often fires occurred or how the year developed.",,
 keyword-fts-01,17,"The records also give no cause, damage, or outcome for any event.",,
-march-word-01,1,Texas protest coverage in 2024 is dominated by one episode: the pro-Palestinian demonstrations in Austin in late April.,,
+march-word-01,1,Texas protest coverage in 2024 is dominated by one episode: the pro-Palestinian demonstrations in Austin in late April.,U,保留U：角色记录没有说明亲巴立场、Austin具体地点或属于同一场示威。
 march-word-01,2,"On April 24, four of the ten most-covered events cluster around the city.",,
 march-word-01,3,Austin protesters against state troopers and Palestine-linked protesters against Austin each drew 40 articles.,,
 march-word-01,4,Palestine against police and Austin against Texas each drew 30.,,
 march-word-01,5,"All carry a Goldstein score of -6.5, which marks them as conflictual.",,
-march-word-01,6,"The April 30 event, ""Demonstrator protests against police,"" with 30 articles, fits the same pattern of confrontation between demonstrators and law enforcement.",,
-march-word-01,7,"The data only labels these events as protests, so the underlying causes and details are inferred from the actors and timing.",,
+march-word-01,6,"The April 30 event, ""Demonstrator protests against police,"" with 30 articles, fits the same pattern of confrontation between demonstrators and law enforcement.",,U改为空白：本句比较反对POLICE/TROOPER的Protest记录所共有的对抗模式，没有断言同一事件、共同动因或延续关系。不同于continued friction。
+march-word-01,7,"The data only labels these events as protests, so the underlying causes and details are inferred from the actors and timing.",,保持空白：明确说明前述原因和细节是推断，本句未提出新的具体假说；不把免责声明单独标H。
 march-word-01,8,Other flashpoints appear outside that cluster.,,
 march-word-01,9,"On February 2, a protest in Eagle Pass, Texas, drew 30 articles.",,
-march-word-01,10,"The data does not say what it was about, though the location is a border town.",,
+march-word-01,10,"The data does not say what it was about, though the location is a border town.",H,保留H：新增边境城镇背景暗示事件主题，但同句明确说数据不知道抗议所为何事。
 march-word-01,11,"On February 26, a ""Washington protests against Israeli"" event was geolocated to Texas, with 30 articles and the sample's most negative score, -7.5.",,
 march-word-01,12,"Student-related protest also drew 40 articles on May 30, when ""Student protests against Texas"" was recorded.",,
 march-word-01,13,"An April 6 event involving the ""United States"" (36 articles) and a July 25 event involving ""Industry"" (30 articles) round out the sample.",,
-march-word-01,14,Their records give no further context.,,
-march-word-01,15,"The sample points to Gaza-related activism, campus and student unrest, and confrontations with police as the main threads of Texas protest news in 2024.",,
-march-word-01,16,Border-related tension appears in the Eagle Pass event.,,
+march-word-01,14,Their records give no further context.,,已核对：4月6日及7月25日记录只有通用角色和Protest摘要，本句说明缺乏具体背景。
+march-word-01,15,"The sample points to Gaza-related activism, campus and student unrest, and confrontations with police as the main threads of Texas protest news in 2024.",U,保留U：Gaza及校园议题并未出现于输入，仅有PALESTINE、ISRAELI和STUDENT角色。
+march-word-01,16,Border-related tension appears in the Eagle Pass event.,U,保留U：Eagle Pass记录没有边境议题，不能仅凭地点断言边境紧张。
 march-word-01,17,"This is only a ranking of the most-covered events, so it shows what drew attention, not how protest activity changed over the year or how much of it occurred.",,
 month-end-01,1,"Protest coverage in Texas during March 2024 spanned several themes, though the event data is thin on detail.",,
 month-end-01,2,"Most records carry only a generic actor label and a location, with no specifics on what each protest was about.",,
 month-end-01,3,"The most heavily covered item was a protest involving police on March 27, statewide, with 24 articles and a Goldstein score of -7.5.",,
-month-end-01,4,That was the sharpest conflict tone among the ten events listed.,,
+month-end-01,4,That was the sharpest conflict tone among the ten events listed.,,已核对：POLICE事件-7.5为10条中最低，其余为-6.5。
 month-end-01,5,"The next day, March 28, San Antonio drew 20 articles on a protest involving the city.",,
-month-end-01,6,"Earlier in the month, the events point to a mix of political and local grievances.",,
+month-end-01,6,"Earlier in the month, the events point to a mix of political and local grievances.",U,保留U：角色和地名未说明政治或地方诉求，grievances是新增动因。
 month-end-01,7,"On March 1, a protest tied to Joe Biden in Texas drew 12 articles.",,
 month-end-01,8,"On March 2, students were recorded protesting against Texas (10 articles).",,
-month-end-01,9,"On March 3, a protest linking Israel and the president drew 10 articles, which suggests the Middle East conflict fed into Texas demonstrations.",,
+month-end-01,9,"On March 3, a protest linking Israel and the president drew 10 articles, which suggests the Middle East conflict fed into Texas demonstrations.",U,保留U：ISRAEL–PRESIDENT配对不能证明中东冲突促成得州示威。
 month-end-01,10,March 6 brought two entries: Houston (16 articles) and a general Texas protest (12 articles).,,
 month-end-01,11,"Houston appears again on March 12, when a community-versus-Houston protest drew 10 articles.",,
-month-end-01,12,"The same day, an appeals court was the focus of a protest entry with 10 articles, which points to a legal or judicial dimension.",,
-month-end-01,13,"On March 20, an employee-related protest drew 18 articles, the third-highest in this sample, which hints at a labor or workplace dispute.",,
-month-end-01,14,"Taken together, these top events show protest activity in Texas touching on policing, immigration-era politics, campus issues, local governance, courts, and labor.",,
+month-end-01,12,"The same day, an appeals court was the focus of a protest entry with 10 articles, which points to a legal or judicial dimension.",U,保留U：APPEALS COURT作为角色不等于抗议涉及法律或司法争议，记录未给主题。
+month-end-01,13,"On March 20, an employee-related protest drew 18 articles, the third-highest in this sample, which hints at a labor or workplace dispute.",U,保留U：EMPLOYEE参与抗议不自动说明原因是劳资或职场争端。
+month-end-01,14,"Taken together, these top events show protest activity in Texas touching on policing, immigration-era politics, campus issues, local governance, courts, and labor.",U,保留U：输入没有immigration-era politics或校园议题，角色类别被扩展为抗议主题。
 month-end-01,15,Houston and San Antonio stand out as urban focal points.,,
 month-end-01,16,"All ten events carry a Goldstein score between -6.5 and -7.5, so the coverage is consistently conflict-toned.",,
 month-end-01,17,"The records do not identify the underlying causes, so any link between events would be speculation.",,
-month-end-02,1,"April 2024 in Texas, as reflected in the most heavily covered events, was shaped by protest, conflict-coded incidents in the Houston area, and political friction.",,
+month-end-02,1,"April 2024 in Texas, as reflected in the most heavily covered events, was shaped by protest, conflict-coded incidents in the Houston area, and political friction.",,Houston/Harris County的Fighting、STUDENT PROTESTER rejects TEXAS，以及PRESIDENTIAL CANDIDATE criticizes均在标题中明确给出。这里概括抗议相关行为、冲突编码及政治人物批评，且限定为高覆盖样本；未补出Gaza、校园或共同动因。
 month-end-02,2,"This is a sample of ten events, so it shows what drew attention rather than the full scope of the month.",,
 month-end-02,3,The mid-month events were mostly conflict-coded.,,
 month-end-02,4,"On April 12, ""HOUSTON fights"" appeared in two records, one in Harris County (100 articles) and one in Houston itself (80 articles), both scoring -10.0 on the Goldstein scale.",,
@@ -329,14 +329,14 @@ month-end-02,6,"The data doesn't say what happened in these incidents, only that
 month-end-02,7,"Earlier, on April 3, a presidential candidate was recorded criticizing an unspecified target in Texas (90 articles, Goldstein -2.0).",,
 month-end-02,8,The month's final days were dominated by protest-related coverage.,,
 month-end-02,9,"On April 27, an ""ISRAEL investigates PROTESTER"" event in Texas drew 128 articles, the highest count in this sample.",,
-month-end-02,10,"On April 29, a student protester was recorded rejecting TEXAS (90 articles, Goldstein -5.0).",,
-month-end-02,11,"Together these suggest campus and activist demonstrations tied to the Israel-related issue were a major story, though the records alone don't give the specifics.",,
+month-end-02,10,"On April 29, a student protester was recorded rejecting TEXAS (90 articles, Goldstein -5.0).",,已核对：STUDENT PROTESTER rejects TEXAS、4月29日、90篇、-5.0均有原记录。
+month-end-02,11,"Together these suggest campus and activist demonstrations tied to the Israel-related issue were a major story, though the records alone don't give the specifics.",U,保留U：ISRAEL调查与STUDENT PROTESTER拒绝是独立记录，未说明同一议题或校园示威；缺少specifics不限定这一关联。
 month-end-02,12,"On April 28, JORDAN made a public statement about a COMPANY in Houston (105 articles, Goldstein 0.0), but the data doesn't explain the context.",,
 month-end-02,13,Cooperative signals also appeared.,,
 month-end-02,14,"On April 22, an unidentified actor consulted with ""THE BELOVED COUNTRY"" in Texas (80 articles, Goldstein 1.9).",,
-month-end-02,15,"On April 25, two mirrored records show intent to cooperate involving the same actor (120 articles each, Goldstein 4.0).",,
+month-end-02,15,"On April 25, two mirrored records show intent to cooperate involving the same actor (120 articles each, Goldstein 4.0).",,已核对：4月25日THE BELOVED COUNTRY角色方向相反的两条记录均120篇、4.0；mirrored描述字段，没有声称同一事件。
 month-end-02,16,"The actor label is ambiguous, so the data doesn't make clear who or what was involved.",,
-month-end-03,1,"February 2024 in Texas, as captured in the most heavily covered GDELT events, was dominated by two threads: Houston as a hub of diplomatic and consultative activity, and immigration and border politics playing out across the state.",,
+month-end-03,1,"February 2024 in Texas, as captured in the most heavily covered GDELT events, was dominated by two threads: Houston as a hub of diplomatic and consultative activity, and immigration and border politics playing out across the state.",U,保留U：移民角色有据，边境政治和Houston外交中心的整体叙事未获数据支持。
 month-end-03,2,"The sample is only ten events, so it shows what drew the most attention, not the full scope of the month.",,
 month-end-03,3,"The single most-covered event was a consultation between ""POLE"" and ""HOUSTON"" on 2024-02-26, with 140 articles.",,
 month-end-03,4,"Another Houston consultation, involving an unidentified actor and ""MELBOURNE"" on 2024-02-08, drew 102 articles.",,
@@ -344,105 +344,105 @@ month-end-03,5,"On 2024-02-12, two events tied to Houston involved ""TEXAS"" and
 month-end-03,6,"One was coded as fighting with a Goldstein score of -10.0, the most conflictual in the set.",,
 month-end-03,7,The other was a public statement with a near-neutral -0.4.,,
 month-end-03,8,"The actor labels are terse, so the data does not say what these exchanges were about.",,
-month-end-03,9,"Read together, the paired events suggest a confrontation involving Governor Abbott's name, though the underlying detail isn't in the records.",,
-month-end-03,10,Immigration themes show up in several other events.,,
+month-end-03,9,"Read together, the paired events suggest a confrontation involving Governor Abbott's name, though the underlying detail isn't in the records.",U,H改为U：输入只有ABBOT，并未确认Governor Abbott身份或两条记录组成同一次对抗。underlying detail缺失只限定细节，未说明身份和关联不能确认。
+month-end-03,10,Immigration themes show up in several other events.,,保持空白：两条直接含ILLEGAL IMMIGRANT、MIGRANT，可作移民相关角色的宽泛归类；未新增边境政策、动因或共同事件。
 month-end-03,11,"On 2024-02-08, an ""ILLEGAL IMMIGRANT"" and ""SCHOOL"" event coded as diplomatic cooperation drew 90 articles.",,
 month-end-03,12,"On 2024-02-29, a ""JUDGE"" coercing a ""MIGRANT"" (Goldstein -5.0) and a ""LAW ENFORCEMENT OFFICER"" yielding (Goldstein 5.0) each drew 80 articles.",,
 month-end-03,13,"The same day also saw an unidentified actor make a public statement about ""COMMUNITY"" across Texas, with 102 articles.",,
 month-end-03,14,"Earlier, on 2024-02-02, a ""RADIO STATION"" public statement drew 80 articles.",,
-month-end-03,15,"On 2024-02-27, ""JOE BIDEN"" expressed intent to cooperate with the ""UNITED STATES,"" also with 80 articles, tying the state's stories to national politics.",,
+month-end-03,15,"On 2024-02-27, ""JOE BIDEN"" expressed intent to cooperate with the ""UNITED STATES,"" also with 80 articles, tying the state's stories to national politics.",U,保留U：JOE BIDEN–UNITED STATES记录有据，但将其与全州其他新闻串成国家政治叙事是额外联系。
 month-end-03,16,"Taken together, the sample shows a mix of cooperative and consultative events alongside sharply conflictual ones, with the Abbott-related fighting event and the judge-migrant coercion event as the clearest friction points.",,
 month-end-03,17,"Because the records carry only generic actor labels and no full context, the specific causes and outcomes of these events can't be determined from this data alone.",,
-overview-01,1,The data for Texas in 2024 is thin on detail.,,
+overview-01,1,The data for Texas in 2024 is thin on detail.,,已核对：5条热点仅含通用角色、日期、地点和指标，细节稀少。
 overview-01,2,"Only five highly covered events came through, and several have generic or placeholder actor labels.",,
 overview-01,3,"Across the regional summary, the average tone is mildly negative (about -2.54) and the average Goldstein score is slightly positive (about 0.11).",,
 overview-01,4,That suggests a mix of cooperative and conflictual activity without a strongly lopsided picture.,,
 overview-01,5,The most heavily covered items cluster on three dates.,,
 overview-01,6,"On 2024-05-17, two mirrored records, ""ACTOR vs TEXAS"" and ""TEXAS vs ACTOR"", each drew 200 articles, with tones of 1.9 and 2.8.",,
 overview-01,7,"The unnamed counterpart means the data cannot say what the interaction was, only that Texas was a central party and coverage was substantial and fairly mild in tone.",,
-overview-01,8,"On 2024-06-27, ""HIGH COURT vs TEXAS"" drew 180 articles with a tone of -5.0.",,
-overview-01,9,"That is the most negative of the sampled events, and it points to a judicial dispute or ruling involving the state.",,
+overview-01,8,"On 2024-06-27, ""HIGH COURT vs TEXAS"" drew 180 articles with a tone of -5.0.",,已核对：HIGH COURT–TEXAS、6月27日、180篇、-5.0均与输入一致。
+overview-01,9,"That is the most negative of the sampled events, and it points to a judicial dispute or ruling involving the state.",U,保留U：该输入未给Coercion等事件类型，不能从HIGH COURT配对认定司法争议或裁决；不能借用其他报告的更丰富输入。
 overview-01,10,"On 2024-11-11, two records of ""UNITED STATES vs POPULATION"" in Texas each reached 200 articles.",,
 overview-01,11,"One carries a tone of 5.0, the most positive in the sample.",,
-overview-01,12,"The actor labels are generic, so the underlying event is unclear, but it reflects national-level attention on Texas's population on that date.",,
+overview-01,12,"The actor labels are generic, so the underlying event is unclear, but it reflects national-level attention on Texas's population on that date.",U,保留U：UNITED STATES–POPULATION与得州地点不证明国家层面关注得州人口；前半句含混声明未撤回后半句结论。
 overview-01,13,"Taken together, the sample shows Texas as a focus of attention from courts, national institutions and unnamed actors.",,
 overview-01,14,"The strongest negative signal is the June court-related item, and the mildest or most positive coverage came in May and November.",,
 overview-01,15,"Because only five events are available and several lack identifiable actors, I can draw no firm conclusions about trends or specific causes for the year.",,
 overview-02,1,California's December 2024 record in GDELT is large but thinly detailed.,,
-overview-02,2,"The summary shows 97,962 events for the month, with an average tone of -1.84 and an average Goldstein score of 0.34, which is mildly cooperative.",,
+overview-02,2,"The summary shows 97,962 events for the month, with an average tone of -1.84 and an average Goldstein score of 0.34, which is mildly cooperative.",,已核对：97962、平均语调约-1.84、Goldstein约0.34均来自汇总；正值的温和合作解释不构成事件动因推测。
 overview-02,3,"Of those events, 10,496 are classed as conflict and 11,554 as cooperation.",,
 overview-02,4,"The two categories are close in size, and the slightly higher cooperation count fits the positive Goldstein average.",,
-overview-02,5,"Overall tone is still negative, a common pattern in news coverage.",,
+overview-02,5,"Overall tone is still negative, a common pattern in news coverage.",,U改为空白：负语调有汇总数据支持；新闻常见模式是未经支持的一般概括，但未声称本批事件的原因、实质或联系。按本次推测类口径不标U，事实性问题在此备注。
 overview-02,6,"The five hot events are only a small sample, and their actor labels are generic.",,
-overview-02,7,"The most heavily covered was on December 2, labeled ""ACTOR vs Unknown"" and located only as California, with 198 articles and a neutral tone of 1.9.",,
+overview-02,7,"The most heavily covered was on December 2, labeled ""ACTOR vs Unknown"" and located only as California, with 198 articles and a neutral tone of 1.9.",,已核对：12月2日ACTOR、198篇、1.9为5条热点中最高文章数。
 overview-02,8,"On December 16, an event in Beverly Hills involving ""UNITED STATES vs Unknown"" drew 112 articles and the most negative tone in the set, -9.0, which marks it as conflict-oriented coverage.",,
 overview-02,9,"On December 17, an Oakland event involving a ""SCHOOL"" actor drew 110 articles and a strongly positive tone of 7.4.",,
 overview-02,10,"On December 18, San Francisco appears twice, with ""INDUSTRY vs Unknown"" entries of 90 articles each.",,
 overview-02,11,One has a neutral tone of 3.0 and the other lacks a tone value.,,
-overview-02,12,"They may be duplicate or closely related records, so I wouldn't treat them as two separate stories.",,
+overview-02,12,"They may be duplicate or closely related records, so I wouldn't treat them as two separate stories.",U,保留U：同日同角色、同文章数不证明重复或同一新闻；may不足以替代数据未确认的明确限定。
 overview-02,13,"The data doesn't say what happened in any of these events, only where, when, who in broad terms, and how heavily they were covered.",,
 overview-02,14,"The picture is one of broad, mixed activity across California, with spotlights on Beverly Hills, Oakland and San Francisco.",,
 overview-02,15,The actor labels are too generic to support conclusions about causes or specific developments.,,
-overview-02,16,"Without a prior-period comparison, nothing here shows whether the month was more or less turbulent than usual.",,
-reldate-01,1,"Protest coverage in Texas during the week of December 23–29, 2024 was spread across several unrelated threads.",,
+overview-02,16,"Without a prior-period comparison, nothing here shows whether the month was more or less turbulent than usual.",,已核对：无前期数据，不能比较本月动荡程度，仅说明局限。
+reldate-01,1,"Protest coverage in Texas during the week of December 23–29, 2024 was spread across several unrelated threads.",U,时间、角色和地点分散有据，但unrelated明确断言多个新闻线索互不相关。数据没有建立关联，也没有证明不存在关联，不能把未确认联系当成已确认无关。
 reldate-01,2,"The data is thin on detail: the event records carry actor labels and conflict scores but no narrative text, so what drove each protest is mostly unclear.",,
 reldate-01,3,"The ten most-covered events in the sample each drew 8 to 10 articles, and nearly all carry the same Goldstein score of -6.5.",,
 reldate-01,4,The week opened on December 23 with two events at 10 articles each.,,
-reldate-01,5,"One pitted Starbucks against a ""company"" actor, which suggests a labor or corporate dispute.",,
-reldate-01,6,"The other, the most severe in the sample at Goldstein -7.5, involved Texas against ""deputies."" On December 24, activity centered on Dallas and San Antonio.",,
+reldate-01,5,"One pitted Starbucks against a ""company"" actor, which suggests a labor or corporate dispute.",U,保留U：STARBUCKS–COMPANY抗议未给诉求，劳资或企业纠纷属于事件性质推断。
+reldate-01,6,"The other, the most severe in the sample at Goldstein -7.5, involved Texas against ""deputies."" On December 24, activity centered on Dallas and San Antonio.",,保持空白：TEXAS–DEPUTIES确为-7.5，24日有DALLAS/SAN ANTONIO标签；但Dallas仅是角色，地点只写Texas，不能视为已确认发生地。
 reldate-01,7,"Separate San Antonio-tagged events were recorded in San Antonio and New Braunfels, each with 8 articles.",,
-reldate-01,8,"A Seattle-versus-company event was also located in Texas that day, which may reflect a corporate dispute with a Seattle link rather than a Seattle-based protest.",,
+reldate-01,8,"A Seattle-versus-company event was also located in Texas that day, which may reflect a corporate dispute with a Seattle link rather than a Seattle-based protest.",U,保留U：记录只有SEATTLE–COMPANY及Texas地点，未确认为企业纠纷或说明Seattle如何关联。
 reldate-01,9,"Later in the week, a government-related protest was logged statewide on December 25.",,
 reldate-01,10,"On December 27, a generic ""male"" actor was tied to a protest event.",,
 reldate-01,11,"On December 28, a constable-related protest was recorded in Jersey Village, near Houston, alongside another statewide Texas-tagged event, each with 10 articles.",,
-reldate-01,12,"The constable and deputy events suggest recurring friction involving local law enforcement, though the data doesn't say what caused it.",,
-reldate-01,13,"Overall, the sample points to scattered protests involving corporate, government and law enforcement actors rather than one dominant movement.",,
+reldate-01,12,"The constable and deputy events suggest recurring friction involving local law enforcement, though the data doesn't say what caused it.",U,保留U：把CONSTABLE和DEPUTIES记录认定为持续执法摩擦；不知道原因并不否定这项持续性联系。
+reldate-01,13,"Overall, the sample points to scattered protests involving corporate, government and law enforcement actors rather than one dominant movement.",U,企业、政府和执法角色的罗列有据，但rather than one dominant movement进一步排除一场主导运动。角色多样不能证明这些记录来自不同运动，输入也未提供参与者、诉求或组织关系。
 reldate-01,14,"Because many records are tagged only to ""Texas"" and have vague actors, the specific causes and participants can't be determined from this data alone.",,
 reldate-03,1,"The most-covered New York event in this window is a December 30 disapproval event, coded as a news organization criticizing an unspecified target (91 articles, Goldstein -2.0).",,
 reldate-03,2,"Also on December 30, a politician was coded in an assault event (50 articles, Goldstein -9.0), the most conflictual event in the sample.",,
 reldate-03,3,"The data doesn't say who was involved or what happened, so the label should be read cautiously.",,
 reldate-03,4,"The same day, the Appeals Court was coded in a rejection event (42 articles, Goldstein -4.0).",,
 reldate-03,5,"A spokesman was coded criticizing the Appeals Court in a separate disapproval event (42 articles, Goldstein -2.0).",,
-reldate-03,6,"Together these suggest a court ruling that drew a public response, though the records don't name the case.",,
+reldate-03,6,"Together these suggest a court ruling that drew a public response, though the records don't name the case.",U,保留U：法院Rejection和SPOKESMAN批评法院未被证明为裁决引发回应；case未命名不等于关联未确认。
 reldate-03,7,"Elsewhere in the state, residents of the Finger Lakes region made a public statement on December 30 (50 articles, Goldstein 0.0).",,
 reldate-03,8,The records give no topic.,,
 reldate-03,9,"On December 31, several New York-tagged events were mostly low-conflict or cooperative.",,
 reldate-03,10,"A ""MINIST"" actor was coded in a consultation event (50 articles, Goldstein +1.0).",,
-reldate-03,11,"Victoria was coded in a public statement (48 articles, Goldstein -0.4), and ""New York"" was coded in another public statement (40 articles, Goldstein 0.0).",,
+reldate-03,11,"Victoria was coded in a public statement (48 articles, Goldstein -0.4), and ""New York"" was coded in another public statement (40 articles, Goldstein 0.0).",,已核对：VICTORIA与NEW YORK两条Public statement分别48篇/-0.4、40篇/0.0。
 reldate-03,12,"Some of the heavily covered events in this New York-filtered set are actually in New Orleans, Louisiana.",,
 reldate-03,13,"On December 31, the Coast Guard was coded in an investigation event (80 articles, Goldstein -2.0) and in a public statement about New Orleans (49 articles, Goldstein 0.0).",,
-reldate-03,14,"These likely reflect a national story that was geotagged to New York, perhaps through coverage originating from the city, rather than local New York activity.",,
-reldate-03,15,The sample is thin on detail.,,
+reldate-03,14,"These likely reflect a national story that was geotagged to New York, perhaps through coverage originating from the city, rather than local New York activity.",U,保留U：输入地点实际为New Orleans，未说明全国新闻性质、纽约媒体来源或地理标注机制。
+reldate-03,15,The sample is thin on detail.,,已核对：记录缺少事件内容，仅为信息局限判断。
 reldate-03,16,"Actors are generic, such as ""news organization,"" ""politician"" and ""spokesman,"" and the records carry no narrative text.",,
 reldate-03,17,"The links between events, especially the Appeals Court pair, are inferences from shared actors, dates and locations rather than confirmed facts.",,
-search-02,1,The most heavily covered conflict events in North America in 2024 were mostly tied to U.S.,,
-search-02,2,political and legal disputes rather than clear-cut armed violence.,,
+search-02,1,The most heavily covered conflict events in North America in 2024 were mostly tied to U.S.,,这行在U.S.处被错误切句。仅就本行可见地理陈述，10条地点均在美国，未提出原因或事件性质；下一行才是political and legal disputes rather than armed violence的性质判断。本轮保留原切分，并注明不将下一行的U重复计入本行。
+search-02,2,political and legal disputes rather than clear-cut armed violence.,U,保留U：结合第1句的U.S.分句读取；将Fighting等编码重解释为政治法律纠纷而非武装暴力，输入未说明。
 search-02,3,"Of the ten events listed, seven were in North Carolina, two in North Dakota and one in Northbrook, Illinois.",,
 search-02,4,"This is a sample of the top events by article count, so it shows where coverage clustered, not the full scope of conflict.",,
-search-02,5,North Carolina's institutions and politics dominate the list.,,
+search-02,5,North Carolina's institutions and politics dominate the list.,U,North Carolina占7条有据，COURT OF APPEALS/SENATE等角色也确实存在；但politics dominate结合上下文将Fighting等编码归为政治性质，角色字段没有说明冲突实际关于政治。
 search-02,6,"The most-covered event was on 2024-03-13, when the COURT OF APPEALS and VOTER were coded in a ""Fighting"" event (70 articles, Goldstein -10.0).",,
 search-02,7,"On 2024-10-03, PRESIDENT vs NORTH CAROLINA was coded as a show of force (63 articles, -7.2).",,
 search-02,8,A 2024-11-02 protest involving PRESIDENT and CHARLOTTE drew 42 articles (-6.5).,,
 search-02,9,"Other North Carolina events include an unidentified actor against the SENATE on 2024-12-17 (60 articles, -9.5), an unidentified actor against CHARLOTTE on 2024-07-25 (56 articles, -10.0), POLICE on 2024-11-27 (50 articles, -10.0), and ACADEMICS vs LAWMAKER on 2024-09-16 (40 articles, -10.0).",,
-search-02,10,"The actors are mostly courts, legislators, voters and city or state entities, which suggests contention over governance, elections and policing.",,
+search-02,10,"The actors are mostly courts, legislators, voters and city or state entities, which suggests contention over governance, elections and policing.",U,保留U：法院、议员、选民、警察角色不证明争议内容为治理、选举或警务。
 search-02,11,"The data does not say what each event involved, and GDELT's ""Fighting"" label can cover verbal or legal confrontation as well as physical clashes.",,
 search-02,12,"Outside North Carolina, two mirrored records from 2024-11-22 in North Dakota, NORTH DAKOTA vs JUDGE and JUDGE vs NORTH DAKOTA, each drew 50 articles at -10.0.",,
-search-02,13,"They are most likely the same story coded from both directions, a state-versus-judiciary dispute.",,
+search-02,13,"They are most likely the same story coded from both directions, a state-versus-judiciary dispute.",U,保留U：两条镜像NORTH DAKOTA–JUDGE记录没有共同事件标识，不能确认同一新闻或州与司法机关争端。
 search-02,14,"The remaining event is EUROPE coded in ""Fighting"" in Northbrook, Illinois, on 2024-04-02 (40 articles, -10.0).",,
-search-02,15,"The actor-location pairing is odd, so it may reflect a coding quirk or a story with international links.",,
-search-02,16,"Overall, the sampled events point to institutional and political conflict, especially in North Carolina, as the most heavily covered form of conflict in the data.",,
+search-02,15,"The actor-location pairing is odd, so it may reflect a coding quirk or a story with international links.",U,保留U：EUROPE角色与Northbrook地点不能证明国际关联；列出可能解释但未明确说明该解释未经数据证实。
+search-02,16,"Overall, the sampled events point to institutional and political conflict, especially in North Carolina, as the most heavily covered form of conflict in the data.",U,保留U：把事件归为制度和政治冲突，需要超出Fighting及角色字段的实质信息。
 search-02,17,"The records give no casualty or incident details, and no period comparison is provided, so they cannot show whether conflict intensified or eased over the year.",,
 top-02,1,March 2024 coverage tagged to Florida was led by a cluster of events on March 12.,,
 top-02,2,"The most-covered was a ""MIAMI vs SCHOOL"" event in Miami, with 150 articles and a cooperative tone (8.0).",,
 top-02,3,"The same day, a generic ""FLORIDA vs Unknown"" event drew 144 articles.",,
-top-02,4,"Two mirrored ""SETTLEMENT vs FLORIDA"" and ""FLORIDA vs SETTLEMENT"" records, each with 84 articles and a neutral tone (1.0), point to a settlement involving the state.",,
+top-02,4,"Two mirrored ""SETTLEMENT vs FLORIDA"" and ""FLORIDA vs SETTLEMENT"" records, each with 84 articles and a neutral tone (1.0), point to a settlement involving the state.",U,保留U：SETTLEMENT是角色标签，不足以确认法律和解或与州达成和解的事件。
 top-02,5,The data doesn't say what the settlement concerned.,,
 top-02,6,Several other events were recorded on March 22.,,
-top-02,7,"A ""BARRISTER vs Unknown"" event drew 120 articles with a neutral tone (3.4), suggesting legal coverage.",,
-top-02,8,"A ""WORKER vs Unknown"" event drew 100 articles and was the most negative in the set, with a conflict tone of -10.0.",,
-top-02,9,"The actors are too generic to say what happened, but the tone suggests a dispute, accident, or other adverse incident involving a worker.",,
-top-02,10,The rest of the list reflects Florida as a backdrop for broader stories.,,
-top-02,11,"A ""HUNGARY vs BELGIUM"" event on March 15 (102 articles, tone -2.0) and a ""UN SECURITY COUNCIL vs ISRAEL"" event on March 27 (81 articles, tone 3.0) were geolocated to Florida, probably because of how the articles were tagged rather than because the events happened there.",,
+top-02,7,"A ""BARRISTER vs Unknown"" event drew 120 articles with a neutral tone (3.4), suggesting legal coverage.",U,保留U：BARRISTER角色没有事件内容，不能据此确认报道主题为法律事务。
+top-02,8,"A ""WORKER vs Unknown"" event drew 100 articles and was the most negative in the set, with a conflict tone of -10.0.",,已核对：WORKER记录为100篇、-10.0，确为10条中最低分。
+top-02,9,"The actors are too generic to say what happened, but the tone suggests a dispute, accident, or other adverse incident involving a worker.",H,保留H：猜测工人争端、事故或不利事件，句首明确说角色过于笼统，无法确定发生了什么。
+top-02,10,The rest of the list reflects Florida as a backdrop for broader stories.,U,保留U：外国角色与Florida地点不证明佛州只是其他更广泛新闻的背景。
+top-02,11,"A ""HUNGARY vs BELGIUM"" event on March 15 (102 articles, tone -2.0) and a ""UN SECURITY COUNCIL vs ISRAEL"" event on March 27 (81 articles, tone 3.0) were geolocated to Florida, probably because of how the articles were tagged rather than because the events happened there.",U,两条Florida地点记录及文章数、分数有据，但没有原文来源、地理匹配过程或真实发生地证据。probably because提出了地理标注机制的原因，并排除实际发生在Florida，未在本句承认该解释不能确认。
 top-02,12,"Two more were tied to specific places: ""NAPLES vs FLORIDA"" on March 17 (80 articles, tone -4.0) and ""Unknown vs BRAZILIAN"" in Miami on March 19 (80 articles, tone -2.0).",,
 top-02,13,"This is a sample of the ten most-covered events, not a complete picture.",,
-top-02,14,"Many actor labels are generic or unresolved (""Unknown,"" ""WORKER,"" ""BARRISTER""), so the specifics behind these events can't be confirmed from this data alone.",,
+top-02,14,"Many actor labels are generic or unresolved (""Unknown,"" ""WORKER,"" ""BARRISTER""), so the specifics behind these events can't be confirmed from this data alone.",,已核对：角色泛化且缺乏事件叙述，本句仅说明无法确认具体情况。
