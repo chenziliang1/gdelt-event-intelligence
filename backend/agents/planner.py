@@ -19,10 +19,11 @@ from typing import List, Dict, Any, Optional
 
 import httpx
 from pydantic import BaseModel, Field
-from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
 from langchain_openai import ChatOpenAI
 
 from backend.agents.known_locations import find_known_location
+from backend.services.report_checks import check_report, failed_checks, rewrite_request
 from backend.queries.query_utils import DEFAULT_DATA_START, DEFAULT_DATA_END
 from backend.queries.date_utils import (
     DateRange,
@@ -80,6 +81,8 @@ class ReportResult(BaseModel):
     """AI-generated report based on query results."""
     summary: str = Field(..., description="Executive summary")
     key_findings: List[str] = Field(default_factory=list, description="Bullet point key findings")
+    checks: Optional[Dict[str, Any]] = Field(
+        None, description="Deterministic checks on the report: passed, attempts, fallback, failed checks")
 
 
 # ---------------------------------------------------------------------------
@@ -1440,6 +1443,61 @@ Rules:
 - No preamble like "Here is the analysis". Start immediately with the summary."""
 
 
+_CHECK_NAMES = {
+    "ungrounded_numbers": "numbers not in the data",
+    "sample_as_total": "totals from a sample",
+    "qualitative_trend": "a trend from a sample",
+    "dates_outside_window": "dates outside the query",
+    "count_overclaims": "a wrong count of records",
+    "comparison_direction": "the wrong direction of change",
+}
+
+
+def _record_line(evt: Dict[str, Any]) -> str:
+    date = evt.get("SQLDATE") or evt.get("date") or "unknown date"
+    place = evt.get("ActionGeo_FullName") or evt.get("location_name") or "unknown place"
+    actors = " vs ".join(a for a in (evt.get("Actor1Name"), evt.get("Actor2Name")) if a) or "no named actor"
+    kind = evt.get("event_type_label") or evt.get("event_type")
+    n = evt.get("NumArticles") or evt.get("num_articles")
+    return " · ".join(str(x) for x in (date, place, actors, kind, f"{n} articles" if n else None) if x)
+
+
+def deterministic_summary(data: Dict[str, Any], failed: List[str]) -> str:
+    """What the user sees when the report fails its checks twice: the data, stated without a model.
+
+    Same records and caps as the report model was given (_format_data_for_report), so nothing
+    here can be more wrong than the query results themselves.
+    """
+    reasons = ", ".join(_CHECK_NAMES.get(f, f) for f in failed)
+    lines = [f"The AI-written summary did not pass the automatic checks ({reasons}), "
+             "so the results are listed without interpretation."]
+    for item in data.values():
+        if not isinstance(item, dict) or not item.get("data"):
+            continue
+        kind, rows = item.get("type"), item["data"]
+        if kind == "compare_periods" and isinstance(rows, dict):
+            parts = [f"{p.get('label')}: {p.get('event_count'):,} events ({p.get('events_per_day')} per day)"
+                     for p in (rows.get("earlier") or {}, rows.get("later") or {}) if p.get("event_count") is not None]
+            pct = rows.get("percent_change_per_day")
+            lines.append(f"Period comparison, {rows.get('verdict')}: " + "; ".join(parts)
+                         + (f"; change in events per day {pct:+.1f}%." if pct is not None else "."))
+        elif kind in ("events", "top_events", "hot_events", "similar_events") and isinstance(rows, list):
+            cap = 8 if kind == "similar_events" else 10
+            lines.append(f"The {min(cap, len(rows))} most-covered records listed (a sample, not a total):")
+            lines += [f"- {_record_line(e)}" for e in rows[:cap] if isinstance(e, dict)]
+        elif kind == "event_detail" and isinstance(rows, dict):
+            lines.append(f"Event: {_record_line(rows.get('event_data') or rows)}")
+        elif kind == "daily_brief" and isinstance(rows, dict):
+            lines.append(f"Total events: {rows.get('total_events')}; conflict events: {rows.get('conflict_events')}; "
+                         f"average tone: {rows.get('avg_tone')}.")
+        elif kind == "regional_overview" and isinstance(rows, dict):
+            hot = rows.get("hot_events") or []
+            if rows.get("summary"):
+                lines.append(f"Summary: {json.dumps(rows['summary'], default=str)}")
+            lines += [f"- {_record_line(e)}" for e in hot[:5] if isinstance(e, dict)]
+    return "\n".join(lines)
+
+
 class ReportGenerator:
     """Generates narrative reports from structured event data.
     
@@ -1610,11 +1668,47 @@ class ReportGenerator:
             result = result[:4800] + "\n\n... [additional events omitted]"
         return result
 
-    async def generate(self, data: Dict[str, Any], prompt: Optional[str] = None) -> ReportResult:
-        """Generate a narrative report from query results."""
+    async def _ask(self, messages: List[Any]) -> str:
+        response = await asyncio.wait_for(self.llm.ainvoke(messages), timeout=120.0)
+        text = self._get_response_text(response)
+        # Clean up markdown code blocks if any
+        text = re.sub(r'^```.*?\n', '', text, flags=re.DOTALL)
+        return re.sub(r'\n```$', '', text)
+
+    @staticmethod
+    def _split(text: str) -> ReportResult:
+        """Split into summary + bullet findings."""
+        lines = [l.strip() for l in text.split('\n') if l.strip()]
+        summary_lines = []
+        findings = []
+        in_findings = False
+        for line in lines:
+            if line.lower().startswith(('key finding', 'findings', 'highlights', '- ')):
+                in_findings = True
+            if in_findings and (line.startswith('- ') or line.startswith('* ')):
+                findings.append(line[2:].strip())
+            elif in_findings:
+                findings.append(line)
+            else:
+                summary_lines.append(line)
+
+        summary = '\n'.join(summary_lines) if summary_lines else text
+        if len(summary) > 4000:
+            summary = summary[:4000] + "..."
+        return ReportResult(summary=summary, key_findings=findings)
+
+    async def generate(self, data: Dict[str, Any], prompt: Optional[str] = None,
+                       plan: Optional[Dict[str, Any]] = None) -> ReportResult:
+        """Generate a report from query results, checked before it is returned.
+
+        The deterministic checks of the offline evaluation (backend/services/report_checks.py) run
+        on every report. A failing report is sent back once with what failed; if the rewrite fails
+        too, or cannot be made, the user gets a deterministic summary of the records instead, with
+        the reason. ``plan`` gives the queried window; without it the window check is skipped.
+        """
         # Pre-process data into narrative format
         narrative_data = self._format_data_for_report(data)
-        
+
         if not narrative_data.strip() or narrative_data.strip() == "=== 0 EVENTS FOUND ===":
             return ReportResult(
                 summary="No events were found for this query. Try broadening your search (e.g., removing location filters or expanding the date range).",
@@ -1627,43 +1721,11 @@ class ReportGenerator:
             SystemMessage(content=REPORT_SYSTEM_PROMPT),
             HumanMessage(content=f"{user_prompt}\n\nEvent Data:\n{narrative_data}\n\nWrite the summary:"),
         ]
+        check_plan = plan or {"steps": [{"type": v.get("type"), "params": {}}
+                                        for v in data.values() if isinstance(v, dict)]}
 
         try:
-            response = await asyncio.wait_for(self.llm.ainvoke(messages), timeout=120.0)
-            text = self._get_response_text(response)
-
-            # Clean up markdown code blocks if any
-            text = re.sub(r'^```.*?\n', '', text, flags=re.DOTALL)
-            text = re.sub(r'\n```$', '', text)
-
-            if not text:
-                return ReportResult(
-                    summary="No report content was generated.",
-                    key_findings=[],
-                )
-
-            # Split into summary + bullet findings
-            lines = [l.strip() for l in text.split('\n') if l.strip()]
-            summary_lines = []
-            findings = []
-            in_findings = False
-            for line in lines:
-                if line.lower().startswith(('key finding', 'findings', 'highlights', '- ')):
-                    in_findings = True
-                if in_findings and (line.startswith('- ') or line.startswith('* ')):
-                    findings.append(line[2:].strip())
-                elif in_findings:
-                    findings.append(line)
-                else:
-                    summary_lines.append(line)
-
-            summary = '\n'.join(summary_lines) if summary_lines else text
-            if len(summary) > 4000:
-                summary = summary[:4000] + "..."
-
-            print(f"[ReportGenerator] Generated report: {len(summary)} chars summary, {len(findings)} findings", flush=True)
-            return ReportResult(summary=summary, key_findings=findings)
-
+            text = await self._ask(messages)
         except asyncio.TimeoutError:
             print("[ReportGenerator] LLM timeout after 120s", flush=True)
             return ReportResult(
@@ -1676,3 +1738,33 @@ class ReportGenerator:
                 summary="Unable to generate AI report at this time. The analysis data is still available above.",
                 key_findings=[],
             )
+        if not text:
+            return ReportResult(summary="No report content was generated.", key_findings=[])
+
+        result = check_report(text, check_plan, data)
+        status = {"passed": result["pass"], "attempts": 1, "fallback": False,
+                  "failed_first": failed_checks(result), "failed": failed_checks(result)}
+        if not result["pass"]:
+            print(f"[ReportGenerator] Checks failed, asking for one rewrite: {sorted(status['failed'])}", flush=True)
+            try:
+                rewrite = await self._ask(messages + [AIMessage(content=text),
+                                                      HumanMessage(content=rewrite_request(result, data))])
+            except Exception as e:  # noqa: BLE001 - a failed rewrite falls back like a failing one
+                print(f"[ReportGenerator] Rewrite failed: {e}", flush=True)
+                rewrite = ""
+            status["attempts"] = 2
+            if rewrite:
+                text, result = rewrite, check_report(rewrite, check_plan, data)
+                status.update(passed=result["pass"], failed=failed_checks(result))
+
+        if not status["passed"]:
+            status["fallback"] = True
+            print(f"[ReportGenerator] Falling back to the deterministic summary: {sorted(status['failed'])}", flush=True)
+            fallback = deterministic_summary(data, sorted(status["failed"]))
+            return ReportResult(summary=fallback, key_findings=[], checks=status)
+
+        report = self._split(text)
+        report.checks = status
+        print(f"[ReportGenerator] Generated report: {len(report.summary)} chars, checks passed "
+              f"after {status['attempts']} attempt(s)", flush=True)
+        return report

@@ -136,11 +136,24 @@ export interface QueryPlan {
   visualizations: string[];
   report_prompt?: string;
   notice?: string;
+  routing_confidence?: string;
+  /** What was counted, where, and as of when (backend/agents/definitions.py). */
+  definitions?: string;
+}
+
+/** Deterministic checks run on the report before it is shown (ReportGenerator.generate). */
+export interface ReportChecks {
+  passed: boolean;
+  attempts: number;
+  fallback: boolean;
+  failed_first: Record<string, string[]>;
+  failed: Record<string, string[]>;
 }
 
 export interface ReportResult {
   summary: string;
   key_findings: string[];
+  checks?: ReportChecks | null;
 }
 
 // Enhanced Reporter v2 types

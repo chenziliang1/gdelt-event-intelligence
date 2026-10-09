@@ -77,3 +77,6 @@ test_*.py
 
 # Small real-data fixture for the CI database tests (tests/ci_db_setup.sh)
 !tests/fixtures/*.sql.gz
+
+# Per-window predictions of the strong-baseline comparison (reproducible: db_scripts/evaluate_strong_baseline.py)
+models/strong_baseline/

@@ -83,10 +83,11 @@ export const api = {
     }),
 
   // AI Report (delayed load)
-  generateReport: (data: any, prompt?: string, llmConfig?: any) =>
+  // The plan lets the backend check the report against the queried window.
+  generateReport: (data: any, prompt?: string, llmConfig?: any, plan?: any) =>
     fetchJson<any>('/api/v1/analyze/report', {
       method: 'POST',
-      body: JSON.stringify({ data, prompt, llm_config: llmConfig }),
+      body: JSON.stringify({ data, prompt, llm_config: llmConfig, plan }),
     }),
 
   // Dashboard insights

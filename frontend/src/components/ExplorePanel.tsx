@@ -212,10 +212,10 @@ export default function ExplorePanel() {
     }
   };
 
-  const loadReport = async (data: any, prompt: string) => {
+  const loadReport = async (data: any, prompt: string, plan?: any) => {
     setReportLoading(true);
     try {
-      const res = await api.generateReport(data, prompt);
+      const res = await api.generateReport(data, prompt, undefined, plan);
       setReport(res);
     } catch (err: any) {
       console.error('Report load failed:', err);
@@ -451,7 +451,7 @@ export default function ExplorePanel() {
                 <div style={{ marginBottom: 16 }}>
                   <div style={{ display: 'flex', gap: 10, marginBottom: 10, alignItems: 'center' }}>
                     <button
-                      onClick={() => loadReport(result.data, result.plan.report_prompt!)}
+                      onClick={() => loadReport(result.data, result.plan.report_prompt!, result.plan)}
                       style={{
                         padding: '8px 16px',
                         borderRadius: 6,
@@ -752,6 +752,13 @@ export default function ExplorePanel() {
               {result.plan.notice && (
                 <div style={{ padding: '10px 14px', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 8, fontSize: 13, color: '#92400e' }}>
                   {result.plan.notice}
+                </div>
+              )}
+
+              {/* Definitions: what was counted, where, and as of when */}
+              {result.plan.definitions && (
+                <div style={{ padding: '8px 14px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, fontSize: 12, color: '#475569' }}>
+                  {result.plan.definitions}
                 </div>
               )}
 

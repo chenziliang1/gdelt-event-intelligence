@@ -15,6 +15,7 @@ from fastapi import APIRouter, HTTPException
 
 from backend.services.data_service import data_service
 from backend.agents.planner import Planner, ReportGenerator, QueryPlan
+from backend.agents.definitions import definitions_line
 from backend.agents.enhanced_reporter import get_enhanced_reporter
 from backend.services.executor import run_plan
 from backend.services.storyline_builder import build_event_context
@@ -99,6 +100,7 @@ async def analyze(request: AnalyzeRequest):
                 report_prompt=plan.report_prompt,
                 notice=plan.notice,
                 routing_confidence=plan.routing_confidence,
+                definitions=definitions_line([{"type": s.type, "params": s.params} for s in plan.steps]),
             ),
             data=results,
             report=None,  # Report is loaded separately
@@ -133,12 +135,13 @@ async def generate_report(request: ReportRequest):
 
     try:
         reporter = ReportGenerator(config=llm_config)
-        report = await reporter.generate(request.data, request.prompt)
+        report = await reporter.generate(request.data, request.prompt, request.plan)
         t_report = round((time.time() - t0) * 1000, 1)
         print(f"[Analyze/Report] Generated in {t_report}ms", flush=True)
         return ReportOutput(
             summary=report.summary,
             key_findings=report.key_findings,
+            checks=report.checks,
         )
     except Exception as e:
         print(f"[Analyze/Report] FAILED: {e}", flush=True)

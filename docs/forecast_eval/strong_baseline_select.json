@@ -1,0 +1,77 @@
+{
+ "stage": "select",
+ "train_windows": 277472,
+ "val_windows": 39008,
+ "validation_seasonal_naive_mae": 67.19,
+ "trials": [
+  {
+   "target": "residual",
+   "objective": "l1",
+   "series_id": true,
+   "num_leaves": 63,
+   "best_iteration": 440,
+   "validation_mae": 57.5,
+   "seconds": 18
+  },
+  {
+   "target": "residual",
+   "objective": "l2",
+   "series_id": true,
+   "num_leaves": 63,
+   "best_iteration": 444,
+   "validation_mae": 57.49,
+   "seconds": 14
+  },
+  {
+   "target": "log",
+   "objective": "l1",
+   "series_id": true,
+   "num_leaves": 63,
+   "best_iteration": 500,
+   "validation_mae": 58.81,
+   "seconds": 20
+  },
+  {
+   "target": "log",
+   "objective": "l2",
+   "series_id": true,
+   "num_leaves": 63,
+   "best_iteration": 444,
+   "validation_mae": 67.97,
+   "seconds": 13
+  },
+  {
+   "target": "residual",
+   "objective": "l2",
+   "series_id": false,
+   "num_leaves": 63,
+   "best_iteration": 1728,
+   "validation_mae": 54.33,
+   "seconds": 37
+  },
+  {
+   "target": "residual",
+   "objective": "l2",
+   "series_id": true,
+   "num_leaves": 31,
+   "best_iteration": 1115,
+   "validation_mae": 57.55,
+   "seconds": 19
+  },
+  {
+   "target": "residual",
+   "objective": "l2",
+   "series_id": true,
+   "num_leaves": 127,
+   "best_iteration": 243,
+   "validation_mae": 56.86,
+   "seconds": 14
+  }
+ ],
+ "chosen": {
+  "target": "residual",
+  "objective": "l2",
+  "series_id": false,
+  "num_leaves": 63
+ }
+}

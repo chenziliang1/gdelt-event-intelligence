@@ -373,11 +373,14 @@ class QueryPlanOutput(BaseModel):
     report_prompt: Optional[str] = None
     notice: Optional[str] = None
     routing_confidence: Optional[str] = None
+    definitions: Optional[str] = None  # what was counted, where, as of when (backend/agents/definitions.py)
 
 
 class ReportOutput(BaseResponse):
     summary: str = ""
     key_findings: List[str] = Field(default_factory=list)
+    # Deterministic checks on the report (passed, attempts, fallback, failed); see ReportGenerator.generate.
+    checks: Optional[Dict[str, Any]] = None
 
 
 class PhaseOutput(BaseModel):
@@ -403,6 +406,8 @@ class ReportRequest(BaseModel):
     # The route reads request.llm_config; without this field every report request raised
     # AttributeError (HTTP 500) before reaching the LLM.
     llm_config: Optional[LLMConfig] = Field(None, description="Custom LLM configuration for the report")
+    # The plan from /analyze, so the checks know the queried window; optional for old clients.
+    plan: Optional[Dict[str, Any]] = Field(None, description="The plan returned by /analyze")
 
 
 # ============================================================================

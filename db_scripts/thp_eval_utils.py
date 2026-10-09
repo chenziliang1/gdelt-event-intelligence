@@ -325,3 +325,45 @@ def interval_coverage(
         "overall": round(float(np.mean(per_horizon)), 3),
         "per_horizon": [round(v, 3) for v in per_horizon],
     }
+
+
+# ---------------------------------------------------------------------------
+# Uncertainty of a difference over one test period
+# ---------------------------------------------------------------------------
+
+def moving_block_bootstrap_ci(
+    per_day: np.ndarray,
+    block: int = 7,
+    n_resamples: int = 2000,
+    seed: int = 0,
+    level: float = 0.95,
+) -> Dict[str, float]:
+    """Percentile interval for the mean of a daily series, resampling blocks of consecutive days.
+
+    ``per_day`` is one value per test start day, in date order (for a comparison: the day's mean
+    absolute error of the model minus the baseline's; every day has the same number of windows,
+    so the mean over days is the overall MAE difference). Neighbouring days share targets (a
+    7-day horizon) and news cycles, so days are not independent; resampling ``block``-day runs
+    keeps that dependence. It measures how the result would vary over other days like these,
+    not over other periods or other training seeds.
+    """
+    values = np.asarray(per_day, dtype=np.float64)
+    n = len(values)
+    if n < block:
+        raise ValueError(f"need at least {block} days, got {n}")
+    starts = np.arange(n - block + 1)
+    k = -(-n // block)  # blocks per resample, ceil(n / block)
+    rng = np.random.default_rng(seed)
+    picks = rng.choice(starts, size=(n_resamples, k))
+    idx = (picks[:, :, None] + np.arange(block)).reshape(n_resamples, -1)[:, :n]
+    means = values[idx].mean(axis=1)
+    alpha = (1.0 - level) / 2.0
+    return {
+        "mean": float(values.mean()),
+        "lo": float(np.quantile(means, alpha)),
+        "hi": float(np.quantile(means, 1.0 - alpha)),
+        "level": level,
+        "block_days": block,
+        "resamples": n_resamples,
+        "days": n,
+    }

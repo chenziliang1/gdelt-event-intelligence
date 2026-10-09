@@ -555,13 +555,17 @@ async def test_report_endpoint_accepts_the_frontend_request(monkeypatch):
         def __init__(self, config=None):
             self.config = config
 
-        async def generate(self, data, prompt):
+        async def generate(self, data, prompt, plan=None):
             from backend.agents.planner import ReportResult
-            return ReportResult(summary=f"ok: {prompt}", key_findings=["a"])
+            return ReportResult(summary=f"ok: {prompt}", key_findings=["a"],
+                                checks={"passed": True, "plan_steps": len((plan or {}).get("steps", []))})
 
     monkeypatch.setattr(analyze_router, "ReportGenerator", FakeReporter)
-    out = await analyze_router.generate_report(ReportRequest(data={"events_0": {"data": []}}, prompt="p"))
+    out = await analyze_router.generate_report(ReportRequest(
+        data={"events_0": {"data": []}}, prompt="p", plan={"steps": [{"type": "events", "params": {}}]}))
     assert out.summary == "ok: p" and out.key_findings == ["a"]
+    # The plan reaches the reporter (for the window check) and the check result reaches the client.
+    assert out.checks == {"passed": True, "plan_steps": 1}
 
 
 async def test_forecast_inputs_use_the_definitions_the_model_was_trained_on():

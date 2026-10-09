@@ -2,6 +2,7 @@
 
 How good is the 7-day event-count forecaster, measured so that the answer can be trusted. Raw results:
 `docs/forecast_eval/retrain_2025h1_{select,test}.json` (retrain on 2024 plus early 2025, tested on Q2 2025),
+`docs/forecast_eval/strong_baseline_{select,test}.json` (LightGBM on the same split, and bootstrap intervals),
 `docs/forecast_eval/fresh_2025q1.json` (a period no model had seen), `docs/forecast_eval/tuning_2026-10-08.json`
 (tuning and final model) and `docs/forecast_eval/retrain_2026-10-08.json` (first leak-free retrain of the original design).
 
@@ -54,6 +55,72 @@ to tell the two apart.
 The served checkpoint (`models/thp_gdelt.pt`, from `models/retrain_2025h1/seed2.pt`, written by `--stage serve`)
 carries the rolling interval in its state at the end of the data (fitted on the windows observed in the last 14
 days), and its test result, which the API reports as `baseline_comparison`.
+
+## A stronger baseline: gradient boosting on the same split (2026-10-09)
+
+Seasonal-naive is the baseline a daily count must beat, but not the strongest one available. A LightGBM model was
+added on exactly the same cache, split and windows as the retrain above (`db_scripts/evaluate_strong_baseline.py`):
+
+* **Features**, one row per window and horizon day: the 14 daily log counts, the last input day's other 15 features,
+  the same-weekday log count a week before the target day, the horizon, the target's day of week, and the series'
+  kind and measure as categories (optionally its id).
+* **Chosen on validation only** (train 2024 + January 2025, 277,472 windows; validation February-March 2025, 39,008
+  windows; early stopping on validation). Seven trials: four settle target and loss, three vary one setting from the
+  best of those (`docs/forecast_eval/strong_baseline_select.json`):
+
+| Target | Loss | Series id | Leaves | Rounds | Validation MAE |
+| :-- | :-- | :-- | --: | --: | --: |
+| residual on seasonal-naive (log) | L1 | yes | 63 | 440 | 57.50 |
+| residual on seasonal-naive (log) | L2 | yes | 63 | 444 | 57.49 |
+| log count | L1 | yes | 63 | 500 | 58.81 |
+| log count | L2 | yes | 63 | 444 | 67.97 |
+| **residual (log)** | **L2** | **no** | **63** | **1,728** | **54.33** |
+| residual (log) | L2 | yes | 31 | 1,115 | 57.55 |
+| residual (log) | L2 | yes | 127 | 243 | 56.86 |
+
+  For reference on the same validation windows: seasonal-naive 67.19, the Transformer seeds 61.68, 62.23 and 56.94.
+* **Tested once** with the chosen configuration (`docs/forecast_eval/strong_baseline_test.json`). The Transformer
+  predictions were recomputed from the three checkpoints and reproduce the recorded test MAEs exactly.
+
+| Model, test 2025-04-01 to 06-11 (48,576 windows) | Test MAE | vs seasonal-naive | Series won vs seasonal-naive |
+| :-- | --: | --: | --: |
+| Seasonal-naive | 62.05 | | |
+| Transformer, seed 42 / 1 / 2 | 57.54 / 58.24 / 52.62 | +7.3% / +6.1% / +15.2% | 72.1% / 68.8% / 67.5% |
+| Transformer, mean of 3 seeds | 56.13 | +9.5% | 67 to 72% |
+| **LightGBM (chosen on validation)** | **53.52** | **+13.8%** | **77.9%** |
+
+**LightGBM did better on this period.** Its MAE is 2.6 points (about 5%) below the Transformer's 3-seed average, it
+wins on more series, and only the served seed 2, the luckiest of three draws, is lower; the interval below shows the
+gap is not established.
+
+How sure: MAE differences with a moving-block bootstrap over the 66 test start days (7-day blocks, 2,000 resamples,
+95% percentile intervals; negative means the first model has lower error):
+
+| Difference in MAE | Mean | 95% interval |
+| :-- | --: | :-- |
+| Transformer (3-seed mean) minus seasonal-naive | -5.92 | -8.75 to -4.12 |
+| LightGBM minus seasonal-naive | -8.54 | -15.20 to -4.34 |
+| Transformer (3-seed mean) minus LightGBM | +2.62 | -0.78 to +7.64 |
+| Transformer seed 42 / 1 minus LightGBM | +4.03 / +4.73 | +0.59 to +9.64 / +1.30 to +10.01 |
+| Transformer seed 2 (served) minus LightGBM | -0.90 | -4.52 to +3.06 |
+
+Both models beat seasonal-naive on this period with intervals clear of zero. The Transformer-versus-LightGBM interval
+includes zero for the seed average and for the served seed: on these 66 days the data do not establish that either
+is better, while two of the three Transformer seeds are clearly worse than LightGBM. The point estimate favours
+LightGBM, which is also simpler, trains in under a minute on a laptop CPU, and needs no GPU.
+
+What the intervals cover and do not: variation over days like these (one 10-week period, resampled in weekly blocks
+because neighbouring days share targets). They do not cover other periods, other training seeds (the Transformer
+average is over three fixed seeds; LightGBM is one deterministic run, its seed variation was not measured), or the
+choice of features and trials.
+
+Limits of the comparison:
+
+* The test period had already been used once, for the Transformer. LightGBM was chosen on validation only and then
+  tested once, but its design (a residual on seasonal-naive) borrows what the Transformer work had learned.
+* The grid was small (seven trials); neither model was tuned further for this comparison.
+* The served model is still the Transformer (seed 2). Whether to serve LightGBM instead, or average both, is a
+  decision for the next period, which has not been looked at.
 
 ## Short answer for the models trained on 2024 only
 
@@ -231,7 +298,9 @@ guarantee of 80%.
 > 2025, rebuilt from the official GDELT files), it cuts MAE by about 9.5% against seasonal-naive (3 seeds, 6 to 15%)
 > and beats it on about 70% of the series; the same design trained on 2024 alone got 5.7% there. The Hawkes-style
 > component of the original design hurt and was removed. The 80% intervals cover 0.79 overall on that period
-> (0.76 for the largest series).
+> (0.76 for the largest series). A LightGBM baseline on the same split did better on that period (+13.8%, MAE
+> 53.52 vs 56.13); the difference between the two is within the bootstrap interval (-0.78 to +7.64), so the
+> Transformer is not shown to beat gradient boosting.
 
 ## Reproduce
 
@@ -279,6 +348,9 @@ for seed in 42 1 2; do python db_scripts/train_thp_model.py \
   --val-start-date 2025-02-01 --test-start-date 2025-04-01 --skip-test \
   --output models/retrain_2025h1/seed$seed.pt; done
 python db_scripts/evaluate_retrain.py --stage select ...   # then --stage test, then --stage serve (see the script)
+# LightGBM on the same split, and bootstrap intervals (stages: transformer, select, test, report; see the script):
+python db_scripts/evaluate_strong_baseline.py --stage select --dataset-cache models/thp_dataset_2024_2025h1_seq14_h7.npz \
+  --out docs/forecast_eval/strong_baseline_select.json
 ```
 
 ## Next steps
@@ -287,6 +359,8 @@ python db_scripts/evaluate_retrain.py --stage select ...   # then --stage test, 
    one; a second later period is needed to choose between them with any confidence.
 2. Q2 2025 has now been used once. The next model change needs a later period, after the June 2025 GDELT outage.
 3. The seed spread (6 to 15%) is large; an ensemble of seeds, chosen in advance, would be steadier than one seed.
+4. LightGBM matched or beat the Transformer on Q2 2025. On the next period, compare the two (and their average)
+   with the choice fixed on validation before the test is run.
 
 ## Served model
 

@@ -1,0 +1,133 @@
+{
+ "stage": "report",
+ "test_days": [
+  "2025-04-01",
+  "2025-06-11"
+ ],
+ "test_windows": 48576,
+ "start_days": 66,
+ "seasonal_naive_mae": 62.05,
+ "transformer_seed_mean_mae": 56.13,
+ "models": {
+  "transformer_seed42": {
+   "test_mae": 57.54,
+   "improvement_pct_vs_seasonal_naive": 7.3,
+   "per_series_vs_seasonal_naive": {
+    "series": 736,
+    "model_wins": 531,
+    "win_rate": 0.721
+   }
+  },
+  "transformer_seed1": {
+   "test_mae": 58.24,
+   "improvement_pct_vs_seasonal_naive": 6.1,
+   "per_series_vs_seasonal_naive": {
+    "series": 736,
+    "model_wins": 506,
+    "win_rate": 0.688
+   }
+  },
+  "transformer_seed2": {
+   "test_mae": 52.62,
+   "improvement_pct_vs_seasonal_naive": 15.2,
+   "per_series_vs_seasonal_naive": {
+    "series": 736,
+    "model_wins": 497,
+    "win_rate": 0.675
+   }
+  },
+  "lightgbm": {
+   "test_mae": 53.52,
+   "improvement_pct_vs_seasonal_naive": 13.8,
+   "per_series_vs_seasonal_naive": {
+    "series": 736,
+    "model_wins": 573,
+    "win_rate": 0.779
+   }
+  }
+ },
+ "mae_difference_95ci": {
+  "transformer_seed_mean_minus_seasonal_naive": {
+   "mean": -5.92,
+   "lo": -8.75,
+   "hi": -4.12,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 66
+  },
+  "lightgbm_minus_seasonal_naive": {
+   "mean": -8.54,
+   "lo": -15.2,
+   "hi": -4.34,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 66
+  },
+  "transformer_seed_mean_minus_lightgbm": {
+   "mean": 2.62,
+   "lo": -0.78,
+   "hi": 7.64,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 66
+  },
+  "transformer_seed42_minus_seasonal_naive": {
+   "mean": -4.51,
+   "lo": -6.5,
+   "hi": -3.14,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 66
+  },
+  "transformer_seed1_minus_seasonal_naive": {
+   "mean": -3.81,
+   "lo": -6.1,
+   "hi": -2.26,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 66
+  },
+  "transformer_seed2_minus_seasonal_naive": {
+   "mean": -9.44,
+   "lo": -13.77,
+   "hi": -6.88,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 66
+  },
+  "transformer_seed42_minus_lightgbm": {
+   "mean": 4.03,
+   "lo": 0.59,
+   "hi": 9.64,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 66
+  },
+  "transformer_seed1_minus_lightgbm": {
+   "mean": 4.73,
+   "lo": 1.3,
+   "hi": 10.01,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 66
+  },
+  "transformer_seed2_minus_lightgbm": {
+   "mean": -0.9,
+   "lo": -4.52,
+   "hi": 3.06,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 66
+  }
+ },
+ "note": "MAE differences in events per window-day (negative = first model better). Moving-block bootstrap over test start days: variation over days like these, not over other periods or other seeds."
+}

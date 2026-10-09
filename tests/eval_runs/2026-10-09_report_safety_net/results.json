@@ -1,0 +1,1374 @@
+{
+  "summary": {
+    "model": "claude-sonnet-5-5",
+    "runs": [
+      "2026-10-08_answer_quality",
+      "2026-10-09_answer_quality",
+      "2026-10-09_report_prompt",
+      "2026-10-09_report_numbers"
+    ],
+    "reports": 216,
+    "passed_first": 208,
+    "rewritten": 8,
+    "rewrite_passed": 8,
+    "would_fall_back": 0,
+    "llm_calls": 8
+  },
+  "results": [
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "detail-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "detail-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "hot-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "hot-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "brief-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "brief-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "overview-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "overview-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "top-01",
+      "first_passed": false,
+      "failed_first": {
+        "count_overclaims": [
+          "The densest cluster came on **January 18** in **Uvalde**, where six events in the sample involved police, schools, or authorities."
+        ]
+      },
+      "rewrite": "January 2024 coverage in Texas centered on three threads: migration, policing in Uvalde, and a handful of isolated local stories. The data is a sample of the top ten events by article count, so it shows where media attention clustered, not the full scope of the month.\n\nThe month opened on **January 4** with statewide coverage tied to migrants. One event involving an unidentified actor and \"MIGRANT\" drew 90 articles at a mildly negative tone (-2.0). Two mirrored \"TEXAS\" events from the same day drew 72 articles each, both at the most conflictual tone in the sample (-10.0). The data doesn't say what drove the coverage, but the shared date and statewide location suggest these records may be related. Next came **January 9**, when an event in **Fort Worth** involving \"AUTHORITIES\" drew 120 articles, the highest count in the sample, though its tone was neutral (3.0) and the data gives no detail on the cause.\n\nThe densest cluster came on **January 18**, where five records in the sample involved police, schools, or authorities. Four of them list **Uvalde** as the location, and one lists **Robb Elementary School**. A \"POLICE vs GUNMAN\" record drew 90 articles at a conflict tone (-10.0), and an \"Unknown vs POLICE\" record drew 80 at the same tone. Three other records at 80 articles each (\"SCHOOL vs POLICE\", \"POLICE vs SCHOOL\", and \"AUTHORITIES vs Unknown\" at Robb Elementary School) were neutral to mildly positive (1.0 to 2.8). The Robb Elementary location and the police and school actors suggest continued attention to Uvalde, but the data doesn't show whether the coverage reflects a new incident, reporting on earlier events, or something else.\n\nThe sample closes on **January 11** in **Houston**, where a \"NAVY\" event drew 70 articles at a slightly negative tone (-4.0). Taken together, the sample suggests that media attention in Texas this month was driven by border and migrant-related coverage early on, a heavy concentration of Uvalde-related reporting mid-month, and a few single-location stories. The event labels are too generic to say more about causes or outcomes.",
+      "rewrite_passed": true,
+      "failed_after": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "top-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "confidence-probe-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "confidence-probe-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "confidence-probe-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "search-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "search-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "keyword-fts-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "reldate-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "reldate-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "reldate-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "reldate-04",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "compare-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "compare-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "month-end-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "month-end-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "month-end-03",
+      "first_passed": false,
+      "failed_first": {
+        "qualitative_trend": [
+          "Coverage rose toward the end of the month."
+        ]
+      },
+      "rewrite": "Texas in February 2024 was dominated by immigration and border enforcement, as seen in the most heavily covered events in the sample. On February 8, two events drew heavy attention in Texas: ILLEGAL IMMIGRANT and SCHOOL were linked in a cooperation event (90 articles), and MEDINA was recorded coercing ILLEGAL IMMIGRANT (72 articles). Two days later, on February 10, TEXAS was recorded coercing PRISON (60 articles). The data gives only actor labels and event types, so it doesn't show what happened in any of these cases.\n\nOn February 29, the top-covered event was an unattributed public statement about COMMUNITY (102 articles, the highest in the sample). That same day included a JUDGE coercing a MIGRANT (80 articles), a LAW ENFORCEMENT OFFICER yielding (80 articles), and an ADMINISTRATION show of force (64 articles). The show of force had the most conflictual tone in the sample, at Goldstein -7.2. Earlier in the month, a POLICE OFFICER yielding (February 5, 80 articles) and a RADIO STATION public statement (February 2, 80 articles) also drew attention. On February 27, JOE BIDEN expressed intent to cooperate with UNITED STATES (80 articles), a national political event tied to Texas.\n\nTaken together, the sample points to a month centered on migrants, courts, and law enforcement, with coercion and force events running alongside cooperation and yielding events. This is a top-50 sample ranked by article count, not a full tally. It can't show trends, and the automated event coding doesn't say what specific incidents lie behind these labels.",
+      "rewrite_passed": true,
+      "failed_after": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "march-word-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "invalid-date-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-detail-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-detail-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-detail-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-hot-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-hot-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-brief-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-brief-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-overview-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-overview-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-overview-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-top-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-reldate-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-reldate-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-reldate-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-reldate-04",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-reldate-05",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-month-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-month-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-march-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-may-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-compare-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-compare-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-compare-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-invalid-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-invalid-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-search-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-08_answer_quality",
+      "id": "h-search-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "detail-01",
+      "first_passed": false,
+      "failed_first": {
+        "count_overclaims": [
+          "The most prominent cluster is at Perry High School, Iowa, on 2024-01-05, where four records, each with 70 articles, involve AUTHORITIES and POLICE."
+        ]
+      },
+      "rewrite": "**Primary event 1150442224** is thinly documented. It is dated 2024-01-09 in Fort Worth, Texas, and pairs \"AUTHORITIES\" with an unidentified counterpart. It was covered in 120 articles and has a neutral tone score of 3.0. There is no event type, summary text or named second actor, so the record shows that authorities were prominent in coverage that day but not what they did.\n\nThe related events fill in some of the surrounding picture. The most prominent cluster is at Perry High School, Iowa, on 2024-01-05, where three records, each with 70 articles, involve AUTHORITIES and POLICE. They include consultations (Goldstein 2.8 and 1.9) and a \"fighting\" record (Goldstein -10.0). A separate Iowa record dated 2024-01-06 has AUTHORITIES fighting PUPIL, with 100 articles and the same -10.0 score. In Texas, a 2024-01-18 record places AUTHORITIES in a consultation at Robb Elementary School, with 80 articles and a Goldstein score of 1.0. The school-based locations are the visible link between these events and the Texas primary event. The data does not say what happened at any of them, and nothing in it establishes a causal connection to Fort Worth.\n\nThe remaining related events are scattered across the United States and do not share a clear theme:\n**Maine (2024-01-05):** AUTHORITIES threatening RESIDENTS, 60 articles, Goldstein -4.4.\n**Michigan (2024-01-02):** AUTHORITIES criticizing an unnamed party, 60 articles, Goldstein -2.0.\n**New Hampshire (2024-01-31):** AUTHORITIES making a public statement about MANCHESTER, 60 articles, Goldstein 0.0.\n\nThese share the generic \"AUTHORITIES\" actor label and heavy coverage, but nothing more is established. The data header lists 50 related events and only eight are shown here, so this is a partial sample. Because the Fort Worth record lacks a type, a second actor and a summary, any firmer reading of it would need the underlying articles.",
+      "rewrite_passed": true,
+      "failed_after": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "detail-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "hot-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "hot-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "brief-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "brief-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "overview-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "overview-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "top-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "top-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "confidence-probe-01",
+      "first_passed": false,
+      "failed_first": {
+        "count_overclaims": [
+          "The largest cluster is January 18 in Uvalde, where six of the ten events are located."
+        ]
+      },
+      "rewrite": "January 2024 coverage of Texas centered on a few clusters: migration and state-level conflict early in the month, an appeal in Fort Worth, and a heavily covered set of events around Uvalde. The data is a sample of the ten most-covered events, so it shows what drew attention, not the full picture or any trend over time.\n\nOn January 4, two threads emerged statewide. An unidentified actor criticized MIGRANT in Texas (90 articles, Goldstein -2.0), a disapproval event that points to the migration debate. The same day, two \"fighting\" events involving TEXAS were recorded (72 articles each, Goldstein -10.0). The data gives no further detail on who was involved. Later, on January 9, AUTHORITIES in Fort Worth made an appeal that drew 120 articles, the most of any event in the sample (Goldstein 3.0). The data does not say what the appeal concerned. On January 11, the NAVY rejected something in Houston (70 articles, Goldstein -4.0), with no further context in the record.\n\nThe largest cluster is January 18, when five of the ten records are dated, four located in Uvalde and one at Robb Elementary School. Two were fighting events: POLICE vs GUNMAN (90 articles) and an unidentified actor fighting POLICE (80 articles), both scored -10.0. Alongside them were consultation events in Uvalde and at Robb Elementary School, involving AUTHORITIES, SCHOOL and POLICE (80 articles each, Goldstein 1.0 to 2.8). Robb Elementary was the site of the 2022 shooting, so the pairing of police, school and authority actors suggests ongoing attention to that case. The data itself does not confirm what happened on that date.\n\nTaken together, the sample shows two contrasting tones: conflict-coded events (Uvalde policing, statewide \"fighting\") and cooperative ones (appeals and consultations). The event codes alone cannot establish the underlying causes, so any link between the migration coverage and the January 4 conflict events remains an inference.",
+      "rewrite_passed": true,
+      "failed_after": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "confidence-probe-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "confidence-probe-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "search-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "search-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "keyword-fts-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "reldate-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "reldate-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "reldate-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "reldate-04",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "compare-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "compare-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "month-end-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "month-end-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "month-end-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "march-word-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "invalid-date-01",
+      "first_passed": false,
+      "failed_first": {
+        "count_overclaims": [
+          "On 2024-11-11, three events coded in Texas involving the United States and \"population\" also hit 200 articles each: a public statement (Goldstein 0.0) and a yield (Goldstein 5.0)."
+        ]
+      },
+      "rewrite": "Texas in 2024 shows up in the data mostly through a handful of heavily covered events, though GDELT's actor coding is generic enough that many details stay vague. The ten events listed are a sample of the most-covered items, not a full account of the year.\n\nThe strongest coverage clusters around two dates. On 2024-05-17, a pair of consultation events between Texas and an unspecified actor each drew 200 articles, with mildly cooperative Goldstein scores of 1.9 and 2.8. On 2024-11-11, two events coded in Texas involving the United States and \"population\" also hit 200 articles each: a public statement (Goldstein 0.0) and a yield (Goldstein 5.0). The data does not say what prompted either set, so those readings are limited to the event types. Between them, on 2024-06-27, the most conflictual of the top events appeared: a \"High Court coerces Texas\" event (Goldstein -5.0) with 180 articles, suggesting a court-imposed constraint on the state.\n\nOther prominent items were more local or thematic. On 2024-10-11 in Dallas, a rejection involving a website (Goldstein -4.0) drew 150 articles. On 2024-02-26 in Houston, a consultation involving \"pole\" and Houston (Goldstein 2.8) drew 140. On 2024-08-30, a governor expressed intent to cooperate (Goldstein 5.2, 130 articles). In late April, two events appeared: on 2024-04-25, an unidentified actor expressed intent to cooperate with \"the beloved country\" (Goldstein 4.0, 120 articles), and on 2024-04-27, Israel investigating a protester (Goldstein -2.0, 128 articles), the latter hinting at an international or protest-related thread in Texas coverage.\n\nTaken together, the sample mixes cooperative signals (consultations, yielding, intent to cooperate) with a few confrontational ones (the High Court coercion, the Dallas rejection, the protester investigation). Because the actor labels are often generic and no period comparison is provided, these events show what drew the most attention, but not how the year developed or what drove each story.",
+      "rewrite_passed": true,
+      "failed_after": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-detail-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-detail-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-detail-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-hot-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-hot-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-brief-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-brief-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-overview-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-overview-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-overview-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-top-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-reldate-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-reldate-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-reldate-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-reldate-04",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-reldate-05",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-month-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-month-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-march-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-may-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-compare-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-compare-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-compare-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-invalid-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-invalid-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-search-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_answer_quality",
+      "id": "h-search-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "detail-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "detail-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "hot-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "hot-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "brief-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "brief-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "overview-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "overview-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "top-01",
+      "first_passed": false,
+      "failed_first": {
+        "count_overclaims": [
+          "Two records from 2024-01-04 are tied for the next-highest count in the list at 90 articles each."
+        ]
+      },
+      "rewrite": "The most heavily covered record is dated 2024-01-09 in Fort Worth, with 120 articles. Its actors are coded AUTHORITIES vs an unknown actor, and its tone is neutral (3.0). Two records are tied for the next-highest count at 90 articles each. One is dated 2024-01-04, located at \"Texas, United States\", and coded as an unknown actor vs MIGRANT (tone -2.0). The other is dated 2024-01-18 in Uvalde, coded POLICE vs GUNMAN, with a conflict tone of -10.0.\n\nFour more records are dated 2024-01-18 and located in Uvalde or at Robb Elementary School. They share the actor label POLICE or AUTHORITIES:\n- Unknown vs POLICE: 80 articles, tone -10.0.\n- SCHOOL vs POLICE: 80 articles, tone 2.8.\n- POLICE vs SCHOOL: 80 articles, tone 1.9.\n- AUTHORITIES vs an unknown actor, at Robb Elementary School: 80 articles, tone 1.0.\n\nTogether with the POLICE vs GUNMAN record, that makes five records from that date and area in the top 10. They are grouped here only by shared date and location fields.\n\nTwo further records are dated 2024-01-04 with a statewide \"Texas\" location. They are coded TEXAS vs an unknown actor and the reverse, each with 72 articles and a conflict tone of -10.0. The last record is dated 2024-01-11 in Houston, coded NAVY vs an unknown actor, with 70 articles and a tone of -4.0.\n\nThe records contain only actor labels, locations, tone scores and article counts. None includes a title or summary explaining what any event was about, so the data does not show causes, the specific incidents, or who the unknown actors were.",
+      "rewrite_passed": true,
+      "failed_after": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "top-02",
+      "first_passed": false,
+      "failed_first": {
+        "count_overclaims": [
+          "By shared fields, five records are dated 2024-03-12 (MIAMI vs SCHOOL, FLORIDA vs Unknown, and the two SETTLEMENT/FLORIDA records, which together make four; the grouping is by date only)."
+        ]
+      },
+      "rewrite": "The most-covered record is dated 2024-03-12 in Miami, Florida, with actors MIAMI vs SCHOOL. It has 150 articles and a tone labeled cooperation (8.0). Another record from the same date, located at the state level in Florida, is FLORIDA vs Unknown, with 144 articles and no tone listed. Third is BARRISTER vs Unknown on 2024-03-22, with 120 articles and a neutral tone (3.4).\n\nOther records follow. HUNGARY vs BELGIUM (2024-03-15, Florida) has 102 articles and a neutral tone (-2.0). WORKER vs Unknown (2024-03-22, Florida) has 100 articles and is the only record labeled conflict, with a tone of -10.0. Two mirrored records dated 2024-03-12 pair SETTLEMENT and FLORIDA, each with 84 articles and a neutral tone (1.0). Other records are UN SECURITY COUNCIL vs ISRAEL (2024-03-27, 81 articles, neutral 3.0), NAPLES vs FLORIDA (2024-03-17, 80 articles, neutral -4.0), and Unknown vs BRAZILIAN (2024-03-19, Miami, 80 articles, neutral -2.0).\n\nBy shared fields, four records are dated 2024-03-12: MIAMI vs SCHOOL, FLORIDA vs Unknown, SETTLEMENT vs FLORIDA, and FLORIDA vs SETTLEMENT. This grouping is by date only. Two records share the date 2024-03-22: BARRISTER vs Unknown and WORKER vs Unknown. Most records carry a Florida-wide location rather than a specific city; only two are placed in Miami.\n\nThe data gives no titles or summaries beyond the actor labels, so it cannot show what any of these events were about, what the actors did, or why they were covered. The records are a sample of the most-covered events and do not give totals or trends.",
+      "rewrite_passed": true,
+      "failed_after": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "confidence-probe-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "confidence-probe-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "confidence-probe-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "search-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "search-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "keyword-fts-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "reldate-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "reldate-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "reldate-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "reldate-04",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "compare-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "compare-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "month-end-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "month-end-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "month-end-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "march-word-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "invalid-date-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-detail-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-detail-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-detail-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-hot-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-hot-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-brief-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-brief-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-overview-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-overview-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-overview-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-top-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-reldate-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-reldate-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-reldate-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-reldate-04",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-reldate-05",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-month-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-month-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-march-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-may-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-compare-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-compare-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-compare-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-invalid-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-invalid-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-search-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_prompt",
+      "id": "h-search-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "detail-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "detail-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "hot-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "hot-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "brief-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "brief-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "overview-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "overview-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "top-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "top-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "confidence-probe-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "confidence-probe-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "confidence-probe-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "search-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "search-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "keyword-fts-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "reldate-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "reldate-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "reldate-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "reldate-04",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "compare-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "compare-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "month-end-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "month-end-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "month-end-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "march-word-01",
+      "first_passed": false,
+      "failed_first": {
+        "sample_as_total": [
+          "In total"
+        ],
+        "count_overclaims": [
+          "In total, five of the ten records are dated 2024-04-24 (the 40-article, 40-article, 30-article and 30-article records noted above, plus none other), so that date is shared by four listed records: AUSTIN vs TROOPER, PALESTINE vs AUSTIN, PALESTINE vs POLICE and AUSTIN vs TEXAS."
+        ]
+      },
+      "rewrite": "**Most-covered records:** Three records are tied at the top with 40 articles each. Two are dated 2024-04-24 and located in Texas, United States: AUSTIN vs TROOPER and PALESTINE vs AUSTIN. The third is dated 2024-05-30: STUDENT vs TEXAS. All three are coded as Protest with a conflict tone of -6.5. Next is a 2024-04-06 record with 36 articles, listing UNITED STATES with no second actor, also at -6.5.\n\n**Other notable records (30 articles each):** Six records have 30 articles. Two of them are dated 2024-04-24 in Texas: PALESTINE vs POLICE and AUSTIN vs TEXAS. The others are:\n- 2024-04-30: DEMONSTRATOR vs POLICE, in Texas.\n- 2024-07-25: INDUSTRY, no second actor, in Texas.\n- 2024-02-26: WASHINGTON vs ISRAELI, in Texas, with a tone of -7.5, the most negative score in this list.\n- 2024-02-02: TEXAS, no second actor, located in Eagle Pass, Texas, the only record here with a place more specific than the state.\n\nThe date 2024-04-24 is shared by AUSTIN vs TROOPER, PALESTINE vs AUSTIN, PALESTINE vs POLICE and AUSTIN vs TEXAS. That is a shared date only, not evidence that they describe the same event.\n\n**Limits:** The titles and summaries give only actor labels, location, tone and article counts, so the data does not show what any of these protests were about, what prompted them, or who the actors were. This is a sample of the top-covered records, so it cannot show totals or trends across 2024.",
+      "rewrite_passed": true,
+      "failed_after": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "invalid-date-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-detail-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-detail-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-detail-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-hot-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-hot-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-brief-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-brief-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-overview-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-overview-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-overview-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-top-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-reldate-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-reldate-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-reldate-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-reldate-04",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-reldate-05",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-month-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-month-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-march-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-may-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-compare-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-compare-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-compare-03",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-invalid-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-invalid-02",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-search-01",
+      "first_passed": true,
+      "failed_first": {}
+    },
+    {
+      "run": "2026-10-09_report_numbers",
+      "id": "h-search-02",
+      "first_passed": true,
+      "failed_first": {}
+    }
+  ]
+}
