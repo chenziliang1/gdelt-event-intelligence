@@ -1,0 +1,410 @@
+{
+  "total": 24,
+  "passed": 13,
+  "failed": 10,
+  "skipped_no_assertion": 1,
+  "results": [
+    {
+      "id": "greet-01",
+      "query": "hi",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "off_topic",
+        "step_types": [],
+        "confidence": null,
+        "date_range_days": null
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 0.02
+    },
+    {
+      "id": "greet-02",
+      "query": "thanks!",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "off_topic",
+        "step_types": [],
+        "confidence": "high",
+        "date_range_days": null
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 1.3
+    },
+    {
+      "id": "greet-03",
+      "query": "???",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "off_topic",
+        "step_types": [],
+        "confidence": null,
+        "date_range_days": null
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 0.0
+    },
+    {
+      "id": "detail-01",
+      "query": "tell me about event 1150442224",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 365
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 0.8
+    },
+    {
+      "id": "detail-02",
+      "query": "what happened in event EVT-2024-01-09-1150442224",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 365
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 1.01
+    },
+    {
+      "id": "detail-03",
+      "query": "tell me about event 9999999999",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 365
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 0.68
+    },
+    {
+      "id": "hot-01",
+      "query": "what's hot right now",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "top_events_all_global",
+        "step_types": [
+          "top_events"
+        ],
+        "confidence": "high",
+        "date_range_days": 365
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 8.64
+    },
+    {
+      "id": "hot-02",
+      "query": "hot events on 2024-01-09",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "hot_events_global",
+        "step_types": [
+          "hot_events"
+        ],
+        "confidence": "high",
+        "date_range_days": null
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 0.9
+    },
+    {
+      "id": "brief-01",
+      "query": "give me today's daily brief",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "low",
+        "date_range_days": 365
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 0.78
+    },
+    {
+      "id": "brief-02",
+      "query": "summarize January 9 2024 for me",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "daily_brief",
+        "step_types": [
+          "daily_brief"
+        ],
+        "confidence": "high",
+        "date_range_days": null
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 0.88
+    },
+    {
+      "id": "overview-01",
+      "query": "give me a regional overview of Texas this year",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_Texas",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "low",
+        "date_range_days": 365
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 8.79
+    },
+    {
+      "id": "overview-02",
+      "query": "how has California been this month",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_California_2026-07-13",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 0
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 0.62
+    },
+    {
+      "id": "top-01",
+      "query": "what were the top events in Texas in January 2024",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "top_events_all_Texas",
+        "step_types": [
+          "top_events"
+        ],
+        "confidence": "high",
+        "date_range_days": 30
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 8.63
+    },
+    {
+      "id": "top-02",
+      "query": "top events in Florida in March 2024",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "top_events_all_Florida",
+        "step_types": [
+          "top_events"
+        ],
+        "confidence": "high",
+        "date_range_days": 30
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 8.61
+    },
+    {
+      "id": "confidence-probe-01",
+      "query": "Texas January 2024",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_Texas",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 30
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 8.48
+    },
+    {
+      "id": "confidence-probe-02",
+      "query": "protests Texas 2024-01",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_protest_Texas",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 30
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 7.51
+    },
+    {
+      "id": "confidence-probe-03",
+      "query": "conflict events California 2024",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_conflict_California",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 365
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 8.97
+    },
+    {
+      "id": "search-01",
+      "query": "find news articles about the Uvalde school shooting response",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 365
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 0.63
+    },
+    {
+      "id": "search-02",
+      "query": "which country had the most conflict events in North America in 2024",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_conflict_North America",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "low",
+        "date_range_days": 365
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 9.43
+    },
+    {
+      "id": "keyword-fts-01",
+      "query": "search for headline mentioning wildfire",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 365
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 0.6
+    },
+    {
+      "id": "reldate-01",
+      "query": "protests in Texas last week",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_protest_Texas",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 131
+      },
+      "pass": false,
+      "checks_run": 2,
+      "elapsed_s": 7.36
+    },
+    {
+      "id": "reldate-02",
+      "query": "what happened yesterday in Illinois",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_Illinois_2026-07-13",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 0
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 0.64
+    },
+    {
+      "id": "reldate-03",
+      "query": "events in the past 3 days in New York",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_New York",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 138
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 9.19
+    },
+    {
+      "id": "reldate-04",
+      "query": "how has Texas been this month",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "regional_overview_Texas",
+        "step_types": [
+          "regional_overview"
+        ],
+        "confidence": "high",
+        "date_range_days": null
+      },
+      "pass": null,
+      "checks_run": 0,
+      "elapsed_s": 0.62
+    }
+  ]
+}

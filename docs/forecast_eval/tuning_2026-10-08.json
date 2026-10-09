@@ -1,0 +1,350 @@
+{
+  "protocol": "Leak-free chronological split (train / validation / test = 70/15/15 by day, test = last 55 days of 2024). Tuning runs used --skip-test: selection by validation MAE only. The chosen configuration was then trained with 3 seeds and evaluated on test once. Seq 14, horizon 7, batch 1024, up to 60 epochs, early stopping on validation MAE (patience 8), CPU.",
+  "tuning_validation_only": [
+    {
+      "run": "s1_log_hw25",
+      "config": "target=log, hawkes=0.25, d96 L3 lr7e-4 (original design)",
+      "best_epoch": 53,
+      "val_mae": 63.57,
+      "val_seasonal_naive_mae": 61.3,
+      "val_improvement_pct": -3.7,
+      "test_evaluated": false
+    },
+    {
+      "run": "s1_log_hw0",
+      "config": "target=log, hawkes=0, d96 L3 lr7e-4",
+      "best_epoch": 28,
+      "val_mae": 65.44,
+      "val_seasonal_naive_mae": 61.3,
+      "val_improvement_pct": -6.8,
+      "test_evaluated": false
+    },
+    {
+      "run": "s1_res_hw25",
+      "config": "target=seasonal_residual, hawkes=0.25, d96 L3 lr7e-4",
+      "best_epoch": 7,
+      "val_mae": 57.58,
+      "val_seasonal_naive_mae": 61.3,
+      "val_improvement_pct": 6.1,
+      "test_evaluated": false
+    },
+    {
+      "run": "s1_res_hw0",
+      "config": "target=seasonal_residual, hawkes=0, d96 L3 lr7e-4",
+      "best_epoch": 12,
+      "val_mae": 56.41,
+      "val_seasonal_naive_mae": 61.3,
+      "val_improvement_pct": 8.0,
+      "test_evaluated": false
+    },
+    {
+      "run": "s2_lr3e4",
+      "config": "target=seasonal_residual, hawkes=0, d96 L3 lr3e-4",
+      "best_epoch": 26,
+      "val_mae": 56.33,
+      "val_seasonal_naive_mae": 61.3,
+      "val_improvement_pct": 8.1,
+      "test_evaluated": false
+    },
+    {
+      "run": "s2_lr1e4",
+      "config": "target=seasonal_residual, hawkes=0, d96 L3 lr1e-4",
+      "best_epoch": 14,
+      "val_mae": 57.9,
+      "val_seasonal_naive_mae": 61.3,
+      "val_improvement_pct": 5.5,
+      "test_evaluated": false
+    },
+    {
+      "run": "s2_d64l2",
+      "config": "target=seasonal_residual, hawkes=0, d64 L2 lr7e-4",
+      "best_epoch": 30,
+      "val_mae": 56.16,
+      "val_seasonal_naive_mae": 61.3,
+      "val_improvement_pct": 8.4,
+      "test_evaluated": false
+    },
+    {
+      "run": "s2_d48l2_lr3e4",
+      "config": "target=seasonal_residual, hawkes=0, d48 L2 lr3e-4",
+      "best_epoch": 16,
+      "val_mae": 57.72,
+      "val_seasonal_naive_mae": 61.3,
+      "val_improvement_pct": 5.8,
+      "test_evaluated": false
+    }
+  ],
+  "selected": "s2_d64l2",
+  "final_test": [
+    {
+      "seed": 42,
+      "best_epoch": 30,
+      "val_mae": 56.16,
+      "test_mae": 97.53,
+      "test_baseline_mae": {
+        "naive_last": 202.13,
+        "moving_avg_7": 167.74,
+        "empirical_hawkes": 168.44,
+        "seasonal_naive": 103.58
+      },
+      "test_improvement_pct_vs_seasonal_naive": 5.8,
+      "test_improvement_pct_vs": {
+        "naive_last": 51.7,
+        "moving_avg_7": 41.9,
+        "empirical_hawkes": 42.1,
+        "seasonal_naive": 5.8
+      },
+      "series_win_rate": 0.649,
+      "calibrated_test_mae": 99.99,
+      "horizon_scale": [
+        1.0166,
+        1.0123,
+        1.0059,
+        1.0059,
+        1.0068,
+        1.0058,
+        1.0144
+      ],
+      "additive_interval_coverage": 0.753,
+      "log_interval_coverage": 0.739,
+      "coverage_by_series_size": {
+        "additive": {
+          "-10": 1.0,
+          "10-100": 0.92,
+          "100-1000": 0.55,
+          "1000-": 0.159
+        },
+        "log": {
+          "-10": 0.784,
+          "10-100": 0.565,
+          "100-1000": 0.771,
+          "1000-": 0.869
+        }
+      },
+      "per_category": {
+        "actor": {
+          "windows": 9800,
+          "model_mae": 84.96,
+          "baseline_mae": 92.6,
+          "improvement_pct": 8.3
+        },
+        "actor_pair": {
+          "windows": 5880,
+          "model_mae": 19.96,
+          "baseline_mae": 22.19,
+          "improvement_pct": 10.1
+        },
+        "country": {
+          "windows": 588,
+          "model_mae": 1089.35,
+          "baseline_mae": 1108.58,
+          "improvement_pct": 1.7
+        },
+        "country_pair": {
+          "windows": 5880,
+          "model_mae": 15.8,
+          "baseline_mae": 17.14,
+          "improvement_pct": 7.8
+        },
+        "event_code": {
+          "windows": 9800,
+          "model_mae": 66.79,
+          "baseline_mae": 71.34,
+          "improvement_pct": 6.4
+        },
+        "event_root": {
+          "windows": 3920,
+          "model_mae": 160.1,
+          "baseline_mae": 170.91,
+          "improvement_pct": 6.3
+        },
+        "global": {
+          "windows": 196,
+          "model_mae": 2815.54,
+          "baseline_mae": 2937.05,
+          "improvement_pct": 4.1
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "best_epoch": 24,
+      "val_mae": 55.33,
+      "test_mae": 99.56,
+      "test_baseline_mae": {
+        "naive_last": 202.13,
+        "moving_avg_7": 167.74,
+        "empirical_hawkes": 168.44,
+        "seasonal_naive": 103.58
+      },
+      "test_improvement_pct_vs_seasonal_naive": 3.9,
+      "test_improvement_pct_vs": {
+        "naive_last": 50.7,
+        "moving_avg_7": 40.6,
+        "empirical_hawkes": 40.9,
+        "seasonal_naive": 3.9
+      },
+      "series_win_rate": 0.644,
+      "calibrated_test_mae": 98.53,
+      "horizon_scale": [
+        1.0115,
+        1.0043,
+        0.9974,
+        0.9955,
+        0.9922,
+        0.9856,
+        0.989
+      ],
+      "additive_interval_coverage": 0.761,
+      "log_interval_coverage": 0.729,
+      "coverage_by_series_size": {
+        "additive": {
+          "-10": 1.0,
+          "10-100": 0.935,
+          "100-1000": 0.561,
+          "1000-": 0.165
+        },
+        "log": {
+          "-10": 0.788,
+          "10-100": 0.546,
+          "100-1000": 0.752,
+          "1000-": 0.86
+        }
+      },
+      "per_category": {
+        "actor": {
+          "windows": 9800,
+          "model_mae": 87.53,
+          "baseline_mae": 92.6,
+          "improvement_pct": 5.5
+        },
+        "actor_pair": {
+          "windows": 5880,
+          "model_mae": 19.74,
+          "baseline_mae": 22.19,
+          "improvement_pct": 11.1
+        },
+        "country": {
+          "windows": 588,
+          "model_mae": 1082.62,
+          "baseline_mae": 1108.58,
+          "improvement_pct": 2.3
+        },
+        "country_pair": {
+          "windows": 5880,
+          "model_mae": 15.86,
+          "baseline_mae": 17.14,
+          "improvement_pct": 7.4
+        },
+        "event_code": {
+          "windows": 9800,
+          "model_mae": 68.22,
+          "baseline_mae": 71.34,
+          "improvement_pct": 4.4
+        },
+        "event_root": {
+          "windows": 3920,
+          "model_mae": 164.2,
+          "baseline_mae": 170.91,
+          "improvement_pct": 3.9
+        },
+        "global": {
+          "windows": 196,
+          "model_mae": 2931.28,
+          "baseline_mae": 2937.05,
+          "improvement_pct": 0.2
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "best_epoch": 20,
+      "val_mae": 54.89,
+      "test_mae": 98.52,
+      "test_baseline_mae": {
+        "naive_last": 202.13,
+        "moving_avg_7": 167.74,
+        "empirical_hawkes": 168.44,
+        "seasonal_naive": 103.58
+      },
+      "test_improvement_pct_vs_seasonal_naive": 4.9,
+      "test_improvement_pct_vs": {
+        "naive_last": 51.3,
+        "moving_avg_7": 41.3,
+        "empirical_hawkes": 41.5,
+        "seasonal_naive": 4.9
+      },
+      "series_win_rate": 0.577,
+      "calibrated_test_mae": 99.85,
+      "horizon_scale": [
+        1.0162,
+        1.0087,
+        1.0015,
+        1.0014,
+        1.0019,
+        1.0021,
+        1.0091
+      ],
+      "additive_interval_coverage": 0.759,
+      "log_interval_coverage": 0.728,
+      "coverage_by_series_size": {
+        "additive": {
+          "-10": 1.0,
+          "10-100": 0.937,
+          "100-1000": 0.555,
+          "1000-": 0.162
+        },
+        "log": {
+          "-10": 0.779,
+          "10-100": 0.547,
+          "100-1000": 0.755,
+          "1000-": 0.865
+        }
+      },
+      "per_category": {
+        "actor": {
+          "windows": 9800,
+          "model_mae": 85.98,
+          "baseline_mae": 92.6,
+          "improvement_pct": 7.1
+        },
+        "actor_pair": {
+          "windows": 5880,
+          "model_mae": 20.05,
+          "baseline_mae": 22.19,
+          "improvement_pct": 9.7
+        },
+        "country": {
+          "windows": 588,
+          "model_mae": 1058.99,
+          "baseline_mae": 1108.58,
+          "improvement_pct": 4.5
+        },
+        "country_pair": {
+          "windows": 5880,
+          "model_mae": 16.62,
+          "baseline_mae": 17.14,
+          "improvement_pct": 3.0
+        },
+        "event_code": {
+          "windows": 9800,
+          "model_mae": 68.75,
+          "baseline_mae": 71.34,
+          "improvement_pct": 3.6
+        },
+        "event_root": {
+          "windows": 3920,
+          "model_mae": 164.05,
+          "baseline_mae": 170.91,
+          "improvement_pct": 4.0
+        },
+        "global": {
+          "windows": 196,
+          "model_mae": 2832.73,
+          "baseline_mae": 2937.05,
+          "improvement_pct": 3.6
+        }
+      }
+    }
+  ]
+}

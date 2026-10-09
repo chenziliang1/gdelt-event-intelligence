@@ -1,0 +1,665 @@
+{
+  "total": 28,
+  "passed": 23,
+  "failed": 5,
+  "skipped_no_assertion": 0,
+  "results": [
+    {
+      "id": "v2-greet-01",
+      "query": "hey!",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "off_topic",
+        "step_types": [],
+        "confidence": null,
+        "date_range_days": null,
+        "date_range": null,
+        "periods": null,
+        "notice": null,
+        "routing_confidence": null
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 0.03
+    },
+    {
+      "id": "v2-greet-02",
+      "query": "thank you",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "off_topic",
+        "step_types": [],
+        "confidence": null,
+        "date_range_days": null,
+        "date_range": null,
+        "periods": null,
+        "notice": null,
+        "routing_confidence": null
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 0.0
+    },
+    {
+      "id": "v2-detail-01",
+      "query": "pull up event 1192653514",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "event_detail_lookup",
+        "step_types": [
+          "event_detail",
+          "similar_events"
+        ],
+        "confidence": null,
+        "date_range_days": null,
+        "date_range": null,
+        "periods": null,
+        "notice": null,
+        "routing_confidence": null
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 14.76
+    },
+    {
+      "id": "v2-detail-02",
+      "query": "explain CA-20240603-CRO-APPEAL-1179504660",
+      "http_status": 400,
+      "ok": false,
+      "pass": false,
+      "actual": {
+        "error": "invalid literal for int() with base 10: 'CA-20240603-CRO-APPEAL-1179504660'"
+      },
+      "elapsed_s": 0.0
+    },
+    {
+      "id": "v2-hot-01",
+      "query": "top stories today",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "hot_events_global",
+        "step_types": [
+          "hot_events"
+        ],
+        "confidence": "high",
+        "date_range_days": null,
+        "date_range": null,
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 0.98
+    },
+    {
+      "id": "v2-hot-02",
+      "query": "biggest news on 2024-07-04",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 1,
+        "date_range": [
+          "2024-07-04",
+          "2024-07-04"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "low"
+      },
+      "pass": false,
+      "checks_run": 1,
+      "elapsed_s": 3.51
+    },
+    {
+      "id": "v2-brief-01",
+      "query": "daily digest for 2024-09-10",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "daily_brief",
+        "step_types": [
+          "daily_brief"
+        ],
+        "confidence": "high",
+        "date_range_days": null,
+        "date_range": null,
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 1.06
+    },
+    {
+      "id": "v2-brief-02",
+      "query": "what happened on November 5, 2024?",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "daily_brief",
+        "step_types": [
+          "daily_brief"
+        ],
+        "confidence": "high",
+        "date_range_days": null,
+        "date_range": null,
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 1.02
+    },
+    {
+      "id": "v2-overview-01",
+      "query": "overview of British Columbia this year",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 366,
+        "date_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": false,
+      "checks_run": 2,
+      "elapsed_s": 1.21
+    },
+    {
+      "id": "v2-overview-02",
+      "query": "how is Jalisco doing in Q3",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 92,
+        "date_range": [
+          "2024-07-01",
+          "2024-09-30"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": false,
+      "checks_run": 2,
+      "elapsed_s": 4.44
+    },
+    {
+      "id": "v2-overview-03",
+      "query": "what's the situation in Quebec last week",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "regional_overview_Quebec",
+        "step_types": [
+          "regional_overview"
+        ],
+        "confidence": "high",
+        "date_range_days": 7,
+        "date_range": [
+          "2024-12-23",
+          "2024-12-29"
+        ],
+        "periods": null,
+        "notice": "Interpreted 'last week' as 2024-12-23 to 2024-12-29 (relative dates are anchored to 2024-12-31, the end of the dataset).",
+        "routing_confidence": "medium"
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 0.91
+    },
+    {
+      "id": "v2-top-01",
+      "query": "top events in Mexico City in May 2024",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "top_events_all_Mexico City",
+        "step_types": [
+          "top_events"
+        ],
+        "confidence": "high",
+        "date_range_days": 31,
+        "date_range": [
+          "2024-05-01",
+          "2024-05-31"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 11.95
+    },
+    {
+      "id": "v2-reldate-01",
+      "query": "protests in Ontario in the past 10 days",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_protest_Ontario",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 10,
+        "date_range": [
+          "2024-12-22",
+          "2024-12-31"
+        ],
+        "periods": null,
+        "notice": "Interpreted 'past 10 days' as 2024-12-22 to 2024-12-31 (relative dates are anchored to 2024-12-31, the end of the dataset).",
+        "routing_confidence": "low"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 1.16
+    },
+    {
+      "id": "v2-reldate-02",
+      "query": "conflict in Florida yesterday",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_conflict_Florida",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 1,
+        "date_range": [
+          "2024-12-30",
+          "2024-12-30"
+        ],
+        "periods": null,
+        "notice": "Interpreted 'yesterday' as 2024-12-30 to 2024-12-30 (relative dates are anchored to 2024-12-31, the end of the dataset).",
+        "routing_confidence": "low"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 1.13
+    },
+    {
+      "id": "v2-reldate-03",
+      "query": "events in Alberta this week",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_Alberta",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 2,
+        "date_range": [
+          "2024-12-30",
+          "2024-12-31"
+        ],
+        "periods": null,
+        "notice": "Interpreted 'this week' as 2024-12-30 to 2024-12-31, limited to the data available (2024-12-30 to 2024-12-31) (relative dates are anchored to 2024-12-31, the end of the dataset).",
+        "routing_confidence": "low"
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 1.04
+    },
+    {
+      "id": "v2-month-01",
+      "query": "protests in Arizona in June",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_protest_Arizona",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 30,
+        "date_range": [
+          "2024-06-01",
+          "2024-06-30"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 8.59
+    },
+    {
+      "id": "v2-month-02",
+      "query": "events in Nuevo Leon in September 2024",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_Nuevo Leon",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 30,
+        "date_range": [
+          "2024-09-01",
+          "2024-09-30"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 10.1
+    },
+    {
+      "id": "v2-march-01",
+      "query": "news on the women's march in Chicago",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_protest_Chicago",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 366,
+        "date_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "low"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 8.69
+    },
+    {
+      "id": "v2-may-01",
+      "query": "violence may escalate in Sinaloa",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_conflict_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 366,
+        "date_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 0.93
+    },
+    {
+      "id": "v2-compare-01",
+      "query": "Was there less conflict in Mexico in November than in October?",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "compare_periods_conflict_Mexico",
+        "step_types": [
+          "compare_periods"
+        ],
+        "confidence": "high",
+        "date_range_days": null,
+        "date_range": null,
+        "periods": [
+          [
+            "2024-10-01",
+            "2024-10-31"
+          ],
+          [
+            "2024-11-01",
+            "2024-11-30"
+          ]
+        ],
+        "notice": "Comparing conflict counts in Mexico: October 2024 (2024-10-01 to 2024-10-31) vs November 2024 (2024-11-01 to 2024-11-30). Relative dates are anchored to 2024-12-31, the end of the dataset.",
+        "routing_confidence": "medium"
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 16.49
+    },
+    {
+      "id": "v2-compare-02",
+      "query": "Did protests in Texas go up last month?",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "compare_periods_protest_Texas",
+        "step_types": [
+          "compare_periods"
+        ],
+        "confidence": "high",
+        "date_range_days": null,
+        "date_range": null,
+        "periods": [
+          [
+            "2024-10-01",
+            "2024-10-31"
+          ],
+          [
+            "2024-11-01",
+            "2024-11-30"
+          ]
+        ],
+        "notice": "Comparing protest counts in Texas: October 2024 (2024-10-01 to 2024-10-31) vs last month (2024-11-01 to 2024-11-30). Relative dates are anchored to 2024-12-31, the end of the dataset.",
+        "routing_confidence": "low"
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 15.32
+    },
+    {
+      "id": "v2-compare-03",
+      "query": "How did coverage of California change between Q2 and Q3?",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "compare_periods_all_California",
+        "step_types": [
+          "compare_periods"
+        ],
+        "confidence": "high",
+        "date_range_days": null,
+        "date_range": null,
+        "periods": [
+          [
+            "2024-04-01",
+            "2024-06-30"
+          ],
+          [
+            "2024-07-01",
+            "2024-09-30"
+          ]
+        ],
+        "notice": "Comparing event counts in California: Q2 2024 (2024-04-01 to 2024-06-30) vs Q3 2024 (2024-07-01 to 2024-09-30). Relative dates are anchored to 2024-12-31, the end of the dataset.",
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 18.24
+    },
+    {
+      "id": "v2-compare-04",
+      "query": "Did protests increase in Ontario in January?",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_Ontario",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 31,
+        "date_range": [
+          "2024-01-01",
+          "2024-01-31"
+        ],
+        "periods": null,
+        "notice": "The dataset covers 2024-01-01 to 2024-12-31, so January 2024 cannot be compared with December 2023: there is no data for December 2023. Showing January 2024 only.",
+        "routing_confidence": "low"
+      },
+      "pass": true,
+      "checks_run": 3,
+      "elapsed_s": 8.99
+    },
+    {
+      "id": "v2-invalid-01",
+      "query": "events in Texas on 2024-06-31",
+      "http_status": null,
+      "ok": false,
+      "pass": false,
+      "actual": {
+        "error": "timed out"
+      },
+      "elapsed_s": 30.0
+    },
+    {
+      "id": "v2-invalid-02",
+      "query": "protests in Canada on April 31, 2024",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_protest_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "low",
+        "date_range_days": 366,
+        "date_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ],
+        "periods": null,
+        "notice": "'April 31, 2024' is not a real calendar date, so it was not used. Showing 2024-01-01 to 2024-12-31 instead.",
+        "routing_confidence": "low"
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 1.79
+    },
+    {
+      "id": "v2-search-01",
+      "query": "find articles about the Francis Scott Key bridge",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 366,
+        "date_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 1.06
+    },
+    {
+      "id": "v2-search-02",
+      "query": "news mentioning wildfires in Canada",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_all_global",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 366,
+        "date_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 1,
+      "elapsed_s": 1.55
+    },
+    {
+      "id": "v2-geo-01",
+      "query": "protests in Yucatan in 2024",
+      "http_status": 200,
+      "ok": true,
+      "actual": {
+        "intent": "events_protest_Yucatan",
+        "step_types": [
+          "events"
+        ],
+        "confidence": "high",
+        "date_range_days": 366,
+        "date_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ],
+        "periods": null,
+        "notice": null,
+        "routing_confidence": "high"
+      },
+      "pass": true,
+      "checks_run": 2,
+      "elapsed_s": 15.42
+    }
+  ],
+  "pass_rate_by_routing_confidence": {
+    "high": {
+      "items": 13,
+      "passed": 11
+    },
+    "low": {
+      "items": 8,
+      "passed": 7
+    },
+    "medium": {
+      "items": 2,
+      "passed": 2
+    }
+  }
+}

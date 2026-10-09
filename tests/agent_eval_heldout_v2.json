@@ -1,0 +1,45 @@
+{
+  "description": "Held-out paraphrase set v2, written on 2026-10-08 after every planner change prompted by v1 (tests/agent_eval_heldout.json, which is no longer held out) and before this set was run. Expectations are the intended behaviour, fixed in advance. Adds Canadian and Mexican places, comparisons with a period outside the dataset, and phrasings not used before. Relative dates are anchored to 2024-12-31 (a Tuesday).",
+  "items": [
+    {"id": "v2-greet-01", "query": "hey!", "expected": {"intent": "off_topic", "no_db_query": true}},
+    {"id": "v2-greet-02", "query": "thank you", "expected": {"intent": "off_topic", "no_db_query": true}},
+
+    {"id": "v2-detail-01", "query": "pull up event 1192653514", "expected": {"step_types": ["event_detail"]}},
+    {"id": "v2-detail-02", "query": "explain CA-20240603-CRO-APPEAL-1179504660", "expected": {"step_types": ["event_detail"]},
+     "notes": "Canadian fingerprint; the ID pattern used to accept US- only."},
+
+    {"id": "v2-hot-01", "query": "top stories today", "expected": {"step_types": ["hot_events"]}},
+    {"id": "v2-hot-02", "query": "biggest news on 2024-07-04", "expected": {"step_types": ["hot_events", "top_events"]}},
+
+    {"id": "v2-brief-01", "query": "daily digest for 2024-09-10", "expected": {"step_types": ["daily_brief"]}},
+    {"id": "v2-brief-02", "query": "what happened on November 5, 2024?", "expected": {"step_types": ["daily_brief"]}},
+
+    {"id": "v2-overview-01", "query": "overview of British Columbia this year", "expected": {"step_types": ["regional_overview"], "assert_date_range": ["2024-01-01", "2024-12-31"]}},
+    {"id": "v2-overview-02", "query": "how is Jalisco doing in Q3", "expected": {"step_types": ["regional_overview"], "assert_date_range": ["2024-07-01", "2024-09-30"]}},
+    {"id": "v2-overview-03", "query": "what's the situation in Quebec last week", "expected": {"step_types": ["regional_overview"], "assert_date_range": ["2024-12-23", "2024-12-29"]}},
+
+    {"id": "v2-top-01", "query": "top events in Mexico City in May 2024", "expected": {"step_types": ["top_events"], "assert_date_range": ["2024-05-01", "2024-05-31"]}},
+
+    {"id": "v2-reldate-01", "query": "protests in Ontario in the past 10 days", "expected": {"assert_date_range": ["2024-12-22", "2024-12-31"]}},
+    {"id": "v2-reldate-02", "query": "conflict in Florida yesterday", "expected": {"assert_date_range": ["2024-12-30", "2024-12-30"]}},
+    {"id": "v2-reldate-03", "query": "events in Alberta this week", "expected": {"assert_date_range": ["2024-12-30", "2024-12-31"], "assert_notice": true}},
+
+    {"id": "v2-month-01", "query": "protests in Arizona in June", "expected": {"assert_date_range": ["2024-06-01", "2024-06-30"]}},
+    {"id": "v2-month-02", "query": "events in Nuevo Leon in September 2024", "expected": {"assert_date_range": ["2024-09-01", "2024-09-30"]}},
+    {"id": "v2-march-01", "query": "news on the women's march in Chicago", "expected": {"assert_date_range": ["2024-01-01", "2024-12-31"]}},
+    {"id": "v2-may-01", "query": "violence may escalate in Sinaloa", "expected": {"step_types": ["events"], "assert_date_range": ["2024-01-01", "2024-12-31"]}},
+
+    {"id": "v2-compare-01", "query": "Was there less conflict in Mexico in November than in October?", "expected": {"step_types": ["compare_periods"], "assert_periods": [["2024-10-01", "2024-10-31"], ["2024-11-01", "2024-11-30"]]}},
+    {"id": "v2-compare-02", "query": "Did protests in Texas go up last month?", "expected": {"step_types": ["compare_periods"], "assert_periods": [["2024-10-01", "2024-10-31"], ["2024-11-01", "2024-11-30"]]}},
+    {"id": "v2-compare-03", "query": "How did coverage of California change between Q2 and Q3?", "expected": {"step_types": ["compare_periods"], "assert_periods": [["2024-04-01", "2024-06-30"], ["2024-07-01", "2024-09-30"]]}},
+    {"id": "v2-compare-04", "query": "Did protests increase in Ontario in January?", "expected": {"step_types": ["events"], "assert_date_range": ["2024-01-01", "2024-01-31"], "assert_notice": true},
+     "notes": "The period before January 2024 is not in the dataset: no comparison, a notice, January only."},
+
+    {"id": "v2-invalid-01", "query": "events in Texas on 2024-06-31", "expected": {"assert_notice": true, "assert_date_range": ["2024-01-01", "2024-12-31"]}},
+    {"id": "v2-invalid-02", "query": "protests in Canada on April 31, 2024", "expected": {"assert_notice": true, "assert_date_range": ["2024-01-01", "2024-12-31"]}},
+
+    {"id": "v2-search-01", "query": "find articles about the Francis Scott Key bridge", "expected": {"step_types": ["events"]}},
+    {"id": "v2-search-02", "query": "news mentioning wildfires in Canada", "expected": {"step_types": ["events"]}},
+    {"id": "v2-geo-01", "query": "protests in Yucatan in 2024", "expected": {"step_types": ["events"], "assert_date_range": ["2024-01-01", "2024-12-31"]}}
+  ]
+}

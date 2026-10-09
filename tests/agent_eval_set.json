@@ -1,0 +1,373 @@
+{
+  "description": "Hand-labeled evaluation set for the Planner/Executor agent behind /api/v1/analyze. Each item names an expected outcome decided before running the agent. Grounded in real data restored from gdelt_mysql_backup.sql (2024 North America GDELT events). Revision 2 (after the date/comparison fixes): date-range lengths are counted inclusively (reldate-01 is a Mon-Sun week = 7 days; the earlier value 6 came from end-minus-start counting, which also made 'yesterday' 0 days against an expectation of 1). New items below were written from the intended behaviour before any re-run. Revision 3: reldate-04 gets real assertions (it was notes-only) and invalid-date-01 also asserts the queried range; both changes make the set stricter, no expectation was relaxed.",
+  "items": [
+    {
+      "id": "greet-01",
+      "query": "hi",
+      "intent_group": "greeting_offtopic",
+      "expected": {
+        "intent": "off_topic",
+        "no_db_query": true
+      },
+      "notes": "Must hit the regex fast path before any Ollama call."
+    },
+    {
+      "id": "greet-02",
+      "query": "thanks!",
+      "intent_group": "greeting_offtopic",
+      "expected": {
+        "intent": "off_topic",
+        "no_db_query": true
+      },
+      "notes": "Regex fast path, greeting-adjacent word."
+    },
+    {
+      "id": "greet-03",
+      "query": "???",
+      "intent_group": "greeting_offtopic",
+      "expected": {
+        "intent": "off_topic",
+        "no_db_query": true
+      },
+      "notes": "Punctuation-only input, must not crash the planner."
+    },
+    {
+      "id": "detail-01",
+      "query": "tell me about event 1150442224",
+      "intent_group": "direct_event_lookup",
+      "expected": {
+        "step_types": [
+          "event_detail"
+        ]
+      },
+      "notes": "Real GlobalEventID confirmed to exist in the restored DB (Fort Worth explosion coverage, 2024-01-09)."
+    },
+    {
+      "id": "detail-02",
+      "query": "what happened in event EVT-2024-01-09-1150442224",
+      "intent_group": "direct_event_lookup",
+      "expected": {
+        "step_types": [
+          "event_detail"
+        ]
+      },
+      "notes": "Tests the EVT-YYYY-MM-DD-ID fingerprint format branch in query_event_detail specifically."
+    },
+    {
+      "id": "detail-03",
+      "query": "tell me about event 9999999999",
+      "intent_group": "direct_event_lookup",
+      "expected": {
+        "step_types": [
+          "event_detail"
+        ],
+        "graceful_not_found": true
+      },
+      "notes": "Nonexistent ID. Should return a clean not-found result, not a 500."
+    },
+    {
+      "id": "hot-01",
+      "query": "what's hot right now",
+      "intent_group": "hot_events",
+      "expected": {
+        "step_types": [
+          "hot_events"
+        ]
+      },
+      "notes": "Generic hot-events phrasing, no date given."
+    },
+    {
+      "id": "hot-02",
+      "query": "hot events on 2024-01-09",
+      "intent_group": "hot_events",
+      "expected": {
+        "step_types": [
+          "hot_events"
+        ]
+      },
+      "notes": "Date-anchored hot events, should resolve to the exact date given."
+    },
+    {
+      "id": "brief-01",
+      "query": "give me today's daily brief",
+      "intent_group": "daily_brief",
+      "expected": {
+        "step_types": [
+          "daily_brief"
+        ]
+      },
+      "notes": "No explicit date; server should default sensibly."
+    },
+    {
+      "id": "brief-02",
+      "query": "summarize January 9 2024 for me",
+      "intent_group": "daily_brief",
+      "expected": {
+        "step_types": [
+          "daily_brief"
+        ]
+      },
+      "notes": "Date-anchored daily brief phrasing."
+    },
+    {
+      "id": "overview-01",
+      "query": "give me a regional overview of Texas this year",
+      "intent_group": "regional_overview",
+      "expected": {
+        "step_types": [
+          "regional_overview"
+        ]
+      },
+      "notes": "Region + broad time range."
+    },
+    {
+      "id": "overview-02",
+      "query": "how has California been this month",
+      "intent_group": "regional_overview",
+      "expected": {
+        "step_types": [
+          "regional_overview"
+        ]
+      },
+      "notes": "Region + relative time phrase, also stresses relative-date handling."
+    },
+    {
+      "id": "top-01",
+      "query": "what were the top events in Texas in January 2024",
+      "intent_group": "top_events_structured",
+      "expected": {
+        "step_types": [
+          "top_events"
+        ]
+      },
+      "notes": "Confirmed live: routes rule-based, confidence=high, real 2024-01 Texas events returned (Fort Worth, Uvalde follow-up)."
+    },
+    {
+      "id": "top-02",
+      "query": "top events in Florida in March 2024",
+      "intent_group": "top_events_structured",
+      "expected": {
+        "step_types": [
+          "top_events"
+        ]
+      },
+      "notes": "Same structural shape as top-01, different region/month, for consistency check."
+    },
+    {
+      "id": "confidence-probe-01",
+      "query": "Texas January 2024",
+      "intent_group": "confidence_probe",
+      "expected": {
+        "assert_confidence_field": true
+      },
+      "notes": "Maximally terse, fully structured query with no distinctive free-text component. Candidate for triggering the extract_context NameError-to-regex-fallback path (query_text likely null). Score by inspecting phases[0].detail and confidence, not by assuming which value it will be."
+    },
+    {
+      "id": "confidence-probe-02",
+      "query": "protests Texas 2024-01",
+      "intent_group": "confidence_probe",
+      "expected": {
+        "assert_confidence_field": true
+      },
+      "notes": "Same probe purpose as confidence-probe-01, different phrasing."
+    },
+    {
+      "id": "confidence-probe-03",
+      "query": "conflict events California 2024",
+      "intent_group": "confidence_probe",
+      "expected": {
+        "assert_confidence_field": true
+      },
+      "notes": "Same probe purpose, third phrasing for robustness."
+    },
+    {
+      "id": "search-01",
+      "query": "find news articles about the Uvalde school shooting response",
+      "intent_group": "open_ended_search",
+      "expected": {
+        "step_types": [
+          "events"
+        ]
+      },
+      "notes": "Has a clear free-text component (specific named topic), query_text should NOT be null here."
+    },
+    {
+      "id": "search-02",
+      "query": "which country had the most conflict events in North America in 2024",
+      "intent_group": "open_ended_search",
+      "expected": {
+        "step_types": [
+          "top_events",
+          "dashboard",
+          "events"
+        ]
+      },
+      "notes": "Canonical example question used throughout the case document and course lessons."
+    },
+    {
+      "id": "keyword-fts-01",
+      "query": "search for headline mentioning wildfire",
+      "intent_group": "keyword_search_known_limitation",
+      "expected": {
+        "step_types": [
+          "events"
+        ],
+        "known_limitation": "event_fingerprints headline/summary columns are empty because the population ETL has not been run; expect empty or near-empty results even if matching events exist in events_table"
+      },
+      "notes": "Documents a known, disclosed gap rather than a bug: table exists (schema fixed) but is unpopulated."
+    },
+    {
+      "id": "reldate-01",
+      "query": "protests in Texas last week",
+      "intent_group": "relative_date",
+      "expected": {
+        "assert_date_range_days": 7,
+        "assert_within_supported_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ]
+      },
+      "notes": "Confirmed live to NOT return a 7-day window. Root cause: local Ollama router has no anchor/reference date passed into its prompt and the resulting range is not validated; regex fallback also has no 'last week' handling. This is the flagship bug-finding item in this set. Relative dates are anchored to the dataset end (2024-12-31), not the wall clock."
+    },
+    {
+      "id": "reldate-02",
+      "query": "what happened yesterday in Illinois",
+      "intent_group": "relative_date",
+      "expected": {
+        "assert_date_range_days": 1
+      },
+      "notes": "Simpler relative-date phrase, single-day window expected. Relative dates are anchored to the dataset end (2024-12-31), not the wall clock."
+    },
+    {
+      "id": "reldate-03",
+      "query": "events in the past 3 days in New York",
+      "intent_group": "relative_date",
+      "expected": {
+        "assert_date_range_days": 3
+      },
+      "notes": "Explicit numeric relative-date phrase, easier case than 'last week'. Relative dates are anchored to the dataset end (2024-12-31), not the wall clock."
+    },
+    {
+      "id": "reldate-04",
+      "query": "how has Texas been this month",
+      "intent_group": "relative_date",
+      "expected": {
+        "step_types": [
+          "regional_overview"
+        ],
+        "assert_date_range": [
+          "2024-12-01",
+          "2024-12-31"
+        ]
+      },
+      "notes": "Cross-check against overview-02; both use 'this month' phrasing, results should be internally consistent with each other. Revision 3: was a notes-only item (always skipped); now asserts the same tool as overview-02 and December 2024 as 'this month'."
+    },
+    {
+      "id": "compare-01",
+      "query": "Did protest activity increase in Canada this month?",
+      "intent_group": "period_comparison",
+      "expected": {
+        "step_types": [
+          "compare_periods"
+        ],
+        "assert_periods": [
+          [
+            "2024-11-01",
+            "2024-11-30"
+          ],
+          [
+            "2024-12-01",
+            "2024-12-31"
+          ]
+        ],
+        "assert_notice": true
+      },
+      "notes": "The question from the interview. Needs two complete counts and a computed change, not a top-50 sample."
+    },
+    {
+      "id": "compare-02",
+      "query": "Did protests increase in Canada in March compared with February?",
+      "intent_group": "period_comparison",
+      "expected": {
+        "step_types": [
+          "compare_periods"
+        ],
+        "assert_periods": [
+          [
+            "2024-02-01",
+            "2024-02-29"
+          ],
+          [
+            "2024-03-01",
+            "2024-03-31"
+          ]
+        ]
+      },
+      "notes": "Earlier period first regardless of sentence order; February 2024 has 29 days."
+    },
+    {
+      "id": "month-end-01",
+      "query": "protests in Texas in March 2024",
+      "intent_group": "month_boundaries",
+      "expected": {
+        "step_types": [
+          "events"
+        ],
+        "assert_date_range": [
+          "2024-03-01",
+          "2024-03-31"
+        ]
+      },
+      "notes": "Regression for the March 1-28 bug."
+    },
+    {
+      "id": "month-end-02",
+      "query": "events in Texas in April 2024",
+      "intent_group": "month_boundaries",
+      "expected": {
+        "assert_date_range": [
+          "2024-04-01",
+          "2024-04-30"
+        ]
+      },
+      "notes": "30-day month."
+    },
+    {
+      "id": "month-end-03",
+      "query": "events in Texas in february 2024",
+      "intent_group": "month_boundaries",
+      "expected": {
+        "assert_date_range": [
+          "2024-02-01",
+          "2024-02-29"
+        ]
+      },
+      "notes": "Leap year."
+    },
+    {
+      "id": "march-word-01",
+      "query": "show me a protest march in Texas",
+      "intent_group": "month_boundaries",
+      "expected": {
+        "assert_date_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ]
+      },
+      "notes": "'march' here is a noun, not the month; must not narrow the range to March."
+    },
+    {
+      "id": "invalid-date-01",
+      "query": "what happened in Texas on 2024-02-30",
+      "intent_group": "invalid_input",
+      "expected": {
+        "assert_notice": true,
+        "assert_date_range": [
+          "2024-01-01",
+          "2024-12-31"
+        ]
+      },
+      "notes": "Impossible date: must not be silently accepted; the user should be told what was used instead. Revision 3: also asserts the range, because a live run passed on the notice alone while querying 2024-12-30 and the notice claimed the full year."
+    }
+  ]
+}

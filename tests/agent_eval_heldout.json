@@ -1,0 +1,48 @@
+{
+  "description": "Held-out paraphrase set for the Planner/Executor, written on 2026-10-08 AFTER the fixes that made agent_eval_set.json pass 31/31, and BEFORE this set was run. Every expectation is the intended behaviour, decided in advance; none was changed after seeing results. Purpose: check whether the fixes generalise beyond the exact phrasings they were made against. Same scoring as agent_eval_set.json (tests/run_agent_eval.py --eval-set tests/agent_eval_heldout.json). Relative dates are anchored to 2024-12-31 (a Tuesday), the dataset end.",
+  "items": [
+    {"id": "h-greet-01", "query": "hello there", "expected": {"intent": "off_topic", "no_db_query": true}},
+    {"id": "h-greet-02", "query": "good morning!", "expected": {"intent": "off_topic", "no_db_query": true}},
+
+    {"id": "h-detail-01", "query": "show me the details of event 1150622757", "expected": {"step_types": ["event_detail"]}},
+    {"id": "h-detail-02", "query": "what is US-20240109-FOR-APPEAL-1150442224 about?", "expected": {"step_types": ["event_detail"]},
+     "notes": "Fingerprint in the new format produced by the backfill."},
+    {"id": "h-detail-03", "query": "look up EVT-2024-01-09-1150622757", "expected": {"step_types": ["event_detail"]}},
+
+    {"id": "h-hot-01", "query": "what's trending today?", "expected": {"step_types": ["hot_events"]}},
+    {"id": "h-hot-02", "query": "most reported events on 2024-03-15", "expected": {"step_types": ["hot_events", "top_events"]}},
+
+    {"id": "h-brief-01", "query": "give me a recap of 2024-11-05", "expected": {"step_types": ["daily_brief"]}},
+    {"id": "h-brief-02", "query": "daily summary for July 4 2024", "expected": {"step_types": ["daily_brief"]}},
+
+    {"id": "h-overview-01", "query": "how is Florida doing this year", "expected": {"step_types": ["regional_overview"], "assert_date_range": ["2024-01-01", "2024-12-31"]}},
+    {"id": "h-overview-02", "query": "what's the situation in Ontario last month", "expected": {"step_types": ["regional_overview"], "assert_date_range": ["2024-11-01", "2024-11-30"]}},
+    {"id": "h-overview-03", "query": "give me an overview of Arizona in Q2 2024", "expected": {"step_types": ["regional_overview"], "assert_date_range": ["2024-04-01", "2024-06-30"]}},
+
+    {"id": "h-top-01", "query": "top 10 events in California in June 2024", "expected": {"step_types": ["top_events"], "assert_date_range": ["2024-06-01", "2024-06-30"]}},
+
+    {"id": "h-reldate-01", "query": "protests in Illinois over the past 2 weeks", "expected": {"assert_date_range": ["2024-12-18", "2024-12-31"]}},
+    {"id": "h-reldate-02", "query": "what happened in Texas yesterday", "expected": {"assert_date_range": ["2024-12-30", "2024-12-30"]}},
+    {"id": "h-reldate-03", "query": "events in Canada last month", "expected": {"assert_date_range": ["2024-11-01", "2024-11-30"]}},
+    {"id": "h-reldate-04", "query": "conflict events in Mexico this week", "expected": {"assert_date_range": ["2024-12-30", "2024-12-31"], "assert_within_supported_range": ["2024-01-01", "2024-12-31"]},
+     "notes": "This week is Mon 2024-12-30 to Sun 2025-01-05; only the part inside the dataset can be queried."},
+    {"id": "h-reldate-05", "query": "recent protests in Ohio", "expected": {"assert_date_range": ["2024-12-02", "2024-12-31"]},
+     "notes": "'recently' is defined as the 30 days ending on the anchor."},
+
+    {"id": "h-month-01", "query": "protests in New York in September 2024", "expected": {"assert_date_range": ["2024-09-01", "2024-09-30"]}},
+    {"id": "h-month-02", "query": "events in Arizona during February", "expected": {"assert_date_range": ["2024-02-01", "2024-02-29"]}},
+    {"id": "h-march-01", "query": "news about the march on Washington DC", "expected": {"assert_date_range": ["2024-01-01", "2024-12-31"]}},
+    {"id": "h-may-01", "query": "protests may spread in Canada", "expected": {"step_types": ["events"], "assert_date_range": ["2024-01-01", "2024-12-31"]},
+     "notes": "'may' is a verb here; no comparison period is named."},
+
+    {"id": "h-compare-01", "query": "Were there more protests in Texas in October than in September?", "expected": {"step_types": ["compare_periods"], "assert_periods": [["2024-09-01", "2024-09-30"], ["2024-10-01", "2024-10-31"]]}},
+    {"id": "h-compare-02", "query": "Did conflict events in Mexico go down this month?", "expected": {"step_types": ["compare_periods"], "assert_periods": [["2024-11-01", "2024-11-30"], ["2024-12-01", "2024-12-31"]]}},
+    {"id": "h-compare-03", "query": "How did protest activity in Canada change from Q1 to Q2?", "expected": {"step_types": ["compare_periods"], "assert_periods": [["2024-01-01", "2024-03-31"], ["2024-04-01", "2024-06-30"]]}},
+
+    {"id": "h-invalid-01", "query": "what happened in Florida on 2024-04-31", "expected": {"assert_notice": true, "assert_date_range": ["2024-01-01", "2024-12-31"]}},
+    {"id": "h-invalid-02", "query": "protests in Texas on February 30, 2024", "expected": {"assert_notice": true, "assert_date_range": ["2024-01-01", "2024-12-31"]}},
+
+    {"id": "h-search-01", "query": "news about the Baltimore bridge collapse", "expected": {"step_types": ["events"]}},
+    {"id": "h-search-02", "query": "search for articles mentioning hurricane Helene", "expected": {"step_types": ["events"]}}
+  ]
+}

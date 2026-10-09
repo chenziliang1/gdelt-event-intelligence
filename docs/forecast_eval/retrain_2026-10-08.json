@@ -1,0 +1,363 @@
+{
+  "generated": "2026-10-08",
+  "dataset": "models/thp_calibration_dataset_seq14_h7.npz",
+  "settings": "seq_len 14, horizon 7, d_model 96, layers 3, heads 4, lr 0.0007, batch 1024, epochs<=60, early stopping on validation MAE (patience 8), CPU",
+  "split": {
+    "train": 173696,
+    "val": 36064,
+    "test": 36064,
+    "dropped_boundary_windows": 8832,
+    "val_start_day": 256,
+    "test_start_day": 311
+  },
+  "runs": [
+    {
+      "hawkes_residual_weight": 0.0,
+      "seed": 42,
+      "best_epoch": 28,
+      "validation": {
+        "baseline_mae": {
+          "naive_last": 191.33,
+          "moving_avg_7": 151.28,
+          "empirical_hawkes": 143.66,
+          "seasonal_naive": 61.3
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 67.93,
+        "improvement_pct_vs": {
+          "naive_last": 64.5,
+          "moving_avg_7": 55.1,
+          "empirical_hawkes": 52.7,
+          "seasonal_naive": -10.8
+        },
+        "improvement_pct_vs_strongest": -10.8
+      },
+      "test": {
+        "baseline_mae": {
+          "naive_last": 202.13,
+          "moving_avg_7": 167.74,
+          "empirical_hawkes": 168.44,
+          "seasonal_naive": 103.58
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 106.35,
+        "improvement_pct_vs": {
+          "naive_last": 47.4,
+          "moving_avg_7": 36.6,
+          "empirical_hawkes": 36.9,
+          "seasonal_naive": -2.7
+        },
+        "improvement_pct_vs_strongest": -2.7,
+        "per_series_vs_strongest": {
+          "series": 736,
+          "model_wins": 480,
+          "win_rate": 0.652
+        },
+        "interval_coverage_80": {
+          "nominal": 0.8,
+          "overall": 0.76,
+          "per_horizon": [
+            0.766,
+            0.762,
+            0.758,
+            0.75,
+            0.761,
+            0.761,
+            0.759
+          ]
+        },
+        "windows": 36064
+      }
+    },
+    {
+      "hawkes_residual_weight": 0.0,
+      "seed": 1,
+      "best_epoch": 41,
+      "validation": {
+        "baseline_mae": {
+          "naive_last": 191.33,
+          "moving_avg_7": 151.28,
+          "empirical_hawkes": 143.66,
+          "seasonal_naive": 61.3
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 58.72,
+        "improvement_pct_vs": {
+          "naive_last": 69.3,
+          "moving_avg_7": 61.2,
+          "empirical_hawkes": 59.1,
+          "seasonal_naive": 4.2
+        },
+        "improvement_pct_vs_strongest": 4.2
+      },
+      "test": {
+        "baseline_mae": {
+          "naive_last": 202.13,
+          "moving_avg_7": 167.74,
+          "empirical_hawkes": 168.44,
+          "seasonal_naive": 103.58
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 100.15,
+        "improvement_pct_vs": {
+          "naive_last": 50.5,
+          "moving_avg_7": 40.3,
+          "empirical_hawkes": 40.5,
+          "seasonal_naive": 3.3
+        },
+        "improvement_pct_vs_strongest": 3.3,
+        "per_series_vs_strongest": {
+          "series": 736,
+          "model_wins": 502,
+          "win_rate": 0.682
+        },
+        "interval_coverage_80": {
+          "nominal": 0.8,
+          "overall": 0.746,
+          "per_horizon": [
+            0.762,
+            0.748,
+            0.749,
+            0.745,
+            0.737,
+            0.746,
+            0.737
+          ]
+        },
+        "windows": 36064
+      }
+    },
+    {
+      "hawkes_residual_weight": 0.0,
+      "seed": 2,
+      "best_epoch": 41,
+      "validation": {
+        "baseline_mae": {
+          "naive_last": 191.33,
+          "moving_avg_7": 151.28,
+          "empirical_hawkes": 143.66,
+          "seasonal_naive": 61.3
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 61.7,
+        "improvement_pct_vs": {
+          "naive_last": 67.8,
+          "moving_avg_7": 59.2,
+          "empirical_hawkes": 57.1,
+          "seasonal_naive": -0.7
+        },
+        "improvement_pct_vs_strongest": -0.7
+      },
+      "test": {
+        "baseline_mae": {
+          "naive_last": 202.13,
+          "moving_avg_7": 167.74,
+          "empirical_hawkes": 168.44,
+          "seasonal_naive": 103.58
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 99.76,
+        "improvement_pct_vs": {
+          "naive_last": 50.6,
+          "moving_avg_7": 40.5,
+          "empirical_hawkes": 40.8,
+          "seasonal_naive": 3.7
+        },
+        "improvement_pct_vs_strongest": 3.7,
+        "per_series_vs_strongest": {
+          "series": 736,
+          "model_wins": 505,
+          "win_rate": 0.686
+        },
+        "interval_coverage_80": {
+          "nominal": 0.8,
+          "overall": 0.754,
+          "per_horizon": [
+            0.759,
+            0.755,
+            0.755,
+            0.757,
+            0.751,
+            0.746,
+            0.754
+          ]
+        },
+        "windows": 36064
+      }
+    },
+    {
+      "hawkes_residual_weight": 0.25,
+      "seed": 42,
+      "best_epoch": 20,
+      "validation": {
+        "baseline_mae": {
+          "naive_last": 191.33,
+          "moving_avg_7": 151.28,
+          "empirical_hawkes": 143.66,
+          "seasonal_naive": 61.3
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 84.98,
+        "improvement_pct_vs": {
+          "naive_last": 55.6,
+          "moving_avg_7": 43.8,
+          "empirical_hawkes": 40.8,
+          "seasonal_naive": -38.6
+        },
+        "improvement_pct_vs_strongest": -38.6
+      },
+      "test": {
+        "baseline_mae": {
+          "naive_last": 202.13,
+          "moving_avg_7": 167.74,
+          "empirical_hawkes": 168.44,
+          "seasonal_naive": 103.58
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 123.75,
+        "improvement_pct_vs": {
+          "naive_last": 38.8,
+          "moving_avg_7": 26.2,
+          "empirical_hawkes": 26.5,
+          "seasonal_naive": -19.5
+        },
+        "improvement_pct_vs_strongest": -19.5,
+        "per_series_vs_strongest": {
+          "series": 736,
+          "model_wins": 413,
+          "win_rate": 0.561
+        },
+        "interval_coverage_80": {
+          "nominal": 0.8,
+          "overall": 0.755,
+          "per_horizon": [
+            0.759,
+            0.753,
+            0.751,
+            0.759,
+            0.764,
+            0.752,
+            0.745
+          ]
+        },
+        "windows": 36064
+      }
+    },
+    {
+      "hawkes_residual_weight": 0.25,
+      "seed": 1,
+      "best_epoch": 47,
+      "validation": {
+        "baseline_mae": {
+          "naive_last": 191.33,
+          "moving_avg_7": 151.28,
+          "empirical_hawkes": 143.66,
+          "seasonal_naive": 61.3
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 69.84,
+        "improvement_pct_vs": {
+          "naive_last": 63.5,
+          "moving_avg_7": 53.8,
+          "empirical_hawkes": 51.4,
+          "seasonal_naive": -13.9
+        },
+        "improvement_pct_vs_strongest": -13.9
+      },
+      "test": {
+        "baseline_mae": {
+          "naive_last": 202.13,
+          "moving_avg_7": 167.74,
+          "empirical_hawkes": 168.44,
+          "seasonal_naive": 103.58
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 104.5,
+        "improvement_pct_vs": {
+          "naive_last": 48.3,
+          "moving_avg_7": 37.7,
+          "empirical_hawkes": 38.0,
+          "seasonal_naive": -0.9
+        },
+        "improvement_pct_vs_strongest": -0.9,
+        "per_series_vs_strongest": {
+          "series": 736,
+          "model_wins": 441,
+          "win_rate": 0.599
+        },
+        "interval_coverage_80": {
+          "nominal": 0.8,
+          "overall": 0.751,
+          "per_horizon": [
+            0.76,
+            0.749,
+            0.754,
+            0.74,
+            0.747,
+            0.761,
+            0.748
+          ]
+        },
+        "windows": 36064
+      }
+    },
+    {
+      "hawkes_residual_weight": 0.25,
+      "seed": 2,
+      "best_epoch": 50,
+      "validation": {
+        "baseline_mae": {
+          "naive_last": 191.33,
+          "moving_avg_7": 151.28,
+          "empirical_hawkes": 143.66,
+          "seasonal_naive": 61.3
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 66.99,
+        "improvement_pct_vs": {
+          "naive_last": 65.0,
+          "moving_avg_7": 55.7,
+          "empirical_hawkes": 53.4,
+          "seasonal_naive": -9.3
+        },
+        "improvement_pct_vs_strongest": -9.3
+      },
+      "test": {
+        "baseline_mae": {
+          "naive_last": 202.13,
+          "moving_avg_7": 167.74,
+          "empirical_hawkes": 168.44,
+          "seasonal_naive": 103.58
+        },
+        "strongest_baseline": "seasonal_naive",
+        "model_mae": 111.16,
+        "improvement_pct_vs": {
+          "naive_last": 45.0,
+          "moving_avg_7": 33.7,
+          "empirical_hawkes": 34.0,
+          "seasonal_naive": -7.3
+        },
+        "improvement_pct_vs_strongest": -7.3,
+        "per_series_vs_strongest": {
+          "series": 736,
+          "model_wins": 402,
+          "win_rate": 0.546
+        },
+        "interval_coverage_80": {
+          "nominal": 0.8,
+          "overall": 0.761,
+          "per_horizon": [
+            0.764,
+            0.758,
+            0.763,
+            0.761,
+            0.755,
+            0.763,
+            0.763
+          ]
+        },
+        "windows": 36064
+      }
+    }
+  ]
+}
