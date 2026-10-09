@@ -45,6 +45,9 @@ What this says:
   reviewer also changed labels in both directions. The other 3 imply a cause without a causal word ("in Eagle Pass,
   a border community").
 
+Follow-up: the report prompt was changed and the reports regenerated; the judge finds 0 U sentences in the
+same 30 (`../2026-10-09_report_prompt/summary.md`).
+
 ## Limits
 
 * The 312 sentences that the pre-labeller left empty, the judge did not call U, and the sample did not include were

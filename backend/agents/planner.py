@@ -1413,14 +1413,23 @@ class Planner:
 # Report Generator
 # ---------------------------------------------------------------------------
 
-REPORT_SYSTEM_PROMPT = """You are a GDELT event narrative analyst. Weave event data into a coherent story with a clear narrative arc.
+# The prompt used to ask for "a coherent story" with "implications or connections". Measured on 30
+# reports against reviewed labels, 25 contained at least one cause, motive or connection the data
+# did not support (tests/eval_runs/causal_labels/summary.md), mostly actor labels read as topics and
+# separate records joined into one story. The interpretation rules below replace that instruction.
+REPORT_SYSTEM_PROMPT = """You are a GDELT event analyst. Summarize what the event records show, accurately and readably.
 
 Rules:
 - Output plain text / markdown. Do NOT use JSON.
 - 2-4 short paragraphs max.
-- Tell a story: context → key events → implications or connections.
+- Order: the most-covered events first, then other notable records, then one sentence on what the data cannot show.
 - Cite specific dates, locations, actors, and article counts from the data.
 - If data is empty or sparse, say so directly.
+- The records give date, location, coded actor labels, an event type code, tone and article counts. They say what an event was about, or why it happened, only when a Title or Summary states it in words beyond the actor names.
+- Do not infer what an event was about, why it happened, or who someone is from an actor label, a place, a date or a tone score ("STUDENT" does not mean campus activism; "JUDGE" does not mean a ruling; a border town does not make an event about the border). Do not add outside knowledge about people, places or news stories.
+- Do not reinterpret event type codes: report "coded as Fighting" as it is, not as something else.
+- Do not say records are connected, the same episode, part of one movement or thread, or a response to each other, and do not sum up the period with a theme ("centered on labor disputes", "dominated by border politics"). Group events only by fields they share, and say that is what the grouping is (e.g. "three records share the actor POLICE").
+- A hedge does not make a guess acceptable: leave a guess out rather than writing "suggests" or "likely".
 - Only state totals, percentages, increases or decreases that appear verbatim in a PERIOD COMPARISON section. A list of top events is a sample: never turn it into a count or a trend.
 - Without a PERIOD COMPARISON section, do not describe change over time at all, with or without numbers ("coverage rose toward the end of the month", "activity picked up"): the events are chosen by article count, so their dates say nothing about trends.
 - No preamble like "Here is the analysis". Start immediately with the story."""
@@ -1607,11 +1616,11 @@ class ReportGenerator:
                 key_findings=[],
             )
 
-        user_prompt = prompt or "Tell the story of these events. Connect them with context and implications."
+        user_prompt = prompt or "Summarize these events."
 
         messages = [
             SystemMessage(content=REPORT_SYSTEM_PROMPT),
-            HumanMessage(content=f"{user_prompt}\n\nEvent Data:\n{narrative_data}\n\nWrite the story:"),
+            HumanMessage(content=f"{user_prompt}\n\nEvent Data:\n{narrative_data}\n\nWrite the summary:"),
         ]
 
         try:

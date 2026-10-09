@@ -23,7 +23,8 @@ LLM requests: 54 reports, plus 1 report from the browser check of the Quick Repo
 Interpretation beyond the data (causes, motives, connections) is not checked by the five checks above. It was
 measured separately on 30 of these reports against reviewed labels (`../causal_labels/summary.md`): 25 of 30 contain
 at least one unsupported cause, motive or connection (75 of 447 sentences). A keyword rule finds 59% of them; a Claude
-judge finds 91% with precision 0.84, so it is used as an offline evaluation, not as a pass/fail check.
+judge finds 91% with precision 0.84, so it is used as an offline evaluation, not as a pass/fail check. After a
+prompt change, the regenerated reports have none by the judge (`../2026-10-09_report_prompt/summary.md`).
 
 Counts written as words ("four records") and event-type descriptions are not checked either; the review found one
 of each wrong.
