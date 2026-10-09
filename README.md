@@ -10,7 +10,7 @@ The repository includes the final forecast model artifacts and local training lo
 - **Map hotspot drilldown:** click geographic markers to inspect representative events at a location.
 - **Representative events:** dashboard-level examples selected from the active filter range.
 - **Analyst Chat:** natural-language event analysis using tool routing, SQL-backed data access, ChromaDB retrieval, and LLM summarization.
-- **Forecast:** seven-day daily event-count forecasts with 80% intervals, from a Transformer that corrects a seasonal-naive baseline.
+- **Forecast:** seven-day daily event-count forecasts with 80% intervals, from a gradient-boosting model (LightGBM) that corrects a seasonal-naive baseline; it replaced a Transformer that did worse on an unseen quarter.
 - **Compare Mode:** compare two locations or actors over the selected range by event category.
 - **Report export:** export dashboard summaries and current analytical context.
 
@@ -74,7 +74,8 @@ DB_NAME=gdelt
 BACKEND_PORT=8000
 FRONTEND_PORT=5173
 
-THP_CHECKPOINT_PATH=models/thp_gdelt.pt
+# The served forecaster; models/thp_gdelt.pt serves the Transformer instead (rollback).
+FORECAST_MODEL_PATH=models/lightgbm_gdelt.json
 CHROMA_DB_PATH=/app/chroma_db
 
 LLM_PROVIDER=claude
@@ -138,10 +139,13 @@ The Forecast module predicts daily event counts for the next 7 days for 736 seri
 and country pairs, CAMEO event roots and codes, each split into all / conflict / cooperation / protest):
 
 1. Build daily features (counts, tone, Goldstein score, rolling statistics, calendar) from the GDELT summaries.
-2. Feed the latest 14 daily vectors, with series and event-type embeddings, into a Transformer encoder.
-3. Predict, for each of the next 7 days, a correction in log space to the same weekday of the previous week
-   (seasonal-naive), and add it back.
-4. Return the forecast with an 80% interval fitted on validation per series size.
+2. Take the latest 14 daily vectors, the series kind and the event type, and for each of the next 7 days predict a
+   correction in log space to the same weekday of the previous week (seasonal-naive) with gradient boosting
+   (LightGBM), and add it back.
+3. Return the forecast with an 80% interval per series size, refitted on the errors of the last 14 days of windows.
+
+The served model was chosen between this and a Transformer encoder on the same inputs, by a rule fixed before an
+unseen quarter was loaded (below).
 
 Evaluation (details, protocol and caveats: `docs/FORECAST_EVALUATION.md`):
 
@@ -154,7 +158,7 @@ Evaluation (details, protocol and caveats: `docs/FORECAST_EVALUATION.md`):
   LightGBM is stable across seeds (53.0 to 53.5), and its 80% intervals by the same method cover 79%.
 - On 2025 Q3, unseen by both, with the choice rule committed before the data was loaded: LightGBM 13.3% below
   seasonal-naive, the Transformer 4.5%; LightGBM is better with a bootstrap interval clear of zero, so the rule picks
-  it to serve (the served model has not been switched yet).
+  it to serve, and it is the served model (`models/lightgbm_gdelt.json`; the Transformer remains as the rollback).
 - Earlier, trained on 2024 only: 5.7% lower on Q1 2025 and 4.9% on the held-out end of 2024.
 - The original design's Hawkes-style output head did not help and was removed.
 - The 80% intervals cover 79% on the 2025 test period (76% for the largest series).

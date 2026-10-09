@@ -117,6 +117,8 @@ def _slope_tail(values: Sequence[float], window: int) -> float:
 class NeuralTHPCheckpoint:
     """Lazy checkpoint loader and inference wrapper."""
 
+    model_name = "neural_transformer_hawkes_v1"
+
     def __init__(self, checkpoint_path: str | Path):
         self.checkpoint_path = Path(checkpoint_path)
         self._loaded = False
@@ -168,6 +170,7 @@ class NeuralTHPCheckpoint:
         forecast_days: int,
         series_key: Optional[str] = None,
         event_type: str = "conflict",
+        last_date: Any = None,  # used by the LightGBM model (same interface); not needed here
     ) -> Optional[List[Dict[str, float]]]:
         self._ensure_loaded()
         if not self._available or self._model is None or self._torch is None:

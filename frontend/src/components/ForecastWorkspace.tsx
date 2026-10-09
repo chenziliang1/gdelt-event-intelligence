@@ -67,7 +67,7 @@ export default function ForecastWorkspace() {
           Event Forecast
         </h2>
         <p style={{ fontSize: 13, color: '#6b7280', marginTop: 4 }}>
-          Predict daily event counts for the next 7 days with a Transformer that corrects last week&apos;s same-day counts.
+          Predict daily event counts for the next 7 days with a gradient-boosting model that corrects last week&apos;s same-day counts.
         </p>
       </div>
 

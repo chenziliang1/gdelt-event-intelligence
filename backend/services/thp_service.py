@@ -26,6 +26,7 @@ from backend.services.actor_normalization import (
     actor_country_code,
     normalize_actor_name,
 )
+from backend.services.lgbm_forecaster import LightGBMCheckpoint
 from backend.services.thp_neural import NeuralTHPCheckpoint, build_feature_vector
 
 
@@ -46,8 +47,11 @@ class TransformerHawkesForecaster:
     def __init__(self, lookback_days: int = 30, half_life_days: float = 7.0):
         self.lookback_days = lookback_days
         self.half_life_days = half_life_days
-        checkpoint_path = os.getenv("THP_CHECKPOINT_PATH", "models/thp_gdelt.pt")
-        self.neural_checkpoint = NeuralTHPCheckpoint(Path(checkpoint_path))
+        # LightGBM is served since 2026-10-09 (docs/forecast_eval/2025q3_decision_rule.md); a .pt path
+        # serves the Transformer, which is the rollback. THP_CHECKPOINT_PATH is no longer read.
+        model_path = Path(os.getenv("FORECAST_MODEL_PATH", "models/lightgbm_gdelt.json"))
+        self.neural_checkpoint = (
+            NeuralTHPCheckpoint(model_path) if model_path.suffix == ".pt" else LightGBMCheckpoint(model_path))
         self._feature_window_cache: Dict[str, List[List[float]]] = {}
         self._feature_window_cache_max = int(os.getenv("THP_FEATURE_WINDOW_CACHE_MAX", "64"))
 
@@ -176,6 +180,7 @@ class TransformerHawkesForecaster:
             forecast_days=max(1, min(forecast_days, 60)),
             series_key=self._series_key(region, actor),
             event_type=event_type,
+            last_date=points[-1].date,
         )
         if not predictions:
             return None
@@ -208,7 +213,7 @@ class TransformerHawkesForecaster:
 
         peak = max(forecast_points, key=lambda p: p["risk_score"])
         return {
-            "model": "neural_transformer_hawkes_v1",
+            "model": self.neural_checkpoint.model_name,
             "ok": True,
             "target": {
                 "region": region,
@@ -253,7 +258,7 @@ class TransformerHawkesForecaster:
 
     def _model_name(self) -> str:
         if self.neural_checkpoint.available:
-            return "neural_transformer_hawkes_v1"
+            return self.neural_checkpoint.model_name
         return "empirical_transformer_hawkes_v1"
 
     def _series_key(self, region: Optional[str], actor: Optional[str]) -> str:

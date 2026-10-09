@@ -39,6 +39,7 @@ LightGBM needs libomp (`brew install libomp`, or point DYLD_FALLBACK_LIBRARY_PAT
     python db_scripts/evaluate_strong_baseline.py --stage pool --dataset-cache $CACHE
     python db_scripts/evaluate_strong_baseline.py --stage seeds --dataset-cache $CACHE --out docs/forecast_eval/strong_baseline_seeds.json
     python db_scripts/evaluate_strong_baseline.py --stage intervals --dataset-cache $CACHE --out docs/forecast_eval/strong_baseline_intervals.json
+    python db_scripts/evaluate_strong_baseline.py --stage serve --dataset-cache $CACHE --out models/lightgbm_gdelt.json
 """
 
 from __future__ import annotations
@@ -355,6 +356,81 @@ def stage_intervals(args):
     write(args.out, out)
 
 
+def stage_serve(args):
+    """Write the served model (models/lightgbm_gdelt.json): the tested model (chosen configuration,
+    seed 2025, same training data), its 80% intervals in the rolling 14-day state at the end of the
+    data (as evaluate_retrain.serve does for the Transformer), and its test results, which the API
+    reports as baseline_comparison. Checks that the serving feature path reproduces this script's
+    predictions before writing."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from backend.services.lgbm_forecaster import lgbm_feature_rows
+    from thp_eval_utils import fit_log_interval_by_size
+
+    cfg = json.loads(Path(args.choice).read_text())["chosen"]
+    assert not cfg["series_id"], "serving does not map series ids"
+    d, split, day0 = load(args.dataset_cache)
+    booster = fit(cfg, d, split, day0, SEED)
+    pool = np.concatenate([split.val_idx, split.test_idx])
+    pred = predict(booster, cfg, d, pool, day0)
+
+    # The serving path, window by window, must give the same predictions.
+    all_labels = np.unique(d["labels"])
+    kinds = {k: i for i, k in enumerate(sorted({s.split(":", 1)[0] for s in all_labels}))}
+    measures = {m: i for i, m in enumerate(sorted({s.split("||", 1)[1] for s in all_labels}))}
+    check = split.test_idx[:: max(1, len(split.test_idx) // 500)]
+    worst = 0.0
+    for i in check:
+        label = str(d["labels"][i])
+        dow = (day0 + timedelta(days=int(d["target_positions"][i]))).weekday()
+        rows = lgbm_feature_rows(d["x"][i], kinds[label.split(":", 1)[0]], measures[label.split("||", 1)[1]], dow)
+        served = np.maximum(np.expm1(booster.predict(rows, num_iteration=booster.best_iteration) + rows[:, 29]), 0.0)
+        worst = max(worst, float(np.abs(served - pred[np.where(pool == i)[0][0]]).max()))
+    assert worst < 1e-3, f"serving features differ from training: max difference {worst}"
+
+    pos, y = d["target_positions"], d["y_count"].astype(np.float64)
+    scale = np.expm1(d["x"][:, :, 0]).mean(axis=1)
+    last = pos[pool] + HORIZON - 1
+    recent = last >= last.max() - 14 + 1  # rolling 14 days, the method chosen on validation
+    fitted = fit_log_interval_by_size(y[pool][recent], pred[recent], scale[pool][recent])
+
+    q2 = json.loads(Path("docs/forecast_eval/strong_baseline_test.json").read_text())
+    ints = json.loads(Path("docs/forecast_eval/strong_baseline_intervals.json").read_text())["lightgbm"]
+    q3 = json.loads(Path("docs/forecast_eval/2025q3_test.json").read_text())
+    lgb_q2 = q2["models"]["lightgbm"]
+    bundle = {
+        "format": "lightgbm_gdelt_v1",
+        "booster": booster.model_to_string(num_iteration=booster.best_iteration),
+        "best_iteration": int(booster.best_iteration),
+        "config": cfg, "seed": SEED, "kinds": kinds, "measures": measures,
+        "calibration": {"log_interval_by_size": fitted,
+                        "log_interval_by_size_report": {"method": ints["chosen_interval_method"],
+                                                        "fitted_on_windows": int(recent.sum()),
+                                                        "test": ints["test"][ints["chosen_interval_method"]]}},
+        "metadata": {
+            "model": "LightGBM, residual on seasonal-naive (log), chosen on validation",
+            "training_period": "2024-01-01 to 2025-01-31 (validation 2025-02-01 to 2025-03-31)",
+            "serving_check_max_abs_diff": worst,
+            "decision": "docs/forecast_eval/2025q3_decision_rule.md",
+            "evaluation": {
+                "test": {"strongest_baseline": "seasonal_naive", "model_mae": lgb_q2["test_mae"],
+                         "baseline_mae": {"seasonal_naive": q2["seasonal_naive_mae"]},
+                         "improvement_pct_vs_strongest": lgb_q2["improvement_pct_vs_seasonal_naive"],
+                         "per_series_vs_seasonal_naive": lgb_q2["per_series_vs_seasonal_naive"],
+                         "interval_coverage_80": ints["test"][ints["chosen_interval_method"]], "period": q2["test_days"]},
+                "q3_2025": {"period": q3["period"], "model_mae": q3["models"]["lightgbm"]["mae"],
+                            "seasonal_naive_mae": q3["seasonal_naive_mae"],
+                            "improvement_pct_vs_seasonal_naive": q3["models"]["lightgbm"]["improvement_pct_vs_seasonal_naive"],
+                            "interval_coverage_80": q3["models"]["lightgbm"]["interval_80_rolling_14d"],
+                            "decision": q3["decision"]},
+            },
+        },
+    }
+    out = Path(args.out or "models/lightgbm_gdelt.json")
+    out.write_text(json.dumps(bundle))
+    print(f"served LightGBM -> {out} ({out.stat().st_size / 1e6:.1f} MB): best iteration {booster.best_iteration}, "
+          f"serving check max difference {worst:.2e}, intervals fitted on {int(recent.sum())} windows")
+
+
 def write(path, obj):
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     Path(path).write_text(json.dumps(obj, indent=1, default=str))
@@ -362,7 +438,7 @@ def write(path, obj):
 
 def main() -> int:
     p = argparse.ArgumentParser()
-    p.add_argument("--stage", choices=("transformer", "select", "test", "report", "pool", "seeds", "intervals"),
+    p.add_argument("--stage", choices=("transformer", "select", "test", "report", "pool", "seeds", "intervals", "serve"),
                    required=True)
     p.add_argument("--dataset-cache", required=True)
     p.add_argument("--checkpoints", nargs="+")
@@ -370,7 +446,7 @@ def main() -> int:
     p.add_argument("--out")
     args = p.parse_args()
     {"transformer": stage_transformer, "select": stage_select, "test": stage_test, "report": stage_report,
-     "pool": stage_pool, "seeds": stage_seeds, "intervals": stage_intervals}[args.stage](args)
+     "pool": stage_pool, "seeds": stage_seeds, "intervals": stage_intervals, "serve": stage_serve}[args.stage](args)
     return 0
 
 

@@ -41,7 +41,7 @@ services:
       DB_USER: ${DB_USER:-root}
       DB_PASSWORD: ${DB_PASSWORD:-rootpassword}
       DB_NAME: ${DB_NAME:-gdelt}
-      THP_CHECKPOINT_PATH: ${THP_CHECKPOINT_PATH:-models/thp_gdelt.pt}
+      FORECAST_MODEL_PATH: ${FORECAST_MODEL_PATH:-models/lightgbm_gdelt.json}
       CHROMA_DB_PATH: ${CHROMA_DB_PATH:-/app/chroma_db}
     command: >
       sh -c "python run_backend.py --host 0.0.0.0 --port 8000"

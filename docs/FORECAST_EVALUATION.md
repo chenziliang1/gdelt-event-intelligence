@@ -52,8 +52,8 @@ the earlier periods (0.73 on the 2024 test, 0.77 on Q1 2025); a validation perio
 be part of the reason, but that was not tested. The rolling choice is kept as made; a second period would be needed
 to tell the two apart.
 
-The served checkpoint (`models/thp_gdelt.pt`, from `models/retrain_2025h1/seed2.pt`, written by `--stage serve`)
-carries the rolling interval in its state at the end of the data (fitted on the windows observed in the last 14
+The Transformer checkpoint (`models/thp_gdelt.pt`, from `models/retrain_2025h1/seed2.pt`, written by `--stage serve`;
+served until LightGBM replaced it, see "Served model") carries the rolling interval in its state at the end of the data (fitted on the windows observed in the last 14
 days), and its test result, which the API reports as `baseline_comparison`.
 
 ## A stronger baseline: gradient boosting on the same split (2026-10-09)
@@ -458,7 +458,18 @@ python db_scripts/evaluate_2025q3.py --stage build   # then --stage transformer,
 
 ## Served model
 
-`models/thp_gdelt.pt` is `models/retrain_2025h1/seed2.pt` since 2026-10-09: trained on 2024 plus January 2025, chosen
+**LightGBM since 2026-10-09** (`models/lightgbm_gdelt.json`), by the rule fixed before 2025 Q3 was loaded ("2025 Q3:
+the decision"). It is exactly the tested model: the configuration chosen on validation, trained on 2024 plus January
+2025 with seed 2025 (1,728 trees), written by `db_scripts/evaluate_strong_baseline.py --stage serve`, which first
+checks that the serving feature path (`backend/services/lgbm_forecaster.py`) reproduces the evaluation's predictions
+on test windows (maximum difference 0.0). It carries its 80% intervals in the rolling 14-day state at the end of the
+data (10,304 windows, the same procedure as the Transformer's) and its test results: the API reports Q2 (MAE 53.52 vs
+62.05 for seasonal-naive, +13.8%) as `baseline_comparison`, and Q3 is in its metadata. It forecasts 7 days, the
+horizon it was trained for; the Forecast page asks for 7. The application still serves 2024 data, which is inside the
+training period, so the page's forecasts show the model working, not its accuracy; the accuracy is the test periods'.
+`FORECAST_MODEL_PATH` picks the file: a `.pt` path serves the Transformer below, which is the rollback.
+
+The Transformer: `models/thp_gdelt.pt` is `models/retrain_2025h1/seed2.pt` since 2026-10-09: trained on 2024 plus January 2025, chosen
 on validation (February-March 2025), tested once on 2025-04-01 to 06-11 (MAE 52.62 vs 62.05 for seasonal-naive,
 +15.2%; the 3-seed mean is +9.5%). Same 184 series and 4 event types as before. The backend adds the model output to
 log1p(same weekday last week) from the input window, serves the size-binned log-space interval (rolling 14-day state
