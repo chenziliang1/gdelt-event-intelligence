@@ -1,0 +1,174 @@
+{
+ "stage": "report",
+ "rule": "docs/forecast_eval/2025q3_decision_rule.md (commit afa1791)",
+ "period": [
+  "2025-07-03",
+  "2025-09-30"
+ ],
+ "forecast_start_days": [
+  "2025-07-17",
+  "2025-09-24"
+ ],
+ "windows": 51520,
+ "start_days": 70,
+ "interval_windows": 41216,
+ "interval_first_day": "2025-07-31",
+ "build_check": {
+  "q2_windows_compared": 38272,
+  "q2_windows_built": 38272,
+  "targets_identical": true,
+  "non_rolling_features_max_abs_diff": 0.0
+ },
+ "series_without_events": [],
+ "seasonal_naive_mae": 65.95,
+ "transformer_seed_mean": {
+  "mae": 63.0,
+  "interval_80_overall": 0.794
+ },
+ "served_transformer_seed": "seed2",
+ "models": {
+  "transformer_seed42": {
+   "mae": 63.44,
+   "improvement_pct_vs_seasonal_naive": 3.8,
+   "per_series_vs_seasonal_naive": {
+    "series": 736,
+    "model_wins": 492,
+    "win_rate": 0.668
+   },
+   "interval_80_rolling_14d": {
+    "overall": 0.792,
+    "by_size": {
+     "-10": 0.8,
+     "10-100": 0.8,
+     "100-1000": 0.789,
+     "1000-": 0.752
+    },
+    "worst_bin_gap": 0.048,
+    "mean_width": 244.8
+   }
+  },
+  "transformer_seed1": {
+   "mae": 65.04,
+   "improvement_pct_vs_seasonal_naive": 1.4,
+   "per_series_vs_seasonal_naive": {
+    "series": 736,
+    "model_wins": 458,
+    "win_rate": 0.622
+   },
+   "interval_80_rolling_14d": {
+    "overall": 0.794,
+    "by_size": {
+     "-10": 0.801,
+     "10-100": 0.798,
+     "100-1000": 0.792,
+     "1000-": 0.763
+    },
+    "worst_bin_gap": 0.037,
+    "mean_width": 247.1
+   }
+  },
+  "transformer_seed2": {
+   "mae": 60.52,
+   "improvement_pct_vs_seasonal_naive": 8.2,
+   "per_series_vs_seasonal_naive": {
+    "series": 736,
+    "model_wins": 499,
+    "win_rate": 0.678
+   },
+   "interval_80_rolling_14d": {
+    "overall": 0.795,
+    "by_size": {
+     "-10": 0.799,
+     "10-100": 0.8,
+     "100-1000": 0.789,
+     "1000-": 0.786
+    },
+    "worst_bin_gap": 0.014,
+    "mean_width": 230.4
+   }
+  },
+  "lightgbm": {
+   "mae": 57.21,
+   "improvement_pct_vs_seasonal_naive": 13.3,
+   "per_series_vs_seasonal_naive": {
+    "series": 736,
+    "model_wins": 570,
+    "win_rate": 0.774
+   },
+   "interval_80_rolling_14d": {
+    "overall": 0.79,
+    "by_size": {
+     "-10": 0.798,
+     "10-100": 0.796,
+     "100-1000": 0.782,
+     "1000-": 0.776
+    },
+    "worst_bin_gap": 0.024,
+    "mean_width": 214.4
+   }
+  }
+ },
+ "mae_difference_95ci": {
+  "transformer_seed_mean_minus_lightgbm": {
+   "mean": 5.79,
+   "lo": 1.68,
+   "hi": 9.38,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 70
+  },
+  "transformer_seed_mean_minus_seasonal_naive": {
+   "mean": -2.95,
+   "lo": -9.34,
+   "hi": -0.35,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 70
+  },
+  "lightgbm_minus_seasonal_naive": {
+   "mean": -8.74,
+   "lo": -15.8,
+   "hi": -4.78,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 70
+  },
+  "transformer_seed42_minus_lightgbm": {
+   "mean": 6.23,
+   "lo": 2.8,
+   "hi": 10.11,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 70
+  },
+  "transformer_seed1_minus_lightgbm": {
+   "mean": 7.83,
+   "lo": 2.68,
+   "hi": 11.61,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 70
+  },
+  "transformer_seed2_minus_lightgbm": {
+   "mean": 3.32,
+   "lo": -1.32,
+   "hi": 7.42,
+   "level": 0.95,
+   "block_days": 7,
+   "resamples": 2000,
+   "days": 70
+  }
+ },
+ "decision_steps": [
+  "1. coverage floor 0.75: transformer 0.794 (mean of 3 seeds), lightgbm 0.790; eligible: ['lightgbm', 'transformer']",
+  "2. lower MAE: transformer 63.00 vs lightgbm 57.21 -> lightgbm",
+  "3. 95% interval of transformer minus lightgbm [1.68, 9.38] excludes 0"
+ ],
+ "decision": "lightgbm",
+ "note": "MAE in events per window-day. Moving-block bootstrap over forecast start days (7-day blocks, 2,000 resamples). Intervals: rolling 14-day refit on windows whose targets are observed before the forecast day; the first 14 forecast days are excluded from coverage (no history)."
+}

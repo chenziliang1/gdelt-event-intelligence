@@ -44,6 +44,24 @@ wrong count of records)." and, for a fallback, the record list under "The AI-wri
 automatic checks (numbers not in the data), so the results are listed without interpretation." with an amber line
 "The AI summary failed the checks twice ...".
 
+## The fallback in real requests
+
+With Claude Sonnet the fallback never occurred (0 of 216 saved reports, 0 of the live ones). To see it in real
+requests, the report model was switched to the local `qwen2.5:3b` through the report API's own `llm_config`
+(Ollama's OpenAI-compatible endpoint), same backend, same data, no code change (`weak_model_live.json`):
+
+| qwen2.5:3b, saved questions | passed first | passed after a rewrite | fell back |
+| :-- | --: | --: | --: |
+| Quick Report, 54 | 52 | 2 | 0 |
+| Deep Dive Report, 20 | 17 | 0 | **3** |
+
+The three fallbacks were right: rebuilding the exact input each Deep Dive model call received, none of the flagged
+numbers is in it. `brief-01` was given a 126-character input (three daily figures) and wrote "20,000", "5,978",
+"3,416" and "2,892"; `overview-01` wrote "1,239,867" where the total is 931,529; `hot-02` wrote "637" three times.
+Each rewrite repeated the same numbers, and the user got the records and totals from the data instead, under the
+line naming the failed check. Whether the 3B model's passing reports contain errors the checks miss was not looked
+at.
+
 ## How it would have handled the saved reports
 
 `tests/eval_report_rewrite.py` re-checks all 216 saved reports (2026-10-08, 2026-10-09 and the two prompt changes)
@@ -69,8 +87,8 @@ definitions line with the plan and a report with `checks: {passed: true, attempt
 * The saved failing reports were written with older prompts; the rewrite used the current one. A rewrite fixes what
   was flagged and keeps the rest, so interpretation in an old draft stays (the checks do not cover it; the judge does
   offline).
-* The fallback path did not occur on real reports; it is covered by unit tests with a scripted model
-  (`tests/test_report_safety_net.py`: pass, rewrite, fallback, a rewrite that errors, no plan).
+* With the production model the fallback has not occurred; it was seen in real requests only with a weak local
+  model (above), and is also covered by unit tests with a scripted model.
 * A rewrite adds one model call to the share of reports that fail, 8 of 216 here; live it added about 13 s to an
   enhanced report (37 s against 24 s for the same report passing first time).
 * The gate does not check interpretation. The Deep Dive report's prompt has since been changed with the quick

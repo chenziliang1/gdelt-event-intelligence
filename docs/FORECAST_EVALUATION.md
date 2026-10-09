@@ -158,6 +158,53 @@ Limits of the comparison:
 * The seed check and the intervals used the test period again (for the third and fourth time in all); they were
   computed after the LightGBM choice and change nothing about it, and the interval method was chosen on validation.
 
+## 2025 Q3: the decision (2026-10-09)
+
+The Q2 comparison could not separate the Transformer from LightGBM, so the choice of served model was put to a period
+neither had seen, by a rule committed and pushed before any of its data was downloaded
+(`docs/forecast_eval/2025q3_decision_rule.md`, commit afa1791). Results: `docs/forecast_eval/2025q3_test.json`,
+reproduce with `db_scripts/evaluate_2025q3.py`.
+
+* **Data.** 2025-07-03 (the first full day after the GDELT outage) to 09-30, loaded into `events_2025` by the same
+  rule as Q1 and Q2 (4,225,396 events; `docs/DATA_LAYER.md`). 70 forecast start days, 2025-07-17 to 09-24; 51,520
+  windows of the same 736 series. The rolling input features look back up to 30 days, and the days before 07-03 are
+  the outage, not zero events, so features were built only from data inside the period (the first windows' 30-day
+  means use the days available). The same code path, run on Q2, reproduces the training cache's targets and
+  non-rolling features exactly (38,272 windows).
+* **Models, frozen.** The three Transformer checkpoints as they are; LightGBM with the configuration chosen on
+  validation, refitted with the tested seed (2025), which reproduces the tested Q2 predictions exactly (max
+  difference 0.0). No retraining, no tuning.
+
+| Q3 2025 (51,520 windows) | MAE | vs seasonal-naive | Series won vs seasonal-naive | 80% coverage (rolling 14 days) | Mean width |
+| :-- | --: | --: | --: | --: | --: |
+| Seasonal-naive | 65.95 | | | | |
+| Transformer seed 42 / 1 / 2 | 63.44 / 65.04 / 60.52 | +3.8% / +1.4% / +8.2% | 66.8% / 62.2% / 67.8% | 0.792 / 0.794 / 0.795 | 244.8 / 247.1 / 230.4 |
+| Transformer, mean of 3 seeds | 63.00 | +4.5% | | 0.794 | |
+| **LightGBM** | **57.21** | **+13.3%** | **77.4%** | **0.790** | **214.4** |
+
+Coverage by series size (fewer than 10 / 10 to 100 / 100 to 1,000 / over 1,000 daily events), from 2025-07-31 (the
+first 14 forecast days have no observed windows to refit on; 41,216 windows): LightGBM 0.798 / 0.796 / 0.782 /
+0.776; Transformer seeds 0.799 to 0.801 / 0.798 to 0.800 / 0.789 to 0.792 / 0.752 to 0.786.
+
+MAE differences, moving-block bootstrap over the 70 start days (7-day blocks, 2,000 resamples, 95%; negative means
+the first model has lower error): Transformer (3-seed mean) minus LightGBM **+5.79, interval +1.68 to +9.38**;
+Transformer minus seasonal-naive -2.95 (-9.34 to -0.35); LightGBM minus seasonal-naive -8.74 (-15.80 to -4.78);
+seeds 42 / 1 / 2 minus LightGBM +6.23 (+2.80 to +10.11) / +7.83 (+2.68 to +11.61) / +3.32 (-1.32 to +7.42).
+
+**The rule, applied:** (1) both models clear the coverage floor of 0.75 (Transformer 0.794 as the mean of its seeds,
+LightGBM 0.790); (2) LightGBM has the lower MAE (57.21 against 63.00); (3) the interval of the difference excludes
+0. **Decision: serve LightGBM.**
+
+What the period showed beyond the decision: the Transformer's lead over seasonal-naive shrank from 9.5% on Q2 to 4.5%
+here, while LightGBM's held (13.8% on Q2, 13.3% here); on Q3 LightGBM is better than every Transformer seed,
+clearly so for seeds 42 and 1, and its intervals are narrower at about the same coverage.
+
+Limits: one period of ten weeks, with a three-week outage before it, so the first windows' rolling features are
+built from fewer days than in training; the models were trained on data up to January 2025 and are being tested
+six to eight months later, which both face equally; per-day bootstrap intervals cover variation over days like
+these, not other periods. The served model has not been switched yet; that is a separate change (the API and the
+served checkpoint format are the Transformer's).
+
 ## Short answer for the models trained on 2024 only
 
 On **Q1 2025, a period none of the models had seen** (61,824 windows, built from the official GDELT files with the
@@ -395,6 +442,9 @@ python db_scripts/evaluate_strong_baseline.py --stage seeds --dataset-cache mode
   --out docs/forecast_eval/strong_baseline_seeds.json
 python db_scripts/evaluate_strong_baseline.py --stage intervals --dataset-cache models/thp_dataset_2024_2025h1_seq14_h7.npz \
   --out docs/forecast_eval/strong_baseline_intervals.json
+# 2025 Q3 decision (rule: docs/forecast_eval/2025q3_decision_rule.md); load the period first:
+python db_scripts/load_gdelt_period.py --start 2025-07-03 --end 2025-09-30 --added-until 2025-10-07 --table events_2025
+python db_scripts/evaluate_2025q3.py --stage build   # then --stage transformer, --stage lightgbm, --stage report
 ```
 
 ## Next steps
@@ -403,8 +453,8 @@ python db_scripts/evaluate_strong_baseline.py --stage intervals --dataset-cache 
    one; a second later period is needed to choose between them with any confidence.
 2. Q2 2025 has now been used once. The next model change needs a later period, after the June 2025 GDELT outage.
 3. The seed spread (6 to 15%) is large; an ensemble of seeds, chosen in advance, would be steadier than one seed.
-4. LightGBM matched or beat the Transformer on Q2 2025. On the next period, compare the two (and their average)
-   with the choice fixed on validation before the test is run.
+4. Done: on 2025 Q3, by a rule fixed before the data was loaded, LightGBM was chosen to serve (see "2025 Q3: the
+   decision"). Switching the served model is the remaining step.
 
 ## Served model
 

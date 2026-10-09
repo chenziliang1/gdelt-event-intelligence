@@ -152,6 +152,9 @@ Evaluation (details, protocol and caveats: `docs/FORECAST_EVALUATION.md`):
   seasonal-naive (MAE 53.52 vs 56.13 for the Transformer's 3-seed mean). The bootstrap interval of the difference
   includes zero, so neither model is shown to be better; the Transformer is not shown to beat gradient boosting.
   LightGBM is stable across seeds (53.0 to 53.5), and its 80% intervals by the same method cover 79%.
+- On 2025 Q3, unseen by both, with the choice rule committed before the data was loaded: LightGBM 13.3% below
+  seasonal-naive, the Transformer 4.5%; LightGBM is better with a bootstrap interval clear of zero, so the rule picks
+  it to serve (the served model has not been switched yet).
 - Earlier, trained on 2024 only: 5.7% lower on Q1 2025 and 4.9% on the held-out end of 2024.
 - The original design's Hawkes-style output head did not help and was removed.
 - The 80% intervals cover 79% on the 2025 test period (76% for the largest series).

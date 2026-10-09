@@ -1,0 +1,1453 @@
+{
+ "model": "qwen2.5:3b via Ollama (llm_config of the report API)",
+ "quick_report": [
+  {
+   "id": "detail-01",
+   "elapsed_s": 4.9,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The primary event on January 9, 2024, in Fort Worth, Texas, involves AUTHORITIES vs an unknown actor with 120 articles and a neutral tone score of 3.0. Related events include:"
+  },
+  {
+   "id": "detail-02",
+   "elapsed_s": 3.1,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On January 9, 2024, in Fort Worth, Texas, there was a neutral event involving AUTHORITIES vs an unknown actor with 120 articles. Related events include:"
+  },
+  {
+   "id": "hot-01",
+   "elapsed_s": 4.0,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On December 31, 2024, the most-covered events were:"
+  },
+  {
+   "id": "hot-02",
+   "elapsed_s": 3.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On 2024-01-09, the most-covered events were:\n1. **Fighting** involving GOVERNOR in Iowa, United States (72 articles, Goldstein -10.0, Tone: conflict).\n2. **Coercion** involving EDMONTON in Ottawa, Ontario, Canada (60 articles, Goldstein -9.2, Tone: conflict).\n3. **Yield** involving MISSISSIPPI in Mississippi, United States (60 articles, Goldstein 10.0, Tone: cooperation).\n4. **Fighting** involving GOVERNOR in Charleston, South Carolina, United States (56 articles, Goldstein -10.0, Tone: conflict).\n5. **Cooperation** involving IOWA, CRIMINAL in Kansas, United States (63 articles, Goldstein 7.0, Tone: cooperation).\n6. **Consultation** involving EMPLOYEE and BOEING in Alaska, United States (60 articles, Goldstein 7.0, Tone: cooperation).\n7. **Cooperation** involving SEATTLE in Florida, United States (60 articles, Goldstein 7.0, Tone: cooperation).\nOther notable events included:"
+  },
+  {
+   "id": "brief-01",
+   "elapsed_s": 1.0,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On December 31, 2024, there were a total of 38,539 recorded events globally. Among these, 12,595 were classified as conflict events, indicating significant confrontations and disputes occurred on this date. The average sentiment tone across all events was measured at -2.01467, suggesting an overall negative or unfavorable mood in the reported incidents."
+  },
+  {
+   "id": "brief-02",
+   "elapsed_s": 0.7,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On 2024-01-09, there were a total of 55,878 records, with 18,419 classified as conflict events. The average sentiment score was -2.11113, indicating a generally negative tone across the events."
+  },
+  {
+   "id": "overview-01",
+   "elapsed_s": 1.6,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Texas from January to December 2024, there were a total of 931,529 records analyzed, with an average Goldstein scale of 0.11 and an average tone score of -2.54. The most significant events included conflicts between actors such as the United States and the population (200 articles each), and the High Court versus Texas (180 articles). These events were characterized by neutral tones, with scores ranging from neutral (-5.0) to neutral (5.0). No single event dominated the coverage; instead, multiple conflicts involving governmental entities and societal groups shaped the regional situation in Texas during this period."
+  },
+  {
+   "id": "overview-02",
+   "elapsed_s": 2.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In California from December 1 to December 31, 2024, there were a total of 97,962 records analyzed, with an average Goldstein scale score of 0.338 and an average tone score of -1.839. The most significant events during this period included:"
+  },
+  {
+   "id": "top-01",
+   "elapsed_s": 1.5,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The top events in Texas from January 1 to January 31, 2024, were dominated by conflicts and tensions. The most covered event was a Police shooting incident involving a Gunman at Robb Elementary School in Uvalde on January 18 (Articles: 80), followed closely by another Police shooting incident at the same school (Articles: 80). Other notable events include Authorities vs Unknown in Fort Worth and conflicts between Texas and Unknown entities. Neutral tone articles were also prevalent, such as those involving the Navy and various Unknown actors in Houston."
+  },
+  {
+   "id": "top-02",
+   "elapsed_s": 3.3,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 2,
+    "fallback": false,
+    "failed_first": {
+     "ungrounded_numbers": [
+      "31,"
+     ]
+    },
+    "failed": {}
+   },
+   "summary": "The top events in Florida from March 1 to 27, 2024, were primarily centered on interactions involving FLORIDA and other entities. The most covered event was a conflict between MIAMI and SCHOOL in Miami, with 150 articles. Other notable events include FLORIDA vs an unknown entity (144 articles), WORKER vs an unknown entity (100 articles), and conflicts or neutral tones involving FLORIDA, SETTLEMENT, and entities like NAPLES, UN SECURITY COUNCIL, BRAZILIAN, and others. Neutral tones were prevalent in many of these interactions, with some showing a slight negative shift in tone over time."
+  },
+  {
+   "id": "confidence-probe-01",
+   "elapsed_s": 3.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Texas from January 1 to January 31, 2024, there were several notable events recorded by GDELT:"
+  },
+  {
+   "id": "confidence-probe-02",
+   "elapsed_s": 3.0,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The top events during January 2024-31 involve protests in Texas and surrounding areas. The most covered event was a protest involving COMPANY in San Antonio, Texas on January 9th, with 20 articles noting a Goldstein score of -6.5 indicating conflict. Other notable records include:"
+  },
+  {
+   "id": "confidence-probe-03",
+   "elapsed_s": 2.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In California from January 1 to December 31, 2024, there were multiple instances of conflict involving various actors such as LOS ANGELES, CRIMINAL, HOSPITAL, UNITED STATES, ACTOR, STUDENT, CANADA, and MARINE CORP. The most covered events included mass violence in Los Angeles (250 articles), fighting between criminal groups and a hospital in Los Angeles (126 articles), assault by the United States in Beverly Hills (112 articles), protests against television in Hollywood (protests totaling 210 articles, with two separate instances each having 100 articles), and fights involving STUDENT and GANG in California (100 articles). The data does not provide information on specific causes or contexts for these conflicts."
+  },
+  {
+   "id": "search-01",
+   "elapsed_s": 1.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered events during this period were public statements and consultations involving actors in Uvalde, Texas, United States. The top event was a public statement by TEXAS regarding TROOPER on 2024-09-13 with 70 articles. Other notable records include consultations between an unidentified actor and SCHOOL (70 articles), and GUNMAN fighting SCHOOL (70 articles). There were also two events of conflict involving GUNMAN, one public statement by TEXAS criticizing BORDER PATROL (40 articles) on the same date, and another consultation event with a neutral tone."
+  },
+  {
+   "id": "search-02",
+   "elapsed_s": 2.1,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In North America from January 1 to December 31, 2024, conflicts involving actors such as COURT OF APPEALS, PRESIDENT, SENATE, CHARLOTTE, POLICE, JUDGE, and ACADEMICS were most covered in North Carolina. The top events included Fighting between the COURT OF APPEALS and VOTER, Show of force by the PRESIDENT toward NORTH CAROLINA, and multiple instances of Fighting involving unidentified actors, CHARLOTTE, POLICE, and JUDGE. These conflicts are characterized by negative tones with Goldstein scores ranging from -10.0 to -6.5 across 70 to 42 articles each. No significant trends or changes over time are evident based on the provided data."
+  },
+  {
+   "id": "keyword-fts-01",
+   "elapsed_s": 7.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered events during this period were:"
+  },
+  {
+   "id": "reldate-01",
+   "elapsed_s": 1.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The event records show that there were multiple protests occurring in Texas from December 23 to December 29, 2024. The most covered events involved conflicts between actors such as CONSTABLE, GOVERNMENT, TEXAS, and MALE against unspecified entities. These protests took place in various locations including Jersey Village, Texas; San Antonio, Texas; and New Braunfels, Texas. Each protest had a tone of conflict with Goldstein scores ranging from -6.5 to -7.5, indicating significant negative sentiment. The events are reported as 10 articles each, suggesting high media coverage during this period."
+  },
+  {
+   "id": "reldate-02",
+   "elapsed_s": 2.5,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On December 30, 2024, in Chicago, Illinois, there were multiple incidents of conflict involving law enforcement and other actors. The most covered event was a fight between an unidentified actor and police in Chicago, with 20 articles reporting on it. Another significant event involved the police fighting back against an unnamed actor, which also garnered 12 articles.\nIn Cook County, Illinois, there were two instances of internal conflict involving CHICAGO entities, each receiving 12 articles. Additionally, a professor cooperated with the United States in Chicago, as reported by 12 articles. The United States made a public statement about a producer, which was covered by 12 articles.\nThere was also criticism from a school towards the United States, and an attorney yielding to unspecified authorities, each event receiving 10 articles of coverage. No significant events involving actors such as companies or chief executives were reported on this day in Chicago."
+  },
+  {
+   "id": "reldate-03",
+   "elapsed_s": 3.0,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In New York from December 29 to 31, 2024, there were several events recorded with varying tones and types of interactions. The most covered event was a public statement made by NEWS ORGANIZATION on December 30, criticizing (New York, United States), involving 91 articles.\nOther notable records include:"
+  },
+  {
+   "id": "reldate-04",
+   "elapsed_s": 1.6,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In December 2024, Texas saw a mix of events with varying tones and actors involved. The most covered event was on December 17 in Arlington, where POLICE faced an unknown actor in conflict (80 articles), followed by cooperation between TEXAS and an unspecified party (80 articles, positive tone). On December 31, TEXAS engaged with PRINCE in a neutral interaction (77 articles). Throughout the month, there were also instances of BUSINESS versus an unspecified party (90 articles each on December 16) and Harris County facing an unknown actor (90 articles), all characterized by neutral tones."
+  },
+  {
+   "id": "compare-01",
+   "elapsed_s": 1.1,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "November 2024 saw 1,438 protest events in Canada over a period of 30 days, averaging 47.93 events per day. This month, there were 589 protest events in Canada over 31 days, averaging 19.0 events per day. The decrease is significant, with an average of -60.4% fewer events per day compared to November 2024."
+  },
+  {
+   "id": "compare-02",
+   "elapsed_s": 0.9,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Canada, protest events increased by 30.1% per day in March 2024 compared to February 2024, with a total of 858 events recorded from February 1 to February 29 and 1,193 events from March 1 to March 31."
+  },
+  {
+   "id": "month-end-01",
+   "elapsed_s": 2.4,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered events during this period were protests involving various actors in Texas, United States. The top five events by article count are:"
+  },
+  {
+   "id": "month-end-02",
+   "elapsed_s": 3.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Texas from April 1 to April 30, 2024, there were several events involving various actors and entities. The most covered event was an investigation into a PROTESTER by ISRAEL on April 27 (128 articles). Other notable records include:"
+  },
+  {
+   "id": "month-end-03",
+   "elapsed_s": 4.4,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Texas from February 1st to February 29th, 2024, there were several notable events recorded in the GDELT dataset:"
+  },
+  {
+   "id": "march-word-01",
+   "elapsed_s": 2.7,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The event records show that there were multiple protests in Texas during the period from 2024-01-01 to 2024-12-31, with a focus on conflicts involving various actors such as AUSTIN, TROOPER, STUDENT, INDUSTRY, DEMONSTRATOR, POLICE, and TEXAS. The most covered events were protests against AUSTIN (April 24), PALESTINE (April 24), STUDENT (May 30), UNITED STATES (April 6), and INDUSTRY (July 25). These protests involved actors like TROOPER, POLICE, and TEXAS. The tone of these events was consistently conflict-oriented (-6.5 to -7.5 on a scale where higher negative values indicate more conflict or tension).\nThe data does not provide information about the specific causes or reasons behind these protests beyond noting that they were against various entities including AUSTIN, TROOPER, STUDENT, and TEXAS."
+  },
+  {
+   "id": "invalid-date-01",
+   "elapsed_s": 1.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Texas from January 1, 2024, to December 31, 2024, there were several notable events recorded by GDELT. The most covered event was a consultation between ACTOR and TEXAS on May 17, 2024, with 200 articles mentioning it. Another significant event involved the United States yielding to POPULATION in Texas on November 11, 2024, also with 200 articles.\nThe data does not provide a comprehensive overview of events or trends over time for this period; only specific records are provided here."
+  },
+  {
+   "id": "h-detail-01",
+   "elapsed_s": 3.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 2,
+    "fallback": false,
+    "failed_first": {
+     "ungrounded_numbers": [
+      "24"
+     ]
+    },
+    "failed": {}
+   },
+   "summary": "The primary event on January 9th at the White House involves AUSTIN and DEPUTY with 150 articles. Related events include public statements by DEPUTY about AUSTIN, consultations between AUSTIN and DEPUTY, and intent to cooperate involving AUSTIN and DEPUTY. These related events occurred on January 10th, 11th, and 16th in the White House and Washington, District of Columbia, United States. The tone for these related events ranges from neutral (5.0) to cooperation (7.0)."
+  },
+  {
+   "id": "h-detail-02",
+   "elapsed_s": 3.0,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The primary event involves authorities appealing a decision in Fort Worth, Texas, with 120 articles and a neutral tone (Goldstein score of 3.0). Related events include:"
+  },
+  {
+   "id": "h-detail-03",
+   "elapsed_s": 2.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The primary event on January 9, 2024, at the White House in Washington, District of Columbia, United States involves AUSTIN and DEPUTY with a neutral tone score of 5.0 across 150 articles. Related events include public statements by DEPUTY about AUSTIN made on January 10 (80 articles), January 11 (20 articles), and January 16 (12 articles) at the White House, District of Columbia, United States. Additionally, a consultation between AUSTIN and DEPUTY took place on January 8 (10 articles) with a cooperation tone score of 7.0, followed by another consultation on January 11 (10 articles) with a neutral tone score of 2.8."
+  },
+  {
+   "id": "h-hot-01",
+   "elapsed_s": 3.6,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On December 31, 2024, the most-covered events were:"
+  },
+  {
+   "id": "h-hot-02",
+   "elapsed_s": 3.4,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered events on March 15, 2024, were:"
+  },
+  {
+   "id": "h-brief-01",
+   "elapsed_s": 0.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On 2024-11-05, there were a total of 62,167 records, with 19,256 classified as conflict events. The average sentiment score was -1.41881, indicating a generally negative tone across the dataset."
+  },
+  {
+   "id": "h-brief-02",
+   "elapsed_s": 0.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On 2024-07-04, there were a total of 41,167 records, with 12,344 classified as conflict events. The average sentiment score was -1.68459, indicating a predominantly negative tone across the reported incidents."
+  },
+  {
+   "id": "h-overview-01",
+   "elapsed_s": 2.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Florida from January 1 to December 31, 2024, there were a total of 644,026 records analyzed, with an average Goldstein scale score of 0.31 and an average tone score of -2.47. The most significant events during this period included:"
+  },
+  {
+   "id": "h-overview-02",
+   "elapsed_s": 2.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "Ontario saw a mix of events in November 2024, with Etobicoke and Ottawa both experiencing notable occurrences. The most covered event was on November 14th where HUNTER faced an unknown actor in Etobicoke, resulting in conflict (Tone: -10.0). In Ottawa, a neutral tone prevailed as WORKER clashed with an unknown party on November 15th (Tone: 3.0), and MIGRANT WORKER had a neutral interaction with MINIST on November 26th (Tone: 0.4). On the same day, CANADA was in a neutral stance against an unspecified actor (Tone: 4.0) in Ottawa. The final notable event involved an unknown party opposing MINIST in Ottawa on November 8th (Tone: -5.0). Overall, these events highlight tensions and interactions within Ontario's regions without significant conflict or cooperation noted."
+  },
+  {
+   "id": "h-overview-03",
+   "elapsed_s": 2.9,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "From April 1 to June 30, 2024, Arizona saw a total of 70,992 records in GDELT's event data. The average Goldstein scale was 0.07398580536533336 and the average tone score was -2.6596308395716557.\nThe most covered events were:"
+  },
+  {
+   "id": "h-top-01",
+   "elapsed_s": 2.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The top events in California from June 1 to June 30, 2024, were primarily centered around neutral or cooperative interactions involving government entities and communities. The most covered event was a farmer vs an unknown actor on June 26 (Articles: 120, Tone: cooperation). San Francisco was involved in two events where it faced an unknown entity (June 22) and a judge (June 22), both with neutral tones (-5.0 and 3.4 respectively).\nOther notable events included a website vs an unknown actor on June 22, and interactions between government officials such as the President vs a prosecutor on June 11, and police vs community in Hollywood on June 18 (Articles: 100 each, Tone: neutral). Two instances of Barack Obama vs Los Angeles also occurred on June 18 with cooperative tones."
+  },
+  {
+   "id": "h-reldate-01",
+   "elapsed_s": 2.3,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The event records show that during December 2024, protests occurred in Illinois, primarily focused on conflicts with various entities including PROTESTER vs SUPREME COURT, ILLINOIS vs COMMUNITY, EMPLOYEE vs COMPANY, and WORKER vs unspecified entities. The most covered events were a protest involving PROTESTER against the SUPREME COURT in Illinois (10 articles), followed by protests involving ILLINOIS against COMMUNITY (10 articles) and EMPLOYEE against COMPANY (10 articles). All these events are coded as Protest, with a Goldstein score of -6.5 to -7.5 indicating conflict tones. The location was primarily Chicago, Illinois, United States, except for one event in the state at large. No other notable records or significant trends are present in this period."
+  },
+  {
+   "id": "h-reldate-02",
+   "elapsed_s": 2.5,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "On December 30, 2024, Lee County, Texas experienced a notable event involving military personnel and an unidentified actor in a consultation (Title: Unidentified actor consults with MILITARY PERSONNEL). This was followed by another consultation between military personnel and an unnamed party. In the afternoon, DEPUTIES made a public statement in Lee County, Texas. The day also saw administrative coercion by the administration in Texas (Title: ADMINISTRATION coerces) and diplomatic cooperation involving the United States (Title: UNITED STATES cooperates diplomatically). A public statement was issued regarding Boeing (Title: PROSECUTOR makes a public statement about BOEING), and fighting occurred between NORTH CAROLINA and an unnamed party in Brazoria County, Texas. The most significant event of the day was a conflict involving MIGRANT and the governor of Texas (Title: MIGRANT fights GOVERNOR)."
+  },
+  {
+   "id": "h-reldate-03",
+   "elapsed_s": 2.7,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "From November 1 to 30 in Canada, there were a total of 116,142 records analyzed, with an average Goldstein scale of 0.86 and an average tone score of -1.32. The most significant events during this period are characterized by cooperation and conflict.\nThe two most covered events share the location in Etobicoke, Ontario, Canada:"
+  },
+  {
+   "id": "h-reldate-04",
+   "elapsed_s": 2.3,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered events during December 30-31 in Mexico involve conflicts between criminal groups and security forces, as well as clashes involving workers and the United States. On December 30, there were protests in Tlaxcala, Tabasco, where a President was involved in a protest. Fighting occurred in Sinaloa, Tabasco on both days, with CARTELs engaging in conflict with various actors including the Army and MEXICO. A worker-fighting event also took place in Mexico on December 30. On December 31, fighting involving MEXICO and a Priest occurred in Mexico, and an assault by a Solicitor General against a Monk happened in Juarez, M\u00e9co. Fighting events were reported across multiple locations including Puebla, Puebla and in Mexico itself."
+  },
+  {
+   "id": "h-reldate-05",
+   "elapsed_s": 1.9,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The event records show that there were multiple protests occurring in Ohio from December 2 to December 31, 2024. The most covered events involved WORKER vs UNITED STATES (December 22), YWCA vs ? (December 17), OHIO vs POLICE (December 5), and MEDIA vs ? (December 2). All protests were categorized as Protest events with a conflict tone (-6.5) and featured 10 articles each. The data does not provide information on the specific reasons or issues underlying these protests beyond their titles."
+  },
+  {
+   "id": "h-month-01",
+   "elapsed_s": 3.1,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The event records show that there were multiple protests in New York from September 4 to September 30, 2024, involving various actors including WORKER, PRESIDENT, COMPANY, NEW YORK, ACTIVIST, UNITED STATES, ISRAEL, GAZA, and POLICE. The most covered events were protests by WORKER, PRESIDENT, and COMPANY in New York on September 11, 2024, with each event involving 20 articles. Other notable records include a protest against ACTIVIST by NEW YORK on September 20, 2024 (20 articles), and protests by UNITED STATES and ISRAEL in Columbus Circle, New York, on September 23, 2024 (16 articles each). Additionally, there were two separate protests involving POLICE: one against NEW YORK at Columbia University on September 4, 2024 (16 articles), and another against WORKER in New Hampshire on September 13, 2024 (12 articles). The tone of these events is consistently conflict-oriented (-6.5 to -7.5)."
+  },
+  {
+   "id": "h-month-02",
+   "elapsed_s": 1.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Arizona from February 1 to February 29, 2024, there were a total of 20,942 records analyzed, with an average Goldstein scale of 0.4237 and an average tone score of -2.2752. The most covered events included conflicts between governmental entities such as the Governor and unknown actors (February 24), Arizona versus unknown actors (February 25), and a conflict involving the Administration versus unknown actors (February 23). Notable cooperation was observed in an event where the Administration worked with another entity, though this record did not have a neutral tone. The data does not provide insights into specific conflicts or resolutions within these events."
+  },
+  {
+   "id": "h-march-01",
+   "elapsed_s": 5.1,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered protest events in Washington, DC from January to December 2024 were related to conflicts involving various actors and groups. The top five most covered events are:"
+  },
+  {
+   "id": "h-may-01",
+   "elapsed_s": 3.3,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered events during the period from 2024-01-01 to 2024-12-31 were protests involving various actors against Canada and its institutions, primarily in Toronto, Montreal, and Winnipeg. The top event was a protest by PROTESTER against POLICE in Toronto on 2024-04-06 with 78 articles. Other notable events include protests by CANADA (2024-02-29), PRODUCER (2024-07-17), NURSE (2024-02-12), CIVILIAN (2024-01-16), POLICE (2024-05-12 and 2024-04-08), DEMONSTRATOR (2024-01-11), EMPLOYEE (2024-12-17), and an unidentified actor against MANITOBA in Winnipeg on 2024-05-10. All these events share a conflict tone (-6.5 to -7.5) with similar article counts ranging from 46 to 78 articles."
+  },
+  {
+   "id": "h-compare-01",
+   "elapsed_s": 1.4,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Texas, protest events increased significantly from October 2024 to September 2024. The period comparison shows that there were 248 protest events in September 2024 over a 30-day period (8.27 per day), while October 2024 saw 416 protest events over a 31-day period (13.42 per day). This represents an increase of +62.3% per day, as verified in the PERIOD COMPARISON section."
+  },
+  {
+   "id": "h-compare-02",
+   "elapsed_s": 0.9,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In November 2024, there were 7,829 conflict events in Mexico over a period of 30 days. This month, the number dropped to 8,008 events over 31 days. The data shows about flat coverage with a decrease of -1.0% per day."
+  },
+  {
+   "id": "h-compare-03",
+   "elapsed_s": 1.0,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Canada, protest events remained about flat over Q1 and Q2 2024 with a total of 2,799 events recorded from January to March (30.76 per day) compared to 2,912 events in April to June (32.0 per day), representing an increase of +4.0% daily event counts."
+  },
+  {
+   "id": "h-invalid-01",
+   "elapsed_s": 1.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "In Florida from January 1 to December 31, 2024, there were no significant events or trends reported in the data provided. The most-covered event was a public statement by a federal judge involving the District of Columbia, with 250 articles and neutral tone. Other notable records included consultations between Congress and unidentified actors, as well as appeals from lawyers to China. There were also instances of coercion and threats, but these did not reach the top 10 most-covered events. No other significant patterns or changes over time are indicated in the data provided."
+  },
+  {
+   "id": "h-invalid-02",
+   "elapsed_s": 3.1,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered events during this period were protests in Texas involving STUDENT vs TEXAS (2024-05-30), AUSTIN vs TROOPER (2024-04-24), and PALESTINE vs AUSTIN (2024-04-24). These events share the same date, location, and type code of Protest. All involve conflict as indicated by the Tone score (-6.5) and have 40 articles each.\nOther notable records include UNITED STATES protests (2024-04-06), INDUSTRY protests (2024-07-25), DEMONSTRATOR vs POLICE (2024-04-30), WASHINGTON vs ISRAELI (2024-02-26), and TEXAS protests in Eagle Pass, Texas (2024-02-02). These events also share the type code of Protest but have varying numbers of articles ranging from 30 to 36.\nThe data does not show any specific themes or trends over time; it only lists the most-covered events by article count."
+  },
+  {
+   "id": "h-search-01",
+   "elapsed_s": 5.7,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered events during this period were:"
+  },
+  {
+   "id": "h-search-02",
+   "elapsed_s": 2.6,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "sample_as_total",
+     "qualitative_trend",
+     "dates_outside_window",
+     "count_overclaims",
+     "comparison_direction"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "The most-covered events during this period were public statements and consultations involving various actors from North Carolina, Florida, Tennessee, and Tampa Bay in the United States. The top event was a public statement by NORTH CAROLINA on October 2, with 93 articles mentioning it. Another prominent event involved PRESIDENT consulting with ATLANTA on September 28, receiving 86 articles.\nOther notable events include:"
+  }
+ ],
+ "deep_dive": [
+  {
+   "id": "detail-01",
+   "elapsed_s": 15.0,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "=== Overview ===\nThis event summary focuses on a series of interactions involving AUTHORITIES in Fort Worth, Texas, United States from January 2024. The primary event occurred on January 9th and involved AUTHORITIES vs an unknown actor with 120 articles.\n=== Key Records ===\n- **PRIMARY EVENT**:\n- Date: 2024-01-09\n- Location: Fort Worth, Texas, United States\n- Actors: AUTHORITIES vs ?\n- Articles: 120\n- Tone: neutral (3.0)\n=== Timeline ===\nNo specific timeline data is provided for this event series.\n=== Actor Activity ===\nDaily aggregated activity for the primary actor (AUTHORITIES) shows a pattern of interactions:\n- **January 9th**: 409 events, 2697 articles, Goldstein=-1.4, Tone=-5.3, Top: Yield\n- **January 10th**: 460 events, 2760 articles, Goldstein=-1.6, Tone=-5.7, Top: Accede to demands for change in leadership\n=== Media Themes and Tone (from GKG) ===\nNo specific GKG themes or tone data is provided for this event series.\n### What the Data Cannot Show:\n- The nature of the interaction between AUTHORITIES and the unknown actor on January 9th.\n- Specific reasons behind the interactions involving AUTHORITIES in other events."
+  },
+  {
+   "id": "detail-02",
+   "elapsed_s": 21.7,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nThe primary event on January 9, 2024, in Fort Worth, Texas, involves AUTHORITIES against an unknown actor with a neutral tone (Goldstein score of 3.0). The related events highlight various interactions and tensions involving AUTHORITIES across different locations and contexts.\n## Key Records\n### Primary Event\n- **Date:** January 9, 2024\n- **Location:** Fort Worth, Texas, United States\n- **Actors:** AUTHORITIES vs ?\n- **Articles:** 120\n- **Tone:** Neutral (3.0)\n## Timeline\n### Related Events\n#### Event on January 6, 2024:\n- **Date:** January 6, 2024\n- **Location:** Iowa, United States\n- **Actors:** AUTHORITIES vs PUPIL\n- **Summary:** Fighting involving AUTHORITIES and PUPIL in Iowa, United States.\n- **Articles:** 100\n- **Tone:** Conflict (-10.0)\n- **Type:** Fighting\n#### Event on January 18, 2024:\n- **Date:** January 18, 2024\n- **Location:** Robb Elementary School, Texas, United States\n- **Actors:** AUTHORITIES vs ?\n- **Summary:** Consultation involving AUTHORITIES in Robb Elementary School, Texas, United States.\n- **Articles:** 80\n- **Tone:** Neutral (1.0)\n- **Type:** Consultation\n#### Event on January 5, 2024:\n- **Date:** January 5, 2024\n- **Location:** Perry High School, Iowa, United States\n- **Actors:** AUTHORITIES vs POLICE\n- **Summary:** Consultation involving AUTHORITIES and POLICE in Perry High School, Iowa, United States.\n- **Articles:** 70\n- **Tone:** Neutral (2.8)\n- **Type:** Consultation\n#### Event on January 5, 2024:\n- **Date:** January 5, 2024\n- **Location:** Perry High School, Iowa, United States\n- **Actors:** POLICE vs AUTHORITIES\n- **Summary:** Fighting involving POLICE and AUTHORITIES in Perry High School, Iowa, United States.\n- **Articles:** 70\n- **Tone:** Conflict (-10.0)\n- **Type:** Fighting\n#### Event on January 5, 2024:\n- **Date:** January 5, 2024\n- **Location:** Perry High School, Iowa, United States\n- **Actors:** POLICE vs AUTHORITIES\n- **Summary:** Consultation involving POLICE and AUTHORITIES in Perry High School, Iowa, United States.\n- **Articles:** 70\n- **Tone:** Neutral (1.9)\n- **Type:** Consultation\n#### Event on January 5, 2024:\n- **Date:** January 5, 2024\n- **Location:** Maine, United States\n- **Actors:** AUTHORITIES vs RESIDENTS\n- **Summary:** Threat involving AUTHORITIES and RESIDENTS in Maine, United States.\n- **Articles:** 60\n- **Tone:** Neutral (-4.4)\n- **Type:** Threat\n#### Event on January 2, 2024:\n- **Date:** January 2, 2024\n- **Location:** Michigan, United States\n- **Actors:** AUTHORITIES vs ?\n- **Summary:** Disapproval involving AUTHORITIES in Michigan, United States.\n- **Articles:** 60\n- **Tone:** Neutral (-2.0)\n- **Type:** Disapproval\n#### Event on January 31, 2024:\n- **Date:** January 31, 2024\n- **Location:** New Hampshire, United States\n- **Actors:** AUTHORITIES vs MANCHESTER\n- **Summary:** Public statement involving AUTHORITIES and MANCHESTER in New Hampshire, United States.\n- **Articles:** 60\n- **Tone:** Neutral (0.0)\n- **Type:** Public statement\n## Actor Activity Overview\n### Daily Aggregated Activity for the Primary Actor (AUTHORITIES)\n| Date       | Events | Articles | Goldstein Score | Tone |\n|------------|--------|-----------|------------------|------|\n| 2024-01-02 | 368    | 2393      | -5.1             | -2.0 |\n| 2024-01-03 | 468    | 2943      | -5.4             | -2.0 |\n| 2024-01-04 | 509    | 3286      | -5.7             | -1.6 |\n| 2024-01-05 | 641    | 3851      | -5.4             | -1.6 |\n| 2024-01-06 | 368    | 2393      | -5.1             | -2.0 |\n| 2024-01-07 | 212    | 1274      | -5.3             | -1.2 |\n| 2024-01-08 | 363    | 2193      | -4.6             | -0.8 |\n| 2024-01-09 | 409    | 2697      | -5.3             | -1.4 |\n| 2024-01-10 | 460    | 2760      | -5.7             | -1.6 |\n| 2024-01-11 | 424    | 2378      | -6.0             | -1.7 |\n| 2024-01-12 | 361    | 2017      | -5.5             | -2.2 |\n| 2024-01-13 | 217    | 1301      | -4.9             | -2.1 |\n| 2024-01-14 | 244    | 1458      | -4.9             | -2.7 |\n| 2024-01-15 | 309    | 1769      | -4.9             | -1.7 |\n## Media Themes and Tone (from GKG)\nThe media coverage for these events does not provide specific themes or tone scores, so no evidence of what an event was about or why it happened is available from the data.\n## What the Data Cannot Show\n- The reasons behind AUTHORITIES's interactions with other actors.\n- Specific details about the nature of the unknown actor in the primary event.\n- Any underlying causes for the conflicts and consultations involving AUTHORITIES."
+  },
+  {
+   "id": "hot-01",
+   "elapsed_s": 9.7,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nThe top events on December 31, 2024, were characterized by conflicts and consultations involving various entities in different locations across the United States and Canada.\n## Key Records\n- **Assault**: In Washington, District of Columbia, United States, PRISON assaulted WASHINGTON. The event was marked with a Goldstein score of -9.0 and featured 60 articles.\n- **Coercion**: UNITED STATES coerced in Palo Alto, California, United States. This incident had a Goldstein score of -9.2 and garnered 56 articles.\n- **Consultation**: SAINT consulted with LOS ANGELES in the United States. The event was neutral with a Goldstein score of 1.9 and reported by 240 articles.\n- **Coercion**: AUTHORITIES coerced WISCONSIN in Milwaukee County, Wisconsin, United States. This incident had a Goldstein score of -5.0 and featured 70 articles.\n- **Fighting**: PICKPOCKET fought in Times Square, New York, United States. The event was marked with a Goldstein score of -9.5 and reported by 40 articles.\n- **Coercion**: AUTHORITIES coerced in California, United States. This incident had a Goldstein score of -9.2 and featured 36 articles.\n- **Fighting**: UNITED STATES coerced in California, United States. The event was marked with a Goldstein score of -9.2 and reported by 36 articles.\n- **Fighting**: VANCOUVER fought in Metchosin, British Columbia, Canada. This incident had a Goldstein score of -10.0 and featured 30 articles.\n- **Fighting**: UNITED STATES fights NEIGHBORHOOD in the United States. The event was marked with a Goldstein score of -10.0 and reported by 30 articles.\n- **Consultation**: PRESIDENT consulted with JUDGE in White House, District of Columbia, United States. This incident had a Goldstein score of 2.8 and featured 104 articles.\n## Timeline\nThe day was marked by multiple conflicts and consultations involving various entities across the United States and Canada. The most significant events occurred on December 31, 2024, in Washington, District of Columbia (assault), Palo Alto, California (coercion), Metchosin, British Columbia (fighting), and White House, District of Columbia (consultation).\n## Actor Activity\n- **Washington, District of Columbia**: 60 articles related to the assault involving PRISON.\n- **Palo Alto, California**: 56 articles related to the coercion involving UNITED STATES.\n- **United States**: 240 articles related to the consultation between SAINT and LOS ANGELES.\n- **Milwaukee County, Wisconsin**: 70 articles related to the coercion involving AUTHORITIES.\n- **Times Square, New York**: 40 articles related to the fighting involving PICKPOCKET.\n- **California, United States**: 36 articles each for the coercion involving UNITED STATES and AUTHORITIES.\n- **Metchosin, British Columbia**: 30 articles related to the fighting involving VANCOUVER.\n- **United States**: 30 articles related to the fighting between UNITED STATES and NEIGHBORHOOD.\n- **White House, District of Columbia**: 104 articles related to the consultation between PRESIDENT and JUDGE.\n## Media Themes and Tone\nThe media coverage on December 31, 2024, was predominantly characterized by conflict. The most significant events were marked with Goldstein scores ranging from -9.5 (PICKPOCKET fighting in Times Square) to -10.0 (VANCOUVER fighting in Metchosin and UNITED STATES fights NEIGHBORHOOD). Neutral consultations between entities such as SAINT and LOS ANGELES, and PRESIDENT and JUDGE were also reported.\n## What the Data Cannot Show\nThe data does not provide insights into the causes or reasons behind these events. It only reflects the media coverage of the incidents without attributing any specific motives or contexts to them."
+  },
+  {
+   "id": "hot-02",
+   "elapsed_s": 26.0,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": false,
+    "attempts": 2,
+    "fallback": true,
+    "failed_first": {
+     "ungrounded_numbers": [
+      "637",
+      "637",
+      "637"
+     ]
+    },
+    "failed": {
+     "ungrounded_numbers": [
+      "637",
+      "637",
+      "637"
+     ]
+    }
+   },
+   "summary": "The AI-written summary did not pass the automatic checks (numbers not in the data), so the results are listed without interpretation.\nThe 10 most-covered records listed (a sample, not a total):\n- 2024-01-09 \u00b7 White House, District of Columbia, United States \u00b7 no named actor \u00b7 150 articles\n- 2024-01-09 \u00b7 Iowa, United States \u00b7 no named actor \u00b7 72 articles\n- 2024-01-09 \u00b7 California, United States \u00b7 no named actor \u00b7 70 articles\n- 2024-01-09 \u00b7 Mississippi, United States \u00b7 no named actor \u00b7 60 articles\n- 2024-01-09 \u00b7 Charleston, South Carolina, United States \u00b7 no named actor \u00b7 56 articles\n- 2024-01-09 \u00b7 Ottawa, Ontario, Canada \u00b7 no named actor \u00b7 60 articles\n- 2024-01-09 \u00b7 Kansas, United States \u00b7 no named actor \u00b7 63 articles\n- 2024-01-09 \u00b7 Alaska, United States \u00b7 no named actor \u00b7 60 articles\n- 2024-01-09 \u00b7 Florida, United States \u00b7 no named actor \u00b7 60 articles\n- 2024-01-09 \u00b7 Miami, Florida, United States \u00b7 no named actor \u00b7 42 articles"
+  },
+  {
+   "id": "brief-01",
+   "elapsed_s": 7.5,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": false,
+    "attempts": 2,
+    "fallback": true,
+    "failed_first": {
+     "ungrounded_numbers": [
+      "20,000",
+      "5,978",
+      "3,416",
+      "2,892"
+     ]
+    },
+    "failed": {
+     "ungrounded_numbers": [
+      "20,000",
+      "5,978",
+      "3,416",
+      "2,892"
+     ]
+    }
+   },
+   "summary": "The AI-written summary did not pass the automatic checks (numbers not in the data), so the results are listed without interpretation.\nTotal events: 38539; conflict events: 12595; average tone: -2.01467."
+  },
+  {
+   "id": "brief-02",
+   "elapsed_s": 1.2,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nOn January 09, 2024, there were a total of 55,878 event records across various topics and locations. Among these, 18,419 events were classified as conflict-related.\n### Key Records\n- **Event ID:** GDELT-20240109-0000000000000000000000000000000"
+  },
+  {
+   "id": "overview-01",
+   "elapsed_s": 15.1,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": false,
+    "attempts": 2,
+    "fallback": true,
+    "failed_first": {
+     "ungrounded_numbers": [
+      "1,239,867",
+      "45,000",
+      "0.5%"
+     ]
+    },
+    "failed": {
+     "ungrounded_numbers": [
+      "1,239,867",
+      "45,000",
+      "0.5%"
+     ]
+    }
+   },
+   "summary": "The AI-written summary did not pass the automatic checks (numbers not in the data), so the results are listed without interpretation.\nSummary: {\"total\": \"931529\", \"avg_goldstein\": 0.11440792807843796, \"avg_tone\": -2.542153385275609, \"conflicts\": \"109726\", \"cooperation\": \"112980\"}\n- 2024-05-17 \u00b7 Texas, United States \u00b7 ACTOR vs TEXAS \u00b7 200 articles\n- 2024-05-17 \u00b7 Texas, United States \u00b7 TEXAS vs ACTOR \u00b7 200 articles\n- 2024-11-11 \u00b7 Texas, United States \u00b7 UNITED STATES vs POPULATION \u00b7 200 articles\n- 2024-11-11 \u00b7 Texas, United States \u00b7 UNITED STATES vs POPULATION \u00b7 200 articles\n- 2024-06-27 \u00b7 Texas, United States \u00b7 HIGH COURT vs TEXAS \u00b7 180 articles"
+  },
+  {
+   "id": "overview-02",
+   "elapsed_s": 5.7,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "=== OVERVIEW ===\nIn December 2024, media coverage of events in California focused on cooperation and conflict dynamics. The region saw a total of 97,962 articles covering various actors and locations.\nThe most significant event was a neutral interaction between ACTOR and an unknown party on December 2nd in California. On December 16th, there was a notable conflict involving the United States against an unspecified entity in Beverly Hills. A cooperative incident occurred on December 17th where a school engaged with an unspecified party in Oakland.\n=== KEY RECORDS ===\n- **Date:** 2024-12-02 | **Location:** California, United States | **Actors:** ACTOR vs ? | **Articles:** 198 | **Tone:** neutral (1.9)\n- **Date:** 2024-12-16 | **Location:** Beverly Hills, California, United States | **Actors:** UNITED STATES vs ? | **Articles:** 112 | **Tone:** conflict (-9.0)\n- **Date:** 2024-12-17 | **Location:** Oakland, California, United States | **Actors:** SCHOOL vs ? | **Articles:** 110 | **Tone:** cooperation (7.4)\n=== TIMELINE ===\n- December 2, 2024: Neutral interaction between ACTOR and an unknown party in California.\n- December 16, 2024: Conflict involving the United States against an unspecified entity in Beverly Hills.\n- December 17, 2024: Cooperation incident where a school engaged with an unspecified party in Oakland.\n=== ACTOR ACTIVITY ===\nDaily actor activity showed:\n- **Total Articles:** 97,962\n- **Conflict Articles:** 10,496\n- **Cooperation Articles:** 11,554\n=== MEDIA THEMES AND TONE TIMELINE ===\nGKG themes for this coverage include PROTEST and CONFLICT. The tone timeline indicates a shift from conflict to cooperation.\n- December 2: Neutral (1.9)\n- December 16: Conflict (-9.0)\n- December 17: Cooperation (7.4)\n=== WHAT THE DATA CANNOT SHOW ===\nThe data does not provide insights into the specific causes or reasons behind these interactions, nor does it offer information about who ACTOR and other unspecified entities are."
+  },
+  {
+   "id": "top-01",
+   "elapsed_s": 18.4,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nThe top events in Texas from January 1 to January 31, 2024, were characterized by neutral and conflict tones, with a focus on law enforcement actions against migrants and schools.\n### Key Records\n- **Date:** 2024-01-09 | **Location:** Fort Worth, Texas, United States | **Actors:** AUTHORITIES vs ? | **Title:** AUTHORITIES vs Unknown | **Articles:** 120 | **Tone:** neutral (3.0)\n- **Date:** 2024-01-04 | **Location:** Texas, United States | **Actors:** ? vs MIGRANT | **Title:** Unknown vs MIGRANT | **Articles:** 90 | **Tone:** neutral (-2.0)\n- **Date:** 2024-01-18 | **Location:** Uvalde, Texas, United States | **Actors:** POLICE vs GUNMAN | **Title:** POLICE vs GUNMAN | **Articles:** 90 | **Tone:** conflict (-10.0)\n- **Date:** 2024-01-18 | **Location:** Uvalde, Texas, United States | **Actors:** ? vs POLICE | **Title:** Unknown vs POLICE | **Articles:** 80 | **Tone:** conflict (-10.0)\n- **Date:** 2024-01-18 | **Location:** Uvalde, Texas, United States | **Actors:** SCHOOL vs POLICE | **Title:** SCHOOL vs POLICE | **Articles:** 80 | **Tone:** neutral (2.8)\n- **Date:** 2024-01-18 | **Location:** Robb Elementary School, Texas, United States | **Actors:** AUTHORITIES vs ? | **Title:** AUTHORITIES vs Unknown | **Articles:** 80 | **Tone:** neutral (1.0)\n- **Date:** 2024-01-18 | **Location:** Uvalde, Texas, United States | **Actors:** POLICE vs SCHOOL | **Title:** POLICE vs SCHOOL | **Articles:** 80 | **Tone:** neutral (1.9)\n### Timeline\nThe most significant events occurred on January 18 in Uvalde, Texas, where a conflict between the Police and a Gunman resulted in 90 articles covering it.\n### Actor Activity\nDaily aggregated activity for primary actors:\n- **2024-01-02:** 324 events, 2033 articles, Goldstein=-0.8, Tone=-5.4, Top: Demonstrate crowd control\n- **2024-01-03:** 468 events, 2943 articles, Goldstein=-2.0, Tone=-5.4, Top: Use radiological weapons\n- **2024-01-04:** 509 events, 3286 articles, Goldstein=-2.3, Tone=-5.7, Top: Use unconventional mass violence\n- **2024-01-05:** 641 events, 3851 articles, Goldstein=-1.6, Tone=-5.4, Top: Use radiological weapons\n- **2024-01-06:** 368 events, 2393 articles, Goldstein=-2.0, Tone=-5.1, Top: Use unconventional mass violence\n- **2024-01-07:** 212 events, 1274 articles, Goldstein=-1.2, Tone=-5.3, Top: Reject proposal to meet, discuss, or negotiate\n- **2024-01-08:** 363 events, 2193 articles, Goldstein=-0.8, Tone=-4.6, Top: Reject proposal to meet, discuss, or negotiate\n- **2024-01-09:** 409 events, 2697 articles, Goldstein=-1.4, Tone=-5.3, Top: Yield\n- **2024-01-10:** 460 events, 2760 articles, Goldstein=-1.6, Tone=-5.7, Top: Accede to demands for change in leadership\n- **2024-01-11:** 424 events, 2378 articles, Goldstein=-1.7, Tone=-6.0, Top: Use nuclear weapons\n- **2024-01-12:** 361 events, 2017 articles, Goldstein=-2.2, Tone=-5.5, Top: Protest\n- **2024-01-13:** 217 events, 1301 articles, Goldstein=-2.1, Tone=-4.9, Top: Use force\n- **2024-01-14:** 244 events, 1458 articles, Goldstein=-2.7, Tone=-4.9, Top: Make statement\n- **2024-01-15:** 309 events, 1769 articles, Goldstein=-1.7, Tone=-4.9, Top: Use unconventional mass violence\n### Media Themes and Tone (from GKG)\nThe media coverage for these events did not include any specific themes or tone analysis from the Global Knowledge Gateway.\n## What the Data Cannot Show\n- The data does not provide insights into the underlying causes of conflicts involving migrants, law enforcement, schools, or other actors.\n- It does not indicate why certain actions were taken by authorities, police, or others involved in these events."
+  },
+  {
+   "id": "top-02",
+   "elapsed_s": 12.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nThe top events in Florida from March 1st to March 31st were characterized by neutral tones and a mix of cooperation and conflict. The most covered event was \"MIAMI vs SCHOOL\" on March 12th with 150 articles, focusing on cooperation.\n## Key Records\n### Most Covered Event\n- **Date:** 2024-03-12\n- **Location:** Miami, Florida, United States\n- **Actors:** MIAMI vs SCHOOL\n- **Title:** MIAMI vs SCHOOL\n- **Articles:** 150\n- **Tone:** cooperation (8.0)\n### Neutral Events\nThe most frequent events were neutral in tone and involved FLORIDA as a primary actor:\n- **Date:** 2024-03-12\n- **Location:** Florida, United States\n- **Actors:** FLORIDA vs ?\n- **Articles:** 144\n### Conflict Events\nThere were also events with conflict tones and neutral actors:\n- **Date:** 2024-03-22\n- **Location:** Florida, United States\n- **Actors:** WORKER vs ?\n- **Articles:** 100\n- **Tone:** conflict (-10.0)\n## Timeline\nThe tone of media coverage shifted from neutral to negative over the period:\n- **March 5th:** Tone: -1.6 (Goldstein=-0.3)\n- **March 6th:** Tone: -1.6 (Goldstein=-0.5)\n- **March 7th:** Tone: -1.6 (Goldstein=0.6)\n- **March 8th:** Tone: -2.8 (Goldstein=-0.3)\n- **March 9th:** Tone: -2.3 (Goldstein=1.3)\n- **March 10th:** Tone: -1.2 (Goldstein=0.7)\n- **March 11th:** Tone: -0.7 (Goldstein=1.5)\n- **March 12th:** Tone: -2.7 (Goldstein=1.4)\n- **March 13th:** Tone: -0.6 (Goldstein=1.2)\n- **March 14th:** Tone: -1.8 (Goldstein=0.5)\n- **March 15th:** Tone: -1.1 (Goldstein=1.2)\n## Actor Activity\nThe primary actor activity in Florida showed a fluctuating pattern:\n- **March 5th:** 137 events, 686 articles, Goldstein=-0.3, Tone=-1.6, Top: Use force\n- **March 12th:** 127 events, 745 articles, Goldstein=1.4, Tone=-2.7, Top: Threaten with military force\n## Media Themes and Tone (from GKG)\nGKG themes for this coverage include:\n- PROTEST\n- ENGAGE IN MATERIAL CONFLICT\n- MAKE STATEMENT\n- THREATEN WITH MILITARY FORCE\n- REJECT PROPOSAL TO MEET, DISCUSS OR NEGOTIATE\n## What the Data Cannot Show\nThe data does not provide insights into why specific events occurred or who was involved in them. It only reflects the tone and number of articles covering these events."
+  },
+  {
+   "id": "confidence-probe-01",
+   "elapsed_s": 21.6,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nEvents in Texas from January 1 to January 31, 2024, were characterized by a mix of conflicts and consultations involving law enforcement, schools, unidentified actors, and state entities. The most covered events included confrontations between authorities and unknown parties, as well as consultations among various stakeholders.\n## Key Records\n- **Date:** 2024-01-09 | **Location:** Fort Worth, Texas, United States | **Actors:** AUTHORITIES vs ? | **Title:** AUTHORITIES appeals (Fort Worth, Texas, United States) | **Summary:** Appeal involving AUTHORITIES in Fort Worth, Texas, United States, Goldstein 3.0, 120 articles.\n- **Date:** 2024-01-18 | **Location:** Uvalde, Texas, United States | **Actors:** POLICE vs GUNMAN | **Title:** POLICE fights GUNMAN (Uvalde, Texas, United States) | **Summary:** Fighting involving POLICE and GUNMAN in Uvalde, Texas, United States, Goldstein -10.0, 90 articles.\n- **Date:** 2024-01-18 | **Location:** Robb Elementary School, Texas, United States | **Actors:** AUTHORITIES vs ? | **Title:** AUTHORITIES consults (Robb Elementary School, Texas, United States) | **Summary:** Consultation involving AUTHORITIES in Robb Elementary School, Texas, United States, Goldstein 1.0, 80 articles.\n- **Date:** 2024-01-18 | **Location:** Uvalde, Texas, United States | **Actors:** SCHOOL vs POLICE | **Title:** SCHOOL consults with POLICE (Uvalde, Texas, United States) | **Summary:** Consultation involving SCHOOL and POLICE in Uvalde, Texas, United States, Goldstein 2.8, 80 articles.\n- **Date:** 2024-01-18 | **Location:** Uvalde, Texas, United States | **Actors:** POLICE vs SCHOOL | **Title:** POLICE consults with SCHOOL (Uvalde, Texas, United States) | **Summary:** Consultation involving POLICE and SCHOOL in Uvalde, Texas, United States, Goldstein 1.9, 80 articles.\n- **Date:** 2024-01-18 | **Location:** Uvalde, Texas, United States | **Actors:** ? vs POLICE | **Title:** Unidentified actor fights POLICE (Uvalde, Texas, United States) | **Summary:** Fighting involving POLICE in Uvalde, Texas, United States, Goldstein -10.0, 80 articles.\n- **Date:** 2024-01-04 | **Location:** Texas, United States | **Actors:** ? vs TEXAS | **Title:** Unidentified actor fights TEXAS (Texas, United States) | **Summary:** Fighting involving TEXAS in Texas, United States, Goldstein -10.0, 72 articles.\n- **Date:** 2024-01-04 | **Location:** Texas, United States | **Actors:** TEXAS vs ? | **Title:** TEXAS fights (Texas, United States) | **Summary:** Fighting involving TEXAS in Texas, United States, Goldstein -10.0, 72 articles.\n- **Date:** 2024-01-11 | **Location:** Houston, Texas, United States | **Actors:** NAVY vs ? | **Title:** NAVY rejects (Houston, Texas, United States) | **Summary:** Rejection involving NAVY in Houston, Texas, United States, Goldstein -4.0, 70 articles.\n## Timeline\n- January 18: Multiple events occurred including consultations and confrontations between authorities, schools, and unidentified actors.\n- January 9: An appeal was made by AUTHORITIES in Fort Worth, Texas, with a neutral tone.\n- January 4: Several conflicts involving unknown parties and state entities were reported.\n## Actor Activity\nDaily aggregated activity for the primary actor (NOT individual events):\n- **2024-01-02:** 324 events, 2033 articles, Goldstein=-0.8, Tone=-5.4, Top: Demonstrate crowd control.\n- **2024-01-03:** 468 events, 2943 articles, Goldstein=-2.0, Tone=-5.4, Top: Use radiological weapons.\n- **2024-01-04:** 509 events, 3286 articles, Goldstein=-2.3, Tone=-5.7, Top: Use unconventional mass violence.\n- **2024-01-05:** 641 events, 3851 articles, Goldstein=-1.6, Tone=-5.4, Top: Use radiological weapons.\n- **2024-01-06:** 368 events, 2393 articles, Goldstein=-2.0, Tone=-5.1, Top: Use unconventional mass violence.\n- **2024-01-07:** 212 events, 1274 articles, Goldstein=-1.2, Tone=-5.3, Top: Reject proposal to meet, discuss, or negotiate.\n- **2024-01-08:** 363 events, 2193 articles, Goldstein=-0.8, Tone=-4.6, Top: Reject proposal to meet, discuss, or negotiate.\n- **2024-01-09:** 409 events, 2697 articles, Goldstein=-1.4, Tone=-5.3, Top: Yield.\n- **2024-01-10:** 460 events, 2760 articles, Goldstein=-1.6, Tone=-5.7, Top: Accede to demands for change in leadership.\n- **2024-01-11:** 424 events, 2378 articles, Goldstein=-1.7, Tone=-6.0, Top: Use nuclear weapons.\n## Media Themes and Tone\nThe media coverage of these events included themes such as use of unconventional mass violence, conflicts involving law enforcement and unidentified parties, consultations among stakeholders, and rejections or proposals to meet or negotiate. The tone was generally neutral (-5.4) with occasional conflict (-10.0).\n## What the Data Cannot Show\n- Specific details about the nature of the confrontations or consultations.\n- Motivations behind the actions described in the events.\n- Who exactly is involved in the conflicts and consultations, as actor labels do not provide this information."
+  },
+  {
+   "id": "confidence-probe-02",
+   "elapsed_s": 27.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nThe event summary focuses on protests in Texas from January 1 to January 31, 2024. The most covered events are protest actions involving actors such as COMPANY, HOUSTON, CONGRESSMAN, ABBOT, ADMINISTRATION, ARMY, HAMAS, and DALLAS.\n## Key Records\n- **Date:** 2024-01-09 | **Location:** San Antonio, Texas, United States | **Actors:** COMPANY vs ? | **Title:** COMPANY protests (San Antonio, Texas, United States) | **Summary:** Protest involving COMPANY in San Antonio, Texas, United States, Goldstein -6.5, 20 articles.\n- **Date:** 2024-01-31 | **Location:** Texas, United States | **Actors:** HOUSTON vs GOVERNMENT | **Title:** HOUSTON protests against GOVERNMENT (Texas, United States) | **Summary:** Protest involving HOUSTON, GOVERNMENT in Texas, United States, Goldstein -6.5, 20 articles.\n- **Date:** 2024-01-31 | **Location:** Texas, United States | **Actors:** CONGRESSMAN vs TEXAS | **Title:** CONGRESSMAN protests against TEXAS (Texas, United States) | **Summary:** Protest involving CONGRESSMAN, TEXAS in Texas, United States, Goldstein -6.5, 20 articles.\n- **Date:** 2024-01-23 | **Location:** Texas, United States | **Actors:** ABBOT vs IMMIGRANT | **Title:** ABBOT protests against IMMIGRANT (Texas, United States) | **Summary:** Protest involving ABBOT, IMMIGRANT in Texas, United States, Goldstein -6.5, 20 articles.\n- **Date:** 2024-01-19 | **Location:** San Diego, California, United States | **Actors:** ADMINISTRATION vs ? | **Title:** ADMINISTRATION protests (San Diego, California, United States) | **Summary:** Protest involving ADMINISTRATION in San Diego, California, United States, Goldstein -6.5, 20 articles.\n- **Date:** 2024-01-30 | **Location:** Texas, United States | **Actors:** HAMAS vs MARCHE | **Title:** HAMAS protests against MARCHE (Texas, United States) | **Summary:** Protest involving HAMAS, MARCHE in Texas, United States, Goldstein -6.5, 10 articles.\n- **Date:** 2024-01-30 | **Location:** Dallas, Texas, United States | **Actors:** DALLAS vs ? | **Title:** DALLAS protests (Dallas, Texas, United States) | **Summary:** Protest involving DALLAS in Dallas, Texas, United States, Goldstein -6.5, 10 articles.\n## Timeline\n- January 9: COMPANY protests in San Antonio, Texas.\n- January 31: Protests against GOVERNMENT and TEXAS in Texas; HAMAS protests against MARCHE also occur on this date.\n- January 23: Protest involving ABBOT against IMMIGRANT.\n- January 19: PROTESTS involving ADMINISTRATION in San Diego, California.\n- January 30: Protests by HAMAS and DALLAS in Texas.\n## Actor Activity\nDaily aggregated activity for the primary actor (NOT individual events):\n- **2024-01-02:** 619 events, 3651 articles, Goldstein=2.0, Tone=0.0, Top: Demonstrate military force.\n- **2024-01-03:** 740 events, 4691 articles, Goldstein=2.0, Tone=0.1, Top: Reject plan, agreement to settle dispute.\n- **2024-01-04:** 949 events, 5958 articles, Goldstein=1.9, Tone=0.0, Top: Coerce.\n- **2024-01-05:** 803 events, 5033 articles, Goldstein=1.5, Tone=-0.5, Top: Demonstrate military force.\n- **2024-01-06:** 525 events, 3396 articles, Goldstein=1.6, Tone=-0.5, Top: Demonstrate military force.\n- **2024-01-07:** 341 events, 2697 articles, Goldstein=1.7, Tone=-0.2, Top: Use force.\n- **2024-01-08:** 928 events, 5675 articles, Goldstein=2.0, Tone=0.1, Top: Ease administrative sanctions.\n- **2024-01-09:** 996 events, 6602 articles, Goldstein=2.1, Tone=0.1, Top: Use force.\n- **2024-01-10:** 1028 events, 6451 articles, Goldstein=1.3, Tone=-0.2, Top: Assault.\n- **2024-01-11:** 861 events, 5299 articles, Goldstein=1.8, Tone=0.4, Top: Make statement.\n- **2024-01-12:** 907 events, 5396 articles, Goldstein=1.7, Tone=-0.0, Top: Make statement.\n- **2024-01-13:** 485 events, 3085 articles, Goldstein=2.1, Tone=-0.4, Top: Ease military blockade.\n- **2024-01-14:** 325 events, 2131 articles, Goldstein=1.9, Tone=0.1, Top: Make statement.\n- **2024-01-15:** 482 events, 3270 articles, Goldstein=1.5, Tone=0.5, Top: Make optimistic comment.\n## Media Themes and Tone\nThe GKG themes for this coverage include PROTEST. The tone is consistently negative (-6.5 to -0.5).\n## What the Data Cannot Show\n- The data does not provide insights into the specific reasons or causes of these protests.\n- It does not indicate whether the protesters were successful in their goals, if any existed.\n- The data lacks information about the scale and impact of these protests on broader societal issues.\nThe events show a pattern of protest actions against various entities (GOVERNMENT, TEXAS, IMMIGRANT, MARCHE) by different actors (COMPANY, HOUSTON, CONGRESSMAN, ABBOT, ADMINISTRATION, ARMY, HAMAS, DALLAS). The tone is consistently negative, indicating conflict and opposition."
+  },
+  {
+   "id": "confidence-probe-03",
+   "elapsed_s": 16.9,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nThe conflict in California from January 1, 2024, to December 31, 2024, is characterized by a series of violent and confrontational events involving multiple actors. The primary antagonists include CALIFORNIA, UNITED STATES, POLICE, LOS ANGELES, HOSPITAL, and STUDENT.\n## Key Records\nThe most covered events are:\n- **Date:** 2024-11-01 | **Location:** Los Angeles, California, United States | **Actors:** LOS ANGELES vs ? | **Title:** LOS ANGELES uses mass violence (Los Angeles, California, United States) | **Summary:** Mass violence involving LOS ANGELES in Los Angeles, California, United States, Goldstein -10.0, 250 articles.\n- **Date:** 2024-07-24 | **Location:** San Francisco, California, United States | **Actors:** CRIMINAL vs ? | **Title:** CRIMINAL fights (San Francisco, California, United States) | **Summary:** Fighting involving CRIMINAL in San Francisco, California, United States, Goldstein -10.0, 210 articles.\n- **Date:** 2024-08-05 | **Location:** Los Angeles, California, United States | **Actors:** LOS ANGELES vs HOSPITAL | **Title:** LOS ANGELES fights HOSPITAL (Los Angeles, California, United States) | **Summary:** Fighting involving LOS ANGELES and HOSPITAL in Los Angeles, California, United States, Goldstein -10.0, 126 articles.\n- **Date:** 2024-12-16 | **Location:** Beverly Hills, California, United States | **Actors:** UNITED STATES vs ? | **Title:** UNITED STATES assaults (Beverly Hills, California, United States) | **Summary:** Assault involving UNITED STATES in Beverly Hills, California, United States, Goldstein -9.0, 112 articles.\n- **Date:** 2024-09-10 | **Location:** Hollywood, California, United States | **Actors:** ACTOR vs TELEVISION | **Title:** ACTOR protests against TELEVISION (Hollywood, California, United States) | **Summary:** Protest involving ACTOR and TELEVISION in Hollywood, California, United States, Goldstein -6.5, 110 articles.\n## Timeline\nThe conflict shows a peak of activity around November 2024, with several high-profile events occurring:\n- **November 1, 2024:** Los Angeles uses mass violence.\n- **July 24, 2024:** Criminals fight in San Francisco.\n- **August 5, 2024:** LOS ANGELES fights HOSPITAL in Los Angeles.\n- **December 16, 2024:** UNITED STATES assaults in Beverly Hills.\n## Actor Activity\nDaily aggregated activity for the primary actor (LOS ANGELES):\n- **October 25, 2024:** 323 events, 1897 articles, Goldstein=0.1, Tone=-3.4, Top: Ease administrative sanctions.\n- **October 26, 2024:** 185 events, 955 articles, Goldstein=0.4, Tone=-3.0, Top: Yield.\n- **October 27, 2024:** 99 events, 610 articles, Goldstein=0.8, Tone=-1.6, Top: Use force.\n- **October 28, 2024:** 165 events, 980 articles, Goldstein=0.8, Tone=-3.0, Top: Use force.\n- **October 29, 2024:** 216 events, 1243 articles, Goldstein=1.6, Tone=-2.0, Top: Reject request for humanitarian aid.\n## Media Themes and Tone\nThe media coverage predominantly focuses on conflict-related themes:\n- **Goldstein Score:** -10.0 to -9.0 (indicating a high level of conflict).\n- **Tone:** Negative (-10.0 to -3.4).\n### What the Data Shows\nThe data indicates that violence and confrontation are central to the conflict in California, with actors such as LOS ANGELES, UNITED STATES, CRIMINAL, HOSPITAL, and STUDENT engaging in various forms of violent interactions.\n## What the Data Cannot Show\n- **Specific Actors' Intentions:** The data does not provide insight into the specific intentions or motivations behind these conflicts.\n- **Contextual Factors:** The data lacks information about broader contextual factors such as economic conditions, political climates, or social issues that might influence these events."
+  },
+  {
+   "id": "search-01",
+   "elapsed_s": 18.8,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nThe period from January 1, 2024 to December 31, 2024 saw a significant number of events involving actors such as SCHOOL, GUNMAN, TEXAS, BORDER PATROL, and UNITED STATES. The most covered events were public statements and consultations.\n## Key Records\n- **Date:** 2024-09-13 | **Location:** Uvalde, Texas, United States | **Actors:** SCHOOL vs ? (70 articles), GUNMAN vs ? (70 articles)\n- **Date:** 2024-09-12 | **Location:** Uvalde, Texas, United States | **Actors:** SCHOOL vs ? (40 articles), GUNMAN vs ? (40 articles)\n## Timeline\nThe period saw a significant increase in events involving the actors. On September 13, there were 70 events and 2362 articles with a Goldstein score of -3.7 and a tone of -3.7, indicating high conflict levels.\nOn September 12, there were 462 events and 2362 articles with a Goldstein score of -3.7 and a tone of -3.7, showing continued engagement in conflicts involving SCHOOL and GUNMAN.\n## Actor Activity\nDaily aggregated activity for the primary actors:\n- **September 6:** 401 events, 2087 articles, Goldstein=0.1, Tone=-2.4, Top: Engage in material cooperation.\n- **September 7:** 230 events, 1078 articles, Goldstein=0.6, Tone=-2.4, Top: Threaten non-force.\n- **September 8:** 203 events, 1012 articles, Goldstein=-0.1, Tone=-2.9, Top: Use radiological weapons.\n- **September 9:** 316 events, 1380 articles, Goldstein=0.2, Tone=-2.0, Top: Threaten.\n- **September 10:** 400 events, 2025 articles, Goldstein=0.4, Tone=-2.9, Top: Use chemical weapons.\n- **September 11:** 424 events, 2108 articles, Goldstein=-0.5, Tone=-2.9, Top: Use force.\n- **September 12:** 429 events, 2255 articles, Goldstein=-0.2, Tone=-2.7, Top: Demonstrate military force.\n- **September 13:** 462 events, 2362 articles, Goldstein=-0.8, Tone=-3.7, Top: Make statement.\n- **September 14:** 243 events, 1148 articles, Goldstein=0.4, Tone=-2.6, Top: Reject proposal to meet, discuss, or negotiate.\n- **September 15:** 139 events, 692 articles, Goldstein=-0.1, Tone=-2.2, Top: Event type 0241.\n- **September 16:** 335 events, 1612 articles, Goldstein=-0.6, Tone=-3.9, Top: Reject.\n- **September 17:** 488 events, 2404 articles, Goldstein=0.9, Tone=-2.8, Top: Use force.\n- **September 18:** 481 events, 2410 articles, Goldstein=0.1, Tone=-2.4, Top: Yield.\n- **September 19:** 509 events, 2472 articles, Goldstein=-0.0, Tone=-1.9, Top: Yield.\n## Media Themes and Tone\nThe media coverage for the period was characterized by a high level of conflict (Goldstein scores ranging from -3.7 to -0.8) with themes including use of force, chemical weapons, and consultations or statements made by actors such as TEXAS and BORDER PATROL.\n## What the Data Cannot Show\n- **Actor Intent:** The data does not provide insight into the intentions or motivations behind the actions described.\n- **Contextual Information:** Specific details about the context in which these events occurred are not provided by the data."
+  },
+  {
+   "id": "search-02",
+   "elapsed_s": 14.7,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nThe event data from January 1 to December 31, 2024, in North America shows a significant focus on conflict and confrontation involving various actors such as courts, police, politicians, and other entities. The primary antagonists identified are NORTH CAROLINA, UNITED STATES, POLICE, NORTH DAKOTA, and VOTER.\n## Key Records\n1. **Date: 2024-03-13 | Location: North Carolina, United States | Actors: COURT OF APPEALS vs VOTER**\n- Summary: Fighting involving the COURT OF APPEALS and VOTER in North Carolina.\n- Articles: 70\n- Tone: conflict (-10.0)\n- Type: Fighting\n2. **Date: 2024-10-03 | Location: North Carolina, United States | Actors: PRESIDENT vs NORTH CAROLINA**\n- Summary: Show of force involving the PRESIDENT and NORTH CAROLINA in North Carolina.\n- Articles: 63\n- Tone: conflict (-7.2)\n- Type: Show of force\n3. **Date: 2024-12-17 | Location: North Carolina, United States | Actors: ? vs SENATE**\n- Summary: Fighting involving the SENATE in North Carolina.\n- Articles: 60\n- Tone: conflict (-9.5)\n- Type: Fighting\n4. **Date: 2024-07-25 | Location: North Carolina, United States | Actors: ? vs CHARLOTTE**\n- Summary: Fighting involving CHARLOTTE in North Carolina.\n- Articles: 56\n- Tone: conflict (-10.0)\n- Type: Fighting\n5. **Date: 2024-11-27 | Location: North Carolina, United States | Actors: POLICE vs ?**\n- Summary: Fighting involving the POLICE in North Carolina.\n- Articles: 50\n- Tone: conflict (-10.0)\n- Type: Fighting\n6. **Date: 2024-11-22 | Location: North Dakota, United States | Actors: NORTH DAKOTA vs JUDGE**\n- Summary: Fighting involving NORTH DAKOTA and the JUDGE in North Dakota.\n- Articles: 50\n- Tone: conflict (-10.0)\n- Type: Fighting\n7. **Date: 2024-11-22 | Location: North Dakota, United States | Actors: JUDGE vs NORTH DAKOTA**\n- Summary: Fighting involving the JUDGE and NORTH DAKOTA in North Dakota.\n- Articles: 50\n- Tone: conflict (-10.0)\n- Type: Fighting\n8. **Date: 2024-11-27 | Location: North Carolina, United States | Actors: PRESIDENT vs CHARLOTTE**\n- Summary: Protest involving the PRESIDENT and CHARLOTTE in North Carolina.\n- Articles: 50\n- Tone: conflict (-6.5)\n- Type: Protest\n9. **Date: 2024-09-16 | Location: North Carolina, United States | Actors: ACADEMICS vs LAWMAKER**\n- Summary: Fighting involving the ACADEMICS and LAWMAKER in North Carolina.\n- Articles: 40\n- Tone: conflict (-10.0)\n- Type: Fighting\n10. **Date: 2024-04-02 | Location: Northbrook, Illinois, United States | Actors: EUROPE vs ?**\n- Summary: Fighting involving the EUROPE in Northbrook, Illinois.\n- Articles: 40\n- Tone: conflict (-10.0)\n- Type: Fighting\n## Timeline\nThe timeline of events shows a peak in activity on **2024-03-13** with 31 events and 276 articles, indicating significant conflict involving the COURT OF APPEALS and VOTER.\n## Actor Activity Overview\nDaily aggregated activity for the primary actors (not individual events) reveals varying patterns:\n- On **2024-03-06**, there were 23 events with a Goldstein score of 1.6, indicating conflict.\n- The highest number of articles and events occurred on **2024-03-13** (31 events, 276 articles), characterized by the COURT OF APPEALS vs VOTER event.\n## Media Themes and Tone\nThe GKG themes for this coverage include CONFLICT. The tone is consistently negative (-10.0 to -4.3).\n## What the Data Cannot Show\n- Specific causes or motivations behind these conflicts are not evident from the data.\n- No information about who initiated each conflict or why it occurred beyond what the event records state."
+  },
+  {
+   "id": "keyword-fts-01",
+   "elapsed_s": 17.4,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nThe period from January 1, 2024 to December 31, 2024 saw a variety of events across different locations and involving various actors. The most covered events were related to conflicts and public statements.\n### Key Records\n- **Date:** 2024-09-13 | **Location:** Hawaii, United States | **Actors:** TANKER vs FIREFIGHTER\n- **Title:** TANKER appeals to FIREFIGHTER (Hawaii, United States)\n- **Summary:** Appeal involving TANKER and FIREFIGHTER in Hawaii, United States.\n- **Articles:** 105\n- **Date:** 2024-09-13 | **Location:** Hawaii, United States | **Actors:** RESIDENTS vs ?\n- **Title:** RESIDENTS fights (Hawaii, United States)\n- **Summary:** Fighting involving RESIDENTS in Hawaii, United States.\n- **Articles:** 100\n- **Tone:** conflict (-10.0)\n- **Date:** 2024-09-13 | **Location:** Hawaii, United States | **Actors:** FIREFIGHTER vs TEXAS\n- **Title:** FIREFIGHTER fights TEXAS (Texas, United States)\n- **Summary:** Fighting involving FIREFIGHTER and TEXAS in Texas, United States.\n- **Articles:** 64\n- **Tone:** conflict (-10.0)\n- **Date:** 2024-09-13 | **Location:** Hawaii, United States | **Actors:** TEXAS vs FIREFIGHTER\n- **Title:** TEXAS fights FIREFIGHTER (Texas, United States)\n- **Summary:** Fighting involving TEXAS and FIREFIGHTER in Texas, United States.\n- **Articles:** 64\n- **Tone:** conflict (-10.0)\n### Timeline\nThe period saw a significant spike on September 13, 2024, with multiple events occurring simultaneously across different locations.\n- **September 13, 2024:**\n- Multiple conflicts involving FIREFIGHTER and RESIDENTS in Hawaii.\n- Conflicts between FIREFIGHTER and TEXAS in Texas.\n- Conflicts between TEXAS and FIREFIGHTER in Texas.\n### Actor Activity\nDaily aggregated activity for the primary actors:\n- **September 6, 2024:**\n- 10 events, 39 articles, Goldstein=0.5, Tone=-1.3, Top: Protest\n- **September 7, 2024:**\n- 2 events, 15 articles, Goldstein=-1.5, Tone=-3.3, Top: Use force\n- **September 8, 2024:**\n- 3 events, 15 articles, Goldstein=1.6, Tone=-10.3, Top: Make statement\n- **September 9, 2024:**\n- 2 events, 14 articles, Goldstein=3.7, Tone=-2.6, Top: Make statement\n- **September 10, 2024:**\n- 6 events, 45 articles, Goldstein=4.3, Tone=-3.0, Top: Threaten with military force\n- **September 11, 2024:**\n- 7 events, 26 articles, Goldstein=-6.1, Tone=-5.9, Top: Use force\n- **September 12, 2024:**\n- 5 events, 28 articles, Goldstein=-8.4, Tone=-4.6, Top: Use force\n- **September 13, 2024:**\n- 23 events, 234 articles, Goldstein=0.1, Tone=-3.2, Top: Yield\n- **September 14, 2024:**\n- 10 events, 70 articles, Goldstein=0.5, Tone=-4.8, Top: Yield\n- **September 15, 2024:**\n- 6 events, 28 articles, Goldstein=-0.9, Tone=-4.1, Top: Investigate\n- **September 16, 2024:**\n- 6 events, 55 articles, Goldstein=0.3, Tone=-2.4, Top: Reject proposal to meet, discuss, or negotiate\n- **September 17, 2024:**\n- 2 events, 20 articles, Goldstein=-0.5, Tone=-0.4, Top: Threaten with military force\n- **September 18, 2024:**\n- 4 events, 9 articles, Goldstein=3.5, Tone=-1.4, Top: Yield\n- **September 19, 2024:**\n- 5 events, 21 articles, Goldstein=1.5, Tone=-6.0, Top: Demonstrate crowd control\n### Media Themes and Tone\nThe media coverage for the period was characterized by a mix of neutral and conflict-related themes.\n- **Neutral:** The Associated Press (AP) played a significant role in these events with 6 out of the top 10 most covered events being neutral in tone.\n- **Conflict:** Events involving FIREFIGHTER, RESIDENTS, TEXAS, and other antagonists were marked by conflict tones ranging from -10.0 to -5.9.\n### What the Data Cannot Show\nThe data does not provide insights into the underlying causes or motivations for these events, nor does it offer any information about the identities of the actors involved beyond their labels."
+  },
+  {
+   "id": "reldate-01",
+   "elapsed_s": 10.1,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nProtests occurred across Texas from December 23 to December 29, 2024, involving multiple actors including government bodies, companies, and individuals. The most significant protests were those against governmental entities (TEXAS vs DEPUTIES) and against law enforcement (STARBUCKS vs COMPANY). These events are characterized by conflict with a tone score of -6.5 to -7.5.\n## Key Records\n- **2024-12-28**: Protest in Jersey Village, Texas, United States involving CONSTABLE.\n- **2024-12-23**: Protests against STARBUCKS and COMPANY in multiple locations across Texas.\n- **2024-12-23**: Protests against TEXAS and DEPUTIES in Texas, United States.\n- **2024-12-25**: Protest involving GOVERNMENT in Texas, United States.\n- **2024-12-27**: Protest involving MALE in Texas, United States.\n## Timeline\n### December 23 to December 29, 2024\nProtests were widespread across multiple locations and actors. The tone of the protests was consistently negative, indicating conflict between protesters and authorities or entities.\n## Actor Activity\nDaily aggregated activity for the primary actor (Texas):\n- **December 21**: 3 events, 20 articles, Goldstein=-4.0, Tone=-7.2.\n- **December 23**: 2 events, 4 articles, Goldstein=1.0, Tone=-0.8.\n- **December 24**: 6 events, 24 articles, Goldstein=-2.9, Tone=-5.3.\n- **December 25**: 2 events, 11 articles, Goldstein=-0.8, Tone=-0.1.\n- **December 26**: 3 events, 22 articles, Goldstein=-4.7, Tone=-6.9.\n- **December 27**: 1 event, 8 articles, Goldstein=1.0, Tone=-1.8.\n- **December 28**: 2 events, 15 articles, Goldstein=-3.2, Tone=-5.1.\n- **December 29**: 3 events, 18 articles, Goldstein=2.3, Tone=-1.7.\n- **December 30**: 4 events, 36 articles, Goldstein=-0.2, Tone=-4.7.\n- **December 31**: 4 events, 24 articles, Goldstein=-0.1, Tone=-5.4.\n## Media Themes and Tone\nGKG themes for this coverage include PROTEST, CONFLICT, and DEMONSTRATE FORCE. The tone of the media coverage is consistently negative (-6.5 to -7.5), indicating a high level of conflict and protest activity in Texas during this period.\n## What the Data Cannot Show\n- **Actor Identity**: The data does not provide specific identities for actors such as CONSTABLE, GOVERNMENT, STARBUCKS, COMPANY, TEXAS, DEPUTIES, or MALE.\n- **Reasons for Protests**: The data does not offer insights into why these protests occurred. It only reflects the coverage and activity of the events themselves.\n- **Geographic Specificity**: While specific locations are mentioned (e.g., Jersey Village, Texas; San Antonio, Texas), broader patterns across multiple cities are highlighted.\n- **Temporal Dynamics**: The data focuses on aggregated daily totals rather than detailed temporal dynamics or changes in protest intensity over time."
+  },
+  {
+   "id": "reldate-02",
+   "elapsed_s": 4.3,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nOn December 30, 2024, in Chicago, Illinois, United States, there were multiple incidents involving POLICE and other entities. The most covered event was a fight between an unidentified actor and POLICE, with 20 articles mentioning it.\n## Key Records\n- **Date:** 2024-12-30\n- **Location:** Chicago, Illinois, United States\n- **Actors:** Unidentified actor vs POLICE\n- **Title:** Unidentified actor fights POLICE (Chicago, Illinois, United States)\n- **Summary:** Fighting involving POLICE in Chicago, Illinois, United States, Goldstein -10.0, 20 articles.\n## Timeline\nNo significant events occurred on other dates within the same week.\n## Actor Activity\n### Daily Actor Activity by Date\n| Date       | CHICAGO | POLICE | UNITED STATES | COMPANIES | AMERICAN |\n|------------|---------|--------|----------------|-----------|----------|\n| 2024-12-30 | 4      | 3     | 3             | 2        | 2       |\n## Media Themes and Tone\n### GKG Themes for this Coverage Include:\n- **PROTEST**\n- **FIGHTING**\n### Tone Timeline\n- **2024-12-30:** -10.0 (conflict)\n## What the Data Cannot Show\nThe data does not provide insights into why these events occurred or who was involved in them, nor does it offer any additional context about the broader situation in Chicago on December 30, 2024."
+  },
+  {
+   "id": "reldate-03",
+   "elapsed_s": 12.3,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "## Overview\nEvents in New York from December 29 to December 31 were characterized by neutral and conflict-related activities involving various actors such as NEWS ORGANIZATION, COAST GUARD, RESIDENTS, MINIST, POLITICIAN, VICTORIA, SPOKESMAN, APPEALS COURT, and NEW YORK. The period saw a mix of public statements, investigations, consultations, and conflicts.\n## Key Records\n1. **2024-12-30**: NEWS ORGANIZATION criticized in New York, United States with 91 articles.\n2. **2024-12-31**: COAST GUARD investigated in New Orleans, Louisiana, United States with 80 articles.\n3. **2024-12-30**: RESIDENTS made a public statement in Fingerlakes, New York, United States with 50 articles.\n4. **2024-12-31**: MINIST consulted in New York, United States with 50 articles.\n5. **2024-12-30**: POLITICIAN assaulted in New York, United States with 50 articles.\n6. **2024-12-31**: COAST GUARD made a public statement about NEW ORLEANS in New Orleans, Louisiana, United States with 49 articles.\n7. **2024-12-31**: VICTORIA made a public statement in New York, United States with 48 articles.\n8. **2024-12-30**: SPOKESMAN criticized APPEALS COURT in New York, United States with 42 articles.\n9. **2024-12-30**: APPEALS COURT rejected in New York, United States with 42 articles.\n10. **2024-12-31**: NEW YORK made a public statement in New York, United States with 40 articles.\n## Timeline\n### December 29 to December 31\n- **December 30**: NEWS ORGANIZATION criticized (New York, United States) - 91 articles.\n- **December 31**: COAST GUARD investigated (New Orleans, Louisiana, United States) - 80 articles; RESIDENTS made a public statement (Fingerlakes, New York, United States) - 50 articles; MINIST consulted (New York, United States) - 50 articles.\n- **December 31**: COAST GUARD made a public statement about NEW ORLEANS (New Orleans, Louisiana, United States) - 49 articles; VICTORIA made a public statement (New York, United States) - 48 articles; SPOKESMAN criticized APPEALS COURT (New York, United States) - 42 articles; APPEALS COURT rejected in New York, United States - 42 articles; NEW YORK made a public statement (New York, United States) - 40 articles.\n## Actor Activity\n### Daily Aggregated Activity for the Primary Actor (NEW YORK)\n- **December 23**: 8 events, 42 articles, Goldstein=-2.1, Tone=-2.8, Top: Make statement.\n- **December 24**: 8 events, 39 articles, Goldstein=2.1, Tone=0.1, Top: Yield.\n- **December 25**: 5 events, 11 articles, Goldstein=4.2, Tone=-2.3, Top: Threaten non-force.\n- **December 29**: 2 events, 20 articles, Goldstein=-0.2, Tone=-3.1, Top: Make pessimistic comment.\n- **December 30**: 6 events, 118 articles, Goldstein=-2.5, Tone=-1.5, Top: Demonstrate military force.\n- **December 31**: 11 events, 54 articles, Goldstein=2.5, Tone=-0.2, Top: Use chemical weapons.\n## Media Themes and Tone\nThe media coverage for the period was predominantly neutral with occasional conflict-related tones. The most common themes included public statements, investigations, consultations, and conflicts involving various actors such as NEWS ORGANIZATION, COAST GUARD, RESIDENTS, MINIST, POLITICIAN, VICTORIA, SPOKESMAN, APPEALS COURT, and NEW YORK.\n## What the Data Cannot Show\nThe data does not provide insights into the reasons behind specific events or the motivations of actors involved. It also does not indicate why certain themes were prevalent during this period."
+  },
+  {
+   "id": "reldate-04",
+   "elapsed_s": 4.9,
+   "checks": {
+    "checked": [
+     "ungrounded_numbers",
+     "count_overclaims"
+    ],
+    "passed": true,
+    "attempts": 1,
+    "fallback": false,
+    "failed_first": {},
+    "failed": {}
+   },
+   "summary": "=== OVERVIEW ===\nTexas saw a mix of events in December 2024, with cooperation and conflict occurring across different regions.\n=== KEY RECORDS ===\n- **Date:** 2024-12-17 | **Location:** Arlington, Texas, United States | **Actors:** POLICE vs ? | **Articles:** 80 | **Tone:** neutral (2.8)\n- **Date:** 2024-12-17 | **Location:** Arlington, Texas, United States | **Actors:** TEXAS vs ? | **Articles:** 80 | **Tone:** cooperation (6.0)\n- **Date:** 2024-12-31 | **Location:** Texas, United States | **Actors:** TEXAS vs PRINCE | **Articles:** 77 | **Tone:** neutral (-2.0)\n=== TIMELINE ===\nDecember 16:\n- **Harris County, Texas, United States:** Unknown vs BUSINESS (90 articles)\n- **Arlington, Texas, United States:** POLICE vs Unknown (80 articles)\n- **Texas, United States:** TEXAS vs PRINCE (77 articles)\n=== ACTOR ACTIVITY ===\nDaily actor activity shows:\n- December 16: Harris County, Texas, United States - BUSINESS (90), Harris County, Texas, United States - ? (90)\n- December 17: Arlington, Texas, United States - POLICE (80), Arlington, Texas, United States - ? (80)\n- December 31: Texas, United States - TEXAS (77)\n=== MEDIA THEMES AND TONE ===\nGKG themes and tone for the period include:\n- **TEXAS vs PRINCE:** neutral (-2.0)\n- **POLICE vs Unknown:** neutral (2.8)\n- **TEXAS vs ?:** cooperation (6.0)\n=== WHAT THE DATA CANNOT SHOW ===\nThe data does not provide specific details on what events were about or why they occurred, only the actors involved and tone of articles."
+  }
+ ]
+}

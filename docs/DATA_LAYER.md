@@ -15,9 +15,13 @@ day's 15-minute batches from `data.gdeltproject.org/gdeltv2/` and compares them 
 `events_table`, identical in every column. The English stream alone misses 6,160 of them; the 767 extra official rows
 of that day have event dates outside 2024.
 
-`events_2025`: events for 2025-01-01 to 2025-06-30, loaded with the same rule by `db_scripts/load_gdelt_period.py`
-(Q1: 4,638,688 events, batches read until 2025-04-07 for late additions; Q2 added on 2026-10-09, batches read until
-2025-07-07; 8,396,131 in all). It is a separate table, used only to retrain and test the forecaster
+`events_2025`: events for 2025-01-01 to 2025-06-30 and 2025-07-03 to 09-30, loaded with the same rule by
+`db_scripts/load_gdelt_period.py` (Q1: 4,638,688 events, batches read until 2025-04-07 for late additions; Q2 added on
+2026-10-09, batches read until 2025-07-07; 8,396,131 for H1; Q3 from 2025-07-03 added on 2026-10-09, batches read
+until 2025-10-07: 4,225,396; 12,621,527 in all). Q3 has events on every day from 07-03 to 09-30 (median 53,640 a
+day, 23,055 to 63,514; the lowest twelve days, 23,055 to 26,348, are all Sundays, the usual weekly low), so no day of
+it is affected by an outage, and every 15-minute batch from 2025-07-03 to 10-07 exists upstream in both streams
+(9,312 batch times, 18,624 files). It is a separate table, used only to retrain and test the forecaster
 (`docs/FORECAST_EVALUATION.md`); the application still serves 2024.
 
 **GDELT outage in June 2025.** The official English export files are missing (HTTP 404 upstream, checked
