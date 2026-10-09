@@ -131,3 +131,13 @@ async def test_the_enhanced_report_goes_through_the_same_gate(monkeypatch):
     out = await gen.generate_event_report(DATA, "Report.", include_storyline=False, include_gkg=False)
     assert out.checks["passed"] and out.checks["attempts"] == 1
     assert out.checks["checked"] == ["ungrounded_numbers", "count_overclaims"]  # what the UI lists
+
+
+def test_the_deep_dive_summary_is_not_cut_at_4000_characters():
+    from backend.agents.enhanced_reporter import EnhancedReportGenerator
+
+    gen = EnhancedReportGenerator.__new__(EnhancedReportGenerator)
+    text = "\n".join(f"Paragraph {i}: " + "x" * 300 for i in range(20))  # about 6,300 characters
+    summary, _ = gen._parse_report_text(text, max_chars=12000)
+    assert summary == text and not summary.endswith("...")
+    assert gen._parse_report_text(text, max_chars=4000)[0].endswith("...")

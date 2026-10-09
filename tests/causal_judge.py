@@ -53,7 +53,8 @@ def report_inputs(run=RUN, unlabelled=False):
     ids = {row["report_id"] for row in csv.DictReader((LABELS / "labels.csv").open())}
     for r in json.loads(Path(run).read_text())["results"]:
         if (r["id"] in ids) != unlabelled and r.get("report"):
-            yield r["id"], fmt._format_data_for_report(r["data"]), sentences(r["report"])
+            # A Deep Dive report was given more than the query data (tests/eval_enhanced_reports.py).
+            yield r["id"], r.get("model_input") or fmt._format_data_for_report(r["data"]), sentences(r["report"])
 
 
 def user_message(data_text, sents):

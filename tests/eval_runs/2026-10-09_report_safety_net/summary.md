@@ -73,7 +73,6 @@ definitions line with the plan and a report with `checks: {passed: true, attempt
   (`tests/test_report_safety_net.py`: pass, rewrite, fallback, a rewrite that errors, no plan).
 * A rewrite adds one model call to the share of reports that fail, 8 of 216 here; live it added about 13 s to an
   enhanced report (37 s against 24 s for the same report passing first time).
-* The gate does not check interpretation. The enhanced report's prompt was not changed with the quick report's
-  interpretation rules, and in the browser check it still reads meaning into labels ("The Palestine label ties the
-  24 April cluster to pro-Palestinian demonstrations").
+* The gate does not check interpretation. The Deep Dive report's prompt has since been changed with the quick
+  report's rules (judge: 108 unsupported sentences in 15 reports before, 1 after: `../2026-10-09_enhanced_prompt/`).
 * The checks are as good as their recall, which is not measured (`../2026-10-09_report_numbers/summary.md`).

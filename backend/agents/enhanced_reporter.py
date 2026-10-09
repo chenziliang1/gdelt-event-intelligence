@@ -156,24 +156,27 @@ def _compute_storyline_relevance(
 # Checks that apply to the enhanced report (see generate_event_report).
 ENHANCED_CHECKS = ("ungrounded_numbers", "count_overclaims")
 
-ENHANCED_REPORT_SYSTEM_PROMPT = """You are an expert geopolitical event analyst and narrative journalist.
-Your task is to produce a comprehensive, well-structured report on a specific event or event series.
+# The prompt used to ask for "a narrative journalist" report with "broader implications". Judged on 15
+# reports (tests/eval_runs/2026-10-09_enhanced_prompt/), every one read causes, topics or connections
+# into the records. The rules below are the quick report's (planner.REPORT_SYSTEM_PROMPT), adapted
+# to what this report is also given: article text, GKG themes and tone, complete daily actor figures
+# and a storyline the system assembled.
+ENHANCED_REPORT_SYSTEM_PROMPT = """You are a GDELT event analyst. Write a structured report on what the data shows about an event or event series, accurately and readably.
 
-You will receive:
-1. Event metadata (dates, locations, actors, metrics)
-2. News article content (from original sources)
-3. Storyline data (timeline, entity evolution, theme evolution)
-4. GKG insights (media entities, themes, tone trends)
+You will receive some of: event records (date, place, coded actor labels, event type code, tone, article counts, sometimes a title or summary); a storyline, which is a chronological list of related records the system selected by shared actors and dates; daily actor activity, which is complete daily totals; GKG themes, entities and a tone timeline from the media coverage; and article text when it could be fetched.
 
-Output rules:
-- Write in clear, journalistic prose.
-- Use specific dates, names, and numbers from the data.
-- Cite source counts (NumArticles) as evidence of significance.
-- Structure the output into clearly labeled sections.
-- Do NOT use JSON. Use markdown-style plain text.
-- If data is sparse, say so directly rather than inventing.
-- No preamble like "Here is the report". Start immediately.
-- IMPORTANT: Keep the report concise and focused. Avoid unnecessary repetition or filler text."""
+Rules:
+- Use markdown section headings: Overview; Key records; Timeline (from the storyline, if given); Actor activity (from the daily figures, if given); Media themes and tone (from GKG, if given); What the data cannot show.
+- Cite specific dates, places, actor labels and article counts from the data. Write every number exactly as it appears in the data.
+- Before writing "N records" or "N events" about the listed records, count the records that match what you say they share. Daily totals from the actor activity may be quoted as totals.
+- Evidence of what an event was about, or why it happened, is only what a title, summary, article text or GKG theme in the input says. Attribute it ("GKG themes for this coverage include PROTEST").
+- Do not infer what an event was about, why it happened, or who someone is from an actor label, a place, a date, an event code or a tone score. Do not add outside knowledge about people, places or news stories.
+- Do not reinterpret event type codes, and do not explain odd-looking records ("likely a coding error", "probably wire coverage"): say what looks odd and that the data does not say why.
+- The storyline is a selection by shared actors and dates. Do not say records are connected, caused one another, form one episode or are a response to each other unless article text says so; describe the order of records instead.
+- Do not sum up the period with a theme ("mostly routine", "centered on engagement between Congress and the White House") unless GKG themes or article text state it, and then attribute it.
+- A hedge does not make a guess acceptable: leave a guess out rather than writing "suggests", "points to" or "likely".
+- If data is sparse, say so directly. Do NOT use JSON. No preamble like "Here is the report"; start with the first heading.
+- Keep the report concise; do not repeat the same records across sections."""
 
 
 # ---------------------------------------------------------------------------
@@ -718,6 +721,8 @@ class EnhancedReportGenerator(ReportGenerator):
             actor_activity, event_storyline,
             max_length=max_length,
         )
+        # The exact text the model is given, for offline evaluation (tests/eval_enhanced_reports.py).
+        self.last_model_input = narrative_input
 
         if not narrative_input.strip():
             return EnhancedReportResult(
@@ -728,8 +733,8 @@ class EnhancedReportGenerator(ReportGenerator):
             )
 
         user_prompt = prompt or (
-            "Write a comprehensive event report covering: what happened, "
-            "who was involved, the timeline of events, media coverage, and broader implications."
+            "Write an event report covering: what the records show, "
+            "who was involved, the timeline of records, media coverage, and what the data cannot show."
         )
 
         # Add length constraint to prompt so LLM controls output size
@@ -781,7 +786,7 @@ class EnhancedReportGenerator(ReportGenerator):
                     checks=checks,
                 )
 
-            summary, findings = self._parse_report_text(text)
+            summary, findings = self._parse_report_text(text, max_chars=max_length)
 
             elapsed = round((__import__("time").time() - t0) * 1000, 1)
             print(
@@ -966,8 +971,12 @@ class EnhancedReportGenerator(ReportGenerator):
             result = result[:max_length + 2500] + "\n\n...[additional context available but omitted for brevity]"
         return result
 
-    def _parse_report_text(self, text: str) -> tuple[str, List[str]]:
-        """Parse LLM output into summary and key findings."""
+    def _parse_report_text(self, text: str, max_chars: int = 12000) -> tuple[str, List[str]]:
+        """Parse LLM output into summary and key findings.
+
+        The summary used to be cut at a fixed 4,000 characters while the prompt allowed the configured
+        max_report_length (12,000 by default), so most reports ended mid-sentence with "...".
+        """
         lines = [l.strip() for l in text.split("\n") if l.strip()]
         summary_lines = []
         findings = []
@@ -992,8 +1001,8 @@ class EnhancedReportGenerator(ReportGenerator):
                 summary_lines.append(line)
 
         summary = "\n".join(summary_lines) if summary_lines else text
-        if len(summary) > 4000:
-            summary = summary[:4000] + "..."
+        if len(summary) > max_chars:
+            summary = summary[:max_chars] + "..."
 
         return summary, findings
 
