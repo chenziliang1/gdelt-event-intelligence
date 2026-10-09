@@ -6,6 +6,7 @@ import pytest
 
 from backend.agents.definitions import definitions_line
 from backend.agents.planner import ReportGenerator, deterministic_summary
+from backend.services.report_checks import ALL_CHECKS
 from backend.schemas.responses import QueryPlanOutput, ReportOutput, ReportRequest
 
 DATA = {"events_0": {"type": "events", "data": [
@@ -48,7 +49,8 @@ async def test_a_report_that_passes_is_returned_after_one_call():
     r = reporter([GOOD])
     out = await r.generate(DATA, "Summarize.", PLAN)
     assert out.summary == GOOD and len(r.llm.calls) == 1
-    assert out.checks == {"passed": True, "attempts": 1, "fallback": False, "failed_first": {}, "failed": {}}
+    assert out.checks == {"checked": list(ALL_CHECKS), "passed": True, "attempts": 1, "fallback": False,
+                          "failed_first": {}, "failed": {}}
 
 
 async def test_a_failing_report_is_rewritten_once_with_what_failed():
@@ -105,3 +107,27 @@ def test_the_api_schemas_carry_the_plan_the_checks_and_the_definitions():
     assert ReportRequest(data={}, plan=PLAN).plan == PLAN
     assert ReportOutput(summary="s", checks={"passed": True}).checks == {"passed": True}
     assert QueryPlanOutput(intent="i", steps=[], visualizations=[], definitions="Definitions: x.").definitions
+
+
+async def test_the_enhanced_report_goes_through_the_same_gate(monkeypatch):
+    from backend.agents import enhanced_reporter as er
+
+    gen = er.EnhancedReportGenerator.__new__(er.EnhancedReportGenerator)  # no real LLM client
+    gen.llm = ScriptedLLM([BAD_NUMBER, BAD_NUMBER])
+
+    async def nothing(*args, **kwargs):
+        return None
+
+    monkeypatch.setattr(gen, "_gather_actor_activity", nothing)
+    monkeypatch.setattr(gen, "_gather_event_storyline", nothing)
+    out = await gen.generate_event_report(DATA, "Report.", include_storyline=False, include_gkg=False)
+    assert out.checks["fallback"] and out.checks["failed"] == {"ungrounded_numbers": ["140"]}
+    assert BAD_NUMBER not in out.summary and "100 articles" in out.summary
+    assert out.to_dict()["checks"] == out.checks
+
+    # Trends and dates outside the query are not checked here (the storyline and tone timeline
+    # are time series); a grounded report with a trend word passes on the first draft.
+    gen.llm = ScriptedLLM(["Coverage rose after 2024-01-05; the IOWA record drew 100 articles."])
+    out = await gen.generate_event_report(DATA, "Report.", include_storyline=False, include_gkg=False)
+    assert out.checks["passed"] and out.checks["attempts"] == 1
+    assert out.checks["checked"] == ["ungrounded_numbers", "count_overclaims"]  # what the UI lists

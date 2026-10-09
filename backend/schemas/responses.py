@@ -526,6 +526,7 @@ class EnhancedReportOutput(BaseModel):
     actor_activity: List[ActorActivityItem] = Field(default_factory=list)
     event_storyline: Optional[EventStorylineData] = None
     generated_at: str = ""
+    checks: Optional[Dict[str, Any]] = None  # same as ReportOutput.checks
 
 
 class ReportConfig(BaseModel):

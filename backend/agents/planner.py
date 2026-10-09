@@ -23,7 +23,7 @@ from langchain_core.messages import AIMessage, SystemMessage, HumanMessage
 from langchain_openai import ChatOpenAI
 
 from backend.agents.known_locations import find_known_location
-from backend.services.report_checks import check_report, failed_checks, rewrite_request
+from backend.services.report_checks import ALL_CHECKS, check_report, failed_checks, rewrite_request
 from backend.queries.query_utils import DEFAULT_DATA_START, DEFAULT_DATA_END
 from backend.queries.date_utils import (
     DateRange,
@@ -1675,6 +1675,32 @@ class ReportGenerator:
         text = re.sub(r'^```.*?\n', '', text, flags=re.DOTALL)
         return re.sub(r'\n```$', '', text)
 
+    async def _gate(self, messages: List[Any], text: str, check, data: Dict[str, Any],
+                    checked=ALL_CHECKS):
+        """Check a report; if it fails, send it back once with what failed and check the rewrite.
+
+        Returns the final text and a status dict (checked, passed, attempts, fallback,
+        failed_first, failed). The caller decides what to show when it still fails; it must not be ``text``.
+        Shared by the quick report and the enhanced event report.
+        """
+        result = check(text)
+        status = {"checked": list(checked), "passed": result["pass"], "attempts": 1, "fallback": False,
+                  "failed_first": failed_checks(result), "failed": failed_checks(result)}
+        if not result["pass"]:
+            print(f"[ReportGenerator] Checks failed, asking for one rewrite: {sorted(status['failed'])}", flush=True)
+            try:
+                rewrite = await self._ask(messages + [AIMessage(content=text),
+                                                      HumanMessage(content=rewrite_request(result, data))])
+            except Exception as e:  # noqa: BLE001 - a failed rewrite falls back like a failing one
+                print(f"[ReportGenerator] Rewrite failed: {e}", flush=True)
+                rewrite = ""
+            status["attempts"] = 2
+            if rewrite:
+                text, result = rewrite, check(rewrite)
+                status.update(passed=result["pass"], failed=failed_checks(result))
+        status["fallback"] = not status["passed"]
+        return text, status
+
     @staticmethod
     def _split(text: str) -> ReportResult:
         """Split into summary + bullet findings."""
@@ -1741,24 +1767,8 @@ class ReportGenerator:
         if not text:
             return ReportResult(summary="No report content was generated.", key_findings=[])
 
-        result = check_report(text, check_plan, data)
-        status = {"passed": result["pass"], "attempts": 1, "fallback": False,
-                  "failed_first": failed_checks(result), "failed": failed_checks(result)}
-        if not result["pass"]:
-            print(f"[ReportGenerator] Checks failed, asking for one rewrite: {sorted(status['failed'])}", flush=True)
-            try:
-                rewrite = await self._ask(messages + [AIMessage(content=text),
-                                                      HumanMessage(content=rewrite_request(result, data))])
-            except Exception as e:  # noqa: BLE001 - a failed rewrite falls back like a failing one
-                print(f"[ReportGenerator] Rewrite failed: {e}", flush=True)
-                rewrite = ""
-            status["attempts"] = 2
-            if rewrite:
-                text, result = rewrite, check_report(rewrite, check_plan, data)
-                status.update(passed=result["pass"], failed=failed_checks(result))
-
+        text, status = await self._gate(messages, text, lambda t: check_report(t, check_plan, data), data)
         if not status["passed"]:
-            status["fallback"] = True
             print(f"[ReportGenerator] Falling back to the deterministic summary: {sorted(status['failed'])}", flush=True)
             fallback = deterministic_summary(data, sorted(status["failed"]))
             return ReportResult(summary=fallback, key_findings=[], checks=status)

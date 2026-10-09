@@ -4,6 +4,7 @@ import EventContextPanel from './EventContextPanel';
 import GKGInsightCards from './GKGInsightCards';
 import ActorActivityPanel from './ActorActivityPanel';
 import EventStorylinePanel from './EventStorylinePanel';
+import { ChecksLine } from './ReportPanel';
 
 interface Props {
   report: EnhancedReportResult;
@@ -59,6 +60,8 @@ export default function EventReportPanel({ report, event }: Props) {
             </ul>
           </div>
         )}
+
+        {report.checks && <ChecksLine checks={report.checks} />}
 
         {/* Data Source Indicators */}
         <div style={{ display: 'flex', gap: 12, marginTop: 16, paddingTop: 12, borderTop: '1px solid #e2e8f0' }}>

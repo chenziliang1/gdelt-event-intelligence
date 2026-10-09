@@ -13,14 +13,31 @@ const CHECK_NAMES: Record<string, string> = {
 const names = (failed: Record<string, string[]>) =>
   Object.keys(failed).map(k => CHECK_NAMES[k] ?? k).join(', ');
 
+const CHECKED_NAMES: Record<string, string> = {
+  ungrounded_numbers: 'numbers',
+  sample_as_total: 'totals',
+  qualitative_trend: 'trends',
+  dates_outside_window: 'dates',
+  count_overclaims: 'record counts',
+  comparison_direction: 'direction of change',
+};
+
+/** "numbers, totals and record counts": only the checks that actually ran. */
+const checkedList = (checked?: string[]) => {
+  const items = (checked ?? []).map(k => CHECKED_NAMES[k] ?? k);
+  return items.length > 1 ? `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}` : items.join('');
+};
+
 /** One line under the report: what the deterministic checks found. */
-function ChecksLine({ checks }: { checks: ReportChecks }) {
+export function ChecksLine({ checks }: { checks: ReportChecks }) {
   const warn = checks.fallback;
   const text = checks.fallback
     ? `The AI summary failed the checks twice (${names(checks.failed)}); the records are shown instead.`
     : checks.attempts > 1
       ? `Passed the checks after one rewrite (first draft had ${names(checks.failed_first)}).`
-      : 'Passed the checks: numbers, counts, dates and trends match the data.';
+      : checks.checked?.length
+        ? `Passed the checks against the data: ${checkedList(checks.checked)}.`
+        : 'Passed the checks against the data.';
   const Icon = warn ? ShieldAlert : ShieldCheck;
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 12, fontSize: 12, color: warn ? '#b45309' : '#047857' }}>

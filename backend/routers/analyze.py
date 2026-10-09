@@ -182,6 +182,7 @@ async def generate_event_report(request: EventReportRequest):
                 actor_activity=result.actor_activity or [],
                 event_storyline=result.event_storyline,
                 generated_at=result.generated_at,
+                checks=result.checks,
             ),
             elapsed_ms=t_report,
         )

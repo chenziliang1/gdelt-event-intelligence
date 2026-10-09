@@ -151,6 +151,7 @@ Evaluation (details, protocol and caveats: `docs/FORECAST_EVALUATION.md`):
 - A LightGBM baseline on the same split, chosen on validation, did better on that period: 13.8% lower than
   seasonal-naive (MAE 53.52 vs 56.13 for the Transformer's 3-seed mean). The bootstrap interval of the difference
   includes zero, so neither model is shown to be better; the Transformer is not shown to beat gradient boosting.
+  LightGBM is stable across seeds (53.0 to 53.5), and its 80% intervals by the same method cover 79%.
 - Earlier, trained on 2024 only: 5.7% lower on Q1 2025 and 4.9% on the held-out end of 2024.
 - The original design's Hawkes-style output head did not help and was removed.
 - The 80% intervals cover 79% on the 2025 test period (76% for the largest series).
@@ -187,7 +188,7 @@ docker exec -it gdelt_backend python db_scripts/build_knowledge_base.py
 - `docs/FORECAST_EVALUATION.md`, `docs/DATA_LAYER.md`: forecaster and data-layer evaluation.
 - `tests/eval_runs/`: live evaluations of the chat agent (routing and dates on 118 questions, three held-out sets,
   the last written blind by a separate agent) and of report faithfulness. The report checks also run on every live
-  report: a failing report is rewritten once, then replaced by a deterministic summary
+  report, from either report button: a failing report is rewritten once, then replaced by a deterministic summary
   (`tests/eval_runs/2026-10-09_report_safety_net/summary.md`).
 - `python -m pytest tests --ignore=tests/run_agent_eval.py`: offline tests (no database, Ollama or API key), run in CI,
   including a replay of the eval questions on recorded router outputs (Sonnet: all 118; qwen: the first 88).

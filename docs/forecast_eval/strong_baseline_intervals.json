@@ -1,0 +1,179 @@
+{
+ "stage": "intervals",
+ "nominal": 0.8,
+ "fit_windows": 16928,
+ "eval_windows": 17664,
+ "lightgbm": {
+  "validation_second_half": {
+   "static": {
+    "overall": 0.822,
+    "by_size": {
+     "-10": 0.796,
+     "10-100": 0.837,
+     "100-1000": 0.842,
+     "1000-": 0.812
+    },
+    "worst_bin_gap": 0.042,
+    "mean_width": 223.6
+   },
+   "rolling_14d": {
+    "overall": 0.815,
+    "by_size": {
+     "-10": 0.804,
+     "10-100": 0.817,
+     "100-1000": 0.829,
+     "1000-": 0.802
+    },
+    "worst_bin_gap": 0.029,
+    "mean_width": 223.5
+   },
+   "rolling_28d": {
+    "overall": 0.821,
+    "by_size": {
+     "-10": 0.8,
+     "10-100": 0.827,
+     "100-1000": 0.838,
+     "1000-": 0.824
+    },
+    "worst_bin_gap": 0.038,
+    "mean_width": 224.1
+   },
+   "rolling_42d": {
+    "overall": 0.824,
+    "by_size": {
+     "-10": 0.8,
+     "10-100": 0.831,
+     "100-1000": 0.84,
+     "1000-": 0.832
+    },
+    "worst_bin_gap": 0.04,
+    "mean_width": 229.2
+   }
+  },
+  "chosen_interval_method": "rolling_14d",
+  "test": {
+   "static": {
+    "overall": 0.805,
+    "by_size": {
+     "-10": 0.804,
+     "10-100": 0.812,
+     "100-1000": 0.808,
+     "1000-": 0.78
+    },
+    "worst_bin_gap": 0.02,
+    "mean_width": 206.5
+   },
+   "rolling_14d": {
+    "overall": 0.786,
+    "by_size": {
+     "-10": 0.798,
+     "10-100": 0.785,
+     "100-1000": 0.785,
+     "1000-": 0.75
+    },
+    "worst_bin_gap": 0.05,
+    "mean_width": 194.3
+   },
+   "rolling_28d": {
+    "overall": 0.788,
+    "by_size": {
+     "-10": 0.801,
+     "10-100": 0.786,
+     "100-1000": 0.783,
+     "1000-": 0.762
+    },
+    "worst_bin_gap": 0.038,
+    "mean_width": 195.0
+   },
+   "rolling_42d": {
+    "overall": 0.791,
+    "by_size": {
+     "-10": 0.803,
+     "10-100": 0.793,
+     "100-1000": 0.787,
+     "1000-": 0.765
+    },
+    "worst_bin_gap": 0.035,
+    "mean_width": 196.8
+   }
+  }
+ },
+ "transformer_reference": {
+  "chosen_interval_method": "rolling_14d",
+  "test": {
+   "seed42": {
+    "rolling_14d": {
+     "overall": 0.789,
+     "by_size": {
+      "-10": 0.801,
+      "10-100": 0.795,
+      "100-1000": 0.782,
+      "1000-": 0.758
+     },
+     "worst_bin_gap": 0.042,
+     "mean_width": 215.2
+    },
+    "static": {
+     "overall": 0.814,
+     "by_size": {
+      "-10": 0.812,
+      "10-100": 0.816,
+      "100-1000": 0.816,
+      "1000-": 0.802
+     },
+     "worst_bin_gap": 0.016,
+     "mean_width": 238.2
+    }
+   },
+   "seed1": {
+    "rolling_14d": {
+     "overall": 0.789,
+     "by_size": {
+      "-10": 0.801,
+      "10-100": 0.795,
+      "100-1000": 0.782,
+      "1000-": 0.755
+     },
+     "worst_bin_gap": 0.045,
+     "mean_width": 216.6
+    },
+    "static": {
+     "overall": 0.814,
+     "by_size": {
+      "-10": 0.81,
+      "10-100": 0.814,
+      "100-1000": 0.819,
+      "1000-": 0.806
+     },
+     "worst_bin_gap": 0.019,
+     "mean_width": 241.6
+    }
+   },
+   "seed2": {
+    "rolling_14d": {
+     "overall": 0.791,
+     "by_size": {
+      "-10": 0.8,
+      "10-100": 0.796,
+      "100-1000": 0.786,
+      "1000-": 0.763
+     },
+     "worst_bin_gap": 0.037,
+     "mean_width": 205.1
+    },
+    "static": {
+     "overall": 0.81,
+     "by_size": {
+      "-10": 0.807,
+      "10-100": 0.805,
+      "100-1000": 0.815,
+      "1000-": 0.811
+     },
+     "worst_bin_gap": 0.015,
+     "mean_width": 227.5
+    }
+   }
+  }
+ },
+ "note": "Same candidates, rule and fitting as evaluate_retrain.py; the method is chosen on validation only."
+}

@@ -143,6 +143,8 @@ export interface QueryPlan {
 
 /** Deterministic checks run on the report before it is shown (ReportGenerator.generate). */
 export interface ReportChecks {
+  /** The checks that ran; the enhanced report runs a subset. */
+  checked?: string[];
   passed: boolean;
   attempts: number;
   fallback: boolean;
@@ -280,6 +282,7 @@ export interface EnhancedReportResult {
   actor_activity?: ActorActivityItem[];
   event_storyline?: EventStorylineData;
   generated_at: string;
+  checks?: ReportChecks | null;
 }
 
 export interface Phase {

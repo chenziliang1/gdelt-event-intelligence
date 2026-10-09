@@ -111,8 +111,42 @@ LightGBM, which is also simpler, trains in under a minute on a laptop CPU, and n
 
 What the intervals cover and do not: variation over days like these (one 10-week period, resampled in weekly blocks
 because neighbouring days share targets). They do not cover other periods, other training seeds (the Transformer
-average is over three fixed seeds; LightGBM is one deterministic run, its seed variation was not measured), or the
-choice of features and trials.
+average is over three fixed seeds; for LightGBM see the seed check below), or the choice of features and trials.
+
+**LightGBM's seed** (`docs/forecast_eval/strong_baseline_seeds.json`; a sensitivity check, nothing chosen on it). The
+tested model is reproducible: refitting it with the same seed (2025) gives identical predictions. But it is not
+seed-free, because the chosen configuration subsamples rows and features (bagging fraction 0.8, feature fraction
+0.9), so the same configuration was refitted with seeds 42, 1 and 2, with the same early stopping on validation:
+
+| LightGBM seed | Rounds | Validation MAE | Test MAE |
+| :-- | --: | --: | --: |
+| 2025 (the tested model) | 1,728 | 54.33 | 53.52 |
+| 42 | 1,972 | 53.72 | 53.17 |
+| 1 | 2,804 | 53.53 | 52.96 |
+| 2 | 2,247 | 53.77 | 53.46 |
+| **42 / 1 / 2, mean** | | **53.67** | **53.20** (range 52.96 to 53.46) |
+
+LightGBM barely moves with the seed (0.5 MAE across three seeds), while the Transformer's three seeds span 52.62 to
+58.24. Seed against seed, the Transformer's mean minus LightGBM's mean is +2.94 MAE, 95% interval **-0.42 to +7.74**
+(same block bootstrap): still not established, with the point estimate favouring LightGBM.
+
+**80% prediction intervals for LightGBM** (`docs/forecast_eval/strong_baseline_intervals.json`), by exactly the
+Transformer's method and rule (`evaluate_retrain.py`): size-binned quantiles of log-space residuals; candidates a
+static interval and rolling refits on the windows observed in the previous 14, 28 or 42 days; chosen on validation
+(fitted on the first half, scored on the second) by the smallest worst-size-bin gap to 80%. The validation scores
+pick **rolling 14 days**, the method the Transformer uses (worst-bin gaps: rolling 14 days 0.029, rolling 28 days
+0.038, rolling 42 days 0.040, static 0.042). On test:
+
+| 80% interval, test 2025-04-01 to 06-11 | Overall | <10 | 10-100 | 100-1,000 | 1,000+ | Mean width |
+| :-- | --: | --: | --: | --: | --: | --: |
+| **LightGBM, rolling 14 days (chosen)** | **0.786** | 0.798 | 0.785 | 0.785 | 0.750 | **194.3** |
+| Transformer seeds 42 / 1 / 2, rolling 14 days (chosen) | 0.789 / 0.789 / 0.791 | 0.800 to 0.801 | 0.795 to 0.796 | 0.782 to 0.786 | 0.755 to 0.763 | 215.2 / 216.6 / 205.1 |
+| LightGBM, static | 0.805 | 0.804 | 0.812 | 0.808 | 0.780 | 206.5 |
+| Transformer seeds, static | 0.810 to 0.814 | 0.807 to 0.812 | 0.805 to 0.816 | 0.815 to 0.819 | 0.802 to 0.811 | 227.5 to 241.6 |
+
+The intervals behave the same way for both models: just under 80% overall, lowest for the largest series, and the
+static interval covers a little more but is wider. LightGBM's intervals are narrower at the same coverage (194 against
+205 to 217 for the rolling interval), which follows from its smaller errors; they are not a better-calibrated method.
 
 Limits of the comparison:
 
@@ -121,6 +155,8 @@ Limits of the comparison:
 * The grid was small (seven trials); neither model was tuned further for this comparison.
 * The served model is still the Transformer (seed 2). Whether to serve LightGBM instead, or average both, is a
   decision for the next period, which has not been looked at.
+* The seed check and the intervals used the test period again (for the third and fourth time in all); they were
+  computed after the LightGBM choice and change nothing about it, and the interval method was chosen on validation.
 
 ## Short answer for the models trained on 2024 only
 
@@ -299,8 +335,10 @@ guarantee of 80%.
 > and beats it on about 70% of the series; the same design trained on 2024 alone got 5.7% there. The Hawkes-style
 > component of the original design hurt and was removed. The 80% intervals cover 0.79 overall on that period
 > (0.76 for the largest series). A LightGBM baseline on the same split did better on that period (+13.8%, MAE
-> 53.52 vs 56.13); the difference between the two is within the bootstrap interval (-0.78 to +7.64), so the
-> Transformer is not shown to beat gradient boosting.
+> 53.52 vs 56.13; 53.20 averaged over three seeds, which barely change it); the difference between the two is
+> within the bootstrap interval (-0.78 to +7.64; seed means -0.42 to +7.74), so the Transformer is not shown to beat
+> gradient boosting. LightGBM's 80% intervals, by the same method, cover 0.79 overall (0.75 for the largest series)
+> and are about 8% narrower (mean width 194 against 212).
 
 ## Reproduce
 
@@ -351,6 +389,12 @@ python db_scripts/evaluate_retrain.py --stage select ...   # then --stage test, 
 # LightGBM on the same split, and bootstrap intervals (stages: transformer, select, test, report; see the script):
 python db_scripts/evaluate_strong_baseline.py --stage select --dataset-cache models/thp_dataset_2024_2025h1_seq14_h7.npz \
   --out docs/forecast_eval/strong_baseline_select.json
+# Follow-ups: same-seed refit and validation/test predictions, seed check, 80% intervals (stages pool, seeds, intervals):
+python db_scripts/evaluate_strong_baseline.py --stage pool --dataset-cache models/thp_dataset_2024_2025h1_seq14_h7.npz
+python db_scripts/evaluate_strong_baseline.py --stage seeds --dataset-cache models/thp_dataset_2024_2025h1_seq14_h7.npz \
+  --out docs/forecast_eval/strong_baseline_seeds.json
+python db_scripts/evaluate_strong_baseline.py --stage intervals --dataset-cache models/thp_dataset_2024_2025h1_seq14_h7.npz \
+  --out docs/forecast_eval/strong_baseline_intervals.json
 ```
 
 ## Next steps

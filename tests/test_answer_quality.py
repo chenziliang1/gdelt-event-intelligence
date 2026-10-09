@@ -134,6 +134,11 @@ def test_counts_written_as_words_are_checked():
                "Four records are dated 2024-01-05 (three of them with 70 articles).",
                "Five records are dated between January 5 and January 6, 2024."):
         assert count_overclaims(ok, PERRY) == [], ok
+    # A count in digits that quotes a total in the data is not a count of listed records (the
+    # enhanced report's daily totals: "17 Dec (564 articles, 88 events)").
+    totals = {**PERRY, "actor_activity": [{"date": "2024-01-05", "event_count": 88, "total_articles": 564}]}
+    assert count_overclaims("On 2024-01-05 there were 88 events (564 articles).", totals) == []
+    assert count_overclaims("On 2024-01-05 there were 89 events (564 articles).", totals)
     # The day of a date is not the count, and does not hide the count that follows it.
     assert count_overclaims("On January 6 three events drew 100 articles.", PERRY)
     assert count_overclaims("On January 6 one event drew 100 articles.", PERRY) == []

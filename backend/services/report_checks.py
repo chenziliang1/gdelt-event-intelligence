@@ -380,13 +380,15 @@ def count_overclaims(text: str, data: Any) -> List[str]:
     The number check ignores small numbers and words, so "four records, each with 70 articles" on a
     day with three such records passed. Only over-claims are flagged: a sentence can name fewer
     records than match (a subset described by something the rule does not read). Two dates or two
-    article counts named: either matches; "between X and Y" is a range. Article counts are used only
+    article counts named: either matches; "between X and Y" is a range. A count in digits that is
+    itself a value in the data ("88 events" for a daily total of 88) is a quote, not a count. Article counts are used only
     when they apply to each record ("each with 70 articles"), and nothing inside parentheses is used. Places and actors are not used: names overlap ("Texas" is
     in most locations) and a sentence listing records in different places would never match.
     """
     events = _shown_events(data)
     if not events:
         return []
+    quoted = data_numbers(data)
     hits = []
     for s in sentences(text):
         # Mask dates first, so the day in "January 6 three events" is neither a count nor
@@ -414,6 +416,11 @@ def count_overclaims(text: str, data: Any) -> List[str]:
         available = sum(matches(e) for e in events)
         for m in claims:
             raw = m.group("n").lower()
+            # "88 events" on a day where the data has a daily total of 88 quotes that total; it is
+            # not a count of listed records (the enhanced report gets daily totals). Every miscount
+            # found so far was written as a word.
+            if raw.isdigit() and float(raw) in quoted:
+                continue
             n = _COUNT_WORDS.get(raw, int(raw) if raw.isdigit() else 0)
             if n > available:
                 hits.append(s)
@@ -484,7 +491,9 @@ def plan_window(plan: Dict[str, Any]) -> Tuple[Optional[str], Optional[str]]:
     return (min(starts), max(ends)) if starts else (None, None)
 
 
-def check_report(report_text: str, plan: Dict[str, Any], data: Dict[str, Any]) -> Dict[str, Any]:
+def check_report(report_text: str, plan: Dict[str, Any], data: Dict[str, Any],
+                 only: Optional[Iterable[str]] = None) -> Dict[str, Any]:
+    """All checks, or with ``only`` just those (the others report nothing and do not count)."""
     step_types = [s.get("type") for s in plan.get("steps", [])]
     comparison = next(
         (v.get("data") for k, v in data.items() if k.startswith("compare_periods") and isinstance(v, dict)), None)
@@ -500,6 +509,13 @@ def check_report(report_text: str, plan: Dict[str, Any], data: Dict[str, Any]) -
         "count_overclaims": count_overclaims(report_text, data),
         "causal_candidates": causal_candidates(report_text),  # informational; see causal_judge.py
     }
+    if only is not None:
+        keep = set(only)
+        for k in ("ungrounded_numbers", "sample_as_total", "qualitative_trend", "dates_outside_window", "count_overclaims"):
+            if k not in keep:
+                result[k] = []
+        if "comparison_direction" not in keep:
+            result["comparison_direction_ok"] = None
     result["pass"] = (
         not result["ungrounded_numbers"]
         and not result["sample_as_total"]
@@ -524,6 +540,7 @@ def dumps(obj: Any) -> str:
 # ---------------------------------------------------------------------------
 
 _LIST_CHECKS = ("ungrounded_numbers", "sample_as_total", "qualitative_trend", "dates_outside_window", "count_overclaims")
+ALL_CHECKS = _LIST_CHECKS + ("comparison_direction",)
 
 
 def failed_checks(result: Dict[str, Any]) -> Dict[str, List[str]]:

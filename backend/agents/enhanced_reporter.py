@@ -15,7 +15,8 @@ from typing import Dict, Any, List, Optional
 
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from backend.agents.planner import ReportGenerator, ReportResult, build_llm
+from backend.agents.planner import ReportGenerator, ReportResult, build_llm, deterministic_summary
+from backend.services.report_checks import check_report
 from backend.services.news_scraper import news_scraper
 from backend.services.storyline_builder import build_event_context
 from backend.services.gkg_client import gkg_client
@@ -152,6 +153,9 @@ def _compute_storyline_relevance(
 # Prompts
 # ---------------------------------------------------------------------------
 
+# Checks that apply to the enhanced report (see generate_event_report).
+ENHANCED_CHECKS = ("ungrounded_numbers", "count_overclaims")
+
 ENHANCED_REPORT_SYSTEM_PROMPT = """You are an expert geopolitical event analyst and narrative journalist.
 Your task is to produce a comprehensive, well-structured report on a specific event or event series.
 
@@ -197,6 +201,7 @@ class EnhancedReportResult:
         actor_activity: Optional[List[Dict[str, Any]]] = None,
         event_storyline: Optional[Dict[str, Any]] = None,
         generated_at: Optional[str] = None,
+        checks: Optional[Dict[str, Any]] = None,
     ):
         self.summary = summary
         self.key_findings = key_findings
@@ -206,6 +211,7 @@ class EnhancedReportResult:
         self.actor_activity = actor_activity
         self.event_storyline = event_storyline
         self.generated_at = generated_at or __import__("datetime").datetime.now().isoformat()
+        self.checks = checks
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -217,6 +223,7 @@ class EnhancedReportResult:
             "actor_activity": self.actor_activity,
             "event_storyline": self.event_storyline,
             "generated_at": self.generated_at,
+            "checks": self.checks,
         }
 
 
@@ -752,6 +759,28 @@ class EnhancedReportGenerator(ReportGenerator):
                     event_storyline=event_storyline,
                 )
 
+            # The same gate as the quick report. This report also gets the storyline (events up to
+            # a month around the query), the GKG tone timeline and complete daily actor counts, so
+            # trends, totals and dates outside the query window can be legitimate here: only the
+            # numbers (against everything the model was given) and record counts are checked.
+            grounding = {"input": narrative_input, "query": data, "storyline": event_storyline}
+            text, checks = await self._gate(
+                messages, text, lambda t: check_report(t, {"steps": []}, grounding, only=ENHANCED_CHECKS), data,
+                checked=ENHANCED_CHECKS)
+            context = event_context if isinstance(event_context, dict) else (event_context.to_dict() if event_context else None)
+            if not checks["passed"]:
+                print(f"[EnhancedReportGenerator] Falling back to the deterministic summary: {sorted(checks['failed'])}", flush=True)
+                return EnhancedReportResult(
+                    summary=deterministic_summary(data, sorted(checks["failed"])),
+                    key_findings=[],
+                    event_context=context,
+                    news_coverage=news_coverage if isinstance(news_coverage, dict) else None,
+                    gkg_insights=gkg_data,
+                    actor_activity=actor_activity,
+                    event_storyline=event_storyline,
+                    checks=checks,
+                )
+
             summary, findings = self._parse_report_text(text)
 
             elapsed = round((__import__("time").time() - t0) * 1000, 1)
@@ -769,6 +798,7 @@ class EnhancedReportGenerator(ReportGenerator):
                 gkg_insights=gkg_data,
                 actor_activity=actor_activity,
                 event_storyline=event_storyline,
+                checks=checks,
             )
 
         except asyncio.TimeoutError:

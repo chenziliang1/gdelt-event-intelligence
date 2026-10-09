@@ -14,7 +14,8 @@ jobs:
           python-version: "3.12"
       # Only what the offline tests import. No Ollama, no MySQL, no torch (the one
       # torch test uses importorskip), so this stays fast.
-      - run: pip install numpy pytest pytest-asyncio pydantic httpx langchain-core langchain-openai python-dotenv aiomysql
+      # fastapi, aiohttp and beautifulsoup4 let the API route and enhanced-report tests run instead of skipping.
+      - run: pip install numpy pytest pytest-asyncio pydantic httpx langchain-core langchain-openai python-dotenv aiomysql fastapi aiohttp beautifulsoup4
       - run: python -m pytest tests -q --ignore=tests/run_agent_eval.py
 
   # The query layer against a real MySQL: a real slice of the data is loaded, the precomputed

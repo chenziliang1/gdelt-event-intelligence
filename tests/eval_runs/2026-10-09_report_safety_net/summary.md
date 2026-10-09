@@ -18,6 +18,32 @@ fell back. Every answer also carries a definitions line built from the plan (`ba
 root code 14; event lists are the most-covered records, a sample, not totals; data covers 2024-01-01 to 2024-12-31;
 relative dates are resolved as of 2024-12-31."
 
+## The enhanced (Deep Dive) report
+
+The second report button, `/analyze/event-report`, had no gate. It now goes through the same one
+(`EnhancedReportGenerator.generate_event_report` calls `ReportGenerator._gate`), with two of the checks: numbers
+must appear in what the model was given (the full input text: query results, storyline, GKG tone timeline, actor
+activity) and counts of records must not exceed the records. Trends, totals and dates outside the query are not
+checked here, because this report legitimately has a daily time series, complete daily totals and a storyline up
+to a month around the query. The response says which checks ran (`checked`), and the panel lists exactly those.
+
+Three live enhanced reports (2026-10-09; the query data fetched with the free local router first): all passed. The
+first run of the third flagged "17 Dec (564 articles, 88 events)", a quote of the daily totals, as a count of
+records, and asked for a rewrite (37 s instead of about 21 to 28 s). The count check now skips a count written in
+digits that is itself a value in the data; every real miscount found so far was written as a word, and the 7 flags
+on the 216 saved reports are unchanged. Re-run, the same report passed on the first draft (24 s).
+
+## In the browser
+
+Headless Chrome against the running app (`vite` and the API, 2026-10-09). Live: a Quick Report showed its pass line
+under the report (with the first wording, which listed all checks for both reports and was then changed to list the
+checks that ran), and after the change a Deep Dive Report showed "Passed the checks against the data: numbers and
+record counts."; the definitions line is shown with the results. The two other states were shown with a mocked API
+response, since neither occurred live: "Passed the checks after one rewrite (first draft had a
+wrong count of records)." and, for a fallback, the record list under "The AI-written summary did not pass the
+automatic checks (numbers not in the data), so the results are listed without interpretation." with an amber line
+"The AI summary failed the checks twice ...".
+
 ## How it would have handled the saved reports
 
 `tests/eval_report_rewrite.py` re-checks all 216 saved reports (2026-10-08, 2026-10-09 and the two prompt changes)
@@ -45,5 +71,9 @@ definitions line with the plan and a report with `checks: {passed: true, attempt
   offline).
 * The fallback path did not occur on real reports; it is covered by unit tests with a scripted model
   (`tests/test_report_safety_net.py`: pass, rewrite, fallback, a rewrite that errors, no plan).
-* A rewrite adds one model call (about the cost of the first) to the share of reports that fail, 8 of 216 here.
+* A rewrite adds one model call to the share of reports that fail, 8 of 216 here; live it added about 13 s to an
+  enhanced report (37 s against 24 s for the same report passing first time).
+* The gate does not check interpretation. The enhanced report's prompt was not changed with the quick report's
+  interpretation rules, and in the browser check it still reads meaning into labels ("The Palestine label ties the
+  24 April cluster to pro-Palestinian demonstrations").
 * The checks are as good as their recall, which is not measured (`../2026-10-09_report_numbers/summary.md`).

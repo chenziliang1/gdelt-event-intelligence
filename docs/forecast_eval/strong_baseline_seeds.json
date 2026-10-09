@@ -1,0 +1,63 @@
+{
+ "stage": "seeds",
+ "config": {
+  "target": "residual",
+  "objective": "l2",
+  "series_id": false,
+  "num_leaves": 63
+ },
+ "subsampling": {
+  "bagging_fraction": 0.8,
+  "bagging_freq": 1,
+  "feature_fraction": 0.9
+ },
+ "determinism": {
+  "seed": 2025,
+  "deterministic_flag": true,
+  "refit_max_abs_diff_vs_tested": 0.0,
+  "note": "Same seed reproduces the tested model exactly; because rows and features are subsampled, a different seed gives a different model."
+ },
+ "tested_seed_2025": {
+  "test_mae": 53.52,
+  "validation_mae": 54.33
+ },
+ "seeds": [
+  {
+   "seed": 42,
+   "best_iteration": 1972,
+   "validation_mae": 53.72,
+   "test_mae": 53.17,
+   "seconds": 45
+  },
+  {
+   "seed": 1,
+   "best_iteration": 2804,
+   "validation_mae": 53.53,
+   "test_mae": 52.96,
+   "seconds": 59
+  },
+  {
+   "seed": 2,
+   "best_iteration": 2247,
+   "validation_mae": 53.77,
+   "test_mae": 53.46,
+   "seconds": 47
+  }
+ ],
+ "test_mae_mean": 53.2,
+ "test_mae_range": [
+  52.96,
+  53.46
+ ],
+ "validation_mae_mean": 53.67,
+ "transformer_seed_mean_minus_lightgbm_seed_mean_95ci": {
+  "mean": 2.94,
+  "lo": -0.42,
+  "hi": 7.74,
+  "level": 0.95,
+  "block_days": 7,
+  "resamples": 2000,
+  "days": 66
+ },
+ "note": "Sensitivity only: no choice is made on these test numbers. Same moving-block bootstrap as the report stage (7-day blocks over the 66 test start days, 2,000 resamples)."
+}
