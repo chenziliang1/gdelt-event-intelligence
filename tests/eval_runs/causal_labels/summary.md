@@ -46,7 +46,7 @@ What this says:
   a border community").
 
 Follow-up: the report prompt was changed and the reports regenerated; the judge finds 0 U sentences in the
-same 30 (`../2026-10-09_report_prompt/summary.md`).
+same 30 and in the other 24 reports (`../2026-10-09_report_prompt/summary.md`).
 
 ## Limits
 

@@ -12,6 +12,7 @@ labeller used (tests/eval_runs/causal_labels/README.md).
 
 With --run, the judge labels the same 30 questions in another run (e.g. reports regenerated with a
 new prompt by tests/rerun_reports.py); those reports have no hand labels, so --score does not apply.
+With --unlabelled, it labels the other reports of the run instead (the ones not in labels.csv).
 
 Scored three ways against the hand labels: the rule alone (answer_quality.causal_candidates), the
 judge alone, and rule + judge (U only if the rule lists the sentence and the judge says U).
@@ -46,12 +47,12 @@ A title or summary in the data counts as data. If unsure between U and H, choose
 Reply with JSON only: {"labels": {"1": "", "2": "U", ...}} with every sentence number."""
 
 
-def report_inputs(run=RUN):
+def report_inputs(run=RUN, unlabelled=False):
     from backend.agents.planner import ReportGenerator
     fmt = ReportGenerator.__new__(ReportGenerator)
     ids = {row["report_id"] for row in csv.DictReader((LABELS / "labels.csv").open())}
     for r in json.loads(Path(run).read_text())["results"]:
-        if r["id"] in ids and r.get("report"):
+        if (r["id"] in ids) != unlabelled and r.get("report"):
             yield r["id"], fmt._format_data_for_report(r["data"]), sentences(r["report"])
 
 
@@ -60,21 +61,21 @@ def user_message(data_text, sents):
     return f"DATA GIVEN TO THE REPORT WRITER:\n{data_text}\n\nREPORT:\n{numbered}"
 
 
-async def judge(out_path, model, run=RUN):
+async def judge(out_path, model, run=RUN, unlabelled=False):
     from dotenv import load_dotenv
     from langchain_core.messages import HumanMessage, SystemMessage
     from backend.agents.planner import _extract_json, build_llm
     load_dotenv(HERE.parent / ".env")
     llm = build_llm({"provider": "claude", "model": model})
     results = {}
-    for rid, data_text, sents in report_inputs(run):
+    for rid, data_text, sents in report_inputs(run, unlabelled):
         resp = await llm.ainvoke([SystemMessage(content=JUDGE_PROMPT), HumanMessage(content=user_message(data_text, sents))])
         raw = _extract_json(resp.content) or {}
         got = raw.get("labels") or {}
         results[rid] = {str(i): got.get(str(i), "") for i in range(1, len(sents) + 1)}
         missing = len(sents) - sum(str(i) in got for i in range(1, len(sents) + 1))
         print(rid, sum(v == "U" for v in results[rid].values()), "U", f"MISSING {missing}" if missing else "")
-    Path(out_path).write_text(json.dumps({"model": model, "run": str(run), "prompt": JUDGE_PROMPT, "labels": results}, indent=1))
+    Path(out_path).write_text(json.dumps({"model": model, "run": str(run), "unlabelled": unlabelled, "prompt": JUDGE_PROMPT, "labels": results}, indent=1))
 
 
 def prf(pred, gold):
@@ -117,6 +118,7 @@ def main():
     p.add_argument("--out")
     p.add_argument("--score")
     p.add_argument("--run", default=str(RUN))
+    p.add_argument("--unlabelled", action="store_true")
     p.add_argument("--model", default=os.getenv("JUDGE_MODEL", "claude-sonnet-5-5"))
     a = p.parse_args()
     if a.dry_run:
@@ -125,7 +127,7 @@ def main():
     elif a.score:
         score(a.score)
     elif a.out:
-        asyncio.run(judge(a.out, a.model, a.run))
+        asyncio.run(judge(a.out, a.model, a.run, a.unlabelled))
 
 
 if __name__ == "__main__":

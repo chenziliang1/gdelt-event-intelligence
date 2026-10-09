@@ -36,12 +36,29 @@ may be duplicates and that the data does not say.
 events" (data: 63,370) and "five records out of more than 20,000" (data: 20,942). They are true, but the number
 check requires a value within 0.5% of the data, so they count as failures; the check was not loosened.
 
+## Out of sample: the other 24 reports
+
+The prompt was written after reading the failures in the 30 labelled reports. The other 24 reports of the run had
+not been read, so the judge labelled them before and after (`judge_other24_before.json`, `judge_other24_after.json`,
+48 calls, `causal_judge.py --unlabelled`):
+
+| other 24 questions | before | after |
+| :-- | --: | --: |
+| Sentences the judge calls U | 26 | **0** |
+| Reports with at least one U (judge) | 15 | **0** |
+| Sentences the judge calls H | 12 | 1 |
+| Sentences the keyword rule lists | 39 | 6 |
+| Words | 5,771 | 5,121 |
+
+The 6 rule sentences are again statements of limits or method ("the per-day figures reflect the same window
+length"); the H sentence says two records may be the same occurrence and that it cannot tell. The before figures
+are lower than in the 30 because these 24 include the period comparisons, which had little to interpret.
+
 ## Limits
 
-* In-sample: the prompt was written after reading the failures in these 30 reports. The other 24 reports were not
-  judged, before or after; judging them both ways (48 calls) would be the out-of-sample check.
+* The 30 are in-sample (the prompt was written from their failures); the 24 are not, and show the same result.
 * The judge was validated on reports in the old style. On the new reports nothing was labelled by a person; the
-  rule's agreement is the only second signal.
+  rule's agreement is the only second signal. With recall at most 0.91, "0" means few, not none.
 * One generation per question, so variance is not measured; the drop from 81 to 0 is far larger than resampling
   would explain.
 * The reports are drier: they list records and say what the data cannot show, instead of telling a story.
@@ -54,4 +71,7 @@ python tests/rerun_reports.py --run tests/eval_runs/2026-10-09_answer_quality/re
     --out tests/eval_runs/2026-10-09_report_prompt/results.json                  # 54 report calls
 python tests/causal_judge.py --run tests/eval_runs/2026-10-09_report_prompt/results.json \
     --out tests/eval_runs/2026-10-09_report_prompt/judge.json                     # 30 judge calls
+python tests/causal_judge.py --unlabelled --out tests/eval_runs/2026-10-09_report_prompt/judge_other24_before.json
+python tests/causal_judge.py --unlabelled --run tests/eval_runs/2026-10-09_report_prompt/results.json \
+    --out tests/eval_runs/2026-10-09_report_prompt/judge_other24_after.json       # 24 + 24 judge calls
 ```
