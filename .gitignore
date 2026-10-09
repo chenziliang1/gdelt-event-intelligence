@@ -74,3 +74,6 @@ test_*.py
 
 # macOS
 .DS_Store
+
+# Small real-data fixture for the CI database tests (tests/ci_db_setup.sh)
+!tests/fixtures/*.sql.gz

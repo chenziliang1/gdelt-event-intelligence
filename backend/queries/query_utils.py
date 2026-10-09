@@ -354,7 +354,10 @@ def parse_region_input(region_input: str) -> list[str]:
     if region_clean != region:
         results.add(region_clean)
 
-    parts = re.split(r'[,\s]+', region)
+    # Split explicit lists ("Texas, Ontario") only. Splitting on spaces turned "New York" into
+    # "New%" (New Jersey, New Mexico...), "Los Angeles" into "Los%", and the "de" of "Estado de
+    # México" into Germany's country code.
+    parts = re.split(r'\s*,\s*', region)
     for part in parts:
         if part and len(part) > 1:
             results.add(part.strip())

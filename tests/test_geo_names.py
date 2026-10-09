@@ -49,3 +49,15 @@ def test_search_inner_query_uses_the_city_level_match():
 
     sql, params = _build_optimized_search_sql("2024-03-01", "2024-03-31", "Texas", None, "protest", None, None, None, 20)
     assert "ActionGeo_ADM1 IN" in sql and "Texas" in params  # was "Texas%": 287 of 612 Texas protests in March 2024
+
+
+def test_multi_word_places_are_not_split_into_words():
+    from backend.queries.query_utils import parse_region_input
+
+    assert "New" not in parse_region_input("New York") and "New York" in parse_region_input("New York")
+    assert "Los" not in parse_region_input("Los Angeles")
+    terms = parse_region_input("Estado de México")
+    assert "de" not in terms and "México" not in terms
+    assert {"Texas", "Ontario"} <= set(parse_region_input("Texas, Ontario"))  # explicit lists still split
+    sql, params = _build_smart_location_condition("Estado de México", None)
+    assert params == ["Estado de México", "Méco"]  # was also 'Estado%', 'MX', 'de%', 'DE'
