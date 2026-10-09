@@ -7,7 +7,8 @@ so a failure points at a specific sentence. What they catch:
 * ungrounded numbers: a count, percentage or score in the report that is not in the data;
 * sample-as-total: a total or a trend stated from a top-N event list (a sample, not a count);
 * comparison direction: "increase" in the report when the computed direction is a decrease;
-* dates outside the window: a date the query never covered.
+* dates outside the window: a date the query never covered;
+* count over-claims: "four records, each with 70 articles" on a day with three such records.
 
 Causes and motives are harder: the event records hold dates, places, actor labels, CAMEO codes,
 tone and article counts, never why something happened, yet "which points to a legal dimension"
@@ -160,7 +161,7 @@ def qualitative_trend(text: str, step_types: Iterable[str]) -> List[str]:
     if not steps & SAMPLE_STEPS or "compare_periods" in steps:
         return []
     hits = []
-    for sentence in re.split(r"(?<=[.!?])\s+", text):
+    for sentence in sentences(text):
         if _TREND_VERB.search(sentence) and _TREND_SUBJECT.search(sentence) and not _NOT_A_CLAIM.search(sentence):
             hits.append(sentence.strip())
     return hits
@@ -190,10 +191,30 @@ _DATA_LIMIT = re.compile(
     re.IGNORECASE,
 )
 _SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+|\n+")
+# "Canada vs. United States" never ends a sentence. After an initialism ("U.S.", "D.C.") the sentence
+# ends only if the next word is capitalised: "in Washington, D.C. It drew" vs "U.S. political disputes".
+_NEVER_ENDS = re.compile(r"\b(?:vs|Mr|Mrs|Ms|Dr|St|Gov|Sen|Rep|Gen|Lt|Col|Mt|Ft|e\.g|i\.e)\.$")
+_INITIALISM = re.compile(r"(?:\b[A-Z]\.){2,}$")
+
+
+def _ends_sentence(before: str, after: str) -> bool:
+    if _NEVER_ENDS.search(before):
+        return False
+    if _INITIALISM.search(before):
+        return after.lstrip("\"'(“‘")[:1].isupper()
+    return True
 
 
 def sentences(text: str) -> List[str]:
-    return [s.strip() for s in _SENTENCE_SPLIT.split(text or "") if s.strip()]
+    text = text or ""
+    out, start = [], 0
+    for m in _SENTENCE_SPLIT.finditer(text):
+        if "\n" not in m.group() and not _ends_sentence(text[:m.start()], text[m.end():]):
+            continue
+        out.append(text[start:m.start()].strip())
+        start = m.end()
+    out.append(text[start:].strip())
+    return [s for s in out if s]
 
 
 def causal_candidates(text: str) -> List[str]:
@@ -210,6 +231,88 @@ def causal_candidates(text: str) -> List[str]:
         if _CAUSAL.search(s[:limit.start()] if limit else s):
             out.append(s)
     return out
+
+
+# ---------------------------------------------------------------------------
+# Counts of records written as words
+# ---------------------------------------------------------------------------
+
+_COUNT_WORDS = {w: i for i, w in enumerate(
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen "
+    "sixteen seventeen eighteen nineteen twenty".split())}
+_COUNT_CLAIM = re.compile(
+    r"\b(?P<n>" + "|".join(_COUNT_WORDS) + r"|(?<![\d/.-])\d{1,2})\s+(?:[\w-]+\s+){0,2}?(?:records|events|entries)\b",
+    re.IGNORECASE)
+# "a sample of ten records", "the top ten events", "of the five records" describe the list, not a subset.
+_LIST_SIZE = re.compile(r"\b(?:of|the|top|first|these|all|only)\s*$", re.IGNORECASE)
+# "70 articles", "97 and 95 articles", "114 to 120 articles" (a range).
+_ARTICLES = re.compile(r"\b(\d[\d,]*)(?:\s*(?P<sep>and|or|to|-|\u2013)\s*(\d[\d,]*))?\s+articles\b")
+
+
+def _events(obj: Any, out: Dict[Any, Dict[str, Any]]) -> None:
+    if isinstance(obj, dict):
+        if (obj.get("SQLDATE") or obj.get("date")) and ("NumArticles" in obj or "Actor1Name" in obj):
+            key = obj.get("GlobalEventID") or obj.get("fingerprint") or id(obj)
+            out.setdefault(key, obj)
+        for v in obj.values():
+            _events(v, out)
+    elif isinstance(obj, list):
+        for v in obj:
+            _events(v, out)
+
+
+def _iso(value: Any) -> str:
+    s = str(value or "")
+    return f"{s[:4]}-{s[4:6]}-{s[6:8]}" if re.fullmatch(r"\d{8}", s) else s[:10]
+
+
+def count_overclaims(text: str, data: Any) -> List[str]:
+    """Sentences that say "N records/events" and name a date or an article count, when fewer than N
+    records in the data have that date and article count.
+
+    The number check ignores small numbers and words, so "four records, each with 70 articles" on a
+    day with three such records passed. Only over-claims are flagged: a sentence can name fewer
+    records than match (a subset described by something the rule does not read). Two dates or two
+    article counts named: either matches. Places and actors are not used: names overlap ("Texas" is
+    in most locations) and a sentence listing records in different places would never match.
+    """
+    found: Dict[Any, Dict[str, Any]] = {}
+    _events(data, found)
+    events = list(found.values())
+    if not events:
+        return []
+    hits = []
+    for s in sentences(text):
+        # Mask dates first, so the day in "January 6 three events" is neither a count nor
+        # consumes the match that "three events" needs.
+        masked = s
+        for a, b in _date_spans(s):
+            masked = masked[:a] + "#" * (b - a) + masked[b:]
+        claims = [m for m in _COUNT_CLAIM.finditer(masked) if not _LIST_SIZE.search(masked[:m.start()])]
+        if not claims:
+            continue
+        dates = {d.isoformat() for _, d in _report_dates(s) if d != date.max}
+        ranges = []
+        for m in _ARTICLES.finditer(s):
+            lo = int(m.group(1).replace(",", ""))
+            hi = int(m.group(3).replace(",", "")) if m.group(3) else lo
+            ranges += [(lo, hi)] if m.group("sep") in ("to", "-", "\u2013") else [(lo, lo), (hi, hi)]
+        if not (dates or ranges):
+            continue
+
+        def matches(e: Dict[str, Any]) -> bool:
+            n = e.get("NumArticles") or e.get("num_articles")
+            return ((not dates or _iso(e.get("SQLDATE") or e.get("date")) in dates)
+                    and (not ranges or (n is not None and any(lo <= int(n) <= hi for lo, hi in ranges))))
+
+        available = sum(matches(e) for e in events)
+        for m in claims:
+            raw = m.group("n").lower()
+            n = _COUNT_WORDS.get(raw, int(raw) if raw.isdigit() else 0)
+            if n > available:
+                hits.append(s)
+                break
+    return hits
 
 
 # ---------------------------------------------------------------------------
@@ -288,6 +391,7 @@ def check_report(report_text: str, plan: Dict[str, Any], data: Dict[str, Any]) -
         "qualitative_trend": qualitative_trend(report_text, step_types),
         "comparison_direction_ok": comparison_direction_ok(report_text, comparison),
         "dates_outside_window": dates_outside(report_text, start, end) if window_applies else [],
+        "count_overclaims": count_overclaims(report_text, data),
         "causal_candidates": causal_candidates(report_text),  # informational; see causal_judge.py
     }
     result["pass"] = (
@@ -296,6 +400,7 @@ def check_report(report_text: str, plan: Dict[str, Any], data: Dict[str, Any]) -
         and not result["qualitative_trend"]
         and result["comparison_direction_ok"] is not False
         and not result["dates_outside_window"]
+        and not result["count_overclaims"]
     )
     return result
 

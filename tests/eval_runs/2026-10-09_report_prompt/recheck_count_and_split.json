@@ -1,0 +1,817 @@
+{
+  "summary": {
+    "rechecked": "tests/eval_runs/2026-10-09_report_prompt/results.json",
+    "scored": 54,
+    "passed": 50,
+    "failures_by_check": {
+      "ungrounded_numbers": 2,
+      "sample_as_total": 0,
+      "qualitative_trend": 0,
+      "dates_outside_window": 0,
+      "count_overclaims": 2,
+      "comparison_direction": 0
+    }
+  },
+  "results": [
+    {
+      "id": "detail-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "detail-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "hot-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "hot-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "brief-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "brief-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "overview-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "They therefore do not show what any of the events were about, what caused them, or what the actors did."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "overview-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "top-01",
+      "status": "fail",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [
+          "Two records from 2024-01-04 are tied for the next-highest count in the list at 90 articles each."
+        ],
+        "causal_candidates": [],
+        "pass": false
+      }
+    },
+    {
+      "id": "top-02",
+      "status": "fail",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [
+          "By shared fields, five records are dated 2024-03-12 (MIAMI vs SCHOOL, FLORIDA vs Unknown, and the two SETTLEMENT/FLORIDA records, which together make four; the grouping is by date only)."
+        ],
+        "causal_candidates": [],
+        "pass": false
+      }
+    },
+    {
+      "id": "confidence-probe-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "confidence-probe-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "None has a summary stating what any protest was about, who took part beyond the coded labels, or what triggered it."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "confidence-probe-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The records give no titles or summaries beyond the actor labels and codes, so they do not show what any event was about, what caused it, or who the actors were."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "search-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Because this is a sample of ten records, it cannot show how many events occurred in 2024 or what happened outside these two September days."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "search-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "This reflects only the sample of ten records listed, which is chosen by article count.",
+          "The records give no titles or summaries beyond actor labels and event codes, so they do not show what any of these events were about, what caused them, or who the people behind labels like PRESIDENT, JUDGE or VOTER were."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "keyword-fts-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "reldate-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The records carry only generic titles and summaries (\"Protest involving X\"), so they do not say what any protest was about, who was demonstrating, or what prompted it.",
+          "Because this is a sample of the top events by article count, it also cannot show how many protests occurred in the week or how activity changed across it."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "reldate-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "reldate-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "reldate-04",
+      "status": "fail",
+      "checks": {
+        "ungrounded_numbers": [
+          "63,000"
+        ],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": false
+      }
+    },
+    {
+      "id": "compare-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "compare-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "month-end-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Their titles and summaries do not say what any protest was about, who took part beyond the labels, or what prompted it."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "month-end-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "month-end-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "march-word-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "None includes a title or summary stating what the protests were about, who took part, or what happened, so the causes and the identities behind labels like AUSTIN, STUDENT or INDUSTRY cannot be determined here.",
+          "Because this is a sample of ten records chosen by article count, it shows neither the total number of protest events in Texas in 2024 nor any trend over the year."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "invalid-date-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "They show no totals or trends, and the records are not shown to be related to one another."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-detail-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-detail-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-detail-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-hot-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-hot-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-brief-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-brief-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-overview-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-overview-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-overview-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-top-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-04",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "None includes a descriptive title or summary beyond those labels, so they do not show what any event was about, what caused it, or who was involved beyond the codes."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-05",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-month-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The records do not show crowd sizes, arrests, causes or outcomes, and they cannot show how these events relate to one another."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-month-02",
+      "status": "fail",
+      "checks": {
+        "ungrounded_numbers": [
+          "20,000"
+        ],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": false
+      }
+    },
+    {
+      "id": "h-march-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-may-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The actor labels alone do not establish causes, and the coding of some records (such as POLICE listed as the protesting actor, or KINGSTON as a target in Montreal) is unexplained by the data."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-compare-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-compare-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The raw totals and the per-day figure point in different directions because the periods differ in length."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-compare-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Both quarters span the same 91 days, so the per-day figures reflect the same window length."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-invalid-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-invalid-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Their titles and summaries add no wording on what any protest was about, what prompted it, or who the actors were.",
+          "Because the list is a sample of the top events by article count, it cannot show how many protests took place in Texas in 2024 or how activity changed over the year."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-search-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "This grouping reflects only shared location, date and actor fields."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-search-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    }
+  ]
+}

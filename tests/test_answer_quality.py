@@ -95,3 +95,41 @@ def test_causal_candidates_keep_guesses_and_drop_statements_of_what_the_data_can
                  "I also can't say whether the day was unusual, because the brief has no comparison period.",
                  "Protests in Austin drew 70 articles on 2024-01-10."):
         assert causal_candidates(fine) == [], fine
+
+
+def test_sentences_do_not_split_after_vs_or_mid_sentence_initialisms():
+    from answer_quality import sentences
+
+    text = ("An event coded as Canada vs. United States drew 96 articles. Most were tied to U.S. political "
+            "disputes. It centers on Washington, D.C. It drew 150 articles; one was the only non-U.S. location.")
+    assert sentences(text) == [
+        "An event coded as Canada vs. United States drew 96 articles.",
+        "Most were tied to U.S. political disputes.",
+        "It centers on Washington, D.C.",
+        "It drew 150 articles; one was the only non-U.S. location.",
+    ]
+
+
+PERRY = {"similar_events_0": {"type": "similar_events", "data": [
+    {"SQLDATE": "2024-01-05", "NumArticles": n, "Actor1Name": "POLICE", "ActionGeo_FullName": loc}
+    for n, loc in ((70, "Perry High School, Iowa, United States"),) * 3 + ((60, "Maine, United States"),)
+] + [{"SQLDATE": "2024-01-06", "NumArticles": 100, "Actor1Name": "AUTHORITIES"}]}}
+
+
+def test_counts_written_as_words_are_checked():
+    from answer_quality import count_overclaims
+
+    # detail-01 (2026-10-09): the data has three such records, the report said four.
+    bad = "At Perry High School on 2024-01-05, four records, each with 70 articles, involve POLICE."
+    assert count_overclaims(bad, PERRY) == [bad]
+    assert not check_report(bad, {"steps": [{"type": "similar_events"}]}, PERRY)["pass"]
+    for ok in ("At Perry High School on 2024-01-05, three records, each with 70 articles, involve POLICE.",
+               "Two records on 2024-01-05 drew 70 articles each.",        # a subset is fine
+               "Two records on 2024-01-05 drew 60 to 70 articles.",       # a range
+               "On 2024-01-05 two records drew 70 and 60 articles.",      # two counts: either
+               "Of the five records, four are dated 2024-01-05.",         # "of the five" is the list
+               "Four records were listed in total."):                       # nothing to check against
+        assert count_overclaims(ok, PERRY) == [], ok
+    # The day of a date is not the count, and does not hide the count that follows it.
+    assert count_overclaims("On January 6 three events drew 100 articles.", PERRY)
+    assert count_overclaims("On January 6 one event drew 100 articles.", PERRY) == []

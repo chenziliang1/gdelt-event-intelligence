@@ -22,9 +22,24 @@ LLM requests: 54 reports, plus 1 report from the browser check of the Quick Repo
 
 Interpretation beyond the data (causes, motives, connections) is not checked by the five checks above. It was
 measured separately on 30 of these reports against reviewed labels (`../causal_labels/summary.md`): 25 of 30 contain
-at least one unsupported cause, motive or connection (75 of 447 sentences). A keyword rule finds 59% of them; a Claude
-judge finds 91% with precision 0.84, so it is used as an offline evaluation, not as a pass/fail check. After a
+at least one unsupported cause, motive or connection (75 of 443 sentences). A keyword rule finds 60% of them; a Claude
+judge finds 91% with precision 0.85, so it is used as an offline evaluation, not as a pass/fail check. After a
 prompt change, the regenerated reports have none by the judge (`../2026-10-09_report_prompt/summary.md`).
 
-Counts written as words ("four records") and event-type descriptions are not checked either; the review found one
-of each wrong.
+Event-type descriptions ("the rest are fighting" when one is an assault) are not checked either.
+
+## Recheck with a sixth check (count over-claims), same reports
+
+The causal review found "four records" where the data has three; the number check ignores counts written as words.
+`count_overclaims` (tests/answer_quality.py) takes sentences that say "N records/events" and name a date or an
+article count, and flags them when fewer than N records in the data have that date and article count. It only flags
+over-claims, since a sentence may describe a subset by something the rule does not read. On the saved reports,
+without new LLM calls (`python tests/rerun_reports.py --checks-only ...`, `recheck_count_and_split.json`):
+
+**52 of 54 pass all six checks.** The two failures are real: `detail-01` "four records, each with 70 articles" on
+2024-01-05 at Perry High School (three), and `invalid-date-01` "three events ... 200 articles each" on 2024-11-11 (two,
+and the sentence goes on to list two). Across the 162 saved reports of 2026-10-08, 2026-10-09 and the prompt change,
+the check flags 5 sentences, all wrong when compared with the data; earlier versions of the check that also used
+places and actors, or read the day of a date as a count, flagged correct sentences and were narrowed.
+
+The same change fixed the sentence splitter, which broke after "U.S." and "vs." (`../causal_labels/resplit.py`).

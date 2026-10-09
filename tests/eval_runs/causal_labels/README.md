@@ -1,6 +1,6 @@
 # Hand labels: causes and motives in reports
 
-30 reports from `../2026-10-09_answer_quality/` (seed 2026, `tests/make_causal_labeling.py`), 447 sentences. These
+30 reports from `../2026-10-09_answer_quality/` (seed 2026, `tests/make_causal_labeling.py`), 443 sentences. These
 labels are the reference for the causal rule (`tests/answer_quality.causal_candidates`) and the Claude judge
 (`tests/causal_judge.py`). Round 1 of the review was done before the judge was run; round 2 after (see below).
 
@@ -15,8 +15,10 @@ Pre-labelled, then reviewed by a person (`tests/make_causal_review.py`):
 3. After the judge had run, the person reviewed `review2.csv` blind (no pre-filled answer, no judge label): the 23
    sentences the judge called U that had been pre-labelled empty and not sampled. 12 were U.
 4. `labels.csv` = the pre-labels with the reviewed rows of both rounds replaced (75 U, 6 H).
+5. The sentence splitter was then fixed (it broke after "U.S." and "vs."); `resplit.py` merged the labelled halves
+   in every file, 447 sentences becoming 443 (merged halves: U if either was U, else H if either was H).
 
-Limits: the 312 empty pre-labels that neither the sample nor round 2 covered were not seen by the reviewer, so a
+Limits: the 309 empty pre-labels that neither the sample nor round 2 covered were not seen by the reviewer, so a
 missed U there stays missed; round 2 checked only the judge's disagreements, which favours the judge; and in round
 1 a pre-label can anchor the reviewer. Results: `summary.md`. The judge (Sonnet) is a different model from the pre-labeller (Opus), but
 both are Claude.

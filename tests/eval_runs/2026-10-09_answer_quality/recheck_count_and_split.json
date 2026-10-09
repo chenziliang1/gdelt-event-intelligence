@@ -1,0 +1,953 @@
+{
+  "summary": {
+    "rechecked": "tests/eval_runs/2026-10-09_answer_quality/results.json",
+    "scored": 54,
+    "passed": 52,
+    "failures_by_check": {
+      "ungrounded_numbers": 0,
+      "sample_as_total": 0,
+      "qualitative_trend": 0,
+      "dates_outside_window": 0,
+      "count_overclaims": 2,
+      "comparison_direction": 0
+    }
+  },
+  "results": [
+    {
+      "id": "detail-01",
+      "status": "fail",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [
+          "The most prominent cluster is at Perry High School, Iowa, on 2024-01-05, where four records, each with 70 articles, involve AUTHORITIES and POLICE."
+        ],
+        "causal_candidates": [
+          "Because the Fort Worth record lacks a type, a second actor and a summary, any firmer reading of it would need the underlying articles."
+        ],
+        "pass": false
+      }
+    },
+    {
+      "id": "detail-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Together these suggest coverage of a school-related security incident in Iowa.",
+          "The shared \"AUTHORITIES\" actor label and the school-related Texas and Iowa locations suggest a thematic overlap at most."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "hot-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The near-identical scores and the shared geography suggest these may be related coverage of one situation, but the data doesn't confirm a link.",
+          "The event labels are automated GDELT codings, so they point to topics in the news without establishing what actually happened."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "hot-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The coding suggests a handoff of responsibility between Defense Secretary Lloyd Austin and his deputy, but the data gives no further detail on what was yielded or why.",
+          "These entries should be read cautiously as signals of conflict-related coverage, not literal confrontations between those parties.",
+          "The Boeing and Alaska pairing likely connects to the aviation story of that day, but the data doesn't confirm it."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "brief-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "That suggests coverage leaned toward negative framing, but with no event detail I can't say which stories or regions drove it."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "brief-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "overview-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "That suggests a mix of cooperative and conflictual activity without a strongly lopsided picture.",
+          "That is the most negative of the sampled events, and it points to a judicial dispute or ruling involving the state.",
+          "The actor labels are generic, so the underlying event is unclear, but it reflects national-level attention on Texas's population on that date.",
+          "Because only five events are available and several lack identifiable actors, I can draw no firm conclusions about trends or specific causes for the year."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "overview-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The actor labels are too generic to support conclusions about causes or specific developments."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "top-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Five of the ten events are tied to that date and to Uvalde or Robb Elementary School.",
+          "The mix of sharply negative and mildly positive tones suggests the coverage mixed violent-incident framing with institutional and procedural reporting.",
+          "Together they point to a border and migration-related story involving the state, though the records don't specify the nature of the dispute."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "top-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Two mirrored \"SETTLEMENT vs FLORIDA\" and \"FLORIDA vs SETTLEMENT\" records, each with 84 articles and a neutral tone (1.0), point to a settlement involving the state.",
+          "A \"BARRISTER vs Unknown\" event drew 120 articles with a neutral tone (3.4), suggesting legal coverage.",
+          "The actors are too generic to say what happened, but the tone suggests a dispute, accident, or other adverse incident involving a worker.",
+          "The rest of the list reflects Florida as a backdrop for broader stories.",
+          "A \"HUNGARY vs BELGIUM\" event on March 15 (102 articles, tone -2.0) and a \"UN SECURITY COUNCIL vs ISRAEL\" event on March 27 (81 articles, tone 3.0) were geolocated to Florida, probably because of how the articles were tagged rather than because the events happened there.",
+          "Two more were tied to specific places: \"NAPLES vs FLORIDA\" on March 17 (80 articles, tone -4.0) and \"Unknown vs BRAZILIAN\" in Miami on March 19 (80 articles, tone -2.0)."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "confidence-probe-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "An unidentified actor criticized MIGRANT in Texas (90 articles, Goldstein -2.0), a disapproval event that points to the migration debate.",
+          "Robb Elementary was the site of the 2022 shooting, so the pairing of police, school and authority actors suggests ongoing attention to that case."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "confidence-probe-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Hamas versus \"Marche\" appears on both January 29 and January 30, with 10 articles each, which suggests Middle East-related demonstrations in Texas, though the actor coding is ambiguous.",
+          "One 20-article event, on January 19, was located in San Diego, California, not Texas, so it likely reflects a geographic tagging quirk in the data.",
+          "Taken together, the sample suggests the month's protest coverage was driven mainly by border and migration politics, with local and international issues also present.",
+          "The sparse and loosely coded actor fields mean specific causes and participants can't be confirmed from this data alone."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "confidence-probe-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "That is milder than the -10.0 fighting events, and it points to labor or industry-related tension rather than physical confrontation, though the data does not specify the cause."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "search-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Together these suggest coverage that mixed violence with discussion and engagement around the school."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "search-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The most heavily covered conflict events in North America in 2024 were mostly tied to U.S. political and legal disputes rather than clear-cut armed violence.",
+          "The actors are mostly courts, legislators, voters and city or state entities, which suggests contention over governance, elections and policing.",
+          "They are most likely the same story coded from both directions, a state-versus-judiciary dispute.",
+          "The actor-location pairing is odd, so it may reflect a coding quirk or a story with international links.",
+          "Overall, the sampled events point to institutional and political conflict, especially in North Carolina, as the most heavily covered form of conflict in the data."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "keyword-fts-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The actor labels (FIREFIGHTER, TANKER, RESIDENTS, XCEL ENERGY) point to emergency response, utilities, and affected communities.",
+          "GDELT codes these as \"fighting\" and \"appeal\" events, so the \"fighting\" entries are probably firefighting reports rather than armed conflict.",
+          "On March 7, a public statement about XCEL ENERGY drew 70 articles, which suggests the utility was drawn into the story.",
+          "On August 4 in Hawaii, RESIDENTS were tied to a fighting event (60 articles, -9.5), and a SCHOOL expressed intent to cooperate (60 articles, +4.0).",
+          "The records also give no cause, damage, or outcome for any event."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "reldate-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The data is thin on detail: the event records carry actor labels and conflict scores but no narrative text, so what drove each protest is mostly unclear.",
+          "One pitted Starbucks against a \"company\" actor, which suggests a labor or corporate dispute.",
+          "A Seattle-versus-company event was also located in Texas that day, which may reflect a corporate dispute with a Seattle link rather than a Seattle-based protest.",
+          "On December 27, a generic \"male\" actor was tied to a protest event.",
+          "The constable and deputy events suggest recurring friction involving local law enforcement, though the data doesn't say what caused it.",
+          "Overall, the sample points to scattered protests involving corporate, government and law enforcement actors rather than one dominant movement.",
+          "Because many records are tagged only to \"Texas\" and have vague actors, the specific causes and participants can't be determined from this data alone."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "reldate-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The event codes alone don't establish causes or outcomes."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "reldate-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Together these suggest a court ruling that drew a public response, though the records don't name the case.",
+          "These likely reflect a national story that was geotagged to New York, perhaps through coverage originating from the city, rather than local New York activity."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "reldate-04",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Overall, the data points to business activity in Harris County and a police-related incident in Arlington as the prominent stories, but the actor labels are too generic to say more."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "compare-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Both figures use the same filters (location=Canada, event_type=protest), so the drop reflects a change in recorded events under identical criteria."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "compare-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The comparison therefore rests on events per day rather than raw totals, so the 30.1% reflects the daily rate and not just March's extra days.",
+          "It contains no breakdown of actors, cities, causes, or individual events, so it cannot show what drove the increase or where it was concentrated."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "month-end-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Earlier in the month, the events point to a mix of political and local grievances.",
+          "On March 1, a protest tied to Joe Biden in Texas drew 12 articles.",
+          "On March 3, a protest linking Israel and the president drew 10 articles, which suggests the Middle East conflict fed into Texas demonstrations.",
+          "The same day, an appeals court was the focus of a protest entry with 10 articles, which points to a legal or judicial dimension.",
+          "The records do not identify the underlying causes, so any link between events would be speculation."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "month-end-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "April 2024 in Texas, as reflected in the most heavily covered events, was shaped by protest, conflict-coded incidents in the Houston area, and political friction.",
+          "Together these suggest campus and activist demonstrations tied to the Israel-related issue were a major story, though the records alone don't give the specifics.",
+          "Cooperative signals also appeared."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "month-end-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "On 2024-02-12, two events tied to Houston involved \"TEXAS\" and \"ABBOT\" and drew 90 articles each.",
+          "Read together, the paired events suggest a confrontation involving Governor Abbott's name, though the underlying detail isn't in the records.",
+          "Because the records carry only generic actor labels and no full context, the specific causes and outcomes of these events can't be determined from this data alone."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "march-word-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The data only labels these events as protests, so the underlying causes and details are inferred from the actors and timing.",
+          "The sample points to Gaza-related activism, campus and student unrest, and confrontations with police as the main threads of Texas protest news in 2024."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "invalid-date-01",
+      "status": "fail",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [
+          "On 2024-11-11, three events coded in Texas involving the United States and \"population\" also hit 200 articles each: a public statement (Goldstein 0.0) and a yield (Goldstein 5.0)."
+        ],
+        "causal_candidates": [
+          "Between them, on 2024-06-27, the most conflictual of the top events appeared: a \"High Court coerces Texas\" event (Goldstein -5.0) with 180 articles, suggesting a court-imposed constraint on the state.",
+          "Taken together, the sample mixes cooperative signals (consultations, yielding, intent to cooperate) with a few confrontational ones (the High Court coercion, the Dallas rejection, the protester investigation).",
+          "Because the actor labels are often generic and no period comparison is provided, these events show what drew the most attention, but not how the year developed or what drove each story."
+        ],
+        "pass": false
+      }
+    },
+    {
+      "id": "h-detail-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Together these show a connected exchange: consultation, cooperative signals, and repeated public statements from DEPUTY's side.",
+          "The data also doesn't identify who AUSTIN and DEPUTY are, what the statements said, or what prompted the coverage."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-detail-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Together they show that \"AUTHORITIES\" is a generic actor label used across many US states, so the Fort Worth appeal can't be tied to these events on the evidence provided."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-detail-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-hot-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Their identical scores and shared geography suggest they may be related coverage of a single situation, though the data does not say what it was.",
+          "Other conflict events were tied to familiar New Year's Eve settings and to public safety.",
+          "These are automated event codings, so the actor labels (such as \"SAINT\" or \"PICKPOCKET\") are rough and the underlying stories may differ from what the labels suggest."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-hot-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Together they suggest a notable moment of political engagement around the Speaker, though the data doesn't say what the cooperation concerned."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-brief-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-brief-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-overview-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The clustering may reflect a single news cycle, or it may reflect how GDELT assigns locations, since national stories are often tagged to a state."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-overview-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Taken together, the sample suggests national-level coverage centred on Ottawa, with worker and migrant-worker issues and government ministries prominent, set against a single sharply negative incident in Etobicoke.",
+          "The records lack detail on the actors and the nature of the events, so the underlying causes and any links between these events can't be determined from this data."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-overview-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "That points to a mix of conflict and cooperation with no decisive lean either way.",
+          "The actor pairing is odd for a city-level event and may reflect how the source articles were coded rather than a literal confrontation.",
+          "It points to a political dispute playing out in Arizona coverage, though the data doesn't identify the issue.",
+          "Together these top events suggest a period shaped by political and institutional friction, with the Maricopa County event standing out for its tone."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-top-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The San Francisco events pair the city with an unnamed counterpart and with a \"JUDGE,\" which suggests a court or legal matter, and a separate \"WEBSITE\" event the same day drew 114 articles.",
+          "The repeated San Francisco and Hollywood entries probably reflect a few major news items, each recorded as several related events.",
+          "The records point to a month of legal, political, and local-community coverage, but the specifics would need the source articles."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The data is generic: the events carry actor labels rather than named organizations, so the specific causes behind them cannot be identified from this sample.",
+          "Taken together, the sample suggests that labor actions and protests aimed at prisons and the courts drew the most coverage in Illinois during this window, with Chicago as the main location.",
+          "Because the records are broad actor-type labels and the list is only a sample of the most-covered events, they do not show the size of the protests, the specific grievances, or how the disputes were resolved."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The pairing of military personnel and sheriff's deputies in one county does suggest a coordinated local response of some kind.",
+          "Elsewhere, the coverage reflected a mix of cooperation and conflict.",
+          "Their Texas geotagging may reflect where the stories were reported rather than where the events happened."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "They do suggest that community-level and economic themes were among the more widely reported items.",
+          "The sharper negative signals come from two places.",
+          "Their near-identical article counts suggest the same underlying story coded twice, though the data doesn't say what happened.",
+          "Because the actor labels are generic and the counterparts unknown, these entries show where media attention clustered but not the causes or outcomes."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-04",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Coverage of Mexico on December 30-31, 2024 is dominated by violence tied to organized crime, with one political protest standing out as the single most-covered event.",
+          "The geocoding is imprecise: these records pair Sinaloa and Michoac\u00e1n with \"Tabasco,\" which suggests location-matching errors in the source data rather than a real geographic link.",
+          "Taken together, the sample suggests that cartel-army clashes in Michoac\u00e1n and criminal violence in Sinaloa were the main conflict stories of these two days."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-reldate-05",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "On December 30, workers were recorded protesting against PITTSBURGH in Lordstown, a location tied to Ohio's manufacturing sector.",
+          "The actor labels alone don't reveal the employers or issues involved, so any link between these events is only suggested by the shared actor category.",
+          "The records do not say what prompted them."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-month-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "On September 23, Columbus Circle was the site of two events tied to the Israel\u2013Gaza conflict, one listing the United States against Israel and the other Gaza against Israel, each with 16 articles."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-month-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The identical actors and article counts suggest one underlying story recorded twice.",
+          "These records are tied to the state as a whole rather than a city, and the sequence suggests government activity in the final week."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-march-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "On 2024-07-26, two separate DC events each drew 50 articles: one coded \"Protester vs Law Enforcement Agencies\" and one coded \"Unidentified actor vs Male.\" The shared date and location suggest they may describe the same episode, but the data doesn't confirm that.",
+          "These appear to reflect labor and corporate disputes and shouldn't be counted as DC activity."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-may-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "It points to Toronto and Montreal as the main flashpoints, with police confrontations drawing the most intense conflict ratings."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-compare-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Because the per-day figure already accounts for the extra day in October, the rise is not an artifact of a longer month.",
+          "It includes no individual events, actors, cities, or article counts, so it shows how much protest activity rose but not what drove it.",
+          "Explaining the cause would require looking at the specific events within each month."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-compare-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The raw totals and the daily rates seem to point in different directions, and the periods' lengths explain why."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-compare-03",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": true,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "Canada's protest event volume in the second quarter stayed very close to the first quarter's level, and the small difference in the daily rate does not point to a clear escalation or decline."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-invalid-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The overlap in dates and in the Florida location suggests a single news cycle involving federal institutions, but the records alone don't establish what it was.",
+          "These two events share a date and county, which points to a connected development involving a school and state action, though the data doesn't say what it was.",
+          "On August 5, an event coded as Florida threatening Florida (Goldstein -4.4, 150 articles) pointed to internal tension within the state, again without detail on its cause.",
+          "Because they are a sample ranked by article count and the coded actors are often generic, they show what drew the most coverage rather than a full account of the year in Florida."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-invalid-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The actor pairings suggest pro-Palestinian demonstrators confronting law enforcement, including state troopers.",
+          "A related event on April 30, DEMONSTRATOR vs POLICE (30 articles), points to continued friction with police later that month.",
+          "The data does not specify the cause, but the location is notable.",
+          "Taken together, these records suggest that Gaza-related activism, campus and student mobilization, and clashes with police were prominent threads in Texas protest coverage, with Austin as a focal point.",
+          "The data is only a sample of the most-covered events and gives limited detail on causes, participants, or outcomes, so these links are inferences from actor labels and dates rather than confirmed findings."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-search-01",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The data supports a cluster of coverage tied to Baltimore around late March and early April, but not the cause or full scope of that story."
+        ],
+        "pass": true
+      }
+    },
+    {
+      "id": "h-search-02",
+      "status": "pass",
+      "checks": {
+        "ungrounded_numbers": [],
+        "sample_as_total": [],
+        "qualitative_trend": [],
+        "comparison_direction_ok": null,
+        "dates_outside_window": [],
+        "count_overclaims": [],
+        "causal_candidates": [
+          "The pattern is consistent with the aftermath of a major hurricane season, though the data doesn't name a specific storm or cause, so that link is inference rather than something the records state."
+        ],
+        "pass": true
+      }
+    }
+  ]
+}

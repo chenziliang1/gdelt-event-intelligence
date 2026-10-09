@@ -80,7 +80,15 @@ def merge():
     second = LABELS / "review2.csv"
     if second.exists():
         for r in csv.DictReader(second.open()):
-            reviewed[(r["report_id"], r["sentence_no"])] = {**r, "prelabel": ""}
+            key = (r["report_id"], r["sentence_no"])
+            first = reviewed.get(key)
+            if first:
+                # Only after the splitter fix (resplit.py): halves reviewed in different rounds
+                # became one sentence; it is U if either answer was U, else H if either was H.
+                finals = {first["final"].strip().upper(), r["final"].strip().upper()}
+                r = {**r, "final": "U" if "U" in finals else "H" if "H" in finals else "",
+                     "note": " / ".join(n for n in (first["note"], r["note"]) if n)}
+            reviewed[key] = {**r, "prelabel": first["prelabel"] if first else ""}
     changed = 0
     all_rows = rows()
     for r in all_rows:

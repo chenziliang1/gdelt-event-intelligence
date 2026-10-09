@@ -32,14 +32,13 @@ confidence-probe-03,5,"Another assault, in Beverly Hills on 2024-12-16, drew 112
 confidence-probe-03,6,The rest of the sample shows conflict in other settings.,,
 confidence-probe-03,7,"On 2024-01-29, a statewide event pitting students against a gang drew 100 articles.",,
 confidence-probe-03,8,"On 2024-02-07 and 2024-02-08, fighting involving Marine Corps and San Diego actors was reported in San Diego, with 90 articles each day.",,
-confidence-probe-03,9,"On 2024-07-29, an event coded as Canada vs.",,
-confidence-probe-03,10,"United States, located only as ""California,"" drew 96 articles.",,
-confidence-probe-03,11,"The coding of that event is ambiguous, and the data does not say what it concerned.",,
-confidence-probe-03,12,"The one distinctly non-violent cluster is a pair of protest events in Hollywood on 2024-09-09 and 2024-09-10, involving actors and television (100 and 110 articles, Goldstein -6.5).",,
-confidence-probe-03,13,"That is milder than the -10.0 fighting events, and it points to labor or industry-related tension rather than physical confrontation, though the data does not specify the cause.",H,保留H：从ACTOR–TELEVISION猜测劳资或行业矛盾，同句明确说明数据未给出原因，限定直接针对这项猜测。
-confidence-probe-03,14,"This is only a sample of the most-covered events, so it cannot show how much conflict occurred overall or how it changed during the year.",,
-confidence-probe-03,15,"It does show that Los Angeles, San Francisco, San Diego and Hollywood drew the heaviest coverage.",,
-confidence-probe-03,16,"Many of the actor labels are generic or machine-coded (e.g., ""LOS ANGELES vs ?""), so the underlying incidents should be confirmed against the source articles.",,
+confidence-probe-03,9,"On 2024-07-29, an event coded as Canada vs. United States, located only as ""California,"" drew 96 articles.",,
+confidence-probe-03,10,"The coding of that event is ambiguous, and the data does not say what it concerned.",,
+confidence-probe-03,11,"The one distinctly non-violent cluster is a pair of protest events in Hollywood on 2024-09-09 and 2024-09-10, involving actors and television (100 and 110 articles, Goldstein -6.5).",,
+confidence-probe-03,12,"That is milder than the -10.0 fighting events, and it points to labor or industry-related tension rather than physical confrontation, though the data does not specify the cause.",H,保留H：从ACTOR–TELEVISION猜测劳资或行业矛盾，同句明确说明数据未给出原因，限定直接针对这项猜测。
+confidence-probe-03,13,"This is only a sample of the most-covered events, so it cannot show how much conflict occurred overall or how it changed during the year.",,
+confidence-probe-03,14,"It does show that Los Angeles, San Francisco, San Diego and Hollywood drew the heaviest coverage.",,
+confidence-probe-03,15,"Many of the actor labels are generic or machine-coded (e.g., ""LOS ANGELES vs ?""), so the underlying incidents should be confirmed against the source articles.",,
 detail-01,1,**Primary event 1150442224** is thinly documented.,,
 detail-01,2,"It is dated 2024-01-09 in Fort Worth, Texas, and pairs ""AUTHORITIES"" with an unidentified counterpart.",,
 detail-01,3,It was covered in 120 articles and has a neutral tone score of 3.0.,,
@@ -234,10 +233,9 @@ hot-01,9,"California was a cluster: coercion events involving the United States 
 hot-01,10,"The near-identical scores and the shared geography suggest these may be related coverage of one situation, but the data doesn't confirm a link.",H,保留H：推测3条Coercion属于同一情境，同句明确数据未证实联系。
 hot-01,11,The rest were conflict-coded events with smaller article counts.,,
 hot-01,12,"""PICKPOCKET fights"" in Times Square, New York, drew 40 articles (Goldstein -9.5), which fits New Year's Eve crowds there.",U,保留U：输入没有跨年人群，将PICKPOCKET事件与人群相联系属于外部背景解释。
-hot-01,13,"""VANCOUVER fights"" in Metchosin, British Columbia, and ""UNITED STATES fights NEIGHBORHOOD"" across the U.S.",,
-hot-01,14,each had 30 articles and the most negative score on the list (-10.0).,,
-hot-01,15,Canada's single entry stands out in a list otherwise located in the United States.,,
-hot-01,16,"The event labels are automated GDELT codings, so they point to topics in the news without establishing what actually happened.",,
+hot-01,13,"""VANCOUVER fights"" in Metchosin, British Columbia, and ""UNITED STATES fights NEIGHBORHOOD"" across the U.S. each had 30 articles and the most negative score on the list (-10.0).",,
+hot-01,14,Canada's single entry stands out in a list otherwise located in the United States.,,
+hot-01,15,"The event labels are automated GDELT codings, so they point to topics in the news without establishing what actually happened.",,
 hot-02,1,"On 2024-01-09, the most-covered event in the data was at the White House in Washington, D.C., where ""AUSTIN yields to DEPUTY"" drew 150 articles, more than double any other item on the list.",,
 hot-02,2,It carries a neutral tone (Goldstein 5.0).,,
 hot-02,3,"The coding suggests a handoff of responsibility between Defense Secretary Lloyd Austin and his deputy, but the data gives no further detail on what was yielded or why.",U,保留U：输入只有AUSTIN yields to DEPUTY，未确认Lloyd Austin身份或职责交接。缺少更多细节不等于承认身份推断未证实。
@@ -253,8 +251,7 @@ hot-02,12,"""MISSISSIPPI yields"" had 60 articles (Goldstein 10.0).",,
 hot-02,13,"""IOWA yields to CRIMINAL"" in Kansas had 63 articles (7.0).",,
 hot-02,14,"""EMPLOYEE consults with BOEING"" in Alaska had 60 articles (7.0), and ""SEATTLE provides aid"" in Florida had 60 articles (7.0).",,
 hot-02,15,"The Boeing and Alaska pairing likely connects to the aviation story of that day, but the data doesn't confirm it.",H,保留H：把BOEING与Alaska联系到当天航空新闻，同时明确说数据不能确认。
-hot-02,16,"Taken together, the list is dominated by U.S.",,
-hot-02,17,"locations, and its generic actor labels make the specific storylines hard to pin down beyond the Pentagon item.",U,保留U：结合第16句读取分句；Pentagon item把AUSTIN–DEPUTY认定为五角大楼事件，输入未给这一身份。
+hot-02,16,"Taken together, the list is dominated by U.S. locations, and its generic actor labels make the specific storylines hard to pin down beyond the Pentagon item.",U,保留U：结合第16句读取分句；Pentagon item把AUSTIN–DEPUTY认定为五角大楼事件，输入未给这一身份。
 invalid-date-01,1,"Texas in 2024 shows up in the data mostly through a handful of heavily covered events, though GDELT's actor coding is generic enough that many details stay vague.",,
 invalid-date-01,2,"The ten events listed are a sample of the most-covered items, not a full account of the year.",,
 invalid-date-01,3,The strongest coverage clusters around two dates.,,已核对：5月17日和11月11日各有两条200篇记录，为最高覆盖日期组。
@@ -415,23 +412,22 @@ reldate-03,14,"These likely reflect a national story that was geotagged to New Y
 reldate-03,15,The sample is thin on detail.,,已核对：记录缺少事件内容，仅为信息局限判断。
 reldate-03,16,"Actors are generic, such as ""news organization,"" ""politician"" and ""spokesman,"" and the records carry no narrative text.",,
 reldate-03,17,"The links between events, especially the Appeals Court pair, are inferences from shared actors, dates and locations rather than confirmed facts.",,
-search-02,1,The most heavily covered conflict events in North America in 2024 were mostly tied to U.S.,,这行在U.S.处被错误切句。仅就本行可见地理陈述，10条地点均在美国，未提出原因或事件性质；下一行才是political and legal disputes rather than armed violence的性质判断。本轮保留原切分，并注明不将下一行的U重复计入本行。
-search-02,2,political and legal disputes rather than clear-cut armed violence.,U,保留U：结合第1句的U.S.分句读取；将Fighting等编码重解释为政治法律纠纷而非武装暴力，输入未说明。
-search-02,3,"Of the ten events listed, seven were in North Carolina, two in North Dakota and one in Northbrook, Illinois.",,
-search-02,4,"This is a sample of the top events by article count, so it shows where coverage clustered, not the full scope of conflict.",,
-search-02,5,North Carolina's institutions and politics dominate the list.,U,North Carolina占7条有据，COURT OF APPEALS/SENATE等角色也确实存在；但politics dominate结合上下文将Fighting等编码归为政治性质，角色字段没有说明冲突实际关于政治。
-search-02,6,"The most-covered event was on 2024-03-13, when the COURT OF APPEALS and VOTER were coded in a ""Fighting"" event (70 articles, Goldstein -10.0).",,
-search-02,7,"On 2024-10-03, PRESIDENT vs NORTH CAROLINA was coded as a show of force (63 articles, -7.2).",,
-search-02,8,A 2024-11-02 protest involving PRESIDENT and CHARLOTTE drew 42 articles (-6.5).,,
-search-02,9,"Other North Carolina events include an unidentified actor against the SENATE on 2024-12-17 (60 articles, -9.5), an unidentified actor against CHARLOTTE on 2024-07-25 (56 articles, -10.0), POLICE on 2024-11-27 (50 articles, -10.0), and ACADEMICS vs LAWMAKER on 2024-09-16 (40 articles, -10.0).",,
-search-02,10,"The actors are mostly courts, legislators, voters and city or state entities, which suggests contention over governance, elections and policing.",U,保留U：法院、议员、选民、警察角色不证明争议内容为治理、选举或警务。
-search-02,11,"The data does not say what each event involved, and GDELT's ""Fighting"" label can cover verbal or legal confrontation as well as physical clashes.",,
-search-02,12,"Outside North Carolina, two mirrored records from 2024-11-22 in North Dakota, NORTH DAKOTA vs JUDGE and JUDGE vs NORTH DAKOTA, each drew 50 articles at -10.0.",,
-search-02,13,"They are most likely the same story coded from both directions, a state-versus-judiciary dispute.",U,保留U：两条镜像NORTH DAKOTA–JUDGE记录没有共同事件标识，不能确认同一新闻或州与司法机关争端。
-search-02,14,"The remaining event is EUROPE coded in ""Fighting"" in Northbrook, Illinois, on 2024-04-02 (40 articles, -10.0).",,
-search-02,15,"The actor-location pairing is odd, so it may reflect a coding quirk or a story with international links.",U,保留U：EUROPE角色与Northbrook地点不能证明国际关联；列出可能解释但未明确说明该解释未经数据证实。
-search-02,16,"Overall, the sampled events point to institutional and political conflict, especially in North Carolina, as the most heavily covered form of conflict in the data.",U,保留U：把事件归为制度和政治冲突，需要超出Fighting及角色字段的实质信息。
-search-02,17,"The records give no casualty or incident details, and no period comparison is provided, so they cannot show whether conflict intensified or eased over the year.",,
+search-02,1,The most heavily covered conflict events in North America in 2024 were mostly tied to U.S. political and legal disputes rather than clear-cut armed violence.,U,保留U：结合第1句的U.S.分句读取；将Fighting等编码重解释为政治法律纠纷而非武装暴力，输入未说明。 / 这行在U.S.处被错误切句。仅就本行可见地理陈述，10条地点均在美国，未提出原因或事件性质；下一行才是political and legal disputes rather than armed violence的性质判断。本轮保留原切分，并注明不将下一行的U重复计入本行。
+search-02,2,"Of the ten events listed, seven were in North Carolina, two in North Dakota and one in Northbrook, Illinois.",,
+search-02,3,"This is a sample of the top events by article count, so it shows where coverage clustered, not the full scope of conflict.",,
+search-02,4,North Carolina's institutions and politics dominate the list.,U,North Carolina占7条有据，COURT OF APPEALS/SENATE等角色也确实存在；但politics dominate结合上下文将Fighting等编码归为政治性质，角色字段没有说明冲突实际关于政治。
+search-02,5,"The most-covered event was on 2024-03-13, when the COURT OF APPEALS and VOTER were coded in a ""Fighting"" event (70 articles, Goldstein -10.0).",,
+search-02,6,"On 2024-10-03, PRESIDENT vs NORTH CAROLINA was coded as a show of force (63 articles, -7.2).",,
+search-02,7,A 2024-11-02 protest involving PRESIDENT and CHARLOTTE drew 42 articles (-6.5).,,
+search-02,8,"Other North Carolina events include an unidentified actor against the SENATE on 2024-12-17 (60 articles, -9.5), an unidentified actor against CHARLOTTE on 2024-07-25 (56 articles, -10.0), POLICE on 2024-11-27 (50 articles, -10.0), and ACADEMICS vs LAWMAKER on 2024-09-16 (40 articles, -10.0).",,
+search-02,9,"The actors are mostly courts, legislators, voters and city or state entities, which suggests contention over governance, elections and policing.",U,保留U：法院、议员、选民、警察角色不证明争议内容为治理、选举或警务。
+search-02,10,"The data does not say what each event involved, and GDELT's ""Fighting"" label can cover verbal or legal confrontation as well as physical clashes.",,
+search-02,11,"Outside North Carolina, two mirrored records from 2024-11-22 in North Dakota, NORTH DAKOTA vs JUDGE and JUDGE vs NORTH DAKOTA, each drew 50 articles at -10.0.",,
+search-02,12,"They are most likely the same story coded from both directions, a state-versus-judiciary dispute.",U,保留U：两条镜像NORTH DAKOTA–JUDGE记录没有共同事件标识，不能确认同一新闻或州与司法机关争端。
+search-02,13,"The remaining event is EUROPE coded in ""Fighting"" in Northbrook, Illinois, on 2024-04-02 (40 articles, -10.0).",,
+search-02,14,"The actor-location pairing is odd, so it may reflect a coding quirk or a story with international links.",U,保留U：EUROPE角色与Northbrook地点不能证明国际关联；列出可能解释但未明确说明该解释未经数据证实。
+search-02,15,"Overall, the sampled events point to institutional and political conflict, especially in North Carolina, as the most heavily covered form of conflict in the data.",U,保留U：把事件归为制度和政治冲突，需要超出Fighting及角色字段的实质信息。
+search-02,16,"The records give no casualty or incident details, and no period comparison is provided, so they cannot show whether conflict intensified or eased over the year.",,
 top-02,1,March 2024 coverage tagged to Florida was led by a cluster of events on March 12.,,
 top-02,2,"The most-covered was a ""MIAMI vs SCHOOL"" event in Miami, with 150 articles and a cooperative tone (8.0).",,
 top-02,3,"The same day, a generic ""FLORIDA vs Unknown"" event drew 144 articles.",,

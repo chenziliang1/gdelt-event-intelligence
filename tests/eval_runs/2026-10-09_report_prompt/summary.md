@@ -15,14 +15,14 @@ asks for a summary of what the records show, with explicit rules (`REPORT_SYSTEM
 
 Only the prompt changed. `tests/rerun_reports.py` regenerated all 54 reports of `../2026-10-09_answer_quality/`
 from the saved plan and data (same `claude-sonnet-5-5`, no planner or database calls). The judge from
-`../causal_labels/` (recall 0.91, precision 0.84 against reviewed labels) then labelled the reports for the same 30
+`../causal_labels/` (recall 0.91, precision 0.85 against reviewed labels) then labelled the reports for the same 30
 questions (`judge.json`).
 
 ## Result
 
 | 30 questions | before | after |
 | :-- | --: | --: |
-| Sentences the judge calls U (unsupported) | 81 | **0** |
+| Sentences the judge calls U (unsupported) | 80 | **0** |
 | Reports with at least one U (judge) | 28 | **0** |
 | Sentences the judge calls H (guess, flagged as such) | 13 | 2 |
 | Sentences the keyword rule lists | 87 | 14 |
@@ -32,9 +32,16 @@ All 14 sentences the rule lists are statements of what the data cannot show ("th
 about, what caused it, or who was involved"), so the rule agrees with the judge. The 2 H sentences say two records
 may be duplicates and that the data does not say.
 
-**Deterministic checks: 52 of 54 pass** (54 of 54 before). Both failures are rounded totals: "the other 63,000-plus
-events" (data: 63,370) and "five records out of more than 20,000" (data: 20,942). They are true, but the number
-check requires a value within 0.5% of the data, so they count as failures; the check was not loosened.
+Counts are after the sentence splitter fix (`../causal_labels/resplit.py`): the judge's two U labels on the halves
+of one sentence in `search-02` became one, so 81 became 80.
+
+**Deterministic checks: 50 of 54 pass** (52 of 54 for the old prompt), with the count check added after this run
+(`recheck_count_and_split.json`, no new LLM calls). Two failures are rounded totals: "the other 63,000-plus events"
+(data: 63,370) and "five records out of more than 20,000" (data: 20,942). They are true, but the number check
+requires a value within 0.5% of the data, so they count as failures; the check was not loosened. Two are wrong
+counts: "Two records from 2024-01-04 ... at 90 articles each" (one has 90) and "five records are dated 2024-03-12"
+(four are; the sentence itself says "together make four"). The old prompt's two wrong counts were in other reports,
+so the new prompt neither caused nor fixed this kind of error.
 
 ## Out of sample: the other 24 reports
 
@@ -59,7 +66,7 @@ are lower than in the 30 because these 24 include the period comparisons, which 
 * The 30 are in-sample (the prompt was written from their failures); the 24 are not, and show the same result.
 * The judge was validated on reports in the old style. On the new reports nothing was labelled by a person; the
   rule's agreement is the only second signal. With recall at most 0.91, "0" means few, not none.
-* One generation per question, so variance is not measured; the drop from 81 to 0 is far larger than resampling
+* One generation per question, so variance is not measured; the drop from 80 to 0 is far larger than resampling
   would explain.
 * The reports are drier: they list records and say what the data cannot show, instead of telling a story.
   Whether analysts find them less useful is not measured.

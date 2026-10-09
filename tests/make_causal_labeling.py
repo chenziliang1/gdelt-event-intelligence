@@ -43,6 +43,11 @@ def main() -> None:
             rows.append({"report_id": r["id"], "sentence_no": i, "sentence": s, "label": "", "note": ""})
         md.append("")
     (OUT / "reports.md").write_text("\n".join(md))
+    if (OUT / "labels.csv").exists():
+        # The labels are done; re-running only refreshes reports.md (e.g. after a splitter fix,
+        # with labels.csv renumbered by eval_runs/causal_labels/resplit.py).
+        print(f"reports.md rewritten; labels.csv exists and was left alone ({len(rows)} sentences)")
+        return
     with (OUT / "labels.csv").open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["report_id", "sentence_no", "sentence", "label", "note"])
         w.writeheader()

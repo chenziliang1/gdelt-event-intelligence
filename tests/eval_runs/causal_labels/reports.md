@@ -125,14 +125,13 @@ Avg tone: -2.01467
 6. The rest of the sample shows conflict in other settings.
 7. On 2024-01-29, a statewide event pitting students against a gang drew 100 articles.
 8. On 2024-02-07 and 2024-02-08, fighting involving Marine Corps and San Diego actors was reported in San Diego, with 90 articles each day.
-9. On 2024-07-29, an event coded as Canada vs.
-10. United States, located only as "California," drew 96 articles.
-11. The coding of that event is ambiguous, and the data does not say what it concerned.
-12. The one distinctly non-violent cluster is a pair of protest events in Hollywood on 2024-09-09 and 2024-09-10, involving actors and television (100 and 110 articles, Goldstein -6.5).
-13. That is milder than the -10.0 fighting events, and it points to labor or industry-related tension rather than physical confrontation, though the data does not specify the cause.
-14. This is only a sample of the most-covered events, so it cannot show how much conflict occurred overall or how it changed during the year.
-15. It does show that Los Angeles, San Francisco, San Diego and Hollywood drew the heaviest coverage.
-16. Many of the actor labels are generic or machine-coded (e.g., "LOS ANGELES vs ?"), so the underlying incidents should be confirmed against the source articles.
+9. On 2024-07-29, an event coded as Canada vs. United States, located only as "California," drew 96 articles.
+10. The coding of that event is ambiguous, and the data does not say what it concerned.
+11. The one distinctly non-violent cluster is a pair of protest events in Hollywood on 2024-09-09 and 2024-09-10, involving actors and television (100 and 110 articles, Goldstein -6.5).
+12. That is milder than the -10.0 fighting events, and it points to labor or industry-related tension rather than physical confrontation, though the data does not specify the cause.
+13. This is only a sample of the most-covered events, so it cannot show how much conflict occurred overall or how it changed during the year.
+14. It does show that Los Angeles, San Francisco, San Diego and Hollywood drew the heaviest coverage.
+15. Many of the actor labels are generic or machine-coded (e.g., "LOS ANGELES vs ?"), so the underlying incidents should be confirmed against the source articles.
 
 ## detail-01
 
@@ -797,10 +796,9 @@ Hot events (5):
 10. The near-identical scores and the shared geography suggest these may be related coverage of one situation, but the data doesn't confirm a link.
 11. The rest were conflict-coded events with smaller article counts.
 12. "PICKPOCKET fights" in Times Square, New York, drew 40 articles (Goldstein -9.5), which fits New Year's Eve crowds there.
-13. "VANCOUVER fights" in Metchosin, British Columbia, and "UNITED STATES fights NEIGHBORHOOD" across the U.S.
-14. each had 30 articles and the most negative score on the list (-10.0).
-15. Canada's single entry stands out in a list otherwise located in the United States.
-16. The event labels are automated GDELT codings, so they point to topics in the news without establishing what actually happened.
+13. "VANCOUVER fights" in Metchosin, British Columbia, and "UNITED STATES fights NEIGHBORHOOD" across the U.S. each had 30 articles and the most negative score on the list (-10.0).
+14. Canada's single entry stands out in a list otherwise located in the United States.
+15. The event labels are automated GDELT codings, so they point to topics in the news without establishing what actually happened.
 
 ## hot-02
 
@@ -851,8 +849,7 @@ Hot events (5):
 13. "IOWA yields to CRIMINAL" in Kansas had 63 articles (7.0).
 14. "EMPLOYEE consults with BOEING" in Alaska had 60 articles (7.0), and "SEATTLE provides aid" in Florida had 60 articles (7.0).
 15. The Boeing and Alaska pairing likely connects to the aviation story of that day, but the data doesn't confirm it.
-16. Taken together, the list is dominated by U.S.
-17. locations, and its generic actor labels make the specific storylines hard to pin down beyond the Pentagon item.
+16. Taken together, the list is dominated by U.S. locations, and its generic actor labels make the specific storylines hard to pin down beyond the Pentagon item.
 
 ## invalid-date-01
 
@@ -1386,23 +1383,22 @@ Hot events (5):
 
 **Report:**
 
-1. The most heavily covered conflict events in North America in 2024 were mostly tied to U.S.
-2. political and legal disputes rather than clear-cut armed violence.
-3. Of the ten events listed, seven were in North Carolina, two in North Dakota and one in Northbrook, Illinois.
-4. This is a sample of the top events by article count, so it shows where coverage clustered, not the full scope of conflict.
-5. North Carolina's institutions and politics dominate the list.
-6. The most-covered event was on 2024-03-13, when the COURT OF APPEALS and VOTER were coded in a "Fighting" event (70 articles, Goldstein -10.0).
-7. On 2024-10-03, PRESIDENT vs NORTH CAROLINA was coded as a show of force (63 articles, -7.2).
-8. A 2024-11-02 protest involving PRESIDENT and CHARLOTTE drew 42 articles (-6.5).
-9. Other North Carolina events include an unidentified actor against the SENATE on 2024-12-17 (60 articles, -9.5), an unidentified actor against CHARLOTTE on 2024-07-25 (56 articles, -10.0), POLICE on 2024-11-27 (50 articles, -10.0), and ACADEMICS vs LAWMAKER on 2024-09-16 (40 articles, -10.0).
-10. The actors are mostly courts, legislators, voters and city or state entities, which suggests contention over governance, elections and policing.
-11. The data does not say what each event involved, and GDELT's "Fighting" label can cover verbal or legal confrontation as well as physical clashes.
-12. Outside North Carolina, two mirrored records from 2024-11-22 in North Dakota, NORTH DAKOTA vs JUDGE and JUDGE vs NORTH DAKOTA, each drew 50 articles at -10.0.
-13. They are most likely the same story coded from both directions, a state-versus-judiciary dispute.
-14. The remaining event is EUROPE coded in "Fighting" in Northbrook, Illinois, on 2024-04-02 (40 articles, -10.0).
-15. The actor-location pairing is odd, so it may reflect a coding quirk or a story with international links.
-16. Overall, the sampled events point to institutional and political conflict, especially in North Carolina, as the most heavily covered form of conflict in the data.
-17. The records give no casualty or incident details, and no period comparison is provided, so they cannot show whether conflict intensified or eased over the year.
+1. The most heavily covered conflict events in North America in 2024 were mostly tied to U.S. political and legal disputes rather than clear-cut armed violence.
+2. Of the ten events listed, seven were in North Carolina, two in North Dakota and one in Northbrook, Illinois.
+3. This is a sample of the top events by article count, so it shows where coverage clustered, not the full scope of conflict.
+4. North Carolina's institutions and politics dominate the list.
+5. The most-covered event was on 2024-03-13, when the COURT OF APPEALS and VOTER were coded in a "Fighting" event (70 articles, Goldstein -10.0).
+6. On 2024-10-03, PRESIDENT vs NORTH CAROLINA was coded as a show of force (63 articles, -7.2).
+7. A 2024-11-02 protest involving PRESIDENT and CHARLOTTE drew 42 articles (-6.5).
+8. Other North Carolina events include an unidentified actor against the SENATE on 2024-12-17 (60 articles, -9.5), an unidentified actor against CHARLOTTE on 2024-07-25 (56 articles, -10.0), POLICE on 2024-11-27 (50 articles, -10.0), and ACADEMICS vs LAWMAKER on 2024-09-16 (40 articles, -10.0).
+9. The actors are mostly courts, legislators, voters and city or state entities, which suggests contention over governance, elections and policing.
+10. The data does not say what each event involved, and GDELT's "Fighting" label can cover verbal or legal confrontation as well as physical clashes.
+11. Outside North Carolina, two mirrored records from 2024-11-22 in North Dakota, NORTH DAKOTA vs JUDGE and JUDGE vs NORTH DAKOTA, each drew 50 articles at -10.0.
+12. They are most likely the same story coded from both directions, a state-versus-judiciary dispute.
+13. The remaining event is EUROPE coded in "Fighting" in Northbrook, Illinois, on 2024-04-02 (40 articles, -10.0).
+14. The actor-location pairing is odd, so it may reflect a coding quirk or a story with international links.
+15. Overall, the sampled events point to institutional and political conflict, especially in North Carolina, as the most heavily covered form of conflict in the data.
+16. The records give no casualty or incident details, and no period comparison is provided, so they cannot show whether conflict intensified or eased over the year.
 
 ## top-02
 

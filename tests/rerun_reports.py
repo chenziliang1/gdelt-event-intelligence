@@ -8,6 +8,9 @@ changes: no planner or database calls, one report call per scored row (paid LLM 
         --out tests/eval_runs/2026-10-09_report_prompt/results.json
 
 The output has the same shape as run_answer_quality_eval.py, so causal_judge.py --run can read it.
+
+With --checks-only, no LLM calls: re-run the deterministic checks on the saved reports (after a
+change to tests/answer_quality.py) and write only ids, status and checks.
 """
 
 import argparse
@@ -20,6 +23,23 @@ HERE = Path(__file__).parent
 sys.path[:0] = [str(HERE.parent), str(HERE)]
 
 from answer_quality import check_report, report_text  # noqa: E402
+
+
+def recheck(run_path, out_path):
+    saved = json.loads(Path(run_path).read_text())
+    results = []
+    for r in saved["results"]:
+        if r["status"] not in ("pass", "fail"):
+            continue
+        checks = check_report(r["report"], r["plan"], r["data"])
+        results.append({"id": r["id"], "status": "pass" if checks["pass"] else "fail", "checks": checks})
+    failed = {k: sum(bool(r["checks"][k]) for r in results)
+              for k in ("ungrounded_numbers", "sample_as_total", "qualitative_trend", "dates_outside_window", "count_overclaims")}
+    failed["comparison_direction"] = sum(r["checks"]["comparison_direction_ok"] is False for r in results)
+    summary = {"rechecked": str(run_path), "scored": len(results),
+               "passed": sum(r["status"] == "pass" for r in results), "failures_by_check": failed}
+    Path(out_path).write_text(json.dumps({"summary": summary, "results": results}, indent=2))
+    print(json.dumps(summary, indent=2))
 
 
 async def rerun(run_path, out_path, concurrency):
@@ -54,5 +74,6 @@ if __name__ == "__main__":
     p.add_argument("--run", required=True)
     p.add_argument("--out", required=True)
     p.add_argument("--concurrency", type=int, default=4)
+    p.add_argument("--checks-only", action="store_true")
     a = p.parse_args()
-    asyncio.run(rerun(a.run, a.out, a.concurrency))
+    recheck(a.run, a.out) if a.checks_only else asyncio.run(rerun(a.run, a.out, a.concurrency))
