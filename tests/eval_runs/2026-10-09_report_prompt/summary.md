@@ -35,13 +35,13 @@ may be duplicates and that the data does not say.
 Counts are after the sentence splitter fix (`../causal_labels/resplit.py`): the judge's two U labels on the halves
 of one sentence in `search-02` became one, so 81 became 80.
 
-**Deterministic checks: 50 of 54 pass** (52 of 54 for the old prompt), with the count check added after this run
-(`recheck_count_and_split.json`, no new LLM calls). Two failures are rounded totals: "the other 63,000-plus events"
-(data: 63,370) and "five records out of more than 20,000" (data: 20,942). They are true, but the number check
-requires a value within 0.5% of the data, so they count as failures; the check was not loosened. Two are wrong
-counts: "Two records from 2024-01-04 ... at 90 articles each" (one has 90) and "five records are dated 2024-03-12"
-(four are; the sentence itself says "together make four"). The old prompt's two wrong counts were in other reports,
-so the new prompt neither caused nor fixed this kind of error.
+**Deterministic checks: 52 of 54 pass** (51 of 54 for the old prompt), scored with the final checks
+(`recheck_count_and_split.json`, no new LLM calls). Both failures are wrong counts: "Two records from 2024-01-04 ...
+at 90 articles each" (one has 90) and "five records are dated 2024-03-12" (four are; the sentence itself says
+"together make four"). The old prompt's wrong counts were in other reports, so this prompt neither caused nor fixed
+that kind of error. Two reports rounded totals ("the other 63,000-plus events" for 63,370, "more than 20,000" for
+20,942); they first failed the number check, which then learned to accept a bound that a data value satisfies within
+10%. Both kinds were then addressed in the prompt: `../2026-10-09_report_numbers/summary.md`.
 
 ## Out of sample: the other 24 reports
 

@@ -31,15 +31,17 @@ Event-type descriptions ("the rest are fighting" when one is an assault) are not
 ## Recheck with a sixth check (count over-claims), same reports
 
 The causal review found "four records" where the data has three; the number check ignores counts written as words.
-`count_overclaims` (tests/answer_quality.py) takes sentences that say "N records/events" and name a date or an
-article count, and flags them when fewer than N records in the data have that date and article count. It only flags
-over-claims, since a sentence may describe a subset by something the rule does not read. On the saved reports,
-without new LLM calls (`python tests/rerun_reports.py --checks-only ...`, `recheck_count_and_split.json`):
+`count_overclaims` (tests/answer_quality.py) takes sentences that say "N records/events" and name a date or a
+per-record article count, and flags them when fewer than N of the records shown to the report model have them. It
+only flags over-claims, since a sentence may describe a subset by something the rule does not read (details:
+`../2026-10-09_report_numbers/summary.md`). On the saved reports, without new LLM calls
+(`python tests/rerun_reports.py --checks-only ...`, `recheck_count_and_split.json`):
 
-**52 of 54 pass all six checks.** The two failures are real: `detail-01` "four records, each with 70 articles" on
-2024-01-05 at Perry High School (three), and `invalid-date-01` "three events ... 200 articles each" on 2024-11-11 (two,
-and the sentence goes on to list two). Across the 162 saved reports of 2026-10-08, 2026-10-09 and the prompt change,
-the check flags 5 sentences, all wrong when compared with the data; earlier versions of the check that also used
-places and actors, or read the day of a date as a count, flagged correct sentences and were narrowed.
+**51 of 54 pass all six checks.** The three failures are real: `detail-01` "four records, each with 70 articles" on
+2024-01-05 at Perry High School (three), `confidence-probe-01` "six of the ten events" on January 18 in Uvalde (five),
+and `invalid-date-01` "three events ... 200 articles each" on 2024-11-11 (two, and the sentence goes on to list two).
+Across all 216 saved reports the final check flags 7 sentences, all wrong when compared with the data; earlier
+versions flagged correct sentences (using places and actors, reading the day of a date as a count, applying a
+count in parentheses or "for the first three" to every record) and were narrowed.
 
 The same change fixed the sentence splitter, which broke after "U.S." and "vs." (`../causal_labels/resplit.py`).

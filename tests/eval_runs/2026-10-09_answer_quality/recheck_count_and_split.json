@@ -2,13 +2,13 @@
   "summary": {
     "rechecked": "tests/eval_runs/2026-10-09_answer_quality/results.json",
     "scored": 54,
-    "passed": 52,
+    "passed": 51,
     "failures_by_check": {
       "ungrounded_numbers": 0,
       "sample_as_total": 0,
       "qualitative_trend": 0,
       "dates_outside_window": 0,
-      "count_overclaims": 2,
+      "count_overclaims": 3,
       "comparison_direction": 0
     }
   },
@@ -189,19 +189,21 @@
     },
     {
       "id": "confidence-probe-01",
-      "status": "pass",
+      "status": "fail",
       "checks": {
         "ungrounded_numbers": [],
         "sample_as_total": [],
         "qualitative_trend": [],
         "comparison_direction_ok": null,
         "dates_outside_window": [],
-        "count_overclaims": [],
+        "count_overclaims": [
+          "The largest cluster is January 18 in Uvalde, where six of the ten events are located."
+        ],
         "causal_candidates": [
           "An unidentified actor criticized MIGRANT in Texas (90 articles, Goldstein -2.0), a disapproval event that points to the migration debate.",
           "Robb Elementary was the site of the 2022 shooting, so the pairing of police, school and authority actors suggests ongoing attention to that case."
         ],
-        "pass": true
+        "pass": false
       }
     },
     {

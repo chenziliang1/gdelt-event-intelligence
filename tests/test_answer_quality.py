@@ -128,8 +128,28 @@ def test_counts_written_as_words_are_checked():
                "Two records on 2024-01-05 drew 60 to 70 articles.",       # a range
                "On 2024-01-05 two records drew 70 and 60 articles.",      # two counts: either
                "Of the five records, four are dated 2024-01-05.",         # "of the five" is the list
-               "Four records were listed in total."):                       # nothing to check against
+               "Four records were listed in total.",                        # nothing to check against
+               # numbers that describe only part of the records
+               "On 2024-01-05 four records were listed, each with 70 articles except the Maine one.",
+               "Four records are dated 2024-01-05 (three of them with 70 articles).",
+               "Five records are dated between January 5 and January 6, 2024."):
         assert count_overclaims(ok, PERRY) == [], ok
     # The day of a date is not the count, and does not hide the count that follows it.
     assert count_overclaims("On January 6 three events drew 100 articles.", PERRY)
     assert count_overclaims("On January 6 one event drew 100 articles.", PERRY) == []
+
+
+def test_rounded_bounds_on_a_data_value_are_grounded():
+    data = {"regional_overview_0": {"data": {"summary": {"total_events": 20942, "conflict_events": 1947}}}}
+    for ok in ("Five records out of more than 20,000 say nothing about the month.",
+               "The other 20,000-plus events are not listed.",
+               "Conflict events numbered under 2,000."):
+        assert ungrounded_numbers(ok, data) == [], ok
+    # A bare number beyond the 0.5% rounding tolerance, a bound on the wrong side, or one too far
+    # from the data is not grounded.
+    assert ungrounded_numbers("About 22,000 events were recorded.", data) == ["22,000"]
+    assert ungrounded_numbers("There were more than 21,000 events.", data) == ["21,000"]
+    assert ungrounded_numbers("There were more than 15,000 events.", data) == ["15,000"]
+    # "over 31 days" is a span: 31 must be in the data, as for any number.
+    assert ungrounded_numbers("Events per day over 31 days.", {"days": 31}) == []
+    assert ungrounded_numbers("Events per day over 30 days.", {"days": 31}) == ["30"]

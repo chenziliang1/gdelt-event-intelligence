@@ -2,9 +2,9 @@
   "summary": {
     "rechecked": "tests/eval_runs/2026-10-09_report_prompt/results.json",
     "scored": 54,
-    "passed": 50,
+    "passed": 52,
     "failures_by_check": {
-      "ungrounded_numbers": 2,
+      "ungrounded_numbers": 0,
       "sample_as_total": 0,
       "qualitative_trend": 0,
       "dates_outside_window": 0,
@@ -299,18 +299,16 @@
     },
     {
       "id": "reldate-04",
-      "status": "fail",
+      "status": "pass",
       "checks": {
-        "ungrounded_numbers": [
-          "63,000"
-        ],
+        "ungrounded_numbers": [],
         "sample_as_total": [],
         "qualitative_trend": [],
         "comparison_direction_ok": null,
         "dates_outside_window": [],
         "count_overclaims": [],
         "causal_candidates": [],
-        "pass": false
+        "pass": true
       }
     },
     {
@@ -662,18 +660,16 @@
     },
     {
       "id": "h-month-02",
-      "status": "fail",
+      "status": "pass",
       "checks": {
-        "ungrounded_numbers": [
-          "20,000"
-        ],
+        "ungrounded_numbers": [],
         "sample_as_total": [],
         "qualitative_trend": [],
         "comparison_direction_ok": null,
         "dates_outside_window": [],
         "count_overclaims": [],
         "causal_candidates": [],
-        "pass": false
+        "pass": true
       }
     },
     {

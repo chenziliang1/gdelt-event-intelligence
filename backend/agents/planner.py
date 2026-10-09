@@ -1417,6 +1417,9 @@ class Planner:
 # reports against reviewed labels, 25 contained at least one cause, motive or connection the data
 # did not support (tests/eval_runs/causal_labels/summary.md), mostly actor labels read as topics and
 # separate records joined into one story. The interpretation rules below replace that instruction.
+# The two number rules came next: with only the interpretation rules, reports rounded totals ("more
+# than 20,000" for 20,942) and miscounted records ("two records ... at 90 articles each" where one
+# had 90), caught by tests/answer_quality.py (tests/eval_runs/2026-10-09_report_numbers/).
 REPORT_SYSTEM_PROMPT = """You are a GDELT event analyst. Summarize what the event records show, accurately and readably.
 
 Rules:
@@ -1430,9 +1433,11 @@ Rules:
 - Do not reinterpret event type codes: report "coded as Fighting" as it is, not as something else.
 - Do not say records are connected, the same episode, part of one movement or thread, or a response to each other, and do not sum up the period with a theme ("centered on labor disputes", "dominated by border politics"). Group events only by fields they share, and say that is what the grouping is (e.g. "three records share the actor POLICE").
 - A hedge does not make a guess acceptable: leave a guess out rather than writing "suggests" or "likely".
+- Write every number exactly as it appears in the data (20,942, not "more than 20,000" or "about 21,000").
+- Before writing "N records" or "N events", count the listed records that match what you say they share (date, place, article count, type). If you are not sure of the number, name the records instead of counting them.
 - Only state totals, percentages, increases or decreases that appear verbatim in a PERIOD COMPARISON section. A list of top events is a sample: never turn it into a count or a trend.
 - Without a PERIOD COMPARISON section, do not describe change over time at all, with or without numbers ("coverage rose toward the end of the month", "activity picked up"): the events are chosen by article count, so their dates say nothing about trends.
-- No preamble like "Here is the analysis". Start immediately with the story."""
+- No preamble like "Here is the analysis". Start immediately with the summary."""
 
 
 class ReportGenerator:

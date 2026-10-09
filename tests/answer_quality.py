@@ -84,8 +84,21 @@ def _date_spans(text: str) -> List[Tuple[int, int]]:
     return spans
 
 
+# A rounded bound on a value in the data: "more than 20,000" for 20,942, "63,000-plus" for 63,370.
+_LOWER_BEFORE = re.compile(r"\b(?:more than|over|at least|upwards of|in excess of)\s+$", re.IGNORECASE)
+_LOWER_AFTER = re.compile(r"^(?:-plus\b|\+|\s+or more\b)", re.IGNORECASE)
+_UPPER_BEFORE = re.compile(r"\b(?:fewer than|less than|under|below|at most)\s+$", re.IGNORECASE)
+_SPAN_AFTER = re.compile(r"^%?\s+(?:days?|weeks?|months?|years?|hours?)\b", re.IGNORECASE)
+BOUND_SLACK = 0.10  # a bound counts only if the data value is within 10% of it
+
+
 def report_numbers(text: str) -> List[Tuple[str, float, bool]]:
     """(raw, value, is_percent) for numbers that are not part of a date or year."""
+    return [(raw, value, is_pct) for raw, value, is_pct, _ in _report_numbers(text)]
+
+
+def _report_numbers(text: str) -> List[Tuple[str, float, bool, Optional[str]]]:
+    """As report_numbers, plus "lower" / "upper" when the number is stated as a bound."""
     spans = _date_spans(text)
     found = []
     for m in re.finditer(r"(?<![\w.])-?\d[\d,]*(?:\.\d+)?%?", text):
@@ -93,8 +106,22 @@ def report_numbers(text: str) -> List[Tuple[str, float, bool]]:
             continue
         raw = m.group(0)
         value = float(raw.rstrip("%").replace(",", ""))
-        found.append((raw, value, raw.endswith("%")))
+        before, after = text[max(0, m.start() - 20):m.start()], text[m.end():m.end() + 10]
+        bound = ("lower" if _LOWER_BEFORE.search(before) or _LOWER_AFTER.search(after)
+                 else "upper" if _UPPER_BEFORE.search(before) else None)
+        if bound and _SPAN_AFTER.search(text[m.end():m.end() + 10]):
+            bound = None  # "over 31 days" is a span, not a bound
+        found.append((raw, value, raw.endswith("%"), bound))
     return found
+
+
+def _bounds(value: float, bound: Optional[str], candidates: Iterable[float]) -> bool:
+    """A stated bound is grounded if a data value is on the right side of it and within the slack."""
+    if bound == "lower":
+        return any(value <= c <= value * (1 + BOUND_SLACK) for c in candidates)
+    if bound == "upper":
+        return any(value * (1 - BOUND_SLACK) <= c <= value for c in candidates)
+    return False
 
 
 def _close(value: float, candidates: Iterable[float]) -> bool:
@@ -107,17 +134,21 @@ def _close(value: float, candidates: Iterable[float]) -> bool:
 def ungrounded_numbers(text: str, data: Any, ignore_below: float = 10) -> List[str]:
     """Numbers in the report that do not appear in the data (within rounding).
 
+    A rounded bound ("more than 20,000", "63,000-plus", "under 500") is accepted when a data value
+    lies on the stated side of it and within ``BOUND_SLACK``; a bare rounded number is not.
     Small numbers (counts like "three events", ranks) are ignored below ``ignore_below``;
     percentages are always checked. A percentage also matches a data value stored as a
     fraction (0.301 for 30.1%).
     """
     nums = data_numbers(data)
     bad = []
-    for raw, value, is_pct in report_numbers(text):
+    for raw, value, is_pct, bound in _report_numbers(text):
         if not is_pct and abs(value) < ignore_below:
             continue
-        candidates = nums | ({n * 100 for n in nums} if is_pct else set())
-        if not _close(abs(value), {abs(c) for c in candidates}):
+        candidates = {abs(c) for c in nums | ({n * 100 for n in nums} if is_pct else set())}
+        # A bound is judged only as a bound: "more than 21,000" is wrong for 20,942 although the two
+        # are within rounding.
+        if not (_bounds(abs(value), bound, candidates) if bound else _close(abs(value), candidates)):
             bad.append(raw)
     return bad
 
@@ -241,12 +272,68 @@ _COUNT_WORDS = {w: i for i, w in enumerate(
     "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen "
     "sixteen seventeen eighteen nineteen twenty".split())}
 _COUNT_CLAIM = re.compile(
-    r"\b(?P<n>" + "|".join(_COUNT_WORDS) + r"|(?<![\d/.-])\d{1,2})\s+(?:[\w-]+\s+){0,2}?(?:records|events|entries)\b",
+    r"\b(?P<n>" + "|".join(_COUNT_WORDS) + r"|(?<![\d/.-])\d{1,2})\s+"
+    r"(?:of the (?:\w+\s+){0,2}?|(?:[\w-]+\s+){0,2}?)(?:records|events|entries)\b",  # "five of the ten records"
     re.IGNORECASE)
+# How many records of each step the report model is shown (ReportGenerator._format_data_for_report).
+_SHOWN = {"similar_events": 8, "events": 10, "top_events": 10, "hot_events": 10}
 # "a sample of ten records", "the top ten events", "of the five records" describe the list, not a subset.
 _LIST_SIZE = re.compile(r"\b(?:of|the|top|first|these|all|only)\s*$", re.IGNORECASE)
 # "70 articles", "97 and 95 articles", "114 to 120 articles" (a range).
-_ARTICLES = re.compile(r"\b(\d[\d,]*)(?:\s*(?P<sep>and|or|to|-|\u2013)\s*(\d[\d,]*))?\s+articles\b")
+# An article count binds the records only when it applies to each of them: "each with 70 articles",
+# "90 articles each", "97 and 95 articles each" - not "with 250 articles each for the first three"
+# or "each had 120 articles, except the third".
+_NUM = r"\d[\d,]*(?:\s*(?:and|or|to|-|\u2013)\s*\d[\d,]*)?"
+_NOT_ALL = r"(?!\s*,?\s*(?:except|but|for the first|apart from)\b)"
+_ARTICLES_EACH = re.compile(
+    rf"\beach\s+(?:[a-z]+\s+){{0,2}}?(?P<a>{_NUM})\s+articles\b{_NOT_ALL}"
+    rf"|\b(?P<b>{_NUM})\s+articles\s+each\b(?!\s+for\b){_NOT_ALL}")
+_PARENS = re.compile(r"\([^()]*\)")
+_RANGE_JOIN = re.compile(r"^\s*(?:and|to|through|until|-|\u2013)\s*$")
+
+
+def _article_ranges(s: str) -> List[Tuple[int, int]]:
+    out = []
+    for m in _ARTICLES_EACH.finditer(s):
+        nums = [int(x.replace(",", "")) for x in re.findall(r"\d[\d,]*", m.group("a") or m.group("b"))]
+        joined = re.search(r"\bto\b|-|\u2013", m.group("a") or m.group("b"))
+        out += [(nums[0], nums[-1])] if joined and len(nums) == 2 else [(n, n) for n in nums]
+    return out
+
+
+def _date_ranges(s: str) -> List[Tuple[date, date]]:
+    """Dates in a sentence, with "between X and Y", "from X to Y", "X to Y" and "December 23-29" as ranges."""
+    found = []
+    for m in re.finditer(r"\b(\d{4})-(\d{2})-(\d{2})\b", s):
+        try:
+            d = date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        except ValueError:
+            continue
+        found.append((m.start(), m.end(), d, d))
+    for m in re.finditer(_DAY_RE, s):
+        name = m.group("month") or m.group("month_after")
+        month = next(i for i, full in enumerate(MONTHS, 1) if full.startswith(name.lower()[:3]))
+        year = int(m.group("year") or m.group("year_after") or 2024)
+        try:
+            lo = date(year, month, int(m.group("day") or m.group("day_first")))
+            hi = date(year, month, int(m.group("day2"))) if m.group("day2") else lo
+        except ValueError:
+            continue
+        found.append((m.start(), m.end(), lo, hi))
+    found.sort()
+    out, i = [], 0
+    while i < len(found):
+        a0, a1, lo, hi = found[i]
+        if i + 1 < len(found):
+            b0, b1, lo2, hi2 = found[i + 1]
+            gap, before = s[a1:b0], s[max(0, a0 - 9):a0]
+            if _RANGE_JOIN.match(gap) and (re.search(r"\b(?:between|from)\s+$", before) or "and" not in gap):
+                out.append((lo, hi2))
+                i += 2
+                continue
+        out.append((lo, hi))
+        i += 1
+    return out
 
 
 def _events(obj: Any, out: Dict[Any, Dict[str, Any]]) -> None:
@@ -261,6 +348,23 @@ def _events(obj: Any, out: Dict[Any, Dict[str, Any]]) -> None:
             _events(v, out)
 
 
+def _shown_events(data: Any) -> List[Dict[str, Any]]:
+    """The records the report model saw: lists are cut to the formatter's caps. Data without step
+    types (hand-written test data) is used whole."""
+    found: Dict[Any, Dict[str, Any]] = {}
+    if isinstance(data, dict) and all(isinstance(v, dict) and "type" in v for v in data.values()):
+        for item in data.values():
+            rows, kind = item.get("data"), item["type"]
+            if kind in _SHOWN and isinstance(rows, list):
+                rows = rows[:_SHOWN[kind]]
+            elif kind == "regional_overview" and isinstance(rows, dict):
+                rows = (rows.get("hot_events") or [])[:5]
+            _events(rows, found)
+    else:
+        _events(data, found)
+    return list(found.values())
+
+
 def _iso(value: Any) -> str:
     s = str(value or "")
     return f"{s[:4]}-{s[4:6]}-{s[6:8]}" if re.fullmatch(r"\d{8}", s) else s[:10]
@@ -268,17 +372,17 @@ def _iso(value: Any) -> str:
 
 def count_overclaims(text: str, data: Any) -> List[str]:
     """Sentences that say "N records/events" and name a date or an article count, when fewer than N
-    records in the data have that date and article count.
+    records shown to the report model have that date and article count (a list of 50 related events
+    is shown as its first 8, so "five records on April 24" is checked against those 8).
 
     The number check ignores small numbers and words, so "four records, each with 70 articles" on a
     day with three such records passed. Only over-claims are flagged: a sentence can name fewer
     records than match (a subset described by something the rule does not read). Two dates or two
-    article counts named: either matches. Places and actors are not used: names overlap ("Texas" is
+    article counts named: either matches; "between X and Y" is a range. Article counts are used only
+    when they apply to each record ("each with 70 articles"), and nothing inside parentheses is used. Places and actors are not used: names overlap ("Texas" is
     in most locations) and a sentence listing records in different places would never match.
     """
-    found: Dict[Any, Dict[str, Any]] = {}
-    _events(data, found)
-    events = list(found.values())
+    events = _shown_events(data)
     if not events:
         return []
     hits = []
@@ -291,18 +395,18 @@ def count_overclaims(text: str, data: Any) -> List[str]:
         claims = [m for m in _COUNT_CLAIM.finditer(masked) if not _LIST_SIZE.search(masked[:m.start()])]
         if not claims:
             continue
-        dates = {d.isoformat() for _, d in _report_dates(s) if d != date.max}
-        ranges = []
-        for m in _ARTICLES.finditer(s):
-            lo = int(m.group(1).replace(",", ""))
-            hi = int(m.group(3).replace(",", "")) if m.group(3) else lo
-            ranges += [(lo, hi)] if m.group("sep") in ("to", "-", "\u2013") else [(lo, lo), (hi, hi)]
+        # A parenthesis describes one item of a list ("two are in Houston (2024-03-06 and 2024-03-12)"),
+        # not the records counted, so its dates and counts are left out.
+        outside = _PARENS.sub(" ", s)
+        dates = _date_ranges(outside)
+        ranges = _article_ranges(outside)
         if not (dates or ranges):
             continue
 
         def matches(e: Dict[str, Any]) -> bool:
             n = e.get("NumArticles") or e.get("num_articles")
-            return ((not dates or _iso(e.get("SQLDATE") or e.get("date")) in dates)
+            day = _iso(e.get("SQLDATE") or e.get("date"))
+            return ((not dates or any(lo.isoformat() <= day <= hi.isoformat() for lo, hi in dates))
                     and (not ranges or (n is not None and any(lo <= int(n) <= hi for lo, hi in ranges))))
 
         available = sum(matches(e) for e in events)
