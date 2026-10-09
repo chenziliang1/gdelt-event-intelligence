@@ -639,3 +639,40 @@ async def test_overview_label_with_a_dropped_place_recovers_it(query, place):
     ctx = QueryContext(intent_category="overview")  # the router's label, without the place
     plan, _ = await planner_with(ctx).plan(query)
     assert plan.steps[0].type == "regional_overview" and plan.steps[0].params["region"] == place
+
+
+# --- Claude router -----------------------------------------------------------------
+
+async def test_claude_router_falls_back_to_the_local_router_without_a_key():
+    """No ANTHROPIC_API_KEY (conftest empties it): no request is made, the local router answers,
+    and the planner marks the routing as at most medium."""
+    from backend.agents.planner import ClaudeRouter
+
+    local = QueryContext(location="Texas", event_type="protest", intent_category="search", router="qwen2.5:3b")
+    router = ClaudeRouter(fallback=StubRouter(local))
+    ctx = await router.extract_context("protests in Texas in March")
+    assert ctx.router == "qwen2.5:3b" and router.fallback.calls == 1
+
+    p = Planner()
+    p.router = router
+    plan, phases = await p.plan("protests in Texas in March 2024")
+    assert plan.routing_confidence == "medium"
+    assert "Claude router unavailable" in phases[1]["detail"]
+
+
+async def test_claude_router_reply_is_parsed_like_the_local_one(monkeypatch):
+    from backend.agents.planner import ClaudeRouter
+
+    class Reply:
+        content = '```json\n{"location": "Québec", "date_start": "2024-04-01", "date_end": "2024-06-30", ' \
+                  '"event_type": null, "query_text": null, "intent_category": "overview"}\n```'
+
+    class FakeLLM:
+        async def ainvoke(self, messages):
+            return Reply()
+
+    router = ClaudeRouter(fallback=StubRouter(explode=True))
+    monkeypatch.setattr(router, "_client", lambda: FakeLLM())
+    ctx = await router.extract_context("Give me an overview of Québec between April and June")
+    assert (ctx.location, ctx.intent_category, ctx.router) == ("Québec", "overview", router.model)
+    assert ctx.event_type is None

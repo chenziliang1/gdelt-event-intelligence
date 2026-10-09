@@ -57,11 +57,18 @@ def extract_step_types(plan: dict) -> list:
 
 
 def extract_date_range(plan: dict) -> tuple | None:
-    """(start, end) of the first step that carries a date range."""
+    """(start, end) of the first step that carries a date range.
+
+    Single-day tools (daily_brief, hot_events) carry ``query_date``: that is the range (day, day).
+    Without this, held-out v3's "hottest events of March 12, 2024" and "What happened on 3/15/2024?"
+    failed with the right day planned (found on the first v3 run, 2026-10-09).
+    """
     for s in (plan or {}).get("steps", []):
         params = s.get("params", {})
         if params.get("start_date") and params.get("end_date"):
             return params["start_date"], params["end_date"]
+        if params.get("query_date"):
+            return params["query_date"], params["query_date"]
     return None
 
 

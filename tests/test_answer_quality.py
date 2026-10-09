@@ -79,3 +79,19 @@ def test_qualitative_trend_claims_from_a_sample_are_caught():
         assert qualitative_trend(ok, ["events"]) == [], ok
     # A comparison step makes trends legitimate.
     assert qualitative_trend("Protests rose in March.", ["compare_periods"]) == []
+
+
+def test_causal_candidates_keep_guesses_and_drop_statements_of_what_the_data_cannot_show():
+    from answer_quality import causal_candidates
+
+    # Sentences from the 2026-10-09 reports that read like findings the records do not contain.
+    for claim in ("That is the most negative of the sampled events, and it points to a judicial dispute.",
+                  "Robb Elementary was the site of the 2022 shooting, so the pairing suggests ongoing attention to that case.",
+                  # a trailing limit clause does not cancel the guess before it
+                  "Read together, the events suggest a confrontation, though the underlying detail isn't in the records."):
+        assert causal_candidates(claim) == [claim], claim
+    for fine in ("The data does not say what happened at any of them, and nothing in it establishes a causal connection.",
+                 "The data doesn't say what prompted this cluster, so the underlying incident stays unclear.",
+                 "I also can't say whether the day was unusual, because the brief has no comparison period.",
+                 "Protests in Austin drew 70 articles on 2024-01-10."):
+        assert causal_candidates(fine) == [], fine

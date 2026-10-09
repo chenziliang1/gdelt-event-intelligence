@@ -169,3 +169,35 @@ class TestComparison:
         jan = parse_month_range("january 2024")
         prev = previous_period(jan)
         assert (prev.start_iso, prev.end_iso) == ("2023-12-01", "2023-12-31")
+
+
+# --- held-out v3 (2026-10-09): days without a year, month spans, explicit ranges ------------
+
+@pytest.mark.parametrize("text,expected", [
+    ("Give me a recap of what happened on Dec 3rd", ("2024-12-03", "2024-12-03")),  # was the whole of December
+    ("Could I get a digest of the news from July 4?", ("2024-07-04", "2024-07-04")),  # was the whole of July
+    ("the march on Washington on 4 July", ("2024-07-04", "2024-07-04")),
+    ("What happened on 3/15/2024?", ("2024-03-15", "2024-03-15")),
+    ("Give me an overview of Québec between April and June", ("2024-04-01", "2024-06-30")),  # was April
+    ("protests from 2024-02-01 to 2024-02-15", ("2024-02-01", "2024-02-15")),  # was its first day
+    ("in the top 5 June events", ("2024-06-01", "2024-06-30")),  # "5 June" here is not a day
+    ("violence may 3 escalate", None),
+])
+def test_v3_date_phrases(text, expected):
+    r = resolve_dates(text)
+    assert (r and (r.start_iso, r.end_iso)) == expected or (r is None and expected is None)
+
+
+def test_impossible_day_without_a_year_is_reported():
+    from backend.queries.date_utils import find_impossible_day
+
+    assert find_impossible_day("Strikes in Michigan on February 30") == "February 30"
+    assert find_impossible_day("events on 4/31/2024") == "4/31/2024"
+    assert find_impossible_day("events on July 4") is None
+
+
+def test_two_explicit_ranges_are_compared():
+    earlier, later = resolve_comparison_periods(
+        "Compare demonstrations in Ottawa from 2024-03-01 to 2024-03-15 versus 2024-02-01 to 2024-02-15")
+    assert (earlier.start_iso, earlier.end_iso, later.start_iso, later.end_iso) == (
+        "2024-02-01", "2024-02-15", "2024-03-01", "2024-03-15")

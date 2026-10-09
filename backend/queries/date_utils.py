@@ -284,17 +284,80 @@ def parse_quarter_range(text: str, default_year: int = DATA_YEAR) -> Optional[Da
     return DateRange(start, end, f"Q{q} {year}", "quarter")
 
 
+# "Jan 9, 2024", "January 9 2024", and without a year "Dec 3rd", "July 4" (held-out v3: both were
+# read as the whole month). The day must not be followed by more digits ("June 30 2024" keeps its
+# year; "March 2024" has no day).
+_MONTH_DAY = re.compile(
+    rf"\b({_MONTH_NAMES})\.?\s+(\d{{1,2}})(st|nd|rd|th)?(?:,?\s+(\d{{4}}))?\b(?!\s*[-/]?\d)", re.IGNORECASE)
+_US_DAY = re.compile(r"\b(\d{1,2})/(\d{1,2})/(\d{4})\b")  # 3/15/2024
+_DAY_MONTH = re.compile(rf"\b(\d{{1,2}})(?:st|nd|rd|th)?\s+(?:of\s+)?({_MONTH_NAMES})\b(?:,?\s+(\d{{4}}))?", re.IGNORECASE)  # 4 July
+_ISO_RANGE = re.compile(
+    r"\b(\d{4}-\d{2}-\d{2})\s*(?:to|through|until|-|–)\s*(\d{4}-\d{2}-\d{2})\b", re.IGNORECASE)
+
+
+def _month_day_matches(text: str):
+    """(match, year, month, day) for month-name days; "may 5"/"march 3" need a year, an ordinal or a
+    month-ish preposition before them, like a bare "may"/"march" (``_month_token_ok``)."""
+    for m in _MONTH_DAY.finditer(text):
+        token = m.group(1).lower()
+        if token in _AMBIGUOUS_MONTHS and not (m.group(3) or m.group(4)):
+            before = text[: m.start()]
+            if not (re.search(rf"\b(?:on|{_MONTH_PREP})\s+$", before, re.IGNORECASE) or not before.strip()):
+                continue
+        yield m, int(m.group(4) or DATA_YEAR), _month_number(m.group(1)), int(m.group(2))
+    for m in _DAY_MONTH.finditer(text):  # "4 July", "1st of May 2024"; not "the top 5 March events"
+        if re.search(r"\b(?:top|past|last|first|next)\s+$", text[: m.start()], re.IGNORECASE):
+            continue
+        yield m, int(m.group(3) or DATA_YEAR), _month_number(m.group(2)), int(m.group(1))
+
+
+def parse_explicit_range(text: str) -> Optional[DateRange]:
+    """"from 2024-02-01 to 2024-02-15" -> that range (it used to become its first day)."""
+    m = _ISO_RANGE.search(text)
+    if m:
+        d1, d2 = _parse_iso(m.group(1)), _parse_iso(m.group(2))
+        if d1 and d2 and d1 <= d2:
+            return DateRange(d1, d2, f"{iso(d1)} to {iso(d2)}", "explicit")
+    return None
+
+
+def parse_month_span(text: str, default_year: int = DATA_YEAR) -> Optional[DateRange]:
+    """"between April and June", "from April to June", "April through June" -> April 1 to June 30."""
+    m = re.search(
+        rf"\b(?:between|from)?\s*({_MONTH_NAMES})\b(?:\s+(\d{{4}}))?\s+(?:and|to|through|until|-|–)\s+"
+        rf"({_MONTH_NAMES})\b(?:\s+(\d{{4}}))?", text, re.IGNORECASE)
+    if not m or not (m.group(0).lower().lstrip().startswith(("between", "from")) or
+                     re.search(r"\b(?:to|through|until)\b|[-–]", m.group(0), re.IGNORECASE)):
+        return None
+    y2 = int(m.group(4) or m.group(2) or default_year)
+    y1 = int(m.group(2) or y2)
+    start, _ = month_bounds(y1, _month_number(m.group(1)))
+    _, end = month_bounds(y2, _month_number(m.group(3)))
+    if start >= end:
+        return None
+    return DateRange(start, end, f"{calendar.month_name[start.month]} to {calendar.month_name[end.month]} {y2}", "explicit")
+
+
 def parse_explicit_day(text: str) -> Optional[DateRange]:
-    """"2024-01-09", "January 9 2024", "Jan 9, 2024" -> that single day."""
+    """"2024-01-09", "January 9 2024", "Jan 9, 2024", "Dec 3rd", "July 4", "3/15/2024" -> that day.
+
+    A month and day without a year is in the dataset year.
+    """
     m = re.search(r"\b(\d{4})-(\d{2})-(\d{2})\b", text)
     if m:
         d = _parse_iso(m.group(0))
         if d:
             return DateRange(d, d, iso(d), "day")
-    m = re.search(rf"\b({_MONTH_NAMES})\.?\s+(\d{{1,2}})(?:st|nd|rd|th)?,?\s+(\d{{4}})\b", text, re.IGNORECASE)
+    for m, year, month, day in _month_day_matches(text):
+        try:
+            d = date(year, month, day)
+        except ValueError:
+            return None
+        return DateRange(d, d, iso(d), "day")
+    m = _US_DAY.search(text)
     if m:
         try:
-            d = date(int(m.group(3)), _month_number(m.group(1)), int(m.group(2)))
+            d = date(int(m.group(3)), int(m.group(1)), int(m.group(2)))
         except ValueError:
             return None
         return DateRange(d, d, iso(d), "day")
@@ -323,9 +386,14 @@ def find_impossible_day(text: str) -> Optional[str]:
     for m in re.finditer(r"\b(\d{4})-(\d{2})-(\d{2})\b", text):
         if _parse_iso(m.group(0)) is None:
             return m.group(0)
-    for m in re.finditer(rf"\b({_MONTH_NAMES})\.?\s+(\d{{1,2}})(?:st|nd|rd|th)?,?\s+(\d{{4}})\b", text, re.IGNORECASE):
+    for m, year, month, day in _month_day_matches(text):  # also "February 30" with no year
         try:
-            date(int(m.group(3)), _month_number(m.group(1)), int(m.group(2)))
+            date(year, month, day)
+        except ValueError:
+            return m.group(0)
+    for m in _US_DAY.finditer(text):
+        try:
+            date(int(m.group(3)), int(m.group(1)), int(m.group(2)))
         except ValueError:
             return m.group(0)
     return None
@@ -334,14 +402,16 @@ def find_impossible_day(text: str) -> Optional[str]:
 def resolve_dates(text: str, ref: Optional[date] = None) -> Optional[DateRange]:
     """Resolve the single most specific date expression in ``text``.
 
-    Precedence: explicit day, quarter, relative phrase, month name. Returns
-    ``None`` when the text has no date expression at all (the caller then
-    decides whether to default or to ask).
+    Precedence: explicit range, explicit day, quarter, relative phrase, month span, month name.
+    Returns ``None`` when the text has no date expression at all (the caller then decides whether
+    to default or to ask).
     """
     return (
-        parse_explicit_day(text)
+        parse_explicit_range(text)
+        or parse_explicit_day(text)
         or parse_quarter_range(text)
         or parse_relative_range(text, ref)
+        or parse_month_span(text)
         or parse_month_range(text)
     )
 
@@ -401,6 +471,11 @@ def resolve_comparison_periods(
     """
     if not _COMPARE_STRONG.search(text):
         return None
+
+    explicit = [r for r in (parse_explicit_range(m.group(0)) for m in _ISO_RANGE.finditer(text)) if r]
+    if len(explicit) >= 2:  # "from 2024-02-01 to 2024-02-15 versus 2024-03-01 to 2024-03-15"
+        pair = sorted(explicit[:2], key=lambda r: r.start)
+        return pair[0], pair[1]
 
     months = _all_month_ranges(text)
     if len(months) >= 2:

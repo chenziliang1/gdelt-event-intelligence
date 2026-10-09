@@ -1,7 +1,8 @@
 """
 GDELT Planner + Report Generator
 
-Planner: Hybrid routing with local Ollama router (qwen2.5:3b) + rule-based fast path + remote LLM tool execution.
+Planner: router (Claude by default, local Ollama qwen2.5:3b as fallback) + deterministic checks +
+rule-based fast path + remote LLM tool execution.
 Report Generator: Summarizes JSON data into natural language insights.
 
 Both use LangChain ChatOpenAI for LLM integration (Claude by default, via Anthropic's
@@ -59,6 +60,7 @@ class QueryContext(BaseModel):
     date_status: str = Field("none", description="none | valid | invalid | defaulted. Whether the date range was checked, not which parser produced it")
     date_source: str = Field("none", description="none | explicit | deterministic | router")
     date_note: Optional[str] = Field(None, description="User-facing note when dates were defaulted or corrected")
+    router: Optional[str] = Field(None, description="Which router produced this context: claude model, qwen2.5:3b, or rules")
 
 
 class QueryPlan(BaseModel):
@@ -228,6 +230,39 @@ _HOT_RE = re.compile(
 )
 
 
+def context_from_router_json(raw: Dict, query: str) -> QueryContext:
+    """QueryContext from a router's JSON reply (same schema for the Claude and the local router)."""
+    def field(name):
+        value = raw.get(name)
+        if isinstance(value, str) and value.strip().lower() in ('null', 'none', 'n/a', ''):
+            return None
+        return value
+
+    location, event_type, query_text = field("location"), field("event_type"), field("query_text")
+    date_start, date_end = field("date_start"), field("date_end")
+    intent = raw.get("intent_category", "search")
+    if intent not in ("search", "detail", "brief", "overview", "hot", "off_topic"):
+        intent = "search"
+
+    # If query_text looks like an event fingerprint, force intent=detail and clear all other
+    # fields (fingerprint lookup does not need date/location filters).
+    check_text = (query_text or "").strip() or query.strip()
+    if re.match(r'^(EVT-\d{4}-\d{2}-\d{2}-\d+|US-\d{8}-[A-Z]+-[A-Z]+-\d+|\d{9,12})$', check_text, re.IGNORECASE):
+        intent = "detail"
+        location = date_start = date_end = event_type = None
+        query_text = query_text or check_text
+
+    return QueryContext(
+        location=location,
+        date_start=date_start,
+        date_end=date_end,
+        event_type=event_type,
+        query_text=query_text,
+        intent_category=intent,
+        confidence="high",
+    )
+
+
 def detect_intent(text: str) -> str:
     """Keyword intent detection shared by the regex fallback paths."""
     if _BRIEF_RE.search(text):
@@ -380,66 +415,18 @@ No other text. Just the JSON."""
                 raw = _extract_json(text)
                 if raw is None:
                     continue
-                
-                location = raw.get("location")
-                if location and location.lower() in ('null', 'none', 'n/a', ''):
-                    location = None
-                
-                event_type = raw.get("event_type")
-                if event_type and event_type.lower() in ('null', 'none', 'n/a', ''):
-                    event_type = None
-                
-                query_text = raw.get("query_text")
-                if query_text and query_text.lower() in ('null', 'none', 'n/a', ''):
-                    query_text = None
-                
-                date_start = raw.get("date_start")
-                date_end = raw.get("date_end")
-                if date_start and date_start.lower() in ('null', 'none', 'n/a', ''):
-                    date_start = None
-                if date_end and date_end.lower() in ('null', 'none', 'n/a', ''):
-                    date_end = None
-                
-                intent = raw.get("intent_category", "search")
-                if intent not in ("search", "detail", "brief", "overview", "hot", "off_topic"):
-                    intent = "search"
-                
-                # Post-process: if query_text looks like an event fingerprint, force intent=detail
-                # and clear all other fields (fingerprint lookup does not need date/location filters)
-                check_text = (query_text or "").strip()
-                if not check_text:
-                    # Previously `user_input.strip()`: an undefined name, so any reply
-                    # without query_text raised NameError, was swallowed by the
-                    # except below, and the router silently fell back to regex.
-                    check_text = query.strip()
-                if check_text:
-                    # Match EVT-YYYY-MM-DD-NNNNNNNNNN, US-YYYYMMDD-LOC-TYPE-NUM, or raw numeric ID
-                    if re.match(r'^(EVT-\d{4}-\d{2}-\d{2}-\d+|US-\d{8}-[A-Z]+-[A-Z]+-\d+|\d{9,12})$', check_text, re.IGNORECASE):
-                        intent = "detail"
-                        location = None
-                        date_start = None
-                        date_end = None
-                        event_type = None
-                        # Put the fingerprint into query_text so planner can extract it
-                        if not query_text:
-                            query_text = check_text
-                
-                return QueryContext(
-                    location=location,
-                    date_start=date_start,
-                    date_end=date_end,
-                    event_type=event_type,
-                    query_text=query_text,
-                    intent_category=intent,
-                    confidence="high",
-                )
-                
+                ctx = context_from_router_json(raw, query)
+                ctx.router = self.MODEL
+                return ctx
+
             except Exception as e:
                 last_error = e
                 continue
         
         print(f"[OllamaRouter] All URLs failed (last: {last_error}), falling back to regex extraction", flush=True)
-        return self._fallback_extract_context(query)
+        ctx = self._fallback_extract_context(query)
+        ctx.router = "rules"
+        return ctx
 
     def _fallback_extract_context(self, query: str) -> QueryContext:
         """Regex-based fallback extraction when Ollama router fails."""
@@ -621,6 +608,65 @@ No other text. Just the JSON."""
             self._client = None
 
 
+class ClaudeRouter:
+    """Context extraction with Claude (ROUTER_MODEL, default claude-sonnet-5-5), same JSON schema
+    and prompt as the local router.
+
+    The 3B router mislabelled questions the rules had not been written for (each new held-out set
+    needed new rule fixes), so the default router is now Claude, with the local model as the
+    fallback when there is no key or the call fails (and the regex rules behind that). The
+    planner's deterministic checks (dates, labels against the user's words) apply to either router.
+    """
+
+    def __init__(self, fallback: Optional["OllamaRouter"] = None, config: Optional[Dict[str, Any]] = None):
+        self.fallback = fallback or OllamaRouter()
+        self._config = config
+        self._llm: Optional[ChatOpenAI] = None
+        self.model = os.getenv("ROUTER_MODEL", "claude-sonnet-5-5")
+
+    def _client(self) -> ChatOpenAI:
+        if self._llm is None:
+            cfg = dict(self._config or {}, provider="claude", model=self.model)
+            settings = resolve_llm_settings(cfg)
+            if not settings["api_key"]:
+                raise ValueError("ANTHROPIC_API_KEY not set")
+            # max_tokens covers the model's reasoning as well as the JSON: at 300, Sonnet 5.5 spent
+            # the whole budget reasoning about impossible dates and "this week" and returned no text
+            # (finish_reason=length) on 12 of 118 eval questions.
+            self._llm = ChatOpenAI(api_key=settings["api_key"], base_url=settings["base_url"],
+                                   model=settings["model"], max_tokens=2048, timeout=30, max_retries=1)
+        return self._llm
+
+    async def extract_context(self, query: str) -> QueryContext:
+        messages = [
+            SystemMessage(content=OllamaRouter.SYSTEM_PROMPT),
+            HumanMessage(content=(
+                f"Reference date for relative phrases (treat this as 'today'): {_iso(reference_date())}\n\n"
+                f"Query: \"{query}\"\n\nJSON:")),
+        ]
+        try:
+            response = await self._client().ainvoke(messages)
+            raw = _extract_json(response.content if hasattr(response, "content") else str(response))
+            if raw is None:
+                raise ValueError("no JSON in the router reply")
+            ctx = context_from_router_json(raw, query)
+            ctx.router = self.model
+            return ctx
+        except Exception as e:
+            print(f"[ClaudeRouter] {type(e).__name__}: {e}; using the local router", flush=True)
+            return await self.fallback.extract_context(query)
+
+    async def close(self):
+        await self.fallback.close()
+
+
+def build_router():
+    """ROUTER_PROVIDER=claude (default) or ollama (local qwen2.5:3b only)."""
+    if os.getenv("ROUTER_PROVIDER", "claude").lower() == "ollama":
+        return OllamaRouter()
+    return ClaudeRouter()
+
+
 # ---------------------------------------------------------------------------
 # Planner
 # ---------------------------------------------------------------------------
@@ -673,7 +719,7 @@ class Planner:
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self._llm_config = config
         self._llm: Optional[ChatOpenAI] = None
-        self.router = OllamaRouter()
+        self.router = build_router()
 
     @property
     def llm(self) -> ChatOpenAI:
@@ -1003,15 +1049,17 @@ class Planner:
         """Confidence from evidence, not the 3B router's self-report (which said "high" for
         nearly everything, including the wrong labels the held-out set exposed).
 
-        low: the router's label was overridden by the user's words, its extraction failed (regex
-        fallback), or the date was unusable. medium: the label stood but the dates were
-        re-derived from the text. high: label and dates agreed with the deterministic checks.
+        low: the router's label was overridden by the user's words, or its extraction failed (regex
+        fallback). medium: the label stood but the dates were re-derived from the text. high: label
+        and dates agreed with the deterministic checks.
+
+        An impossible date in the question ("2024-06-31") used to make it low. It is the user's
+        date, not a routing error, and the plan already carries a notice: all 5 such dev questions
+        were planned correctly by both routers (2026-10-09), so it no longer lowers the level.
         """
         reasons = []
         if ctx.intent_category != router_label:
             reasons.append(f"router label '{router_label}' overridden to '{ctx.intent_category}'")
-        if ctx.date_status == "invalid":
-            reasons.append("date not usable")
         if ctx.confidence == "low" and not reasons:
             reasons.append("router extraction fell back to rules")
         if reasons:
@@ -1257,6 +1305,10 @@ class Planner:
             self._recover_location(ctx)
 
         routing_confidence, routing_reasons = self._routing_confidence(ctx, router_label, router_dates)
+        if isinstance(self.router, ClaudeRouter) and ctx.router not in (self.router.model, "rules"):
+            routing_reasons.append(f"Claude router unavailable, {ctx.router} used")
+            if routing_confidence == "high":
+                routing_confidence = "medium"
 
         detail_parts = [f"intent='{ctx.intent_category}'"]
         if ctx.location:
@@ -1274,7 +1326,7 @@ class Planner:
         phases.append({
             "name": "Context Extraction",
             "status": "completed",
-            "detail": f"Local Qwen2.5b extracted: {', '.join(detail_parts)} ({ctx.confidence} confidence)",
+            "detail": f"{ctx.router or 'Router'} extracted: {', '.join(detail_parts)} ({ctx.confidence} confidence)",
             "elapsed_ms": t_router,
         })
         phases.append({

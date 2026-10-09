@@ -1,10 +1,61 @@
 # Forecast evaluation
 
 How good is the 7-day event-count forecaster, measured so that the answer can be trusted. Raw results:
+`docs/forecast_eval/retrain_2025h1_{select,test}.json` (retrain on 2024 plus early 2025, tested on Q2 2025),
 `docs/forecast_eval/fresh_2025q1.json` (a period no model had seen), `docs/forecast_eval/tuning_2026-10-08.json`
 (tuning and final model) and `docs/forecast_eval/retrain_2026-10-08.json` (first leak-free retrain of the original design).
 
-## Short answer
+## Latest: retrained on 2024 plus early 2025, tested on Q2 2025 (2026-10-09)
+
+The served model had seen no 2025 data, and Q1 2025 had already been used once as a test. So:
+
+* **Data.** The 2024 series plus 2025-01-01 to 2025-06-11 rebuilt from `events_2025` with the rules that reproduce
+  the training tables (`db_scripts/build_extended_dataset.py`; its 2024 windows are identical to the original cache,
+  254,656 of 254,656). The test stops on 2025-06-11 because GDELT's own files are missing from 2025-06-12 18:15 to
+  2025-07-02 (`docs/DATA_LAYER.md`).
+* **Split by date.** Training targets up to 2025-01-31, validation 2025-02-01 to 03-31 (39,008 windows), test
+  2025-04-01 to 06-11 (48,576 windows), leak-free as before (`--val-start-date`, `--test-start-date`).
+* **Model fixed in advance.** The configuration selected on 2026-10-08 (seasonal residual, no Hawkes head, d64 L2,
+  lr 7e-4, 14-day input), not re-tuned; 3 seeds; trained with `--skip-test`.
+* **Intervals chosen on validation only** (`db_scripts/evaluate_retrain.py --stage select`): fitted on the first half
+  of the validation days, scored on the second half. Candidates: the static size-binned interval served until now,
+  and rolling size-binned intervals refitted at each forecast day on the windows observed in the previous 14, 28 or
+  42 days. Rule: the worst size bin closest to 80%. Rolling 14 days won (worst bin off by 0.019 to 0.028, static
+  0.034 to 0.053). The served seed was fixed the same way: best validation MAE.
+* **Test run once** (`--stage test`), with the 2024-only model as a reference.
+
+Seasonal-naive on the test windows: 62.05.
+
+| Model | Validation MAE (seasonal-naive 67.19) | Test MAE | vs seasonal-naive | Series won |
+| :-- | --: | --: | --: | --: |
+| Retrained, seed 42 | 61.68 | 57.54 | +7.3% | 72.1% |
+| Retrained, seed 1 | 62.23 | 58.24 | +6.1% | 68.8% |
+| **Retrained, seed 2 (served: best on validation)** | **56.94** | **52.62** | **+15.2%** | 67.5% |
+| Retrained, mean of 3 | | 56.13 | **+9.5%** | 67 to 72% |
+| Previous model, 2024 data only | | 58.49 | +5.7% | 60.7% |
+
+Retraining on recent data helped: +9.5% on average against +5.7% for the same design trained on 2024 alone, and a
+larger share of series won. The seed spread is wide (6.1 to 15.2%); the served seed was the best on validation and
+also on test, so +15.2% is the luckiest draw, and +9.5% is the number to quote.
+
+Interval coverage on test (nominal 0.80; by series size under 10 / 10-100 / 100-1,000 / over 1,000 events a day):
+
+| Interval | Served seed | Overall | By size | Mean width |
+| :-- | :-- | --: | :-- | --: |
+| **Rolling 14 days (chosen on validation)** | seed 2 | 0.791 | 0.80 / 0.80 / 0.79 / 0.76 | 205 |
+| Static, fitted on validation | seed 2 | 0.810 | 0.81 / 0.81 / 0.82 / 0.81 | 228 |
+
+The choice made on validation was slightly the worse one on test: the rolling interval is 10% narrower but
+under-covers the largest series (0.76), while the static one was even across sizes. Both are closer to 80% than on
+the earlier periods (0.73 on the 2024 test, 0.77 on Q1 2025); a validation period right before the test period may
+be part of the reason, but that was not tested. The rolling choice is kept as made; a second period would be needed
+to tell the two apart.
+
+The served checkpoint (`models/thp_gdelt.pt`, from `models/retrain_2025h1/seed2.pt`, written by `--stage serve`)
+carries the rolling interval in its state at the end of the data (fitted on the windows observed in the last 14
+days), and its test result, which the API reports as `baseline_comparison`.
+
+## Short answer for the models trained on 2024 only
 
 On **Q1 2025, a period none of the models had seen** (61,824 windows, built from the official GDELT files with the
 same rules as the training data), with every model frozen and the choice of model made beforehand on validation:
@@ -176,9 +227,11 @@ guarantee of 80%.
 ## What can honestly be said
 
 > A Transformer forecaster for 7-day event counts across 736 series, trained as a correction on top of a
-> seasonal-naive baseline. On a later quarter it had never seen (Q1 2025, rebuilt from the official GDELT files), it
-> cuts MAE by about 6% against seasonal-naive (3 seeds, 4 to 8%) and beats it on about two thirds of the series.
-> The Hawkes-style component of the original design hurt and was removed; the 80% intervals cover 75 to 77%.
+> seasonal-naive baseline. Retrained on 2024 plus early 2025 and tested once on a later period (April to mid-June
+> 2025, rebuilt from the official GDELT files), it cuts MAE by about 9.5% against seasonal-naive (3 seeds, 6 to 15%)
+> and beats it on about 70% of the series; the same design trained on 2024 alone got 5.7% there. The Hawkes-style
+> component of the original design hurt and was removed. The 80% intervals cover 0.79 overall on that period
+> (0.76 for the largest series).
 
 ## Reproduce
 
@@ -212,18 +265,34 @@ python db_scripts/train_thp_model.py \
 
 The script prints a `TEST (held out)` line and stores the full evaluation in the checkpoint metadata and the training log.
 
+```bash
+# The retrain on 2024 plus early 2025 (needs MySQL with events_2025 for the first step):
+python db_scripts/load_gdelt_period.py --start 2025-04-01 --end 2025-06-30 --added-until 2025-07-07 --table events_2025
+python db_scripts/build_extended_dataset.py --table events_2025 --end 2025-06-11 --series-from models/thp_gdelt.pt \
+  --check-against models/thp_calibration_dataset_seq14_h7.npz --out models/thp_dataset_2024_2025h1_seq14_h7.npz
+for seed in 42 1 2; do python db_scripts/train_thp_model.py \
+  --dataset-cache models/thp_dataset_2024_2025h1_seq14_h7.npz --seq-len 14 --forecast-horizon 7 \
+  --top-countries 3 --top-actors 50 --top-country-pairs 30 --top-actor-pairs 30 \
+  --top-event-roots 20 --top-event-codes 50 --min-series-events 10 \
+  --epochs 60 --batch-size 1024 --d-model 64 --layers 2 --heads 4 --lr 0.0007 --early-stopping-patience 8 \
+  --seed $seed --target-mode seasonal_residual --hawkes-residual-weight 0 \
+  --val-start-date 2025-02-01 --test-start-date 2025-04-01 --skip-test \
+  --output models/retrain_2025h1/seed$seed.pt; done
+python db_scripts/evaluate_retrain.py --stage select ...   # then --stage test, then --stage serve (see the script)
+```
+
 ## Next steps
 
-1. Intervals under drift: widen with recent residuals (rolling or adaptive conformal) so a volatile period does not
-   drop coverage to 0.63 for the largest series.
-2. Q1 2025 has now been used once; the next model change needs a later period (Q2 2025) for its final check.
-3. Retrain on 2024 plus Q1 2025 before serving 2025 forecasts; the served model has seen no 2025 data.
+1. Rolling and static intervals were close on the one test period and the validation choice was the slightly worse
+   one; a second later period is needed to choose between them with any confidence.
+2. Q2 2025 has now been used once. The next model change needs a later period, after the June 2025 GDELT outage.
+3. The seed spread (6 to 15%) is large; an ensemble of seeds, chosen in advance, would be steadier than one seed.
 
 ## Served model
 
-`models/thp_gdelt.pt` is the selected model, seed 42 (2024 test MAE 97.53, Q1 2025 MAE 75.91), since 2026-10-08,
-with size-binned intervals added on 2026-10-09. It covers the same 184
-series and 4 event types as the original checkpoint. The backend adds the model output to log1p(same weekday last
-week) from the input window, serves log-space intervals, and reports the comparison against the strongest baseline
-on test (`/api/v1/data/forecast` -> `baseline_comparison`: seasonal_naive, +5.8%). The previous checkpoint is in git
-history.
+`models/thp_gdelt.pt` is `models/retrain_2025h1/seed2.pt` since 2026-10-09: trained on 2024 plus January 2025, chosen
+on validation (February-March 2025), tested once on 2025-04-01 to 06-11 (MAE 52.62 vs 62.05 for seasonal-naive,
++15.2%; the 3-seed mean is +9.5%). Same 184 series and 4 event types as before. The backend adds the model output to
+log1p(same weekday last week) from the input window, serves the size-binned log-space interval (rolling 14-day state
+at the end of the data), and reports the test comparison as `baseline_comparison`. The application still serves 2024
+data. The previous checkpoint (2024 only, seed 42) is in git history.

@@ -9,6 +9,13 @@ so a failure points at a specific sentence. What they catch:
 * comparison direction: "increase" in the report when the computed direction is a decrease;
 * dates outside the window: a date the query never covered.
 
+Causes and motives are harder: the event records hold dates, places, actor labels, CAMEO codes,
+tone and article counts, never why something happened, yet "which points to a legal dimension"
+reads like a finding. ``causal_candidates`` is a recall-oriented rule that lists sentences with
+causal or interpretive language, minus those that only state what the data cannot say; a Claude
+judge (tests/causal_judge.py) decides which candidates are unsupported, and both are measured
+against hand labels (tests/eval_runs/causal_labels/).
+
 Used by tests/run_answer_quality_eval.py; unit tested in tests/test_answer_quality.py.
 """
 
@@ -160,6 +167,52 @@ def qualitative_trend(text: str, step_types: Iterable[str]) -> List[str]:
 
 
 # ---------------------------------------------------------------------------
+# Causes and motives
+# ---------------------------------------------------------------------------
+
+_CAUSAL = re.compile(
+    r"\b(because|due to|owing to|thanks to|led to|lead(?:s|ing)? to|caus(?:e|es|ed|ing)|result(?:s|ed|ing)? in|"
+    r"as a result|in response to|in reaction to|in retaliation|spark(?:s|ed|ing)?|trigger(?:s|ed|ing)?|"
+    r"prompt(?:s|ed|ing)|driv(?:en|ing) by|drove|fu?el(?:l)?(?:ed|ing)|amid|stemm(?:ed|ing)|motivat\w*|"
+    r"aimed at|in order to|in protest (?:of|against)|over (?:the )?(?:decision|ruling|policy|law|bill)|"
+    r"suggest(?:s|ed|ing)?|point(?:s|ed|ing)? to|indicat(?:es|ed|ing)|signal(?:s|led|ing)|reflect(?:s|ed|ing)?|"
+    r"consistent with|likely|probably|presumably|apparently|appears? to|seem(?:s|ed)? to|"
+    r"tied to|linked to|connected to|related to|part of a (?:broader|wider|larger))\b",
+    re.IGNORECASE,
+)
+# Sentences whose only interpretive content is a statement of what the data cannot show.
+_DATA_LIMIT = re.compile(
+    r"\b(does(?:n't| not) (?:say|show|state|name|establish|explain|tell|confirm|include)|"
+    r"(?:can't|cannot|can not|could not|couldn't) (?:be )?(?:confirm|say|tell|establish|determin|show|know)\w*|"
+    r"no (?:details?|information|indication|explanation) (?:on|of|about)|"
+    r"(?:causes?|motives?|reasons?)(?: and \w+)? (?:are|is|remain|stay)s? (?:unknown|unclear|not (?:stated|given|recorded))|"
+    r"nothing in (?:it|the data|the records?) (?:establishes|says|shows)|is not (?:in|stated in) the (?:data|records?))\b",
+    re.IGNORECASE,
+)
+_SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+|\n+")
+
+
+def sentences(text: str) -> List[str]:
+    return [s.strip() for s in _SENTENCE_SPLIT.split(text or "") if s.strip()]
+
+
+def causal_candidates(text: str) -> List[str]:
+    """Sentences that may state a cause, motive or connection the data does not contain.
+
+    High recall by design: hedged inferences ("suggests a confrontation, though the details are not
+    in the records") are kept, because a hedge does not make a guess grounded. Sentences that only
+    say what the data cannot show are dropped; a limit clause that follows a claim ("suggests X,
+    though the data doesn't confirm it") does not drop it. Not part of ``pass``: the judge decides.
+    """
+    out = []
+    for s in sentences(text):
+        limit = _DATA_LIMIT.search(s)
+        if _CAUSAL.search(s[:limit.start()] if limit else s):
+            out.append(s)
+    return out
+
+
+# ---------------------------------------------------------------------------
 # Comparison direction
 # ---------------------------------------------------------------------------
 
@@ -235,6 +288,7 @@ def check_report(report_text: str, plan: Dict[str, Any], data: Dict[str, Any]) -
         "qualitative_trend": qualitative_trend(report_text, step_types),
         "comparison_direction_ok": comparison_direction_ok(report_text, comparison),
         "dates_outside_window": dates_outside(report_text, start, end) if window_applies else [],
+        "causal_candidates": causal_candidates(report_text),  # informational; see causal_judge.py
     }
     result["pass"] = (
         not result["ungrounded_numbers"]

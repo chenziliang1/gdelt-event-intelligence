@@ -18,7 +18,8 @@ The repository includes the final forecast model artifacts and local training lo
 
 Included:
 
-- `models/thp_gdelt.pt`: final forecast checkpoint used by the Forecast page and API.
+- `models/thp_gdelt.pt`: final forecast checkpoint used by the Forecast page and API (`models/retrain_2025h1/`: the
+  three seeds it was chosen from; `models/thp_dataset_2024_2025h1_seq14_h7.npz`: their training data).
 - `models/thp_training_dataset.npz`: cached training array.
 - `models/thp_calibration_dataset_seq14_h7.npz`: calibration/evaluation data.
 - `models/training_logs/`: training logs and per-run metadata.
@@ -58,7 +59,9 @@ cd gdelt-event-intelligence
 Create a `.env` file in the project root (it is git-ignored) with the values below, and fill only the keys you need.
 
 Dashboard and Forecast run without an LLM key. Analyst Chat reports and the planner's fallback for ambiguous
-questions need an LLM key: Anthropic Claude (default) or OpenAI, both through an OpenAI-compatible endpoint.
+questions need an LLM key: Anthropic Claude (default) or OpenAI, both through an OpenAI-compatible endpoint. The
+chat router uses Claude (`ROUTER_MODEL`, default `claude-sonnet-5-5`) when `ANTHROPIC_API_KEY` is set and falls
+back to a local Ollama `qwen2.5:3b` otherwise (`ROUTER_PROVIDER=ollama` forces the local model).
 
 ```env
 DB_HOST=db
@@ -142,11 +145,12 @@ and country pairs, CAMEO event roots and codes, each split into all / conflict /
 
 Evaluation (details, protocol and caveats: `docs/FORECAST_EVALUATION.md`):
 
-- On Q1 2025, a quarter the model never saw, rebuilt from the official GDELT files: MAE 77.92 against 82.62 for
-  seasonal-naive (5.7% lower, 3 seeds), better on 65 to 69% of series.
-- On the held-out end of 2024: 4.9% lower MAE than seasonal-naive; about 41% lower than a 7-day moving average.
+- Retrained on 2024 plus early 2025 and tested once on April to mid-June 2025 (rebuilt from the official GDELT
+  files): MAE 9.5% lower than seasonal-naive on average over 3 seeds (6 to 15%), better on about 70% of series; the
+  same design trained on 2024 alone was 5.7% lower there. The served seed, chosen on validation, is 15.2% lower.
+- Earlier, trained on 2024 only: 5.7% lower on Q1 2025 and 4.9% on the held-out end of 2024.
 - The original design's Hawkes-style output head did not help and was removed.
-- The 80% intervals cover 75 to 77% on Q1 2025.
+- The 80% intervals cover 79% on the 2025 test period (76% for the largest series).
 
 API example:
 
@@ -161,7 +165,9 @@ The chat system is data-grounded rather than purely conversational.
 High-level flow:
 
 1. User asks a natural-language event question.
-2. The planner extracts intent, dates, actors, locations, and event category.
+2. The router (Claude Sonnet 5.5, local qwen2.5:3b as fallback) extracts intent, dates, location and event
+   category; deterministic checks then re-derive the dates from the text and check the intent against the user's
+   words.
 3. The agent routes to SQL tools, dashboard/time-series tools, forecast tools, or ChromaDB retrieval.
 4. Tool results are passed to the LLM for a concise analytical answer.
 5. The UI displays the answer, tool trace, and optional supporting data.
@@ -176,10 +182,12 @@ docker exec -it gdelt_backend python db_scripts/build_knowledge_base.py
 
 - `docs/CLAIMS_EVIDENCE.md`: each project claim with its status and evidence.
 - `docs/FORECAST_EVALUATION.md`, `docs/DATA_LAYER.md`: forecaster and data-layer evaluation.
-- `tests/eval_runs/`: live evaluations of the chat agent (routing and dates on 88 questions, two held-out sets) and of
-  report faithfulness.
-- `python -m pytest tests --ignore=tests/run_agent_eval.py`: offline tests (no database, Ollama or API key), run in CI.
-- `python tests/run_agent_eval.py`: live agent evaluation (needs the backend, MySQL and Ollama).
+- `tests/eval_runs/`: live evaluations of the chat agent (routing and dates on 118 questions, three held-out sets,
+  the last written blind by a separate agent) and of report faithfulness.
+- `python -m pytest tests --ignore=tests/run_agent_eval.py`: offline tests (no database, Ollama or API key), run in CI,
+  including a replay of the eval questions on recorded router outputs (Sonnet: all 118; qwen: the first 88).
+- `python tests/run_planner_eval.py --router ollama|claude`: the eval sets against the planner with a live router.
+- `python tests/run_agent_eval.py`: live agent evaluation through the API (needs the backend, MySQL and a router).
 
 ## Local Development Without Docker
 

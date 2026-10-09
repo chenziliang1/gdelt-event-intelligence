@@ -82,6 +82,8 @@ def leak_free_split(
     horizon: int,
     val_fraction: float = 0.15,
     test_fraction: float = 0.15,
+    val_start_day: Optional[int] = None,
+    test_start_day: Optional[int] = None,
 ) -> Split:
     """Chronological train / validation / test split with no forecast overlap.
 
@@ -92,11 +94,18 @@ def leak_free_split(
 
     Inputs (history) may reach back into earlier partitions; that is ordinary
     forecasting, not leakage. Targets must not.
+
+    ``val_start_day`` / ``test_start_day`` (day indices) replace the fractions, so a partition can
+    be a calendar period (validation = late Q1 2025, test = Q2 2025).
     """
     val_fraction = min(max(float(val_fraction), 0.05), 0.4)
     test_fraction = min(max(float(test_fraction), 0.0), 0.4)
     test_start = int(total_days * (1.0 - test_fraction)) if test_fraction > 0 else total_days
     val_start = int(total_days * (1.0 - test_fraction - val_fraction))
+    if test_start_day is not None:
+        test_start = int(test_start_day)
+    if val_start_day is not None:
+        val_start = int(val_start_day)
 
     pos = np.asarray(target_positions)
     last_target = pos + horizon - 1

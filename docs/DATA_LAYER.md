@@ -15,9 +15,16 @@ day's 15-minute batches from `data.gdeltproject.org/gdeltv2/` and compares them 
 `events_table`, identical in every column. The English stream alone misses 6,160 of them; the 767 extra official rows
 of that day have event dates outside 2024.
 
-`events_2025`: 4,638,688 events for 2025-01-01 to 2025-03-31, loaded with the same rule by
-`db_scripts/load_gdelt_period.py` (batches read until 2025-04-07 for late additions). It is a separate table, used
-only for the forecaster's fresh test (`docs/FORECAST_EVALUATION.md`); the application still serves 2024.
+`events_2025`: events for 2025-01-01 to 2025-06-30, loaded with the same rule by `db_scripts/load_gdelt_period.py`
+(Q1: 4,638,688 events, batches read until 2025-04-07 for late additions; Q2 added on 2026-10-09, batches read until
+2025-07-07; 8,396,131 in all). It is a separate table, used only to retrain and test the forecaster
+(`docs/FORECAST_EVALUATION.md`); the application still serves 2024.
+
+**GDELT outage in June 2025.** The official English export files are missing (HTTP 404 upstream, checked
+2026-10-09) for 2025-06-12 18:15 to 20:15 and continuously from 2025-06-14 18:00 to 2025-07-02 02:00. The table has
+no events at all for 2025-06-15 to 06-24 and only 132 to 768 a day for 06-25 to 06-30 (late reports picked up after
+the outage), against 21,326 to 71,266 a day from 2025-01-01 to 06-11. Anything that uses Q2 2025 stops at 2025-06-11, the last day
+with complete data. Elsewhere in H1 four single batches are missing upstream.
 
 ### Damaged Mexican state names (upstream)
 
@@ -105,7 +112,9 @@ rejects it, and the binary `ActionGeo_Point` values did not survive the re-encod
 `iconv -f UTF-16 -t UTF-8 | sed 's/\r$//'`, import `ActionGeo_Point` as `LONGBLOB`, then rebuild the column from
 lat/long as `import_event.py` does (`ST_PointFromText('POINT(lat long)', 4326)`).
 
-`gdelt_mysql_backup_2026-10-09.sql.gz` is the current state (all tables above, including `events_2025`). Restore
+`gdelt_mysql_backup_2026-10-09.sql.gz` is the state before the Q2 2025 load (all tables above, `events_2025` with Q1
+only; Q2 is reloaded with `load_gdelt_period.py --start 2025-04-01 --end 2025-06-30 --added-until 2025-07-07
+--table events_2025`). Restore
 drill (2026-10-09): restored into a fresh `mysql:8.0` container (768 MB buffer pool, 1.5 GB memory limit) in 70
 minutes with no errors. Row counts of every table, the region totals, the 366 hot lists, a sampled event (including
 `ActionGeo_Point` with SRID 4326 and the virtual `ActionGeo_ADM1`), its fingerprint, the three special indexes and an

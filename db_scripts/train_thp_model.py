@@ -94,6 +94,12 @@ def parse_args() -> argparse.Namespace:
         help="Held-out final partition, evaluated once after model selection. 0 disables it.",
     )
     parser.add_argument(
+        "--val-start-date", default=None,
+        help="First validation day (YYYY-MM-DD); replaces --val-fraction. Needs a cache with first_day "
+             "(db_scripts/build_extended_dataset.py).",
+    )
+    parser.add_argument("--test-start-date", default=None, help="First test day; replaces --test-fraction.")
+    parser.add_argument(
         "--hawkes-residual-weight", type=float, default=0.25,
         help="Weight of the Hawkes-style residual head in the output. 0 is the ablation "
              "(same Transformer without that head); compare its test MAE to the default run.",
@@ -1013,6 +1019,23 @@ def build_training_arrays(args: argparse.Namespace):
     return (*dataset, series, dimension_summary)
 
 
+def split_days_from_dates(args: argparse.Namespace) -> Tuple[Any, Any]:
+    """Day indices for --val-start-date / --test-start-date, counted from the cache's first day."""
+    if not (args.val_start_date or args.test_start_date):
+        return None, None
+    cache_path = Path(args.dataset_cache)
+    if not cache_path.is_absolute():
+        cache_path = PROJECT_ROOT / cache_path
+    payload = np.load(cache_path, allow_pickle=False)
+    if "first_day" not in payload.files:
+        raise SystemExit("--val-start-date / --test-start-date need a dataset cache with first_day")
+    day0 = date.fromisoformat(str(payload["first_day"]))
+    return tuple(
+        (date.fromisoformat(value) - day0).days if value else None
+        for value in (args.val_start_date, args.test_start_date)
+    )
+
+
 def encode_label_ids(
     labels: List[Tuple[str, str]]
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, Dict[str, int], Dict[str, int], Dict[str, int]]:
@@ -1380,6 +1403,7 @@ def train(args: argparse.Namespace) -> Dict[str, Any]:
         args.forecast_horizon,
         args.val_fraction,
         args.test_fraction,
+        *split_days_from_dates(args),
     )
     train_idx, val_idx, test_idx = split.train_idx, split.val_idx, split.test_idx
     split_position = split.val_start
@@ -1623,6 +1647,8 @@ def train(args: argparse.Namespace) -> Dict[str, Any]:
         "test_start_day": int(split.test_start),
         "validation_fraction": float(args.val_fraction),
         "test_fraction": float(args.test_fraction),
+        "val_start_date": args.val_start_date,
+        "test_start_date": args.test_start_date,
         "hawkes_residual_weight": float(args.hawkes_residual_weight),
         "target_mode": args.target_mode,
         "neural_thp": regression_metrics(y_count[val_idx], model_val_predictions),
