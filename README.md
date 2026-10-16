@@ -2,6 +2,14 @@
 
 An end-to-end DBMS and AI analytics platform for exploring 17.5M 2024 North American GDELT events. The system combines a MySQL-backed dashboard, a LangChain-style analyst chat agent with checked LLM reports, and a forecasting service. The served forecaster is LightGBM; a PyTorch Transformer is kept for comparison and as the rollback, because LightGBM did better on a quarter neither had seen, under a rule fixed in advance (see Forecast).
 
+**Dashboard** (January 2024, all of North America): daily counts, conflict rate and tone, and an event map.
+
+![Dashboard](docs/images/dashboard.png)
+
+**Forecast** (United States, from 2024-02-01): the next 7 days from the served LightGBM model, with 80% intervals.
+
+![Forecast](docs/images/forecast.png)
+
 The repository includes the final forecast model artifacts and local training logs. API keys and local `.env` files are intentionally not included.
 
 ## Main Features
