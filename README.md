@@ -1,6 +1,6 @@
 # GDELT Analysis Platform
 
-An end-to-end DBMS and AI analytics platform for exploring 2024 GDELT event data. The system combines a MySQL-backed dashboard, a LangChain-style analyst chat agent, ChromaDB retrieval, and a Transformer forecasting service (the `thp` module).
+An end-to-end DBMS and AI analytics platform for exploring 17.5M 2024 North American GDELT events. The system combines a MySQL-backed dashboard, a LangChain-style analyst chat agent with checked LLM reports, and a forecasting service. The served forecaster is LightGBM; a PyTorch Transformer is kept for comparison and as the rollback, because LightGBM did better on a quarter neither had seen, under a rule fixed in advance (see Forecast).
 
 The repository includes the final forecast model artifacts and local training logs. API keys and local `.env` files are intentionally not included.
 
@@ -9,7 +9,7 @@ The repository includes the final forecast model artifacts and local training lo
 - **Dashboard:** interactive event analytics with date, location, actor, and event-type filters.
 - **Map hotspot drilldown:** click geographic markers to inspect representative events at a location.
 - **Representative events:** dashboard-level examples selected from the active filter range.
-- **Analyst Chat:** natural-language event analysis using tool routing, SQL-backed data access, ChromaDB retrieval, and LLM summarization.
+- **Analyst Chat:** natural-language event analysis using tool routing, SQL-backed data access, and LLM summarization checked before it is shown.
 - **Forecast:** seven-day daily event-count forecasts with 80% intervals, from a gradient-boosting model (LightGBM) that corrects a seasonal-naive baseline; it replaced a Transformer that did worse on an unseen quarter.
 - **Compare Mode:** compare two locations or actors over the selected range by event category.
 - **Report export:** export dashboard summaries and current analytical context.
@@ -18,14 +18,15 @@ The repository includes the final forecast model artifacts and local training lo
 
 Included:
 
-- `models/thp_gdelt.pt`: final forecast checkpoint used by the Forecast page and API (`models/retrain_2025h1/`: the
-  three seeds it was chosen from; `models/thp_dataset_2024_2025h1_seq14_h7.npz`: their training data).
+- `models/lightgbm_gdelt.json`: the served forecast model, used by the Forecast page and API (see `models/README.md`).
+- `models/thp_gdelt.pt`: the Transformer checkpoint, kept for comparison and as the rollback (`models/retrain_2025h1/`:
+  the three seeds it was chosen from; `models/thp_dataset_2024_2025h1_seq14_h7.npz`: their training data).
 - `models/thp_training_dataset.npz`: cached training array.
 - `models/thp_calibration_dataset_seq14_h7.npz`: calibration/evaluation data.
 - `models/training_logs/`: training logs and per-run metadata.
 - `models/thp_sweeps/`: sweep outputs and intermediate checkpoints.
 - `logs/`: local import, ETL, and THP training logs.
-- `chroma_db/`: local ChromaDB vector index used by chat retrieval.
+- `chroma_db/`: local ChromaDB vector index used by the optional news-context tool.
 - `reports/`: final report/case-study materials generated during the project.
 
 Not included:
@@ -39,8 +40,8 @@ Note: the local `data/` folder currently contains only `.gitkeep`. Raw GDELT CSV
 
 ## Tech Stack
 
-- **Backend:** Python, FastAPI, Pydantic, aiomysql, PyTorch, NumPy, Pandas.
-- **AI layer:** LangChain-style tool orchestration, OpenAI-compatible LLM calls, optional local routing, ChromaDB retrieval.
+- **Backend:** Python, FastAPI, Pydantic, aiomysql, LightGBM, PyTorch (Transformer comparison and rollback), NumPy, Pandas.
+- **AI layer:** LangChain-style tool orchestration, OpenAI-compatible LLM calls, optional local routing, an optional ChromaDB news-context tool.
 - **Database:** MySQL 8.0 with indexes and spatial columns.
 - **Frontend:** React, TypeScript, Vite, ECharts, Leaflet.
 - **Deployment:** Docker Compose for MySQL, backend, and frontend services.
@@ -108,7 +109,7 @@ Invoke-WebRequest http://localhost:8000/health
 
 Open `http://localhost:5173`, then switch to the **Forecast** tab.
 
-The final model is included at `models/thp_gdelt.pt`, so the Forecast page can load the checkpoint directly. Choose history windows of at least 14 days, starting on or after `2024-01-01`.
+The served model is included at `models/lightgbm_gdelt.json`, so the Forecast page can load it directly. Choose history windows of at least 14 days, starting on or after `2024-01-01`.
 
 ## Database Setup
 
@@ -149,19 +150,20 @@ unseen quarter was loaded (below).
 
 Evaluation (details, protocol and caveats: `docs/FORECAST_EVALUATION.md`):
 
-- Retrained on 2024 plus early 2025 and tested once on April to mid-June 2025 (rebuilt from the official GDELT
-  files): MAE 9.5% lower than seasonal-naive on average over 3 seeds (6 to 15%), better on about 70% of series; the
-  same design trained on 2024 alone was 5.7% lower there. The served seed, chosen on validation, is 15.2% lower.
-- A LightGBM baseline on the same split, chosen on validation, did better on that period: 13.8% lower than
+- Transformer, retrained on 2024 plus early 2025 and tested once on April to mid-June 2025 (rebuilt from the official
+  GDELT files): MAE 9.5% lower than seasonal-naive on average over 3 seeds (6 to 15%), better on about 70% of series;
+  the same design trained on 2024 alone was 5.7% lower there. Its seed chosen on validation (the rollback checkpoint)
+  is 15.2% lower.
+- LightGBM on the same split, chosen on validation, did better on that period: 13.8% lower than
   seasonal-naive (MAE 53.52 vs 56.13 for the Transformer's 3-seed mean). The bootstrap interval of the difference
   includes zero, so neither model is shown to be better; the Transformer is not shown to beat gradient boosting.
   LightGBM is stable across seeds (53.0 to 53.5), and its 80% intervals by the same method cover 79%.
 - On 2025 Q3, unseen by both, with the choice rule committed before the data was loaded: LightGBM 13.3% below
   seasonal-naive, the Transformer 4.5%; LightGBM is better with a bootstrap interval clear of zero, so the rule picks
   it to serve, and it is the served model (`models/lightgbm_gdelt.json`; the Transformer remains as the rollback).
-- Earlier, trained on 2024 only: 5.7% lower on Q1 2025 and 4.9% on the held-out end of 2024.
-- The original design's Hawkes-style output head did not help and was removed.
-- The 80% intervals cover 79% on the 2025 test period (76% for the largest series).
+- Earlier, the Transformer trained on 2024 only: 5.7% lower on Q1 2025 and 4.9% on the held-out end of 2024.
+- The Transformer's original Hawkes-style output head did not help and was removed.
+- The served model's 80% intervals cover 79% on both 2025 test periods (75% for the largest series in Q2), short of 80%.
 
 API example:
 
@@ -179,11 +181,13 @@ High-level flow:
 2. The router (Claude Sonnet 5.5, local qwen2.5:3b as fallback) extracts intent, dates, location and event
    category; deterministic checks then re-derive the dates from the text and check the intent against the user's
    words.
-3. The agent routes to SQL tools, dashboard/time-series tools, forecast tools, or ChromaDB retrieval.
+3. The agent routes to SQL tools, dashboard/time-series tools, or forecast tools; comparisons use complete counts,
+   not the sampled event lists.
 4. Tool results are passed to the LLM for a concise analytical answer.
 5. The UI displays the answer, tool trace, and optional supporting data.
 
-ChromaDB is used for semantic retrieval over local event/news context. The included `chroma_db/` folder lets the chat layer reuse the existing vector index. To rebuild it:
+ChromaDB is not on the chat path. It is used only by an optional news-context tool in the event report (when a
+headline is missing; the Explore UI does not enable it). The included `chroma_db/` folder holds its index. To rebuild it:
 
 ```powershell
 docker exec -it gdelt_backend python db_scripts/build_knowledge_base.py
@@ -229,10 +233,10 @@ If PowerShell says `npm` is not recognized, install Node.js 20+ and reopen the t
 backend/                 FastAPI app, data routers, chat planner, services
 backend/agents/          Tool-routing analyst agent and enhanced reporter
 backend/queries/         Shared SQL query layer
-backend/services/        Dashboard data, THP forecast, Chroma/news/storyline services
-db_scripts/              Schema, import, ETL, precompute, index, and THP training scripts
+backend/services/        Dashboard data, forecast (LightGBM, Transformer rollback), report checks, news/storyline services
+db_scripts/              Schema, import, ETL, precompute, index, training and forecast evaluation scripts
 frontend/                React + TypeScript + Vite UI
-models/                  Final THP checkpoint, training arrays, sweeps, logs
+models/                  Served LightGBM model, Transformer checkpoint (rollback), training arrays, sweeps, logs
 chroma_db/               Local persistent ChromaDB retrieval index
 logs/                    Import, ETL, runtime, and training logs
 reports/                 Project report and case-study materials
@@ -243,7 +247,7 @@ data/                    Place raw GDELT CSV chunks here when rebuilding the DB
 
 - **Frontend opens but dashboard is empty:** import CSV data into MySQL and run `etl_pipeline.py`.
 - **Forecast says not enough historical data:** use forecast start `2024-01-31` or later.
-- **Chat responds without data:** check MySQL data, `.env` LLM key, and `CHROMA_DB_PATH`.
+- **Chat responds without data:** check MySQL data and the `.env` LLM key.
 - **Docker cannot connect:** start Docker Desktop before running `docker compose up -d`.
 - **Map drilldown has no events:** run ETL/precompute scripts and verify spatial indexes.
 
