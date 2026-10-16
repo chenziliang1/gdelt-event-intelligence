@@ -90,13 +90,13 @@ export default function StatsCards({ data, timeSeries }: Props) {
       },
       {
         label: 'Unique Actors',
-        value: summary.unique_actors ?? 0,
+        value: Number(summary.unique_actors ?? 0),
         icon: Users,
         color: '#7c3aed',
       },
       {
         label: 'Total Articles',
-        value: summary.total_articles ?? 0,
+        value: Number(summary.total_articles ?? 0),  // SUM() can arrive as a string
         icon: Newspaper,
         color: '#059669',
       },

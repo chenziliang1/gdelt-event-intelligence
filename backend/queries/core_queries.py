@@ -594,12 +594,24 @@ async def query_dashboard(pool, start_date: str, end_date: str) -> Dict[str, Any
         top_actors = sorted([{'actor': k, 'event_count': v} for k, v in all_actors.items()], key=lambda x: x['event_count'], reverse=True)[:10]
         geo_distribution = sorted([{'country_code': k, 'event_count': v} for k, v in all_countries.items()], key=lambda x: x['event_count'], reverse=True)[:10]
         event_types = sorted([{'event_type': k, 'event_count': v} for k, v in all_event_types.items()], key=lambda x: x['event_count'], reverse=True)
-        # extraquerytotal_articles（daily_summaryNo.storethisfield）
-        articles_result = await pool.fetchone(
-            f"SELECT SUM(NumArticles) as total_articles FROM {DEFAULT_TABLE} WHERE SQLDATE BETWEEN %s AND %s",
-            (start_date, end_date)
+        # daily_summary stores neither: articles, and distinct actors over the range (the union of
+        # the daily top-actor lists is a few dozen names, not the actors in the data). The inner
+        # GROUP BY lets MySQL walk idx_date_actor (loose index scan: 0.07 s for a month, 0.9 s for
+        # the year) where a plain COUNT(DISTINCT) over the range read every row.
+        articles_result, actors_result = await asyncio.gather(
+            pool.fetchone(
+                f"SELECT SUM(NumArticles) as total_articles FROM {DEFAULT_TABLE} WHERE SQLDATE BETWEEN %s AND %s",
+                (start_date, end_date)
+            ),
+            pool.fetchone(
+                f"SELECT COUNT(DISTINCT Actor1Name) as unique_actors FROM ("
+                f"SELECT SQLDATE, Actor1Name FROM {DEFAULT_TABLE} "
+                f"WHERE SQLDATE BETWEEN %s AND %s AND Actor1Name IS NOT NULL GROUP BY SQLDATE, Actor1Name) t",
+                (start_date, end_date)
+            ),
         )
-        total_articles = articles_result['total_articles'] if articles_result else None
+        total_articles = int(articles_result['total_articles'] or 0) if articles_result else None
+        unique_actors = int(actors_result['unique_actors'] or 0) if actors_result else len(unique_actors_set)
         return {
             'daily_trend': {'data': daily_trend},
             'top_actors': {'data': top_actors},
@@ -607,7 +619,7 @@ async def query_dashboard(pool, start_date: str, end_date: str) -> Dict[str, Any
             'event_types': {'data': event_types},
             'summary_stats': {'data': [{
                 'total_events': total_events,
-                'unique_actors': len(unique_actors_set),
+                'unique_actors': unique_actors,
                 'avg_goldstein': round(goldstein_sum / total_events, 2) if total_events else 0,
                 'avg_tone': round(tone_sum / total_events, 2) if total_events else 0,
                 'total_articles': total_articles,

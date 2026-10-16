@@ -11,6 +11,7 @@ interface Props {
 function riskColor(level?: string) {
   if (!level) return '#6b7280';
   if (level.includes('high')) return '#dc2626';
+  if (level.includes('elevated')) return '#ea580c';
   if (level.includes('moderate')) return '#f59e0b';
   return '#16a34a';
 }
@@ -18,6 +19,7 @@ function riskColor(level?: string) {
 function riskBg(level?: string) {
   if (!level) return '#f3f4f6';
   if (level.includes('high')) return '#fef2f2';
+  if (level.includes('elevated')) return '#fff7ed';
   if (level.includes('moderate')) return '#fffbeb';
   return '#f0fdf4';
 }
